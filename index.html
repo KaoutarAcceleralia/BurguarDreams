@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burguar Dreams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --sand: #E8DFD0;
+    --stone: #C4B8A4;
+    --warm-dark: #2C2416;
+    --warm-mid: #5C4F3A;
+    --accent: #8B6B3D;
+    --accent-light: #B8935A;
+    --white: #FDFAF5;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: #ffffff;
+    color: var(--warm-dark);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(196,184,164,0.3);
+  }
+
+  /* Top bar */
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;
+    border-bottom: 1px solid rgba(196,184,164,0.2);
+  }
+
+  .logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--warm-dark);
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  /* Language switcher */
+  .lang-switcher {
+    position: relative;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    background: none;
+    border: 1px solid var(--stone);
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-mid);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .lang-flag {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .lang-chevron {
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .lang-switcher.open .lang-chevron { transform: rotate(180deg); }
+
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: var(--white);
+    border: 1px solid var(--sand);
+    min-width: 160px;
+    box-shadow: 0 8px 24px rgba(44,36,22,0.12);
+    z-index: 200;
+    animation: fadeIn 0.15s ease;
+  }
+
+  .lang-switcher.open .lang-dropdown { display: block; }
+
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.82rem;
+    color: var(--warm-mid);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-body);
+  }
+
+  .lang-option:hover { background: var(--cream); color: var(--warm-dark); }
+  .lang-option.active { color: var(--accent); font-weight: 500; }
+
+  /* Nav bar */
+  .header-nav {
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+  }
+
+  .nav-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    text-decoration: none;
+    padding: 0.9rem 1.4rem;
+    position: relative;
+    transition: color 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 1.4rem; right: 1.4rem;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+
+  .nav-link:hover { color: var(--accent); }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-link.active-nav { color: var(--accent); }
+  .nav-link.active-nav::after { transform: scaleX(1); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 14rem 4rem 6rem;
+    max-width: 100%;
+    margin: 0;
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 60%;
+    filter: blur(18px) brightness(0.45) saturate(0.8);
+    transform: scale(1.08);
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.5);
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: #ffffff;
+    max-width: 700px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    max-width: 420px;
+    line-height: 1.7;
+  }
+
+  /* ── GRID ── */
+  .properties-section {
+    padding: 4rem 4rem 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+
+  .section-label h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+  }
+
+  .count-badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  /* Todas las tarjetas iguales */
+  .card {
+    cursor: pointer;
+    background: #fff;
+    border: 1px solid #E8DFD0;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    box-shadow: 0 12px 40px rgba(44,36,22,0.12);
+    transform: translateY(-4px);
+  }
+
+  .card:first-child,
+  .card:nth-child(2),
+  .card:nth-child(3),
+  .card:nth-child(4) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .card-img-wrap {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .card:hover .card-img { transform: scale(1.04); }
+
+  .card-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+  }
+
+  .card-placeholder svg { opacity: 0.25; }
+
+  .card-info {
+    padding: 1.4rem 1.6rem 1.6rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border-top: 1px solid #E8DFD0;
+  }
+
+  .card-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.1rem;
+  }
+
+  .card-city {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    line-height: 1.2;
+  }
+
+  .card-street {
+    font-size: 0.82rem;
+    color: var(--warm-mid);
+    font-weight: 300;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0ece4;
+  }
+
+  .card-price {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--warm-dark);
+    font-weight: 400;
+  }
+
+  .card-price span {
+    font-size: 0.78rem;
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--warm-mid);
+  }
+
+  .btn-saber {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.2rem;
+    background: var(--warm-dark);
+    color: #FDFAF5;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s ease;
+  }
+
+  .btn-saber:hover { background: var(--accent); }
+  .btn-saber svg { flex-shrink: 0; }
+
+  /* ── DETAIL VIEW ── */
+  #detail-view {
+    display: none;
+    min-height: 100vh;
+    background: #ffffff;
+  }
+
+  #detail-view.active { display: block; }
+
+  .detail-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    transition: color 0.2s;
+    padding: 2rem 4rem;
+    display: flex;
+  }
+
+  .detail-back:hover { color: var(--accent); }
+
+  .detail-hero {
+    position: relative;
+    height: 65vh;
+    overflow: hidden;
+  }
+
+  .detail-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .detail-hero-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detail-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(44,36,22,0.2) 0%, transparent 40%);
+  }
+
+  .detail-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 4rem 8rem;
+  }
+
+  .detail-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 3.5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .detail-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .detail-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--warm-dark);
+    line-height: 1.15;
+  }
+
+  .detail-address {
+    font-size: 0.9rem;
+    color: var(--warm-mid);
+    margin-top: 0.6rem;
+    font-weight: 300;
+  }
+
+  .detail-price-block {
+    text-align: right;
+  }
+
+  .detail-price {
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    line-height: 1;
+  }
+
+  .detail-price sub {
+    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 300;
+    color: var(--warm-mid);
+    vertical-align: baseline;
+  }
+
+  .availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+
+  .availability-badge.available {
+    background: rgba(80, 140, 80, 0.1);
+    color: #3a7a3a;
+  }
+
+  .availability-badge.unavailable {
+    background: rgba(180, 80, 60, 0.1);
+    color: #8B3A2A;
+  }
+
+  .availability-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* Detail specs */
+  .detail-specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--sand);
+    margin-bottom: 4rem;
+    border: 1px solid var(--sand);
+  }
+
+  .spec-item {
+    background: #ffffff;
+    padding: 1.8rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .spec-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .spec-value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+  }
+
+  .spec-unit {
+    font-size: 0.8rem;
+    color: var(--warm-mid);
+    font-family: var(--font-body);
+    font-weight: 300;
+  }
+
+  /* Description */
+  .detail-description {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-bottom: 4rem;
+  }
+
+  .detail-description h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 1.2rem;
+  }
+
+  .detail-description p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--warm-mid);
+    font-weight: 300;
+  }
+
+  .detail-features {
+    list-style: none;
+  }
+
+  .detail-features li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    color: var(--warm-mid);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--sand);
+    font-weight: 300;
+  }
+
+  .detail-features li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* Extra photos */
+  .detail-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-bottom: 5rem;
+  }
+
+  .detail-photos .detail-photo:first-child {
+    grid-column: 1 / 3;
+    aspect-ratio: 16/9;
+  }
+
+  .detail-photo {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--sand);
+  }
+
+  .detail-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .detail-photo:hover img { transform: scale(1.05); }
+
+  .detail-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* CTA */
+  .detail-cta {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
+    border-top: 1px solid var(--sand);
+  }
+
+  .btn-quiero {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 3.5rem;
+    background: var(--warm-dark);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    font-weight: 400;
+  }
+
+  .btn-quiero:hover {
+    background: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(44,36,22,0.6);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal {
+    background: #ffffff;
+    max-width: 520px;
+    width: 100%;
+    padding: 3.5rem;
+    position: relative;
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--stone);
+    display: flex;
+    padding: 0.3rem;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--warm-dark); }
+
+  .modal-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .modal h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--warm-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal p {
+    font-size: 0.85rem;
+    color: var(--warm-mid);
+    margin-bottom: 2rem;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: #f8f8f8;
+    border: 1px solid transparent;
+    border-bottom-color: var(--stone);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--warm-dark);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    background: #ffffff;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--warm-dark);
+    color: var(--white);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    transition: background 0.25s;
+  }
+
+  .btn-submit:hover { background: var(--accent); }
+
+  /* Success state */
+  .modal-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .modal-success.active { display: block; }
+  .modal-form.hidden { display: none; }
+
+  .success-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(80,140,80,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: #3a7a3a;
+  }
+
+  .modal-success h3 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--warm-dark);
+    margin-bottom: 0.6rem;
+  }
+
+  .modal-success p {
+    font-size: 0.88rem;
+    color: var(--warm-mid);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--warm-dark);
+    color: var(--sand);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo { color: var(--sand); }
+  footer .logo span { color: var(--accent-light); }
+
+  footer p {
+    font-size: 0.78rem;
+    color: var(--stone);
+    font-weight: 300;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .header-top { padding: 1rem 1.5rem; }
+    .header-nav { padding: 0 1.5rem; overflow-x: auto; }
+    .nav-link { padding: 0.8rem 0.8rem; font-size: 0.7rem; }
+    .hero { padding: 11rem 2rem 4rem; }
+    .properties-section { padding: 2rem 2rem 6rem; }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      aspect-ratio: 4/3;
+      min-height: unset;
+    }
+
+    .btn-saber { font-size: 0.68rem; padding: 0.5rem 0.9rem; }
+
+    .detail-body { padding: 4rem 2rem 6rem; }
+    .detail-header { grid-template-columns: 1fr; }
+    .detail-price-block { text-align: left; }
+    .detail-specs { grid-template-columns: repeat(2, 1fr); }
+    .detail-description { grid-template-columns: 1fr; gap: 3rem; }
+    .detail-photos { grid-template-columns: repeat(2, 1fr); }
+    .modal { padding: 2.5rem 1.8rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .detail-back { padding: 1.5rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────────── HEADER ─────────────── -->
+<header id="main-header">
+  <!-- Fila superior: logo + selector de idioma -->
+  <div class="header-top">
+    <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
+
+    <div class="lang-switcher" id="lang-switcher">
+      <button class="lang-btn" onclick="toggleLang(event)" id="lang-btn">
+        <span class="lang-flag" id="lang-flag">🇪🇸</span>
+        <span id="lang-label">ES</span>
+        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 4l4 4 4-4"/>
+        </svg>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown">
+        <button class="lang-option active" onclick="setLang('es')">🇪🇸 &nbsp;Español</button>
+        <button class="lang-option" onclick="setLang('ca')">🏴 &nbsp;Català</button>
+        <button class="lang-option" onclick="setLang('en')">🇬🇧 &nbsp;English</button>
+        <button class="lang-option" onclick="setLang('fr')">🇫🇷 &nbsp;Français</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fila inferior: navegación -->
+  <nav class="header-nav">
+    <button class="nav-link" data-i18n="nav_sale" onclick="handleNav('venta')">Venta</button>
+    <button class="nav-link active-nav" data-i18n="nav_rent" onclick="handleNav('alquiler')">Alquiler</button>
+    <button class="nav-link" data-i18n="nav_business" onclick="handleNav('empresas')">Empresas</button>
+    <button class="nav-link" data-i18n="nav_about" onclick="handleNav('quienes')">Quiénes somos</button>
+  </nav>
+</header>
+
+<!-- ─────────────── HOME VIEW ─────────────── -->
+<div id="home-view">
+
+  <section class="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow" data-i18n="hero_eyebrow">Propiedades en alquiler</p>
+      <h1>Tu próximo hogar te <em>está esperando</em></h1>
+      <p class="hero-sub">Selección de inmuebles exclusivos en las mejores ubicaciones. Ven a conocerlos.</p>
+    </div>
+  </section>
+
+  <section class="properties-section">
+    <div class="section-label">
+      <h2>Propiedades disponibles</h2>
+      <span class="count-badge">4 inmuebles</span>
+    </div>
+
+    <div class="grid" id="properties-grid">
+      <!-- Las tarjetas se generan con JS -->
+    </div>
+  </section>
+
+</div>
+
+<!-- ─────────────── DETAIL VIEW ─────────────── -->
+<div id="detail-view">
+
+  <div style="padding-top: 7rem; background:#fff;">
+    <button class="detail-back" onclick="showHome()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 3L5 8l5 5"/>
+      </svg>
+      <span id="back-label">Volver</span>
+    </button>
+  </div>
+
+  <div class="detail-hero">
+    <div id="detail-hero-img-wrap">
+      <div class="detail-hero-placeholder">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5">
+          <rect x="10" y="30" width="60" height="40" rx="2"/>
+          <path d="M10 30L40 8l30 22"/>
+          <rect x="30" y="50" width="20" height="20"/>
+        </svg>
+      </div>
+    </div>
+    <div class="detail-hero-overlay"></div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-header">
+      <div>
+        <p class="detail-tag" id="d-tag"></p>
+        <h1 class="detail-title" id="d-title"></h1>
+        <p class="detail-address" id="d-address"></p>
+        <span class="availability-badge" id="d-availability"></span>
+      </div>
+      <div class="detail-price-block">
+        <div class="detail-price" id="d-price"></div>
+      </div>
+    </div>
+
+    <div class="detail-specs" id="d-specs"></div>
+
+    <div class="detail-description">
+      <div>
+        <h3>Sobre la propiedad</h3>
+        <p id="d-description"></p>
+      </div>
+      <div>
+        <h3>Características</h3>
+        <ul class="detail-features" id="d-features"></ul>
+      </div>
+    </div>
+
+    <div class="detail-photos" id="d-photos"></div>
+
+    <div class="detail-cta">
+      <button class="btn-quiero" onclick="openModal()">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 3h12v10H3z"/>
+          <path d="M3 6l6 4 6-4"/>
+        </svg>
+        <span>Quiero verlo</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── MODAL ─────────────── -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 5l10 10M15 5L5 15"/>
+      </svg>
+    </button>
+
+    <div class="modal-form" id="modal-form">
+      <p class="modal-eyebrow">Solicitar visita</p>
+      <h2>Quiero verlo</h2>
+      <p>Déjanos tus datos y nos ponemos en contacto contigo para concertar una visita.</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-nombre">Nombre</label>
+          <input type="text" placeholder="Tu nombre" id="f-nombre">
+        </div>
+        <div class="form-group">
+          <label for="f-apellidos">Apellidos</label>
+          <input type="text" placeholder="Apellidos" id="f-apellidos">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="f-telefono">Teléfono</label>
+        <input type="tel" placeholder="+34 600 000 000" id="f-telefono">
+      </div>
+      <div class="form-group">
+        <label for="f-email">Email</label>
+        <input type="email" placeholder="tu@email.com" id="f-email">
+      </div>
+      <div class="form-group">
+        <label for="f-cuando">¿Cuándo prefieres la visita?</label>
+        <select id="f-cuando">
+          <option value="">Selecciona una franja horaria</option>
+          <option>Mañana (9h – 13h)</option>
+          <option>Tarde (15h – 19h)</option>
+          <option>Cualquier día y horario</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-mensaje">Mensaje (opcional)</label>
+        <textarea rows="3" placeholder="¿Alguna pregunta o comentario?" id="f-mensaje"></textarea>
+      </div>
+
+      <button class="btn-submit" id="btn-send" onclick="submitForm()">Enviar solicitud</button>
+    </div>
+
+    <div class="modal-success" id="modal-success">
+      <div class="success-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <h3>¡Solicitud enviada!</h3>
+      <p>Nos pondremos en contacto contigo en menos de 24 horas para confirmar la visita.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────── FOOTER ─────────────── -->
+<footer>
+  <a href="#" class="logo" onclick="showHome()">Burguar <span>Dreams</span></a>
+  <p>© 2025 Burguar Dreams · Todos los derechos reservados</p>
+</footer>
+
+
+<script>
+/* ─── DATOS DE LOS INMUEBLES ─────────────────────────────────────
+   EDITA AQUÍ para añadir o modificar propiedades.
+   
+   Para las imágenes: pon la ruta o URL de cada foto en los arrays.
+   - mainImage: foto principal (hero del detalle)
+   - cardImage: foto de la tarjeta en el grid
+   - extraPhotos: galería adicional en el detalle (hasta 6)
+   
+   Ejemplo de ruta local: './fotos/piso1-principal.jpg'
+   Ejemplo URL externa: 'https://ejemplo.com/foto.jpg'
+────────────────────────────────────────────────────────────────── */
+const properties = [
+  {
+    id: 1,
+    city: 'Barcelona',
+    street: 'Gran Via de les Corts Catalanes, 794 Entresuelo 2ª',
+    tag: 'Piso',
+    price: '',
+    priceUnit: '/mes',
+    available: true,
+    availableText: 'Disponible ahora',
+    description: 'Luminoso piso en pleno Eixample, reformado con materiales de primera calidad. Techos altos, ventanas de piso a techo y vistas despejadas. A 5 minutos del Passeig de Gràcia.',
+    features: ['Calefacción central', 'Aire acondicionado', 'Cocina equipada', 'Ascensor', 'Portero automático'],
+    specs: [
+      { label: 'Superficie', value: '56', unit: 'm²' },
+      { label: 'Habitaciones', value: '1', unit: 'dorm.' },
+      { label: 'Baños', value: '1', unit: 'baño' },
+      { label: 'Planta', value: 'Entresuelo', unit: '2ª' }
+    ],
+    cardImage: './fotos/Granvia/Entrada.jpg',
+    mainImage: './fotos/Granvia/Entrada.jpg',
+    extraPhotos: [
+      './fotos/Granvia/Menjador.jpg',
+      './fotos/Granvia/Menjador3.jpg',
+      './fotos/Granvia/Menjador4.jpg',
+      './fotos/Granvia/MobleMenjador.jpg',
+      './fotos/Granvia/Sofa.jpg',
+      './fotos/Granvia/Sofa2.jpg',
+      './fotos/Granvia/Cuina.jpg',
+      './fotos/Granvia/Cuina2.jpg',
+      './fotos/Granvia/Cuina3.jpg',
+      './fotos/Granvia/Cuina4.jpg',
+      './fotos/Granvia/Habitacio.jpg',
+      './fotos/Granvia/Habitacio2.jpg',
+      './fotos/Granvia/Lavabo.jpg',
+      './fotos/Granvia/Pati.jpg'
+    ]
+  },
+  {
+    id: 2,
+    city: 'Barcelona',
+    street: 'C/ de València, 178 Entresuelo 3ª',
+    tag: 'Piso',
+    price: '',
+    priceUnit: '/mes',
+    available: true,
+    availableText: 'Disponible ahora',
+    description: 'Elegante apartamento en el Eixample. Acabados de lujo, suelos de parquet y cocina con isla de diseño. Zona premium con todos los servicios a pie de calle.',
+    features: ['Dobles ventanas', 'Cocina equipada', 'Aire acondicionado', 'Ascensor', 'Portero automático'],
+    specs: [
+      { label: 'Superficie', value: '50', unit: 'm²' },
+      { label: 'Habitaciones', value: '1', unit: 'dorm.' },
+      { label: 'Baños', value: '1', unit: 'baño' },
+      { label: 'Planta', value: 'Entresuelo', unit: '3ª' }
+    ],
+    cardImage: './fotos/Valencia/Escriptori.jpg',
+    mainImage: './fotos/Valencia/Escriptori.jpg',
+    extraPhotos: [
+      './fotos/Valencia/Mejador.jpg',
+      './fotos/Valencia/Sofa.jpg',
+      './fotos/Valencia/Sofa2.jpg',
+      './fotos/Valencia/Sofa3.jpg',
+      './fotos/Valencia/Sofa4.jpg',
+      './fotos/Valencia/Cuina.jpg',
+      './fotos/Valencia/Cuina2.jpg',
+      './fotos/Valencia/Cuina3.jpg',
+      './fotos/Valencia/Cuina4.jpg',
+      './fotos/Valencia/Cuina5.jpg',
+      './fotos/Valencia/Cuina6.jpg',
+      './fotos/Valencia/Dormitori.jpg',
+      './fotos/Valencia/Dormitori2.jpg',
+      './fotos/Valencia/Dormitori3.jpg',
+      './fotos/Valencia/Dormitori4.jpg',
+      './fotos/Valencia/Dormitori5.jpg',
+      './fotos/Valencia/Lavabo.jpg',
+      './fotos/Valencia/Lavabo2.jpg',
+      './fotos/Valencia/Ducha.jpg',
+      './fotos/Valencia/Entrada.jpg',
+      './fotos/Valencia/Entrada2.jpg',
+      './fotos/Valencia/Edifici.jpg'
+    ]
+  },
+  {
+    id: 3,
+    city: 'Barcelona',
+    street: 'Carrer de Can Bruixa, 16 Entresuelo 1ª',
+    tag: 'Piso',
+    price: '1.049,97',
+    priceUnit: '/mes',
+    available: false,
+    availableText: 'Disponible el 10/07/2026',
+    description: 'Precioso piso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
+    features: ['Patio privado', 'Cocina independiente', 'Aire acondicionado', 'Doble acristalamiento', 'Ascensor', 'Portero automático'],
+    specs: [
+      { label: 'Superficie', value: '70', unit: 'm²' },
+      { label: 'Habitaciones', value: '1', unit: 'dorm.' },
+      { label: 'Baños', value: '1', unit: 'baño' },
+      { label: 'Planta', value: 'Entresuelo', unit: '1ª' }
+    ],
+    cardImage: './fotos/Bruixa/Dormitori.jpg',
+    mainImage: './fotos/Bruixa/Dormitori.jpg',
+    extraPhotos: [
+      './fotos/Bruixa/Menjador.jpg',
+      './fotos/Bruixa/Menjador2.jpg',
+      './fotos/Bruixa/Menjador3.jpg',
+      './fotos/Bruixa/Menjador4.jpg',
+      './fotos/Bruixa/Menjador5.jpg',
+      './fotos/Bruixa/Menjador6.jpg',
+      './fotos/Bruixa/Sofa.jpg',
+      './fotos/Bruixa/Sofa2.jpg',
+      './fotos/Bruixa/Cuina.jpg',
+      './fotos/Bruixa/Dormitori2.jpg',
+      './fotos/Bruixa/Dormitori3.jpg',
+      './fotos/Bruixa/Lavabo.jpg',
+      './fotos/Bruixa/Lavabo2.jpg',
+      './fotos/Bruixa/Pati.jpg',
+      './fotos/Bruixa/Carrer.jpg',
+      './fotos/Bruixa/Escriptori.jpg',
+      './fotos/Bruixa/Edifici.jpg'
+    ]
+  },
+  {
+    id: 4,
+    city: 'Barcelona',
+    street: 'Carrer del Comte d\'Urgell, 259 Subsotano 1°',
+    tag: 'Piso',
+    price: '',
+    priceUnit: '/mes',
+    available: true,
+    availableText: 'Disponible ahora',
+    description: 'Amplio piso con balcón en el Eixample esquerra. Reformado y luminoso, con habitaciones exteriores y cocina renovada. Muy bien comunicado.',
+    features: ['Balcón exterior', 'Cocina renovada', 'Habitaciones exteriores', 'Ascensor', 'Portero automático', 'Aire acondicionado'],
+    specs: [
+      { label: 'Superficie', value: '80', unit: 'm²' },
+      { label: 'Habitaciones', value: '2', unit: 'dorm.' },
+      { label: 'Baños', value: '1', unit: 'baño' },
+      { label: 'Planta', value: 'Subsótano', unit: '1°' }
+    ],
+    cardImage: './fotos/Urgell/Sofa.jpg',
+    mainImage: './fotos/Urgell/Sofa.jpg',
+    extraPhotos: [
+      './fotos/Urgell/Entrada.jpg',
+      './fotos/Urgell/Entrada2.jpg',
+      './fotos/Urgell/Menjador.jpg',
+      './fotos/Urgell/Menjador2.jpg',
+      './fotos/Urgell/Menjador3.jpg',
+      './fotos/Urgell/Sofa2.jpg',
+      './fotos/Urgell/Cuina.jpg',
+      './fotos/Urgell/Cuina2.jpg',
+      './fotos/Urgell/Dormitori.jpg',
+      './fotos/Urgell/Dormitori2.jpg',
+      './fotos/Urgell/Dormitori3.jpg',
+      './fotos/Urgell/Dormitori4.jpg',
+      './fotos/Urgell/Dormitori5.jpg',
+      './fotos/Urgell/Lavabo.jpg',
+      './fotos/Urgell/Lavabo2.jpg',
+      './fotos/Urgell/Balco.jpg',
+      './fotos/Urgell/Balco2.jpg',
+      './fotos/Urgell/Balco3.jpg',
+      './fotos/Urgell/Pasadis.jpg',
+      './fotos/Urgell/Edifici.jpg',
+      './fotos/Urgell/Edifici2.jpg'
+    ]
+  }
+];
+
+
+/* ─── RENDER GRID ─── */
+function renderGrid() {
+  const t = i18n[currentLang] || i18n.es;
+  const grid = document.getElementById('properties-grid');
+  grid.innerHTML = properties.map((p, i) => `
+    <div class="card" onclick="showDetail(${p.id})">
+      <div class="card-img-wrap">
+        ${p.cardImage
+          ? `<img src="${p.cardImage}" alt="${p.city}" class="card-img">`
+          : `<div class="card-placeholder">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#C4B8A4" stroke-width="1.5">
+                <rect x="8" y="24" width="48" height="32" rx="2"/>
+                <path d="M8 24L32 6l24 18"/>
+                <rect x="24" y="40" width="16" height="16"/>
+              </svg>
+             </div>`
+        }
+      </div>
+      <div class="card-info">
+        <span class="card-tag">${p.tag}</span>
+        <div class="card-city">${p.city}</div>
+        <div class="card-street">${p.street}</div>
+        <div class="card-footer">
+          <div class="card-price">${p.price ? p.price + '€<span>' + p.priceUnit + '</span>' : '<span style="font-size:0.78rem;font-family:var(--font-body);color:var(--warm-mid)">Consultar precio</span>'}</div>
+          <button class="btn-saber" onclick="event.stopPropagation(); showDetail(${p.id})">
+            <span>${t.btn_more}</span>
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2.5 6.5h8M7 3.5l3 3-3 3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+
+/* ─── SHOW DETAIL ─── */
+function showDetail(id) {
+  const p = properties.find(x => x.id === id);
+  if (!p) return;
+
+  // hero image
+  const wrap = document.getElementById('detail-hero-img-wrap');
+  wrap.innerHTML = p.mainImage
+    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img">`
+    : `<div class="detail-hero-placeholder">
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5">
+          <rect x="10" y="30" width="60" height="40" rx="2"/>
+          <path d="M10 30L40 8l30 22"/>
+          <rect x="30" y="50" width="20" height="20"/>
+        </svg>
+       </div>`;
+
+  document.getElementById('d-tag').textContent = p.tag;
+  document.getElementById('d-title').textContent = p.city;
+  document.getElementById('d-address').textContent = p.street;
+  document.getElementById('d-price').innerHTML = p.price
+    ? `${p.price}€<sub>${p.priceUnit}</sub>`
+    : `<span style="font-size:1.2rem;font-family:var(--font-body);font-weight:300;color:var(--warm-mid)">Consultar precio</span>`;
+
+  const badge = document.getElementById('d-availability');
+  badge.textContent = p.availableText;
+  badge.className = 'availability-badge ' + (p.available ? 'available' : 'unavailable');
+
+  // specs
+  document.getElementById('d-specs').innerHTML = p.specs.map(s => `
+    <div class="spec-item">
+      <span class="spec-label">${s.label}</span>
+      <span class="spec-value">${s.value} <span class="spec-unit">${s.unit}</span></span>
+    </div>
+  `).join('');
+
+  // description & features
+  document.getElementById('d-description').textContent = p.description;
+  document.getElementById('d-features').innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+
+  // extra photos
+  const photos = p.extraPhotos.filter(Boolean);
+  const photoGrid = document.getElementById('d-photos');
+  if (photos.length) {
+    photoGrid.innerHTML = photos.map((src, i) => `
+      <div class="detail-photo">
+        <img src="${src}" alt="Foto ${i+1}" loading="lazy">
+      </div>
+    `).join('');
+  } else {
+    photoGrid.innerHTML = [0,1,2].map(() => `
+      <div class="detail-photo">
+        <div class="detail-photo-placeholder">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C4B8A4" stroke-width="1.2">
+            <rect x="5" y="8" width="30" height="24" rx="2"/>
+            <circle cx="15" cy="16" r="3"/>
+            <path d="M5 26l8-6 6 5 5-4 11 7"/>
+          </svg>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('home-view').style.display = 'none';
+  document.getElementById('detail-view').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+/* ─── SHOW HOME ─── */
+function showHome() {
+  document.getElementById('detail-view').classList.remove('active');
+  document.getElementById('home-view').style.display = '';
+  hideEmptyState();
+  // Reset active nav to alquiler
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
+  document.querySelectorAll('.nav-link')[1].classList.add('active-nav');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+
+
+/* ─── MODAL ─── */
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('active');
+  document.getElementById('modal-form').classList.remove('hidden');
+  document.getElementById('modal-success').classList.remove('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+function submitForm() {
+  const nombre = document.getElementById('f-nombre').value.trim();
+  const telefono = document.getElementById('f-telefono').value.trim();
+  if (!nombre || !telefono) {
+    alert('Por favor rellena al menos tu nombre y teléfono.');
+    return;
+  }
+  document.getElementById('modal-form').classList.add('hidden');
+  document.getElementById('modal-success').classList.add('active');
+  setTimeout(closeModal, 3000);
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ─── TRANSLATIONS ─────────────────────────────────────────────── */
+const i18n = {
+  es: {
+    nav_sale:       'Venta',
+    nav_rent:       'Alquiler',
+    nav_business:   'Empresas',
+    nav_about:      'Quiénes somos',
+    hero_eyebrow:   'Propiedades en alquiler',
+    hero_h1:        'Tu próximo hogar te <em>está esperando</em>',
+    hero_sub:       'Selección de inmuebles exclusivos en las mejores ubicaciones. Ven a conocerlos.',
+    section_title:  'Propiedades disponibles',
+    section_count:  '4 inmuebles',
+    btn_more:       'Saber más',
+    btn_visit:      'Quiero verlo',
+    back:           'Volver',
+    about_prop:     'Sobre la propiedad',
+    features:       'Características',
+    modal_eyebrow:  'Solicitar visita',
+    modal_title:    'Quiero verlo',
+    modal_desc:     'Déjanos tus datos y nos ponemos en contacto contigo para concertar una visita.',
+    f_name:         'Nombre',
+    f_surname:      'Apellidos',
+    f_phone:        'Teléfono',
+    f_email:        'Email',
+    f_when:         '¿Cuándo prefieres la visita?',
+    f_opt0:         'Selecciona una franja horaria',
+    f_opt1:         'Mañana (9h – 13h)',
+    f_opt2:         'Tarde (15h – 19h)',
+    f_opt3:         'Cualquier día y horario',
+    f_msg:          'Mensaje (opcional)',
+    f_msg_ph:       '¿Alguna pregunta o comentario?',
+    btn_send:       'Enviar solicitud',
+    success_title:  '¡Solicitud enviada!',
+    success_desc:   'Nos pondremos en contacto contigo en menos de 24 horas para confirmar la visita.',
+    available:      'Disponible',
+    unavailable:    'Alquilado',
+    flag:           '🇪🇸',
+    label:          'ES',
+    footer_copy:    '© 2025 Burguar Dreams · Todos los derechos reservados',
+  },
+  ca: {
+    nav_sale:       'Venda',
+    nav_rent:       'Lloguer',
+    nav_business:   'Empreses',
+    nav_about:      'Qui som',
+    hero_eyebrow:   'Propietats en lloguer',
+    hero_h1:        'La teva nova llar t\'<em>està esperant</em>',
+    hero_sub:       'Selecció d\'immobles exclusius a les millors ubicacions. Vine a conèixer-los.',
+    section_title:  'Propietats disponibles',
+    section_count:  '4 immobles',
+    btn_more:       'Saber-ne més',
+    btn_visit:      'Vull veure-la',
+    back:           'Tornar',
+    about_prop:     'Sobre la propietat',
+    features:       'Característiques',
+    modal_eyebrow:  'Sol·licitar visita',
+    modal_title:    'Vull veure-la',
+    modal_desc:     'Deixa\'ns les teves dades i ens posem en contacte per concertar una visita.',
+    f_name:         'Nom',
+    f_surname:      'Cognoms',
+    f_phone:        'Telèfon',
+    f_email:        'Correu electrònic',
+    f_when:         'Quan prefereixes la visita?',
+    f_opt0:         'Selecciona una franja horària',
+    f_opt1:         'Matí (9h – 13h)',
+    f_opt2:         'Tarda (15h – 19h)',
+    f_opt3:         'Qualsevol dia i horari',
+    f_msg:          'Missatge (opcional)',
+    f_msg_ph:       'Tens alguna pregunta o comentari?',
+    btn_send:       'Enviar sol·licitud',
+    success_title:  'Sol·licitud enviada!',
+    success_desc:   'Ens posarem en contacte amb tu en menys de 24 hores per confirmar la visita.',
+    available:      'Disponible',
+    unavailable:    'Llogat',
+    flag:           '🏴',
+    label:          'CA',
+    footer_copy:    '© 2025 Burguar Dreams · Tots els drets reservats',
+  },
+  en: {
+    nav_sale:       'Sale',
+    nav_rent:       'Rental',
+    nav_business:   'Business',
+    nav_about:      'About us',
+    hero_eyebrow:   'Properties for rent',
+    hero_h1:        'Your next home is <em>waiting for you</em>',
+    hero_sub:       'A curated selection of exclusive properties in the best locations. Come and see them.',
+    section_title:  'Available properties',
+    section_count:  '4 properties',
+    btn_more:       'Learn more',
+    btn_visit:      'I want to see it',
+    back:           'Back',
+    about_prop:     'About the property',
+    features:       'Features',
+    modal_eyebrow:  'Schedule a visit',
+    modal_title:    'I want to see it',
+    modal_desc:     'Leave us your details and we\'ll get in touch to arrange a viewing.',
+    f_name:         'First name',
+    f_surname:      'Last name',
+    f_phone:        'Phone',
+    f_email:        'Email',
+    f_when:         'When do you prefer the visit?',
+    f_opt0:         'Select a time slot',
+    f_opt1:         'Morning (9am – 1pm)',
+    f_opt2:         'Afternoon (3pm – 7pm)',
+    f_opt3:         'Any day and time',
+    f_msg:          'Message (optional)',
+    f_msg_ph:       'Any questions or comments?',
+    btn_send:       'Send request',
+    success_title:  'Request sent!',
+    success_desc:   'We will contact you within 24 hours to confirm the visit.',
+    available:      'Available',
+    unavailable:    'Rented',
+    flag:           '🇬🇧',
+    label:          'EN',
+    footer_copy:    '© 2025 Burguar Dreams · All rights reserved',
+  },
+  fr: {
+    nav_sale:       'Vente',
+    nav_rent:       'Location',
+    nav_business:   'Entreprises',
+    nav_about:      'Qui sommes-nous',
+    hero_eyebrow:   'Propriétés à louer',
+    hero_h1:        'Votre prochaine maison vous <em>attend</em>',
+    hero_sub:       'Une sélection de biens exclusifs dans les meilleures adresses. Venez les découvrir.',
+    section_title:  'Propriétés disponibles',
+    section_count:  '4 biens',
+    btn_more:       'En savoir plus',
+    btn_visit:      'Je veux la visiter',
+    back:           'Retour',
+    about_prop:     'À propos du bien',
+    features:       'Caractéristiques',
+    modal_eyebrow:  'Demander une visite',
+    modal_title:    'Je veux la visiter',
+    modal_desc:     'Laissez-nous vos coordonnées et nous vous contacterons pour organiser une visite.',
+    f_name:         'Prénom',
+    f_surname:      'Nom',
+    f_phone:        'Téléphone',
+    f_email:        'Email',
+    f_when:         'Quand préférez-vous la visite ?',
+    f_opt0:         'Sélectionnez un créneau',
+    f_opt1:         'Matin (9h – 13h)',
+    f_opt2:         'Après-midi (15h – 19h)',
+    f_opt3:         'N\'importe quel jour',
+    f_msg:          'Message (optionnel)',
+    f_msg_ph:       'Une question ou un commentaire ?',
+    btn_send:       'Envoyer la demande',
+    success_title:  'Demande envoyée !',
+    success_desc:   'Nous vous contacterons dans les 24 heures pour confirmer la visite.',
+    available:      'Disponible',
+    unavailable:    'Loué',
+    flag:           '🇫🇷',
+    label:          'FR',
+    footer_copy:    '© 2025 Burguar Dreams · Tous droits réservés',
+  }
+};
+
+let currentLang = 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  const t = i18n[lang];
+
+  // Update flag & label in button
+  document.getElementById('lang-flag').textContent = t.flag;
+  document.getElementById('lang-label').textContent = t.label;
+
+  // Mark active option
+  document.querySelectorAll('.lang-option').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${lang}'`));
+  });
+
+  // Nav links
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+
+  // Hero
+  const heroEye = document.querySelector('.hero-eyebrow');
+  if (heroEye) heroEye.textContent = t.hero_eyebrow;
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1) heroH1.innerHTML = t.hero_h1;
+  const heroSub = document.querySelector('.hero-sub');
+  if (heroSub) heroSub.textContent = t.hero_sub;
+
+  // Section
+  const secTitle = document.querySelector('.section-label h2');
+  if (secTitle) secTitle.textContent = t.section_title;
+  const secCount = document.querySelector('.count-badge');
+  if (secCount) secCount.textContent = t.section_count;
+
+  // Footer
+  const footerP = document.querySelector('footer p');
+  if (footerP) footerP.textContent = t.footer_copy;
+
+  // Modal static texts
+  document.querySelector('.modal-eyebrow').textContent = t.modal_eyebrow;
+  document.querySelector('.modal h2').textContent = t.modal_title;
+  document.querySelector('.modal > .modal-form > p').textContent = t.modal_desc;
+  document.querySelector('#btn-send').textContent = t.btn_send;
+  document.querySelector('.modal-success h3').textContent = t.success_title;
+  document.querySelector('.modal-success p').textContent = t.success_desc;
+
+  // Form labels
+  document.querySelector('label[for="f-nombre"]').textContent = t.f_name;
+  document.querySelector('label[for="f-apellidos"]').textContent = t.f_surname;
+  document.querySelector('label[for="f-telefono"]').textContent = t.f_phone;
+  document.querySelector('label[for="f-email"]').textContent = t.f_email;
+  document.querySelector('label[for="f-cuando"]').textContent = t.f_when;
+  document.querySelector('label[for="f-mensaje"]').textContent = t.f_msg;
+  document.getElementById('f-nombre').placeholder = t.f_name;
+  document.getElementById('f-apellidos').placeholder = t.f_surname;
+  document.getElementById('f-mensaje').placeholder = t.f_msg_ph;
+
+  // Select options
+  const sel = document.getElementById('f-cuando');
+  sel.options[0].text = t.f_opt0;
+  sel.options[1].text = t.f_opt1;
+  sel.options[2].text = t.f_opt2;
+  sel.options[3].text = t.f_opt3;
+
+  // Back button
+  const backLabel = document.getElementById('back-label');
+  if (backLabel) backLabel.textContent = t.back;
+
+  // "Quiero verlo" button
+  const btnVisit = document.querySelector('.btn-quiero span');
+  if (btnVisit) btnVisit.textContent = t.btn_visit;
+
+  // Detail headings (when visible)
+  const h3s = document.querySelectorAll('.detail-description h3');
+  if (h3s[0]) h3s[0].textContent = t.about_prop;
+  if (h3s[1]) h3s[1].textContent = t.features;
+
+  // Re-render empty state if visible
+  const emptyEl = document.getElementById('empty-state');
+  if (emptyEl && emptyEl.style.display !== 'none') {
+    const activeNav = document.querySelector('.nav-link.active-nav');
+    const sec = activeNav ? activeNav.getAttribute('onclick').match(/handleNav\('(\w+)'\)/)?.[1] : null;
+    if (sec && sec !== 'alquiler' && sec !== 'quienes') showEmptyState(sec);
+  }
+
+  // Re-render about state if visible
+  const aboutEl = document.getElementById('about-state');
+  if (aboutEl && aboutEl.style.display !== 'none') showAboutUs();
+
+  // Re-render grid for button labels
+  renderGrid();
+
+  // Close dropdown
+  document.getElementById('lang-switcher').classList.remove('open');
+}
+
+function toggleLang(e) {
+  e.stopPropagation();
+  document.getElementById('lang-switcher').classList.toggle('open');
+}
+
+document.addEventListener('click', () => {
+  document.getElementById('lang-switcher').classList.remove('open');
+});
+
+/* ─── NAV HANDLER ─── */
+function handleNav(section) {
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
+  event.target.classList.add('active-nav');
+
+  if (section === 'alquiler') {
+    hideEmptyState();
+    showHome();
+  } else if (section === 'venta') {
+    document.getElementById('detail-view').classList.remove('active');
+    document.getElementById('home-view').style.display = '';
+    const aboutEl = document.getElementById('about-state');
+    if (aboutEl) aboutEl.style.display = 'none';
+    showEmptyState('venta');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (section === 'empresas') {
+    document.getElementById('detail-view').classList.remove('active');
+    document.getElementById('home-view').style.display = '';
+    const aboutEl = document.getElementById('about-state');
+    if (aboutEl) aboutEl.style.display = 'none';
+    showEmptyState('empresas');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (section === 'quienes') {
+    document.getElementById('detail-view').classList.remove('active');
+    document.getElementById('home-view').style.display = '';
+    // Ocultar empty-state explícitamente antes de mostrar about
+    const emptyEl = document.getElementById('empty-state');
+    if (emptyEl) emptyEl.style.display = 'none';
+    document.querySelector('.hero').style.display = 'none';
+    document.querySelector('.properties-section').style.display = 'none';
+    showAboutUs();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+
+function showEmptyState(section) {
+  const t = i18n[currentLang] || i18n.es;
+  let el = document.getElementById('empty-state');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'empty-state';
+    el.style.cssText = `
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding: 8rem 2rem 10rem; text-align:center;
+    `;
+    document.getElementById('home-view').appendChild(el);
+  }
+
+  const msgs = {
+    venta: {
+      es: { icon: 'house', tag: 'Venta', title: 'Próximamente', sub: 'Aún no hay inmuebles disponibles para vender.\nEstamos preparando nuevas propiedades. Vuelve pronto.' },
+      ca: { icon: 'house', tag: 'Venda', title: 'Properament',  sub: 'Encara no hi ha immobles disponibles per vendre.\nEstem preparant noves propietats. Torna aviat.' },
+      en: { icon: 'house', tag: 'Sale',  title: 'Coming soon',  sub: 'There are no properties available for sale yet.\nWe are preparing new listings. Check back soon.' },
+      fr: { icon: 'house', tag: 'Vente', title: 'Bientôt',      sub: 'Aucun bien n\'est encore disponible à la vente.\nNous préparons de nouvelles propriétés. Revenez bientôt.' },
+    },
+    empresas: {
+      es: { icon: 'building', tag: 'Empresas', title: 'Soluciones para empresas', sub: 'Ofrecemos servicios especializados para empresas que buscan\noficinas, locales o espacios corporativos en alquiler.\nContacta con nosotros y te asesoramos sin compromiso.', cta: true },
+      ca: { icon: 'building', tag: 'Empreses', title: 'Solucions per a empreses', sub: 'Oferim serveis especialitzats per a empreses que busquen\noficines, locals o espais corporatius en lloguer.\nContacta\'ns i t\'assessorem sense compromís.', cta: true },
+      en: { icon: 'building', tag: 'Business', title: 'Business solutions',       sub: 'We offer specialized services for companies looking for\noffices, commercial spaces or corporate properties.\nContact us and we\'ll advise you with no obligation.', cta: true },
+      fr: { icon: 'building', tag: 'Entreprises', title: 'Solutions entreprises',  sub: 'Nous proposons des services spécialisés pour les entreprises\nà la recherche de bureaux, locaux ou espaces corporatifs.\nContactez-nous pour un conseil sans engagement.', cta: true },
+    }
+  };
+
+  const ctaLabel = { es: 'Contactar', ca: 'Contactar', en: 'Contact us', fr: 'Nous contacter' };
+  const m = msgs[section][currentLang] || msgs[section].es;
+
+  const iconHouse = `
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#C4B8A4" stroke-width="1.2" style="margin-bottom:2rem">
+      <rect x="10" y="24" width="44" height="30" rx="2"/>
+      <path d="M10 24L32 8l22 16"/>
+      <rect x="24" y="38" width="16" height="16"/>
+      <circle cx="48" cy="20" r="10" fill="#ffffff" stroke="#C4B8A4"/>
+      <path d="M48 16v4.5l3 2" stroke="#C4B8A4" stroke-linecap="round"/>
+    </svg>`;
+
+  const iconBuilding = `
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#C4B8A4" stroke-width="1.2" style="margin-bottom:2rem">
+      <rect x="12" y="10" width="40" height="46" rx="2"/>
+      <rect x="20" y="18" width="8" height="8"/><rect x="36" y="18" width="8" height="8"/>
+      <rect x="20" y="32" width="8" height="8"/><rect x="36" y="32" width="8" height="8"/>
+      <rect x="26" y="44" width="12" height="12"/>
+      <path d="M8 56h48"/>
+    </svg>`;
+
+  const icon = m.icon === 'building' ? iconBuilding : iconHouse;
+  const ctaBtn = m.cta ? `
+    <a href="mailto:info@burguardreams.es" style="
+      display:inline-flex; align-items:center; gap:0.6rem; margin-top:2rem;
+      padding:0.9rem 2.5rem; background:#2C2416; color:#FDFAF5;
+      font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.14em;
+      text-transform:uppercase; text-decoration:none; transition:background 0.2s;
+    " onmouseover="this.style.background='#8B6B3D'" onmouseout="this.style.background='#2C2416'">
+      ${ctaLabel[currentLang] || ctaLabel.es}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 4l3 3-3 3"/></svg>
+    </a>` : '';
+
+  el.innerHTML = `
+    ${icon}
+    <p style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#B8935A;margin-bottom:1rem">${m.tag}</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#2C2416;margin-bottom:1.2rem">${m.title}</h2>
+    <p style="font-size:0.95rem;color:#5C4F3A;font-weight:300;line-height:1.8;max-width:420px;white-space:pre-line">${m.sub}</p>
+    ${ctaBtn}
+  `;
+
+  document.querySelector('.hero').style.display = 'none';
+  document.querySelector('.properties-section').style.display = 'none';
+  el.style.display = 'flex';
+}
+
+function showAboutUs() {
+  let el = document.getElementById('about-state');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'about-state';
+    document.getElementById('home-view').appendChild(el);
+  }
+
+  const about = {
+    es: {
+      tag: 'Quiénes somos',
+      title: 'Expertos en el\nmercado <em>inmobiliario</em>',
+      p1: 'Somos una agencia inmobiliaria con más de 15 años de experiencia ayudando a familias y empresas a encontrar el hogar o espacio perfecto. Nos especializamos en alquiler y venta de inmuebles residenciales y comerciales en las principales ciudades de España.',
+      p2: 'Nuestro equipo de profesionales trabaja con dedicación, transparencia y un trato cercano para que cada proceso sea claro, seguro y sin sorpresas. Conocemos el mercado en profundidad y ponemos ese conocimiento a tu servicio.',
+      val1t: 'Confianza', val1: 'Más de 500 familias han encontrado su hogar con nosotros.',
+      val2t: 'Experiencia', val2: '+15 años en el sector inmobiliario español.',
+      val3t: 'Cercanía', val3: 'Un asesor personal para cada cliente, sin burocracia.',
+      cta: 'Contactar con nosotros',
+    },
+    ca: {
+      tag: 'Qui som',
+      title: 'Experts en el\nmercat <em>immobiliari</em>',
+      p1: 'Som una agència immobiliària amb més de 15 anys d\'experiència ajudant famílies i empreses a trobar la llar o l\'espai perfecte. Ens especialitzem en lloguer i venda d\'immobles residencials i comercials a les principals ciutats d\'Espanya.',
+      p2: 'El nostre equip de professionals treballa amb dedicació, transparència i tracte proper perquè cada procés sigui clar, segur i sense sorpreses. Coneixem el mercat en profunditat i posem aquest coneixement al teu servei.',
+      val1t: 'Confiança', val1: 'Més de 500 famílies han trobat la seva llar amb nosaltres.',
+      val2t: 'Experiència', val2: '+15 anys en el sector immobiliari espanyol.',
+      val3t: 'Proximitat', val3: 'Un assessor personal per a cada client, sense burocràcia.',
+      cta: 'Contacta\'ns',
+    },
+    en: {
+      tag: 'About us',
+      title: 'Experts in the\n<em>real estate</em> market',
+      p1: 'We are a real estate agency with over 15 years of experience helping families and businesses find the perfect home or space. We specialise in rental and sale of residential and commercial properties in Spain\'s major cities.',
+      p2: 'Our team of professionals works with dedication, transparency and a personal touch so that every process is clear, safe and free of surprises. We know the market inside out and put that knowledge at your service.',
+      val1t: 'Trust', val1: 'Over 500 families have found their home with us.',
+      val2t: 'Experience', val2: '+15 years in the Spanish real estate sector.',
+      val3t: 'Personal touch', val3: 'A dedicated advisor for every client, no red tape.',
+      cta: 'Get in touch',
+    },
+    fr: {
+      tag: 'Qui sommes-nous',
+      title: 'Experts du marché\n<em>immobilier</em>',
+      p1: 'Nous sommes une agence immobilière avec plus de 15 ans d\'expérience aidant des familles et des entreprises à trouver le logement ou l\'espace idéal. Nous sommes spécialisés dans la location et la vente de biens résidentiels et commerciaux dans les grandes villes d\'Espagne.',
+      p2: 'Notre équipe de professionnels travaille avec dévouement, transparence et proximité pour que chaque processus soit clair, sûr et sans mauvaises surprises. Nous connaissons le marché en profondeur et mettons ce savoir-faire à votre service.',
+      val1t: 'Confiance', val1: 'Plus de 500 familles ont trouvé leur logement avec nous.',
+      val2t: 'Expérience', val2: '+15 ans dans le secteur immobilier espagnol.',
+      val3t: 'Proximité', val3: 'Un conseiller personnel pour chaque client, sans bureaucratie.',
+      cta: 'Nous contacter',
+    }
+  };
+
+  const a = about[currentLang] || about.es;
+
+  el.innerHTML = `
+    <div style="max-width:960px; margin:0 auto; padding:10rem 4rem 8rem;">
+
+      <p style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#B8935A;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem">
+        <span style="display:inline-block;width:40px;height:1px;background:#B8935A"></span>${a.tag}
+      </p>
+
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:300;color:#2C2416;line-height:1.15;margin-bottom:3rem;white-space:pre-line">${a.title}</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem">
+        <p style="font-size:0.95rem;color:#5C4F3A;font-weight:300;line-height:1.9">${a.p1}</p>
+        <p style="font-size:0.95rem;color:#5C4F3A;font-weight:300;line-height:1.9">${a.p2}</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#E8DFD0;border:1px solid #E8DFD0;margin-bottom:4rem">
+        ${[
+          [a.val1t, a.val1, '❶'],
+          [a.val2t, a.val2, '❷'],
+          [a.val3t, a.val3, '❸']
+        ].map(([title, desc]) => `
+          <div style="background:#fff;padding:2rem 1.8rem">
+            <div style="width:32px;height:2px;background:#B8935A;margin-bottom:1.2rem"></div>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#2C2416;margin-bottom:0.6rem">${title}</p>
+            <p style="font-size:0.84rem;color:#5C4F3A;font-weight:300;line-height:1.7">${desc}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      <div style="display:flex;justify-content:center;padding-top:1rem;border-top:1px solid #E8DFD0">
+        <a href="mailto:info@burguardreams.es" style="
+          display:inline-flex;align-items:center;gap:0.8rem;
+          padding:1rem 3rem;background:#2C2416;color:#FDFAF5;
+          font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.16em;
+          text-transform:uppercase;text-decoration:none;transition:background 0.2s;
+        " onmouseover="this.style.background='#8B6B3D'" onmouseout="this.style.background='#2C2416'">
+          ${a.cta}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 4l3 3-3 3"/></svg>
+        </a>
+      </div>
+
+    </div>
+  `;
+
+  document.querySelector('.hero').style.display = 'none';
+  document.querySelector('.properties-section').style.display = 'none';
+  el.style.display = 'block';
+  el.style.visibility = 'visible';
+  el.style.opacity = '1';
+}
+
+function hideAboutUs() {
+  const el = document.getElementById('about-state');
+  if (el) el.style.display = 'none';
+}
+
+function hideEmptyState() {
+  const el = document.getElementById('empty-state');
+  if (el) el.style.display = 'none';
+  hideAboutUs();
+  const hero = document.querySelector('.hero');
+  const section = document.querySelector('.properties-section');
+  if (hero) hero.style.display = '';
+  if (section) section.style.display = '';
+}
+
+/* ─── INIT ─── */
+renderGrid();
+
+// Set hero blurry background from first property photo
+(function() {
+  const heroBg = document.getElementById('hero-bg');
+  if (heroBg && properties[0] && properties[0].mainImage) {
+    heroBg.style.backgroundImage = `url("${properties[0].mainImage}")`;
+  }
+})();
+</script>
+</body>
+</html>
