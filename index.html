@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -714,6 +715,7 @@
   }
 
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
   .modal {
     background: #ffffff;
@@ -931,7 +933,7 @@
       </button>
       <div class="lang-dropdown" id="lang-dropdown">
         <button class="lang-option active" onclick="setLang('es')">🇪🇸 &nbsp;Español</button>
-        <button class="lang-option" onclick="setLang('ca')">🏴 &nbsp;Català</button>
+        <button class="lang-option" onclick="setLang('ca')"><svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg> &nbsp;Català</button>
         <button class="lang-option" onclick="setLang('en')">🇬🇧 &nbsp;English</button>
         <button class="lang-option" onclick="setLang('fr')">🇫🇷 &nbsp;Français</button>
       </div>
@@ -1106,29 +1108,24 @@
 
 
 <script>
-/* ─── DATOS DE LOS INMUEBLES ─────────────────────────────────────
-   EDITA AQUÍ para añadir o modificar propiedades.
-   
-   Para las imágenes: pon la ruta o URL de cada foto en los arrays.
-   - mainImage: foto principal (hero del detalle)
-   - cardImage: foto de la tarjeta en el grid
-   - extraPhotos: galería adicional en el detalle (hasta 6)
-   
-   Ejemplo de ruta local: './fotos/piso1-principal.jpg'
-   Ejemplo URL externa: 'https://ejemplo.com/foto.jpg'
-────────────────────────────────────────────────────────────────── */
+/* ─── SUPABASE CONFIG ──────────────────────────────────────────── */
+const SUPABASE_URL = "https://yscbwngotgbkytmzogol.supabase.co";
+const SUPABASE_KEY = "sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN";
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── Estado global ──
+let currentPropertyId = null;
+
+/* ─── DATOS DE LOS INMUEBLES ─── */
 const properties = [
   {
     id: 1,
     city: 'Barcelona',
     street: 'Gran Via de les Corts Catalanes, 794 Entresuelo 2ª',
-    tag: 'Piso',
-    price: '',
-    priceUnit: '/mes',
-    available: true,
-    availableText: 'Disponible ahora',
+    tag: 'Apartamento', price: '', priceUnit: '/mes',
+    available: true, availableText: 'Disponible ahora',
     description: 'Luminoso piso en pleno Eixample, reformado con materiales de primera calidad. Techos altos, ventanas de piso a techo y vistas despejadas. A 5 minutos del Passeig de Gràcia.',
-    features: ['Calefacción central', 'Aire acondicionado', 'Cocina equipada', 'Ascensor', 'Portero automático'],
+    features: ['Calefacción central','Aire acondicionado','Cocina equipada','Ascensor','Portero automático'],
     specs: [
       { label: 'Superficie', value: '56', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1138,33 +1135,23 @@ const properties = [
     cardImage: './fotos/Granvia/Entrada.jpg',
     mainImage: './fotos/Granvia/Entrada.jpg',
     extraPhotos: [
-      './fotos/Granvia/Menjador.jpg',
-      './fotos/Granvia/Menjador3.jpg',
-      './fotos/Granvia/Menjador4.jpg',
-      './fotos/Granvia/MobleMenjador.jpg',
-      './fotos/Granvia/Sofa.jpg',
-      './fotos/Granvia/Sofa2.jpg',
-      './fotos/Granvia/Cuina.jpg',
-      './fotos/Granvia/Cuina2.jpg',
-      './fotos/Granvia/Cuina3.jpg',
-      './fotos/Granvia/Cuina4.jpg',
-      './fotos/Granvia/Habitacio.jpg',
-      './fotos/Granvia/Habitacio2.jpg',
-      './fotos/Granvia/Lavabo.jpg',
-      './fotos/Granvia/Pati.jpg'
+      './fotos/Granvia/Menjador.jpg','./fotos/Granvia/Menjador3.jpg',
+      './fotos/Granvia/Menjador4.jpg','./fotos/Granvia/MobleMenjador.jpg',
+      './fotos/Granvia/Sofa.jpg','./fotos/Granvia/Sofa2.jpg',
+      './fotos/Granvia/Cuina.jpg','./fotos/Granvia/Cuina2.jpg',
+      './fotos/Granvia/Cuina3.jpg','./fotos/Granvia/Cuina4.jpg',
+      './fotos/Granvia/Habitacio.jpg','./fotos/Granvia/Habitacio2.jpg',
+      './fotos/Granvia/Lavabo.jpg','./fotos/Granvia/Pati.jpg'
     ]
   },
   {
     id: 2,
     city: 'Barcelona',
     street: 'C/ de València, 178 Entresuelo 3ª',
-    tag: 'Piso',
-    price: '',
-    priceUnit: '/mes',
-    available: true,
-    availableText: 'Disponible ahora',
+    tag: 'Apartamento', price: '', priceUnit: '/mes',
+    available: true, availableText: 'Disponible ahora',
     description: 'Elegante apartamento en el Eixample. Acabados de lujo, suelos de parquet y cocina con isla de diseño. Zona premium con todos los servicios a pie de calle.',
-    features: ['Dobles ventanas', 'Cocina equipada', 'Aire acondicionado', 'Ascensor', 'Portero automático'],
+    features: ['Dobles ventanas','Cocina equipada','Aire acondicionado','Ascensor','Portero automático'],
     specs: [
       { label: 'Superficie', value: '50', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1174,41 +1161,27 @@ const properties = [
     cardImage: './fotos/Valencia/Escriptori.jpg',
     mainImage: './fotos/Valencia/Escriptori.jpg',
     extraPhotos: [
-      './fotos/Valencia/Mejador.jpg',
-      './fotos/Valencia/Sofa.jpg',
-      './fotos/Valencia/Sofa2.jpg',
-      './fotos/Valencia/Sofa3.jpg',
-      './fotos/Valencia/Sofa4.jpg',
-      './fotos/Valencia/Cuina.jpg',
-      './fotos/Valencia/Cuina2.jpg',
-      './fotos/Valencia/Cuina3.jpg',
-      './fotos/Valencia/Cuina4.jpg',
-      './fotos/Valencia/Cuina5.jpg',
-      './fotos/Valencia/Cuina6.jpg',
-      './fotos/Valencia/Dormitori.jpg',
-      './fotos/Valencia/Dormitori2.jpg',
-      './fotos/Valencia/Dormitori3.jpg',
-      './fotos/Valencia/Dormitori4.jpg',
-      './fotos/Valencia/Dormitori5.jpg',
-      './fotos/Valencia/Lavabo.jpg',
-      './fotos/Valencia/Lavabo2.jpg',
-      './fotos/Valencia/Ducha.jpg',
-      './fotos/Valencia/Entrada.jpg',
-      './fotos/Valencia/Entrada2.jpg',
-      './fotos/Valencia/Edifici.jpg'
+      './fotos/Valencia/Mejador.jpg','./fotos/Valencia/Sofa.jpg',
+      './fotos/Valencia/Sofa2.jpg','./fotos/Valencia/Sofa3.jpg',
+      './fotos/Valencia/Sofa4.jpg','./fotos/Valencia/Cuina.jpg',
+      './fotos/Valencia/Cuina2.jpg','./fotos/Valencia/Cuina3.jpg',
+      './fotos/Valencia/Cuina4.jpg','./fotos/Valencia/Cuina5.jpg',
+      './fotos/Valencia/Cuina6.jpg','./fotos/Valencia/Dormitori.jpg',
+      './fotos/Valencia/Dormitori2.jpg','./fotos/Valencia/Dormitori3.jpg',
+      './fotos/Valencia/Dormitori4.jpg','./fotos/Valencia/Dormitori5.jpg',
+      './fotos/Valencia/Lavabo.jpg','./fotos/Valencia/Lavabo2.jpg',
+      './fotos/Valencia/Ducha.jpg','./fotos/Valencia/Entrada.jpg',
+      './fotos/Valencia/Entrada2.jpg','./fotos/Valencia/Edifici.jpg'
     ]
   },
   {
     id: 3,
     city: 'Barcelona',
     street: 'Carrer de Can Bruixa, 16 Entresuelo 1ª',
-    tag: 'Piso',
-    price: '1.049,97',
-    priceUnit: '/mes',
-    available: false,
-    availableText: 'Disponible el 10/07/2026',
+    tag: 'Apartamento', price: '1.049,97', priceUnit: '/mes',
+    available: false, availableText: 'Disponible el 10/07/2026',
     description: 'Precioso piso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
-    features: ['Patio privado', 'Cocina independiente', 'Aire acondicionado', 'Doble acristalamiento', 'Ascensor', 'Portero automático'],
+    features: ['Patio privado','Cocina independiente','Aire acondicionado','Doble acristalamiento','Ascensor','Portero automático'],
     specs: [
       { label: 'Superficie', value: '70', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1218,22 +1191,14 @@ const properties = [
     cardImage: './fotos/Bruixa/Dormitori.jpg',
     mainImage: './fotos/Bruixa/Dormitori.jpg',
     extraPhotos: [
-      './fotos/Bruixa/Menjador.jpg',
-      './fotos/Bruixa/Menjador2.jpg',
-      './fotos/Bruixa/Menjador3.jpg',
-      './fotos/Bruixa/Menjador4.jpg',
-      './fotos/Bruixa/Menjador5.jpg',
-      './fotos/Bruixa/Menjador6.jpg',
-      './fotos/Bruixa/Sofa.jpg',
-      './fotos/Bruixa/Sofa2.jpg',
-      './fotos/Bruixa/Cuina.jpg',
-      './fotos/Bruixa/Dormitori2.jpg',
-      './fotos/Bruixa/Dormitori3.jpg',
-      './fotos/Bruixa/Lavabo.jpg',
-      './fotos/Bruixa/Lavabo2.jpg',
-      './fotos/Bruixa/Pati.jpg',
-      './fotos/Bruixa/Carrer.jpg',
-      './fotos/Bruixa/Escriptori.jpg',
+      './fotos/Bruixa/Menjador.jpg','./fotos/Bruixa/Menjador2.jpg',
+      './fotos/Bruixa/Menjador3.jpg','./fotos/Bruixa/Menjador4.jpg',
+      './fotos/Bruixa/Menjador5.jpg','./fotos/Bruixa/Menjador6.jpg',
+      './fotos/Bruixa/Sofa.jpg','./fotos/Bruixa/Sofa2.jpg',
+      './fotos/Bruixa/Cuina.jpg','./fotos/Bruixa/Dormitori2.jpg',
+      './fotos/Bruixa/Dormitori3.jpg','./fotos/Bruixa/Lavabo.jpg',
+      './fotos/Bruixa/Lavabo2.jpg','./fotos/Bruixa/Pati.jpg',
+      './fotos/Bruixa/Carrer.jpg','./fotos/Bruixa/Escriptori.jpg',
       './fotos/Bruixa/Edifici.jpg'
     ]
   },
@@ -1241,13 +1206,10 @@ const properties = [
     id: 4,
     city: 'Barcelona',
     street: 'Carrer del Comte d\'Urgell, 259 Subsotano 1°',
-    tag: 'Piso',
-    price: '',
-    priceUnit: '/mes',
-    available: true,
-    availableText: 'Disponible ahora',
+    tag: 'Apartamento', price: '', priceUnit: '/mes',
+    available: true, availableText: 'Disponible ahora',
     description: 'Amplio piso con balcón en el Eixample esquerra. Reformado y luminoso, con habitaciones exteriores y cocina renovada. Muy bien comunicado.',
-    features: ['Balcón exterior', 'Cocina renovada', 'Habitaciones exteriores', 'Ascensor', 'Portero automático', 'Aire acondicionado'],
+    features: ['Balcón exterior','Cocina renovada','Habitaciones exteriores','Ascensor','Portero automático','Aire acondicionado'],
     specs: [
       { label: 'Superficie', value: '80', unit: 'm²' },
       { label: 'Habitaciones', value: '2', unit: 'dorm.' },
@@ -1257,30 +1219,27 @@ const properties = [
     cardImage: './fotos/Urgell/Sofa.jpg',
     mainImage: './fotos/Urgell/Sofa.jpg',
     extraPhotos: [
-      './fotos/Urgell/Entrada.jpg',
-      './fotos/Urgell/Entrada2.jpg',
-      './fotos/Urgell/Menjador.jpg',
-      './fotos/Urgell/Menjador2.jpg',
-      './fotos/Urgell/Menjador3.jpg',
-      './fotos/Urgell/Sofa2.jpg',
-      './fotos/Urgell/Cuina.jpg',
-      './fotos/Urgell/Cuina2.jpg',
-      './fotos/Urgell/Dormitori.jpg',
-      './fotos/Urgell/Dormitori2.jpg',
-      './fotos/Urgell/Dormitori3.jpg',
-      './fotos/Urgell/Dormitori4.jpg',
-      './fotos/Urgell/Dormitori5.jpg',
-      './fotos/Urgell/Lavabo.jpg',
-      './fotos/Urgell/Lavabo2.jpg',
-      './fotos/Urgell/Balco.jpg',
-      './fotos/Urgell/Balco2.jpg',
-      './fotos/Urgell/Balco3.jpg',
-      './fotos/Urgell/Pasadis.jpg',
-      './fotos/Urgell/Edifici.jpg',
+      './fotos/Urgell/Entrada.jpg','./fotos/Urgell/Entrada2.jpg',
+      './fotos/Urgell/Menjador.jpg','./fotos/Urgell/Menjador2.jpg',
+      './fotos/Urgell/Menjador3.jpg','./fotos/Urgell/Sofa2.jpg',
+      './fotos/Urgell/Cuina.jpg','./fotos/Urgell/Cuina2.jpg',
+      './fotos/Urgell/Dormitori.jpg','./fotos/Urgell/Dormitori2.jpg',
+      './fotos/Urgell/Dormitori3.jpg','./fotos/Urgell/Dormitori4.jpg',
+      './fotos/Urgell/Dormitori5.jpg','./fotos/Urgell/Lavabo.jpg',
+      './fotos/Urgell/Lavabo2.jpg','./fotos/Urgell/Balco.jpg',
+      './fotos/Urgell/Balco2.jpg','./fotos/Urgell/Balco3.jpg',
+      './fotos/Urgell/Pasadis.jpg','./fotos/Urgell/Edifici.jpg',
       './fotos/Urgell/Edifici2.jpg'
     ]
   }
 ];
+
+function setHeroBg() {
+  const heroBg = document.getElementById('hero-bg');
+  if (heroBg && properties[0] && properties[0].mainImage) {
+    heroBg.style.backgroundImage = `url("${properties[0].mainImage}")`;
+  }
+}
 
 
 /* ─── RENDER GRID ─── */
@@ -1324,6 +1283,7 @@ function renderGrid() {
 function showDetail(id) {
   const p = properties.find(x => x.id === id);
   if (!p) return;
+  currentPropertyId = id;
 
   // hero image
   const wrap = document.getElementById('detail-hero-img-wrap');
@@ -1419,18 +1379,6 @@ function handleOverlayClick(e) {
   if (e.target === document.getElementById('modal-overlay')) closeModal();
 }
 
-function submitForm() {
-  const nombre = document.getElementById('f-nombre').value.trim();
-  const telefono = document.getElementById('f-telefono').value.trim();
-  if (!nombre || !telefono) {
-    alert('Por favor rellena al menos tu nombre y teléfono.');
-    return;
-  }
-  document.getElementById('modal-form').classList.add('hidden');
-  document.getElementById('modal-success').classList.add('active');
-  setTimeout(closeModal, 3000);
-}
-
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 /* ─── TRANSLATIONS ─────────────────────────────────────────────── */
@@ -1507,7 +1455,7 @@ const i18n = {
     success_desc:   'Ens posarem en contacte amb tu en menys de 24 hores per confirmar la visita.',
     available:      'Disponible',
     unavailable:    'Llogat',
-    flag:           '🏴',
+    flag:           '<svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd;vertical-align:middle"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg>',
     label:          'CA',
     footer_copy:    '© 2025 Burguar Dreams · Tots els drets reservats',
   },
@@ -1596,7 +1544,7 @@ function setLang(lang) {
   const t = i18n[lang];
 
   // Update flag & label in button
-  document.getElementById('lang-flag').textContent = t.flag;
+  document.getElementById('lang-flag').innerHTML = t.flag;
   document.getElementById('lang-label').textContent = t.label;
 
   // Mark active option
@@ -1922,16 +1870,52 @@ function hideEmptyState() {
   if (section) section.style.display = '';
 }
 
+/* ─── SUBMIT FORM → SUPABASE ─── */
+async function submitForm() {
+  const nombre   = document.getElementById('f-nombre').value.trim();
+  const telefono = document.getElementById('f-telefono').value.trim();
+  if (!nombre || !telefono) {
+    alert('Por favor rellena al menos tu nombre y teléfono.');
+    return;
+  }
+
+  const btn = document.getElementById('btn-send');
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  const p = properties.find(x => x.id === currentPropertyId);
+
+  try {
+    const { error } = await db.from('solicitudes').insert({
+      property_id:   currentPropertyId || null,
+      property_name: p ? `${p.city} — ${p.street}` : null,
+      nombre:        nombre,
+      apellidos:     document.getElementById('f-apellidos').value.trim(),
+      telefono:      telefono,
+      email:         document.getElementById('f-email').value.trim(),
+      cuando:        document.getElementById('f-cuando').value,
+      mensaje:       document.getElementById('f-mensaje').value.trim(),
+    });
+
+    if (error) throw error;
+
+    document.getElementById('modal-form').classList.add('hidden');
+    document.getElementById('modal-success').classList.add('active');
+    setTimeout(closeModal, 3000);
+
+  } catch (e) {
+    console.error('Error guardando solicitud:', e);
+    alert('Ha ocurrido un error. Por favor inténtalo de nuevo.');
+  } finally {
+    btn.disabled = false;
+    const t = i18n[currentLang] || i18n.es;
+    btn.textContent = t.btn_send;
+  }
+}
+
 /* ─── INIT ─── */
 renderGrid();
-
-// Set hero blurry background from first property photo
-(function() {
-  const heroBg = document.getElementById('hero-bg');
-  if (heroBg && properties[0] && properties[0].mainImage) {
-    heroBg.style.backgroundImage = `url("${properties[0].mainImage}")`;
-  }
-})();
+setHeroBg();
 </script>
 </body>
 </html>
