@@ -863,21 +863,181 @@
     color: var(--warm-mid);
   }
 
-  /* ── FOOTER ── */
-  footer {
+  /* ── CONTACT SECTION ── */
+  .contact-section {
     background: var(--warm-dark);
     color: var(--sand);
-    padding: 3rem 4rem;
+    padding: 6rem 4rem 4rem;
+  }
+
+  .contact-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(196,184,164,0.2);
+  }
+
+  .contact-left .contact-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .contact-left .contact-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent-light);
+  }
+
+  .contact-left h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-left h2 em {
+    font-style: italic;
+    color: var(--accent-light);
+  }
+
+  .contact-left p {
+    font-size: 0.9rem;
+    color: var(--stone);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 360px;
+  }
+
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-channel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.88rem;
+    color: var(--sand);
+    font-weight: 300;
+  }
+
+  .contact-channel-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(196,184,164,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* WhatsApp button */
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: #25D366;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 2rem;
+    width: fit-content;
+  }
+
+  .btn-whatsapp:hover {
+    background: #1ebe5d;
+    transform: translateY(-2px);
+  }
+
+  /* Contact right: info cards */
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(196,184,164,0.15);
+    padding: 1.6rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    transition: background 0.2s;
+  }
+
+  .contact-card:hover {
+    background: rgba(255,255,255,0.07);
+  }
+
+  .contact-card-icon {
+    color: var(--accent-light);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-card-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-card-value {
+    font-size: 1rem;
+    color: #ffffff;
+    font-weight: 300;
+  }
+
+  .contact-card-value a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-card-value a:hover { color: var(--accent-light); }
+
+  /* Footer bottom bar */
+  .footer-bar {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  footer .logo { color: var(--sand); }
-  footer .logo span { color: var(--accent-light); }
+  .footer-bar .logo { color: var(--sand); }
+  .footer-bar .logo span { color: var(--accent-light); }
 
-  footer p {
-    font-size: 0.78rem;
+  .footer-bar p {
+    font-size: 0.75rem;
     color: var(--stone);
     font-weight: 300;
   }
@@ -888,20 +1048,15 @@
     .header-nav { padding: 0 1.5rem; overflow-x: auto; }
     .nav-link { padding: 0.8rem 0.8rem; font-size: 0.7rem; }
     .hero { padding: 11rem 2rem 4rem; }
-    .properties-section { padding: 2rem 2rem 6rem; }
+    .properties-section { padding: 2rem 2rem 4rem; }
 
     .grid {
       grid-template-columns: 1fr;
       gap: 12px;
     }
 
-    .card {
-      aspect-ratio: 4/3;
-      min-height: unset;
-    }
-
+    .card { min-height: unset; }
     .btn-saber { font-size: 0.68rem; padding: 0.5rem 0.9rem; }
-
     .detail-body { padding: 4rem 2rem 6rem; }
     .detail-header { grid-template-columns: 1fr; }
     .detail-price-block { text-align: left; }
@@ -910,8 +1065,10 @@
     .detail-photos { grid-template-columns: repeat(2, 1fr); }
     .modal { padding: 2.5rem 1.8rem; }
     .form-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
     .detail-back { padding: 1.5rem 2rem; }
+    .contact-section { padding: 4rem 2rem 3rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-bar { flex-direction: column; gap: 1rem; text-align: center; }
   }
 </style>
 </head>
@@ -942,9 +1099,7 @@
 
   <!-- Fila inferior: navegación -->
   <nav class="header-nav">
-    <button class="nav-link" data-i18n="nav_sale" onclick="handleNav('venta')">Venta</button>
     <button class="nav-link active-nav" data-i18n="nav_rent" onclick="handleNav('alquiler')">Alquiler</button>
-    <button class="nav-link" data-i18n="nav_business" onclick="handleNav('empresas')">Empresas</button>
     <button class="nav-link" data-i18n="nav_about" onclick="handleNav('quienes')">Quiénes somos</button>
   </nav>
 </header>
@@ -1100,11 +1255,111 @@
   </div>
 </div>
 
-<!-- ─────────────── FOOTER ─────────────── -->
-<footer>
-  <a href="#" class="logo" onclick="showHome()">Burguar <span>Dreams</span></a>
-  <p>© 2025 Burguar Dreams · Todos los derechos reservados</p>
-</footer>
+<!-- ─────────────── CONTACTO + FOOTER ─────────────── -->
+<section class="contact-section" id="contacto">
+  <div class="contact-inner">
+
+    <!-- Izquierda: texto + WhatsApp -->
+    <div class="contact-left">
+      <p class="contact-eyebrow" data-i18n="contact_eyebrow">Contacto</p>
+      <h2 data-i18n-html="contact_title">¿Te interesa algún <em>apartamento?</em></h2>
+      <p data-i18n="contact_sub">Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.</p>
+
+      <div class="contact-channels">
+        <div class="contact-channel">
+          <div class="contact-channel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 2h12v10H2z"/><path d="M2 4l6 4 6-4"/>
+            </svg>
+          </div>
+          <a href="mailto:burguardreams@gmail.com" style="color:var(--sand);text-decoration:none">burguardreams@gmail.com</a>
+        </div>
+        <div class="contact-channel">
+          <div class="contact-channel-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M3 2h3l1.5 3.5-1.8 1.1a9 9 0 0 0 3.7 3.7l1.1-1.8L14 10v3a1 1 0 0 1-1 1C5.2 14 2 7.8 2 3a1 1 0 0 1 1-1z"/>
+            </svg>
+          </div>
+          <span>660 68 85 01</span>
+        </div>
+      </div>
+
+      <!-- Botón WhatsApp -->
+      <a class="btn-whatsapp"
+         href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
+         target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+        <span data-i18n="contact_whatsapp">Escríbenos por WhatsApp</span>
+      </a>
+    </div>
+
+    <!-- Derecha: tarjetas de info -->
+    <div class="contact-right">
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M10 2C7.24 2 5 4.24 5 7c0 4.25 5 11 5 11s5-6.75 5-11c0-2.76-2.24-5-5-5z"/>
+            <circle cx="10" cy="7" r="2"/>
+          </svg>
+        </div>
+        <div>
+          <p class="contact-card-label" data-i18n="contact_location_label">Ubicación</p>
+          <p class="contact-card-value">Barcelona, España</p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 4h14v12H3z"/><path d="M3 6l7 5 7-5"/>
+          </svg>
+        </div>
+        <div>
+          <p class="contact-card-label" data-i18n="contact_email_label">Email</p>
+          <p class="contact-card-value">
+            <a href="mailto:burguardreams@gmail.com">burguardreams@gmail.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 3h3l1.5 3.5-1.8 1.1a9 9 0 0 0 3.7 3.7l1.1-1.8L15 11v3a1 1 0 0 1-1 1C6.2 15 3 8.8 3 4a1 1 0 0 1 1-1z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="contact-card-label" data-i18n="contact_phone_label">Teléfono / WhatsApp</p>
+          <p class="contact-card-value">
+            <a href="tel:+34660688501">660 68 85 01</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="10" cy="10" r="7"/>
+            <path d="M10 6v4l3 2"/>
+          </svg>
+        </div>
+        <div>
+          <p class="contact-card-label" data-i18n="contact_hours_label">Horario</p>
+          <p class="contact-card-value" data-i18n="contact_hours">Lun – Vie, 9h – 19h</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="footer-bar">
+    <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
+    <p data-i18n="footer_copy">© 2025 Burguar Dreams · Todos los derechos reservados</p>
+  </div>
+</section>
 
 
 <script>
@@ -1207,8 +1462,8 @@ const properties = [
     city: 'Barcelona',
     street: 'Carrer del Comte d\'Urgell, 259 Subsotano 1°',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: true, availableText: 'Disponible ahora',
-    description: 'Amplio piso con balcón en el Eixample esquerra. Reformado y luminoso, con habitaciones exteriores y cocina renovada. Muy bien comunicado.',
+    available: false, availableText: 'Disponible el 30/05/2026',
+    description: 'Reformado y luminoso, con habitaciones exteriores y cocina renovada. Muy bien comunicado.',
     features: ['Balcón exterior','Cocina renovada','Habitaciones exteriores','Ascensor','Portero automático','Aire acondicionado'],
     specs: [
       { label: 'Superficie', value: '80', unit: 'm²' },
@@ -1266,12 +1521,27 @@ function renderGrid() {
         <div class="card-street">${p.street}</div>
         <div class="card-footer">
           <div class="card-price">${p.price ? p.price + '€<span>' + p.priceUnit + '</span>' : '<span style="font-size:0.78rem;font-family:var(--font-body);color:var(--warm-mid)">Consultar precio</span>'}</div>
-          <button class="btn-saber" onclick="event.stopPropagation(); showDetail(${p.id})">
-            <span>${t.btn_more}</span>
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M2.5 6.5h8M7 3.5l3 3-3 3"/>
-            </svg>
-          </button>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem">
+            ${!p.available ? `<span style="
+              display:inline-block;
+              background:#FFF0E0;
+              color:#C05C00;
+              border:1px solid #F5C08A;
+              font-size:0.68rem;
+              font-family:var(--font-body);
+              font-weight:500;
+              letter-spacing:0.04em;
+              padding:0.35rem 0.7rem;
+              border-radius:3px;
+              white-space:nowrap;
+            ">📅 ${p.availableText}</span>` : ''}
+            <button class="btn-saber" onclick="event.stopPropagation(); showDetail(${p.id})">
+              <span>${t.btn_more}</span>
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2.5 6.5h8M7 3.5l3 3-3 3"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -1356,7 +1626,7 @@ function showHome() {
   hideEmptyState();
   // Reset active nav to alquiler
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
-  document.querySelectorAll('.nav-link')[1].classList.add('active-nav');
+  document.querySelectorAll('.nav-link')[0].classList.add('active-nav');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   return false;
 }
@@ -1420,6 +1690,15 @@ const i18n = {
     flag:           '🇪🇸',
     label:          'ES',
     footer_copy:    '© 2025 Burguar Dreams · Todos los derechos reservados',
+    contact_eyebrow:       'Contacto',
+    contact_title:         '¿Te interesa algún <em>apartamento?</em>',
+    contact_sub:           'Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.',
+    contact_whatsapp:      'Escríbenos por WhatsApp',
+    contact_location_label:'Ubicación',
+    contact_email_label:   'Email',
+    contact_phone_label:   'Teléfono / WhatsApp',
+    contact_hours_label:   'Horario',
+    contact_hours:         'Lun – Vie, 9h – 19h',
   },
   ca: {
     nav_sale:       'Venda',
@@ -1458,6 +1737,15 @@ const i18n = {
     flag:           '<svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd;vertical-align:middle"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg>',
     label:          'CA',
     footer_copy:    '© 2025 Burguar Dreams · Tots els drets reservats',
+    contact_eyebrow:       'Contacte',
+    contact_title:         'T\'interessa algun <em>apartament?</em>',
+    contact_sub:           'Escriu-nos o truca\'ns i t\'atenem personalment. Estarem encantats d\'organitzar una visita.',
+    contact_whatsapp:      'Escriu-nos per WhatsApp',
+    contact_location_label:'Ubicació',
+    contact_email_label:   'Correu electrònic',
+    contact_phone_label:   'Telèfon / WhatsApp',
+    contact_hours_label:   'Horari',
+    contact_hours:         'Dl – Dv, 9h – 19h',
   },
   en: {
     nav_sale:       'Sale',
@@ -1496,6 +1784,15 @@ const i18n = {
     flag:           '🇬🇧',
     label:          'EN',
     footer_copy:    '© 2025 Burguar Dreams · All rights reserved',
+    contact_eyebrow:       'Contact',
+    contact_title:         'Interested in an <em>apartment?</em>',
+    contact_sub:           'Write or call us and we\'ll help you personally. We\'d love to arrange a viewing.',
+    contact_whatsapp:      'Message us on WhatsApp',
+    contact_location_label:'Location',
+    contact_email_label:   'Email',
+    contact_phone_label:   'Phone / WhatsApp',
+    contact_hours_label:   'Hours',
+    contact_hours:         'Mon – Fri, 9am – 7pm',
   },
   fr: {
     nav_sale:       'Vente',
@@ -1534,6 +1831,15 @@ const i18n = {
     flag:           '🇫🇷',
     label:          'FR',
     footer_copy:    '© 2025 Burguar Dreams · Tous droits réservés',
+    contact_eyebrow:       'Contact',
+    contact_title:         'Un <em>appartement</em> vous intéresse ?',
+    contact_sub:           'Écrivez-nous ou appelez-nous et nous vous répondrons personnellement. Nous serons ravis d\'organiser une visite.',
+    contact_whatsapp:      'Écrivez-nous sur WhatsApp',
+    contact_location_label:'Localisation',
+    contact_email_label:   'Email',
+    contact_phone_label:   'Téléphone / WhatsApp',
+    contact_hours_label:   'Horaires',
+    contact_hours:         'Lun – Ven, 9h – 19h',
   }
 };
 
@@ -1573,8 +1879,21 @@ function setLang(lang) {
   if (secCount) secCount.textContent = t.section_count;
 
   // Footer
-  const footerP = document.querySelector('footer p');
+  const footerP = document.querySelector('.footer-bar p');
   if (footerP) footerP.textContent = t.footer_copy;
+
+  // Contact section
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  // WhatsApp button span
+  const waSpan = document.querySelector('.btn-whatsapp span');
+  if (waSpan && t.contact_whatsapp) waSpan.textContent = t.contact_whatsapp;
 
   // Modal static texts
   document.querySelector('.modal-eyebrow').textContent = t.modal_eyebrow;
@@ -1729,7 +2048,7 @@ function showEmptyState(section) {
 
   const icon = m.icon === 'building' ? iconBuilding : iconHouse;
   const ctaBtn = m.cta ? `
-    <a href="mailto:info@burguardreams.es" style="
+    <a href="mailto:burguardreams@gmail.com" style="
       display:inline-flex; align-items:center; gap:0.6rem; margin-top:2rem;
       padding:0.9rem 2.5rem; background:#2C2416; color:#FDFAF5;
       font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.14em;
@@ -1834,7 +2153,7 @@ function showAboutUs() {
       </div>
 
       <div style="display:flex;justify-content:center;padding-top:1rem;border-top:1px solid #E8DFD0">
-        <a href="mailto:info@burguardreams.es" style="
+        <a href="mailto:burguardreams@gmail.com" style="
           display:inline-flex;align-items:center;gap:0.8rem;
           padding:1rem 3rem;background:#2C2416;color:#FDFAF5;
           font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.16em;
