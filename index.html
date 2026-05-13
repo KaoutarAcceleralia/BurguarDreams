@@ -1045,6 +1045,7 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     .header-top { padding: 1rem 1.5rem; }
+    .wa-header-text { display: none; }
     .header-nav { padding: 0 1.5rem; overflow-x: auto; }
     .nav-link { padding: 0.8rem 0.8rem; font-size: 0.7rem; }
     .hero { padding: 11rem 2rem 4rem; }
@@ -1080,7 +1081,18 @@
   <div class="header-top">
     <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
 
-    <div class="lang-switcher" id="lang-switcher">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <a href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
+         target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.45rem 1rem;background:#25D366;color:#fff;font-family:var(--font-body);font-size:0.72rem;font-weight:500;letter-spacing:0.06em;text-decoration:none;border-radius:2px;transition:background 0.2s"
+         onmouseover="this.style.background='#1ebe5d'" onmouseout="this.style.background='#25D366'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+        <span class="wa-header-text">WhatsApp</span>
+      </a>
+
+      <div class="lang-switcher" id="lang-switcher">
       <button class="lang-btn" onclick="toggleLang(event)" id="lang-btn">
         <span class="lang-flag" id="lang-flag">🇪🇸</span>
         <span id="lang-label">ES</span>
@@ -1094,13 +1106,13 @@
         <button class="lang-option" onclick="setLang('en')">🇬🇧 &nbsp;English</button>
         <button class="lang-option" onclick="setLang('fr')">🇫🇷 &nbsp;Français</button>
       </div>
-    </div>
-  </div>
+      </div>
+    </div><!-- end flex wrapper -->
+  </div><!-- end header-top -->
 
   <!-- Fila inferior: navegación -->
   <nav class="header-nav">
     <button class="nav-link active-nav" data-i18n="nav_rent" onclick="handleNav('alquiler')">Alquiler</button>
-    <button class="nav-link" data-i18n="nav_about" onclick="handleNav('quienes')">Quiénes somos</button>
   </nav>
 </header>
 
@@ -1164,6 +1176,12 @@
       </div>
       <div class="detail-price-block">
         <div class="detail-price" id="d-price"></div>
+        <button class="btn-quiero" onclick="openModal()" style="margin-top:1.2rem">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 3h12v10H3z"/><path d="M3 6l6 4 6-4"/>
+          </svg>
+          <span>Me interesa</span>
+        </button>
       </div>
     </div>
 
@@ -1182,21 +1200,12 @@
 
     <div class="detail-photos" id="d-photos"></div>
 
-    <div class="detail-cta">
-      <button class="btn-quiero" onclick="openModal()">
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M3 3h12v10H3z"/>
-          <path d="M3 6l6 4 6-4"/>
-        </svg>
-        <span>Quiero verlo</span>
-      </button>
-    </div>
   </div>
 </div>
 
 <!-- ─────────────── MODAL ─────────────── -->
 <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
-  <div class="modal">
+  <div class="modal" style="max-width:580px;max-height:90vh;overflow-y:auto">
     <button class="modal-close" onclick="closeModal()">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M5 5l10 10M15 5L5 15"/>
@@ -1204,40 +1213,92 @@
     </button>
 
     <div class="modal-form" id="modal-form">
-      <p class="modal-eyebrow">Solicitar visita</p>
-      <h2>Quiero verlo</h2>
-      <p>Déjanos tus datos y nos ponemos en contacto contigo para concertar una visita.</p>
+      <p class="modal-eyebrow">Solicitud de información</p>
+      <h2>Me interesa</h2>
+      <p>Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
 
+      <!-- 1. Nombre y apellidos -->
       <div class="form-row">
         <div class="form-group">
           <label for="f-nombre">Nombre</label>
-          <input type="text" placeholder="Tu nombre" id="f-nombre">
+          <input type="text" id="f-nombre" placeholder="Tu nombre">
         </div>
         <div class="form-group">
           <label for="f-apellidos">Apellidos</label>
-          <input type="text" placeholder="Apellidos" id="f-apellidos">
+          <input type="text" id="f-apellidos" placeholder="Tus apellidos">
         </div>
       </div>
-      <div class="form-group">
-        <label for="f-telefono">Teléfono</label>
-        <input type="tel" placeholder="+34 600 000 000" id="f-telefono">
+
+      <!-- 2. Email y teléfono -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-email">Email</label>
+          <input type="email" id="f-email" placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label for="f-telefono">Teléfono *</label>
+          <input type="tel" id="f-telefono" placeholder="+34 600 000 000">
+        </div>
       </div>
+
+      <!-- 3. Fecha de nacimiento -->
       <div class="form-group">
-        <label for="f-email">Email</label>
-        <input type="email" placeholder="tu@email.com" id="f-email">
+        <label for="f-nacimiento">Fecha de nacimiento</label>
+        <input type="date" id="f-nacimiento">
       </div>
+
+      <!-- 4. Situación laboral -->
       <div class="form-group">
-        <label for="f-cuando">¿Cuándo prefieres la visita?</label>
-        <select id="f-cuando">
-          <option value="">Selecciona una franja horaria</option>
-          <option>Mañana (9h – 13h)</option>
-          <option>Tarde (15h – 19h)</option>
-          <option>Cualquier día y horario</option>
+        <label for="f-laboral">Situación laboral</label>
+        <select id="f-laboral">
+          <option value="">Selecciona una opción</option>
+          <option>Empleado por cuenta ajena</option>
+          <option>Autónomo / Freelance</option>
+          <option>Funcionario</option>
+          <option>Estudiante</option>
+          <option>Jubilado</option>
+          <option>En búsqueda de empleo</option>
+          <option>Otro</option>
         </select>
       </div>
+
+      <!-- 5. Ingresos mensuales -->
       <div class="form-group">
-        <label for="f-mensaje">Mensaje (opcional)</label>
-        <textarea rows="3" placeholder="¿Alguna pregunta o comentario?" id="f-mensaje"></textarea>
+        <label for="f-ingresos">Ingresos mensuales netos</label>
+        <select id="f-ingresos">
+          <option value="">Selecciona una opción</option>
+          <option>Menos de 1.000 €</option>
+          <option>Entre 1.000 € y 1.500 €</option>
+          <option>Entre 1.500 € y 2.500 €</option>
+          <option>Entre 2.500 € y 4.000 €</option>
+          <option>Más de 4.000 €</option>
+        </select>
+      </div>
+
+      <!-- 6. Número de personas -->
+      <div class="form-group">
+        <label for="f-personas">Número de personas que vivirán allí</label>
+        <select id="f-personas">
+          <option value="">Selecciona una opción</option>
+          <option>1 persona</option>
+          <option>2 personas</option>
+          <option>3 personas</option>
+          <option>4 personas</option>
+          <option>5 o más personas</option>
+        </select>
+      </div>
+
+      <!-- 7. Mascotas -->
+      <div class="form-group">
+        <label>Mascotas</label>
+        <div style="display:flex;gap:1rem;margin-top:0.3rem">
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.88rem;font-weight:300;color:var(--warm-dark);text-transform:none;letter-spacing:0;cursor:pointer">
+            <input type="radio" name="f-mascotas" id="f-mascotas-no" value="No" checked style="accent-color:var(--accent);width:16px;height:16px"> No
+          </label>
+          <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.88rem;font-weight:300;color:var(--warm-dark);text-transform:none;letter-spacing:0;cursor:pointer">
+            <input type="radio" name="f-mascotas" id="f-mascotas-si" value="Sí" style="accent-color:var(--accent);width:16px;height:16px"> Sí
+          </label>
+        </div>
       </div>
 
       <button class="btn-submit" id="btn-send" onclick="submitForm()">Enviar solicitud</button>
@@ -1250,7 +1311,7 @@
         </svg>
       </div>
       <h3>¡Solicitud enviada!</h3>
-      <p>Nos pondremos en contacto contigo en menos de 24 horas para confirmar la visita.</p>
+      <p>Nos pondremos en contacto contigo en menos de 24 horas.</p>
     </div>
   </div>
 </div>
@@ -2203,6 +2264,7 @@ async function submitForm() {
   btn.textContent = '…';
 
   const p = properties.find(x => x.id === currentPropertyId);
+  const mascotas = document.querySelector('input[name="f-mascotas"]:checked')?.value || 'No';
 
   try {
     const { error } = await db.from('solicitudes').insert({
@@ -2212,8 +2274,11 @@ async function submitForm() {
       apellidos:     document.getElementById('f-apellidos').value.trim(),
       telefono:      telefono,
       email:         document.getElementById('f-email').value.trim(),
-      cuando:        document.getElementById('f-cuando').value,
-      mensaje:       document.getElementById('f-mensaje').value.trim(),
+      fecha_nacimiento: document.getElementById('f-nacimiento').value || null,
+      situacion_laboral: document.getElementById('f-laboral').value,
+      ingresos_mensuales: document.getElementById('f-ingresos').value,
+      num_personas:  document.getElementById('f-personas').value,
+      mascotas:      mascotas,
     });
 
     if (error) throw error;
@@ -2227,8 +2292,7 @@ async function submitForm() {
     alert('Ha ocurrido un error. Por favor inténtalo de nuevo.');
   } finally {
     btn.disabled = false;
-    const t = i18n[currentLang] || i18n.es;
-    btn.textContent = t.btn_send;
+    btn.textContent = 'Enviar solicitud';
   }
 }
 
