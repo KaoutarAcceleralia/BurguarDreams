@@ -44,7 +44,6 @@
     border-bottom: 1px solid rgba(196,184,164,0.3);
   }
 
-  /* Top bar */
   .header-top {
     display: flex;
     justify-content: space-between;
@@ -62,15 +61,9 @@
     text-decoration: none;
   }
 
-  .logo span {
-    color: var(--accent);
-    font-style: italic;
-  }
+  .logo span { color: var(--accent); font-style: italic; }
 
-  /* Language switcher */
-  .lang-switcher {
-    position: relative;
-  }
+  .lang-switcher { position: relative; }
 
   .lang-btn {
     display: flex;
@@ -89,16 +82,9 @@
 
   .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-  .lang-flag {
-    font-size: 14px;
-    line-height: 1;
-  }
+  .lang-flag { font-size: 14px; line-height: 1; }
 
-  .lang-chevron {
-    transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-
+  .lang-chevron { transition: transform 0.2s; flex-shrink: 0; }
   .lang-switcher.open .lang-chevron { transform: rotate(180deg); }
 
   .lang-dropdown {
@@ -135,12 +121,7 @@
   .lang-option:hover { background: var(--cream); color: var(--warm-dark); }
   .lang-option.active { color: var(--accent); font-weight: 500; }
 
-  /* Nav bar */
-  .header-nav {
-    display: flex;
-    align-items: center;
-    padding: 0 4rem;
-  }
+  .header-nav { display: flex; align-items: center; padding: 0 4rem; }
 
   .nav-link {
     font-size: 0.78rem;
@@ -227,10 +208,7 @@
     max-width: 700px;
   }
 
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent-light);
-  }
+  .hero h1 em { font-style: italic; color: var(--accent-light); }
 
   .hero-sub {
     margin-top: 2rem;
@@ -275,7 +253,6 @@
     gap: 16px;
   }
 
-  /* Todas las tarjetas iguales */
   .card {
     cursor: pointer;
     background: #fff;
@@ -289,14 +266,6 @@
   .card:hover {
     box-shadow: 0 12px 40px rgba(44,36,22,0.12);
     transform: translateY(-4px);
-  }
-
-  .card:first-child,
-  .card:nth-child(2),
-  .card:nth-child(3),
-  .card:nth-child(4) {
-    grid-column: auto;
-    grid-row: auto;
   }
 
   .card-img-wrap {
@@ -352,11 +321,7 @@
     line-height: 1.2;
   }
 
-  .card-street {
-    font-size: 0.82rem;
-    color: var(--warm-mid);
-    font-weight: 300;
-  }
+  .card-street { font-size: 0.82rem; color: var(--warm-mid); font-weight: 300; }
 
   .card-footer {
     display: flex;
@@ -401,12 +366,7 @@
   .btn-saber svg { flex-shrink: 0; }
 
   /* ── DETAIL VIEW ── */
-  #detail-view {
-    display: none;
-    min-height: 100vh;
-    background: #ffffff;
-  }
-
+  #detail-view { display: none; min-height: 100vh; background: #ffffff; }
   #detail-view.active { display: block; }
 
   .detail-back {
@@ -428,17 +388,8 @@
 
   .detail-back:hover { color: var(--accent); }
 
-  .detail-hero {
-    position: relative;
-    height: 65vh;
-    overflow: hidden;
-  }
-
-  .detail-hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .detail-hero { position: relative; height: 65vh; overflow: hidden; }
+  .detail-hero-img { width: 100%; height: 100%; object-fit: cover; }
 
   .detail-hero-placeholder {
     width: 100%;
@@ -487,16 +438,9 @@
     line-height: 1.15;
   }
 
-  .detail-address {
-    font-size: 0.9rem;
-    color: var(--warm-mid);
-    margin-top: 0.6rem;
-    font-weight: 300;
-  }
+  .detail-address { font-size: 0.9rem; color: var(--warm-mid); margin-top: 0.6rem; font-weight: 300; }
 
-  .detail-price-block {
-    text-align: right;
-  }
+  .detail-price-block { text-align: right; }
 
   .detail-price {
     font-family: var(--font-display);
@@ -526,25 +470,16 @@
     letter-spacing: 0.05em;
   }
 
-  .availability-badge.available {
-    background: rgba(80, 140, 80, 0.1);
-    color: #3a7a3a;
-  }
-
-  .availability-badge.unavailable {
-    background: rgba(180, 80, 60, 0.1);
-    color: #8B3A2A;
-  }
+  .availability-badge.available { background: rgba(80,140,80,0.1); color: #3a7a3a; }
+  .availability-badge.unavailable { background: rgba(180,80,60,0.1); color: #8B3A2A; }
 
   .availability-badge::before {
     content: '';
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     border-radius: 50%;
     background: currentColor;
   }
 
-  /* Detail specs */
   .detail-specs {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -562,12 +497,7 @@
     gap: 0.4rem;
   }
 
-  .spec-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--stone);
-  }
+  .spec-label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone); }
 
   .spec-value {
     font-family: var(--font-display);
@@ -576,14 +506,8 @@
     color: var(--warm-dark);
   }
 
-  .spec-unit {
-    font-size: 0.8rem;
-    color: var(--warm-mid);
-    font-family: var(--font-body);
-    font-weight: 300;
-  }
+  .spec-unit { font-size: 0.8rem; color: var(--warm-mid); font-family: var(--font-body); font-weight: 300; }
 
-  /* Description */
   .detail-description {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -606,9 +530,7 @@
     font-weight: 300;
   }
 
-  .detail-features {
-    list-style: none;
-  }
+  .detail-features { list-style: none; }
 
   .detail-features li {
     display: flex;
@@ -623,14 +545,12 @@
 
   .detail-features li::before {
     content: '';
-    width: 4px;
-    height: 4px;
+    width: 4px; height: 4px;
     border-radius: 50%;
     background: var(--accent);
     flex-shrink: 0;
   }
 
-  /* Extra photos */
   .detail-photos {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -643,15 +563,10 @@
     aspect-ratio: 16/9;
   }
 
-  .detail-photo {
-    aspect-ratio: 4/3;
-    overflow: hidden;
-    background: var(--sand);
-  }
+  .detail-photo { aspect-ratio: 4/3; overflow: hidden; background: var(--sand); }
 
   .detail-photo img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
   }
@@ -659,41 +574,10 @@
   .detail-photo:hover img { transform: scale(1.05); }
 
   .detail-photo-placeholder {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  /* CTA */
-  .detail-cta {
-    display: flex;
-    justify-content: center;
-    padding: 4rem 0;
-    border-top: 1px solid var(--sand);
-  }
-
-  .btn-quiero {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.2rem 3.5rem;
-    background: var(--warm-dark);
-    color: var(--white);
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    transition: background 0.25s, transform 0.2s;
-    font-weight: 400;
-  }
-
-  .btn-quiero:hover {
-    background: var(--accent);
-    transform: translateY(-1px);
   }
 
   /* ── MODAL ── */
@@ -761,7 +645,7 @@
     margin-bottom: 0.5rem;
   }
 
-  .modal p {
+  .modal-intro {
     font-size: 0.85rem;
     color: var(--warm-mid);
     margin-bottom: 2rem;
@@ -769,9 +653,7 @@
     line-height: 1.6;
   }
 
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
+  .form-group { margin-bottom: 1.2rem; }
 
   .form-group label {
     display: block;
@@ -805,11 +687,7 @@
     background: #ffffff;
   }
 
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
   .btn-submit {
     width: 100%;
@@ -828,19 +706,12 @@
 
   .btn-submit:hover { background: var(--accent); }
 
-  /* Success state */
-  .modal-success {
-    display: none;
-    text-align: center;
-    padding: 2rem 0;
-  }
-
+  .modal-success { display: none; text-align: center; padding: 2rem 0; }
   .modal-success.active { display: block; }
   .modal-form.hidden { display: none; }
 
   .success-icon {
-    width: 56px;
-    height: 56px;
+    width: 56px; height: 56px;
     border-radius: 50%;
     background: rgba(80,140,80,0.1);
     display: flex;
@@ -858,12 +729,9 @@
     margin-bottom: 0.6rem;
   }
 
-  .modal-success p {
-    font-size: 0.88rem;
-    color: var(--warm-mid);
-  }
+  .modal-success p { font-size: 0.88rem; color: var(--warm-mid); }
 
-  /* ── CONTACT SECTION ── */
+  /* ── CONTACT ── */
   .contact-section {
     background: var(--warm-dark);
     color: var(--sand);
@@ -894,8 +762,7 @@
   .contact-left .contact-eyebrow::before {
     content: '';
     display: inline-block;
-    width: 30px;
-    height: 1px;
+    width: 30px; height: 1px;
     background: var(--accent-light);
   }
 
@@ -908,10 +775,7 @@
     margin-bottom: 1.5rem;
   }
 
-  .contact-left h2 em {
-    font-style: italic;
-    color: var(--accent-light);
-  }
+  .contact-left h2 em { font-style: italic; color: var(--accent-light); }
 
   .contact-left p {
     font-size: 0.9rem;
@@ -921,12 +785,7 @@
     max-width: 360px;
   }
 
-  .contact-channels {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2.5rem;
-  }
+  .contact-channels { display: flex; flex-direction: column; gap: 1rem; margin-top: 2.5rem; }
 
   .contact-channel {
     display: flex;
@@ -938,8 +797,7 @@
   }
 
   .contact-channel-icon {
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border-radius: 50%;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(196,184,164,0.2);
@@ -949,7 +807,6 @@
     flex-shrink: 0;
   }
 
-  /* WhatsApp button */
   .btn-whatsapp {
     display: inline-flex;
     align-items: center;
@@ -968,12 +825,8 @@
     width: fit-content;
   }
 
-  .btn-whatsapp:hover {
-    background: #1ebe5d;
-    transform: translateY(-2px);
-  }
+  .btn-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
 
-  /* Contact right: info cards */
   .contact-right {
     display: flex;
     flex-direction: column;
@@ -991,15 +844,9 @@
     transition: background 0.2s;
   }
 
-  .contact-card:hover {
-    background: rgba(255,255,255,0.07);
-  }
+  .contact-card:hover { background: rgba(255,255,255,0.07); }
 
-  .contact-card-icon {
-    color: var(--accent-light);
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .contact-card-icon { color: var(--accent-light); flex-shrink: 0; margin-top: 2px; }
 
   .contact-card-label {
     font-size: 0.68rem;
@@ -1009,21 +856,11 @@
     margin-bottom: 0.4rem;
   }
 
-  .contact-card-value {
-    font-size: 1rem;
-    color: #ffffff;
-    font-weight: 300;
-  }
+  .contact-card-value { font-size: 1rem; color: #ffffff; font-weight: 300; }
 
-  .contact-card-value a {
-    color: #ffffff;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
+  .contact-card-value a { color: #ffffff; text-decoration: none; transition: color 0.2s; }
   .contact-card-value a:hover { color: var(--accent-light); }
 
-  /* Footer bottom bar */
   .footer-bar {
     max-width: 1400px;
     margin: 0 auto;
@@ -1035,11 +872,207 @@
 
   .footer-bar .logo { color: var(--sand); }
   .footer-bar .logo span { color: var(--accent-light); }
+  .footer-bar p { font-size: 0.75rem; color: var(--stone); font-weight: 300; }
 
-  .footer-bar p {
-    font-size: 0.75rem;
-    color: var(--stone);
+  /* ── TABS ── */
+  .tabs-bar {
+    display: flex;
+    border-bottom: 1px solid var(--sand);
+    background: #fff;
+    padding: 0 4rem;
+    position: sticky;
+    top: 112px;
+    z-index: 90;
+  }
+
+  .tab-btn {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-mid);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    position: relative;
+    transition: color 0.2s;
+  }
+
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 2px;
+    background: var(--warm-dark);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+
+  .tab-btn:hover { color: var(--warm-dark); }
+  .tab-btn.active { color: var(--warm-dark); font-weight: 500; }
+  .tab-btn.active::after { transform: scaleX(1); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ── CORPORATE ── */
+  .corporate-section { max-width: 1400px; margin: 0 auto; padding: 5rem 4rem 6rem; }
+
+  .corporate-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .corporate-hero-text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
     font-weight: 300;
+    color: var(--warm-dark);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+  }
+
+  .corporate-hero-text h2 em { font-style: italic; color: var(--accent); }
+
+  .corporate-hero-text p {
+    font-size: 0.95rem;
+    color: var(--warm-mid);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .corporate-hero-img { height: 420px; overflow: hidden; background: var(--sand); }
+  .corporate-hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  .corporate-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--sand);
+    border: 1px solid var(--sand);
+  }
+
+  .corp-feature { background: #fff; padding: 2.5rem 2rem; }
+  .corp-feature-icon { color: var(--accent); margin-bottom: 1.2rem; }
+
+  .corp-feature h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .corp-feature p { font-size: 0.85rem; color: var(--warm-mid); line-height: 1.7; font-weight: 300; }
+
+  /* ── FAQ ── */
+  .faq-section { background: #fff; }
+
+  .faq-inner { max-width: 800px; margin: 0 auto; padding: 5rem 4rem 6rem; }
+
+  .faq-item { border-bottom: 1px solid var(--sand); }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 1.4rem 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: color 0.2s;
+  }
+
+  .faq-question:hover { color: var(--accent); }
+  .faq-chevron { flex-shrink: 0; transition: transform 0.25s ease; color: var(--stone); }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-item.open .faq-question { color: var(--accent); }
+
+  .faq-answer {
+    display: none;
+    padding: 0 0 1.5rem;
+    font-size: 0.9rem;
+    color: var(--warm-mid);
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .faq-item.open .faq-answer { display: block; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 600;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox.active { display: flex; }
+
+  .lightbox-img { max-width: 90vw; max-height: 85vh; object-fit: contain; display: block; }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem; right: 1.5rem;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+  .lightbox-prev, .lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .lightbox-prev { left: 1.5rem; }
+  .lightbox-next { right: 1.5rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.25); }
+
+  .lightbox-counter {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    letter-spacing: 0.1em;
   }
 
   /* ── RESPONSIVE ── */
@@ -1048,14 +1081,11 @@
     .wa-header-text { display: none; }
     .header-nav { padding: 0 1.5rem; overflow-x: auto; }
     .nav-link { padding: 0.8rem 0.8rem; font-size: 0.7rem; }
+    .tabs-bar { padding: 0 1rem; top: 100px; overflow-x: auto; }
+    .tab-btn { padding: 0.8rem 0.8rem; font-size: 0.68rem; white-space: nowrap; }
     .hero { padding: 11rem 2rem 4rem; }
     .properties-section { padding: 2rem 2rem 4rem; }
-
-    .grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
+    .grid { grid-template-columns: 1fr; gap: 12px; }
     .card { min-height: unset; }
     .btn-saber { font-size: 0.68rem; padding: 0.5rem 0.9rem; }
     .detail-body { padding: 4rem 2rem 6rem; }
@@ -1070,6 +1100,12 @@
     .contact-section { padding: 4rem 2rem 3rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
     .footer-bar { flex-direction: column; gap: 1rem; text-align: center; }
+    .corporate-section { padding: 3rem 2rem 4rem; }
+    .corporate-hero { grid-template-columns: 1fr; gap: 2.5rem; }
+    .corporate-features { grid-template-columns: repeat(2, 1fr); }
+    .faq-inner { padding: 3rem 2rem 4rem; }
+    .lightbox-prev { left: 0.5rem; }
+    .lightbox-next { right: 0.5rem; }
   }
 </style>
 </head>
@@ -1077,7 +1113,6 @@
 
 <!-- ─────────────── HEADER ─────────────── -->
 <header id="main-header">
-  <!-- Fila superior: logo + selector de idioma -->
   <div class="header-top">
     <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
 
@@ -1093,26 +1128,27 @@
       </a>
 
       <div class="lang-switcher" id="lang-switcher">
-      <button class="lang-btn" onclick="toggleLang(event)" id="lang-btn">
-        <span class="lang-flag" id="lang-flag">🇪🇸</span>
-        <span id="lang-label">ES</span>
-        <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M2 4l4 4 4-4"/>
-        </svg>
-      </button>
-      <div class="lang-dropdown" id="lang-dropdown">
-        <button class="lang-option active" onclick="setLang('es')">🇪🇸 &nbsp;Español</button>
-        <button class="lang-option" onclick="setLang('ca')"><svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg> &nbsp;Català</button>
-        <button class="lang-option" onclick="setLang('en')">🇬🇧 &nbsp;English</button>
-        <button class="lang-option" onclick="setLang('fr')">🇫🇷 &nbsp;Français</button>
+        <button class="lang-btn" onclick="toggleLang(event)" id="lang-btn">
+          <span class="lang-flag" id="lang-flag">🇪🇸</span>
+          <span id="lang-label">ES</span>
+          <svg class="lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 4l4 4 4-4"/>
+          </svg>
+        </button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button class="lang-option active" onclick="setLang('es')">🇪🇸 &nbsp;Español</button>
+          <button class="lang-option" onclick="setLang('ca')"><svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg> &nbsp;Català</button>
+          <button class="lang-option" onclick="setLang('en')">🇬🇧 &nbsp;English</button>
+          <button class="lang-option" onclick="setLang('fr')">🇫🇷 &nbsp;Français</button>
+          <button class="lang-option" onclick="setLang('de')">🇩🇪 &nbsp;Deutsch</button>
+          <button class="lang-option" onclick="setLang('it')">🇮🇹 &nbsp;Italiano</button>
+        </div>
       </div>
-      </div>
-    </div><!-- end flex wrapper -->
-  </div><!-- end header-top -->
+    </div>
+  </div>
 
-  <!-- Fila inferior: navegación -->
   <nav class="header-nav">
-    <button class="nav-link active-nav" data-i18n="nav_rent" onclick="handleNav('alquiler')">Alquiler</button>
+    <button class="nav-link active-nav" onclick="handleNav('alquiler')" id="nav-rent-btn">Alquiler</button>
   </nav>
 </header>
 
@@ -1122,28 +1158,97 @@
   <section class="hero">
     <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow" data-i18n="hero_eyebrow">Propiedades en alquiler</p>
-      <h1>Tu próximo hogar te <em>está esperando</em></h1>
-      <p class="hero-sub">Selección de inmuebles exclusivos en las mejores ubicaciones. Ven a conocerlos.</p>
+      <p class="hero-eyebrow" id="hero-eyebrow-text">Alojamiento en Barcelona</p>
+      <h1 id="hero-h1-text">Descubre nuestros servicios de <em>corporate housing</em> en Barcelona</h1>
+      <p class="hero-sub" id="hero-sub-text">Apartamentos amueblados y listos para entrar a vivir. Para particulares y empresas que buscan flexibilidad, diseño y una experiencia sin complicaciones.</p>
     </div>
   </section>
 
-  <section class="properties-section">
-    <div class="section-label">
-      <h2>Propiedades disponibles</h2>
-      <span class="count-badge">4 inmuebles</span>
-    </div>
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="switchTab('hogar')" id="tab-btn-hogar">Encuentra tu hogar</button>
+    <button class="tab-btn" onclick="switchTab('empresas')" id="tab-btn-empresas">Alojamiento para Empresas</button>
+    <button class="tab-btn" onclick="switchTab('faq')" id="tab-btn-faq">FAQs</button>
+    <button class="tab-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" id="tab-btn-contact">Contacto</button>
+  </div>
 
-    <div class="grid" id="properties-grid">
-      <!-- Las tarjetas se generan con JS -->
-    </div>
-  </section>
+  <!-- TAB: ENCUENTRA TU HOGAR -->
+  <div id="tab-hogar" class="tab-content active">
+    <section class="properties-section">
+      <div class="section-label">
+        <h2 id="section-title-text">Propiedades disponibles</h2>
+        <span class="count-badge" id="section-count-text">4 inmuebles</span>
+      </div>
+      <div class="grid" id="properties-grid"></div>
+    </section>
+  </div>
+
+  <!-- TAB: EMPRESAS -->
+  <div id="tab-empresas" class="tab-content">
+    <section class="corporate-section">
+      <div class="corporate-hero">
+        <div class="corporate-hero-text">
+          <p class="hero-eyebrow" style="color:var(--accent)" id="corp-eyebrow-text">Corporate Housing</p>
+          <h2 id="corp-title-text">Alojamiento para los <em>trabajadores de tu empresa</em></h2>
+          <p id="corp-sub-text">Facilitamos pisos y alojamiento totalmente equipados para profesionales en movilidad, expatriados y equipos de empresa en Barcelona. Sin complicaciones, sin contratos largos.</p>
+          <a href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20el%20alojamiento%20para%20empresas.%20¿Podéis%20informarme%3F"
+             target="_blank" rel="noopener" class="btn-quiero" style="display:inline-flex;text-decoration:none;margin-top:2rem">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            <span id="corp-cta-text">Habla con nosotros</span>
+          </a>
+        </div>
+        <div class="corporate-hero-img">
+          <img src="./fotos/Granvia/Menjador.jpg" alt="Corporate housing Barcelona" onerror="this.parentElement.style.background='var(--sand)'">
+        </div>
+      </div>
+
+      <div class="corporate-features">
+        <div class="corp-feature">
+          <div class="corp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="20" height="20" rx="2"/><path d="M4 10h20"/><path d="M10 4v6"/><path d="M18 4v6"/></svg>
+          </div>
+          <h3 id="corp-f1t-text">Flexibilidad total</h3>
+          <p id="corp-f1-text">Contratos mensuales sin permanencia. Adaptados a las necesidades reales de cada empresa y trabajador.</p>
+        </div>
+        <div class="corp-feature">
+          <div class="corp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 3L3 9v10l11 6 11-6V9z"/><path d="M14 3v18"/><path d="M3 9l11 6 11-6"/></svg>
+          </div>
+          <h3 id="corp-f2t-text">Apartamentos listos</h3>
+          <p id="corp-f2-text">Totalmente amueblados y equipados. El trabajador llega y empieza a vivir desde el primer día.</p>
+        </div>
+        <div class="corp-feature">
+          <div class="corp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 2"/></svg>
+          </div>
+          <h3 id="corp-f3t-text">Gestión sencilla</h3>
+          <p id="corp-f3-text">Un solo interlocutor para todas las necesidades. Atención personalizada y respuesta rápida garantizada.</p>
+        </div>
+        <div class="corp-feature">
+          <div class="corp-feature-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 14s2-4 9-4 9 4 9 4-2 4-9 4-9-4-9-4z"/><circle cx="14" cy="14" r="2"/></svg>
+          </div>
+          <h3 id="corp-f4t-text">Ubicaciones prime</h3>
+          <p id="corp-f4-text">Apartamentos en el corazón del Eixample de Barcelona. Bien comunicados con transporte público y servicios.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TAB: FAQ -->
+  <div id="tab-faq" class="tab-content">
+    <section class="faq-section">
+      <div class="faq-inner">
+        <p class="hero-eyebrow" style="color:var(--accent);margin-bottom:1rem">FAQ</p>
+        <h2 id="faq-title-text" style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--warm-dark);margin-bottom:3rem">Preguntas frecuentes</h2>
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+    </section>
+  </div>
 
 </div>
 
 <!-- ─────────────── DETAIL VIEW ─────────────── -->
 <div id="detail-view">
-
   <div style="padding-top: 7rem; background:#fff;">
     <button class="detail-back" onclick="showHome()">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1180,7 +1285,7 @@
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M3 3h12v10H3z"/><path d="M3 6l6 4 6-4"/>
           </svg>
-          <span>Me interesa</span>
+          <span id="btn-interest-label">Me interesa</span>
         </button>
       </div>
     </div>
@@ -1189,18 +1294,32 @@
 
     <div class="detail-description">
       <div>
-        <h3>Sobre la propiedad</h3>
+        <h3 id="detail-about-h3">Sobre la propiedad</h3>
         <p id="d-description"></p>
       </div>
       <div>
-        <h3>Características</h3>
+        <h3 id="detail-features-h3">Características</h3>
         <ul class="detail-features" id="d-features"></ul>
       </div>
     </div>
 
     <div class="detail-photos" id="d-photos"></div>
-
   </div>
+</div>
+
+<!-- ─────────────── LIGHTBOX ─────────────── -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button class="lightbox-close" onclick="closeLightbox()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3l10 10M13 3L3 13"/></svg>
+  </button>
+  <button class="lightbox-prev" onclick="lightboxNav(-1)">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4L6 9l5 5"/></svg>
+  </button>
+  <button class="lightbox-next" onclick="lightboxNav(1)">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 4l5 5-5 5"/></svg>
+  </button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
 </div>
 
 <!-- ─────────────── MODAL ─────────────── -->
@@ -1213,90 +1332,85 @@
     </button>
 
     <div class="modal-form" id="modal-form">
-      <p class="modal-eyebrow">Solicitud de información</p>
-      <h2>Me interesa</h2>
-      <p>Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+      <p class="modal-eyebrow" id="modal-eyebrow-text">Solicitud de información</p>
+      <h2 id="modal-title-text">Me interesa</h2>
+      <p class="modal-intro" id="modal-intro-text">Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
 
-      <!-- 1. Nombre y apellidos -->
       <div class="form-row">
         <div class="form-group">
-          <label for="f-nombre">Nombre</label>
+          <label for="f-nombre" id="label-nombre">Nombre</label>
           <input type="text" id="f-nombre" placeholder="Tu nombre">
         </div>
         <div class="form-group">
-          <label for="f-apellidos">Apellidos</label>
+          <label for="f-apellidos" id="label-apellidos">Apellidos</label>
           <input type="text" id="f-apellidos" placeholder="Tus apellidos">
         </div>
       </div>
 
-      <!-- 2. Email y teléfono -->
       <div class="form-row">
         <div class="form-group">
-          <label for="f-email">Email</label>
+          <label for="f-email" id="label-email">Email</label>
           <input type="email" id="f-email" placeholder="tu@email.com">
         </div>
         <div class="form-group">
-          <label for="f-telefono">Teléfono *</label>
+          <label for="f-telefono" id="label-telefono">Teléfono *</label>
           <input type="tel" id="f-telefono" placeholder="+34 600 000 000">
         </div>
       </div>
 
-      <!-- 3. Fecha de nacimiento -->
       <div class="form-group">
-        <label for="f-nacimiento">Fecha de nacimiento</label>
+        <label for="f-nacimiento" id="label-nacimiento">Fecha de nacimiento</label>
         <input type="date" id="f-nacimiento">
       </div>
 
-      <!-- 4. Situación laboral -->
       <div class="form-group">
-        <label for="f-laboral">Situación laboral</label>
+        <label for="f-laboral" id="label-laboral">Situación laboral</label>
         <select id="f-laboral">
-          <option value="">Selecciona una opción</option>
-          <option>Empleado por cuenta ajena</option>
-          <option>Autónomo / Freelance</option>
-          <option>Funcionario</option>
-          <option>Estudiante</option>
-          <option>Jubilado</option>
-          <option>En búsqueda de empleo</option>
-          <option>Otro</option>
+          <option value="" id="f-laboral-0">Selecciona una opción</option>
+          <option id="f-laboral-1">Empleado por cuenta ajena</option>
+          <option id="f-laboral-2">Autónomo / Freelance</option>
+          <option id="f-laboral-3">Funcionario</option>
+          <option id="f-laboral-4">Estudiante</option>
+          <option id="f-laboral-5">Jubilado</option>
+          <option id="f-laboral-6">En búsqueda de empleo</option>
+          <option id="f-laboral-7">Otro</option>
         </select>
       </div>
 
-      <!-- 5. Ingresos mensuales -->
       <div class="form-group">
-        <label for="f-ingresos">Ingresos mensuales netos</label>
+        <label for="f-ingresos" id="label-ingresos">Ingresos mensuales netos</label>
         <select id="f-ingresos">
-          <option value="">Selecciona una opción</option>
-          <option>Menos de 1.000 €</option>
-          <option>Entre 1.000 € y 1.500 €</option>
-          <option>Entre 1.500 € y 2.500 €</option>
-          <option>Entre 2.500 € y 4.000 €</option>
-          <option>Más de 4.000 €</option>
+          <option value="" id="f-ingresos-0">Selecciona una opción</option>
+          <option id="f-ingresos-1">Menos de 1.000 €</option>
+          <option id="f-ingresos-2">Entre 1.000 € y 1.500 €</option>
+          <option id="f-ingresos-3">Entre 1.500 € y 2.500 €</option>
+          <option id="f-ingresos-4">Entre 2.500 € y 4.000 €</option>
+          <option id="f-ingresos-5">Más de 4.000 €</option>
         </select>
       </div>
 
-      <!-- 6. Número de personas -->
       <div class="form-group">
-        <label for="f-personas">Número de personas que vivirán allí</label>
+        <label for="f-personas" id="label-personas">Número de personas que vivirán allí</label>
         <select id="f-personas">
-          <option value="">Selecciona una opción</option>
-          <option>1 persona</option>
-          <option>2 personas</option>
-          <option>3 personas</option>
-          <option>4 personas</option>
-          <option>5 o más personas</option>
+          <option value="" id="f-personas-0">Selecciona una opción</option>
+          <option id="f-personas-1">1 persona</option>
+          <option id="f-personas-2">2 personas</option>
+          <option id="f-personas-3">3 personas</option>
+          <option id="f-personas-4">4 personas</option>
+          <option id="f-personas-5">5 o más personas</option>
         </select>
       </div>
 
-      <!-- 7. Mascotas -->
       <div class="form-group">
-        <label>Mascotas</label>
+        <label id="label-mascotas">Mascotas</label>
         <div style="display:flex;gap:1rem;margin-top:0.3rem">
           <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.88rem;font-weight:300;color:var(--warm-dark);text-transform:none;letter-spacing:0;cursor:pointer">
-            <input type="radio" name="f-mascotas" id="f-mascotas-no" value="No" checked style="accent-color:var(--accent);width:16px;height:16px"> No
+            <input type="radio" name="f-mascotas" id="f-mascotas-no" value="No" checked style="accent-color:var(--accent);width:16px;height:16px">
+            <span id="mascotas-no-label">No</span>
           </label>
           <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.88rem;font-weight:300;color:var(--warm-dark);text-transform:none;letter-spacing:0;cursor:pointer">
-            <input type="radio" name="f-mascotas" id="f-mascotas-si" value="Sí" style="accent-color:var(--accent);width:16px;height:16px"> Sí
+            <input type="radio" name="f-mascotas" id="f-mascotas-si" value="Sí" style="accent-color:var(--accent);width:16px;height:16px">
+            <span id="mascotas-si-label">Sí</span>
           </label>
         </div>
       </div>
@@ -1310,8 +1424,8 @@
           <path d="M5 13l4 4L19 7"/>
         </svg>
       </div>
-      <h3>¡Solicitud enviada!</h3>
-      <p>Nos pondremos en contacto contigo en menos de 24 horas.</p>
+      <h3 id="success-title-text">¡Solicitud enviada!</h3>
+      <p id="success-desc-text">Nos pondremos en contacto contigo en menos de 24 horas.</p>
     </div>
   </div>
 </div>
@@ -1319,12 +1433,10 @@
 <!-- ─────────────── CONTACTO + FOOTER ─────────────── -->
 <section class="contact-section" id="contacto">
   <div class="contact-inner">
-
-    <!-- Izquierda: texto + WhatsApp -->
     <div class="contact-left">
-      <p class="contact-eyebrow" data-i18n="contact_eyebrow">Contacto</p>
-      <h2 data-i18n-html="contact_title">¿Te interesa algún <em>apartamento?</em></h2>
-      <p data-i18n="contact_sub">Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.</p>
+      <p class="contact-eyebrow" id="contact-eyebrow-text">Contacto</p>
+      <h2 id="contact-title-text">¿Te interesa algún <em>apartamento?</em></h2>
+      <p id="contact-sub-text">Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.</p>
 
       <div class="contact-channels">
         <div class="contact-channel">
@@ -1345,18 +1457,16 @@
         </div>
       </div>
 
-      <!-- Botón WhatsApp -->
       <a class="btn-whatsapp"
          href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
          target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
         </svg>
-        <span data-i18n="contact_whatsapp">Escríbenos por WhatsApp</span>
+        <span id="contact-whatsapp-text">Escríbenos por WhatsApp</span>
       </a>
     </div>
 
-    <!-- Derecha: tarjetas de info -->
     <div class="contact-right">
       <div class="contact-card">
         <div class="contact-card-icon">
@@ -1366,7 +1476,7 @@
           </svg>
         </div>
         <div>
-          <p class="contact-card-label" data-i18n="contact_location_label">Ubicación</p>
+          <p class="contact-card-label" id="contact-location-label">Ubicación</p>
           <p class="contact-card-value">Barcelona, España</p>
         </div>
       </div>
@@ -1378,7 +1488,7 @@
           </svg>
         </div>
         <div>
-          <p class="contact-card-label" data-i18n="contact_email_label">Email</p>
+          <p class="contact-card-label" id="contact-email-label">Email</p>
           <p class="contact-card-value">
             <a href="mailto:burguardreams@gmail.com">burguardreams@gmail.com</a>
           </p>
@@ -1392,7 +1502,7 @@
           </svg>
         </div>
         <div>
-          <p class="contact-card-label" data-i18n="contact_phone_label">Teléfono / WhatsApp</p>
+          <p class="contact-card-label" id="contact-phone-label">Teléfono / WhatsApp</p>
           <p class="contact-card-value">
             <a href="tel:+34660688501">660 68 85 01</a>
           </p>
@@ -1407,32 +1517,29 @@
           </svg>
         </div>
         <div>
-          <p class="contact-card-label" data-i18n="contact_hours_label">Horario</p>
-          <p class="contact-card-value" data-i18n="contact_hours">Lun – Vie, 9h – 19h</p>
+          <p class="contact-card-label" id="contact-hours-label">Horario</p>
+          <p class="contact-card-value" id="contact-hours-value">Lun – Vie, 9h – 19h</p>
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- Barra inferior -->
   <div class="footer-bar">
     <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
-    <p data-i18n="footer_copy">© 2025 Burguar Dreams · Todos los derechos reservados</p>
+    <p id="footer-copy-text">© 2025 Burguar Dreams · Todos los derechos reservados</p>
   </div>
 </section>
 
 
 <script>
-/* ─── SUPABASE CONFIG ──────────────────────────────────────────── */
+/* ─── SUPABASE CONFIG ─── */
 const SUPABASE_URL = "https://yscbwngotgbkytmzogol.supabase.co";
 const SUPABASE_KEY = "sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN";
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── Estado global ──
 let currentPropertyId = null;
 
-/* ─── DATOS DE LOS INMUEBLES ─── */
+/* ─── PROPERTIES DATA ─── */
 const properties = [
   {
     id: 1,
@@ -1474,8 +1581,8 @@ const properties = [
       { label: 'Baños', value: '1', unit: 'baño' },
       { label: 'Planta', value: 'Entresuelo', unit: '3ª' }
     ],
-    cardImage: './fotos/Valencia/Escriptori.jpg',
-    mainImage: './fotos/Valencia/Escriptori.jpg',
+    cardImage: './fotos/Valencia/Sofa4.jpg',
+    mainImage: './fotos/Valencia/Sofa4.jpg',
     extraPhotos: [
       './fotos/Valencia/Mejador.jpg','./fotos/Valencia/Sofa.jpg',
       './fotos/Valencia/Sofa2.jpg','./fotos/Valencia/Sofa3.jpg',
@@ -1494,7 +1601,7 @@ const properties = [
     id: 3,
     city: 'Barcelona',
     street: 'Carrer de Can Bruixa, 16 Entresuelo 1ª',
-    tag: 'Apartamento', price: '1.049,97', priceUnit: '/mes',
+    tag: 'Apartamento', price: '1.200', priceUnit: '/mes',
     available: false, availableText: 'Disponible el 10/07/2026',
     description: 'Precioso piso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
     features: ['Patio privado','Cocina independiente','Aire acondicionado','Doble acristalamiento','Ascensor','Portero automático'],
@@ -1504,8 +1611,8 @@ const properties = [
       { label: 'Baños', value: '1', unit: 'baño' },
       { label: 'Planta', value: 'Entresuelo', unit: '1ª' }
     ],
-    cardImage: './fotos/Bruixa/Dormitori.jpg',
-    mainImage: './fotos/Bruixa/Dormitori.jpg',
+    cardImage: './fotos/Bruixa/Menjador5.jpg',
+    mainImage: './fotos/Bruixa/Menjador5.jpg',
     extraPhotos: [
       './fotos/Bruixa/Menjador.jpg','./fotos/Bruixa/Menjador2.jpg',
       './fotos/Bruixa/Menjador3.jpg','./fotos/Bruixa/Menjador4.jpg',
@@ -1535,16 +1642,16 @@ const properties = [
     cardImage: './fotos/Urgell/Sofa.jpg',
     mainImage: './fotos/Urgell/Sofa.jpg',
     extraPhotos: [
-      './fotos/Urgell/Entrada.jpg','./fotos/Urgell/Entrada2.jpg',
+      './fotos/Urgell/Sofa.jpg','./fotos/Urgell/Sofa2.jpg',
       './fotos/Urgell/Menjador.jpg','./fotos/Urgell/Menjador2.jpg',
-      './fotos/Urgell/Menjador3.jpg','./fotos/Urgell/Sofa2.jpg',
-      './fotos/Urgell/Cuina.jpg','./fotos/Urgell/Cuina2.jpg',
+      './fotos/Urgell/Pasadis.jpg','./fotos/Urgell/Pasadis2.jpg',
+      './fotos/Urgell/Pasadis3.jpg','./fotos/Urgell/Cuina.jpg',
+      './fotos/Urgell/Cuina2.jpg','./fotos/Urgell/Cuina3.jpg',
       './fotos/Urgell/Dormitori.jpg','./fotos/Urgell/Dormitori2.jpg',
       './fotos/Urgell/Dormitori3.jpg','./fotos/Urgell/Dormitori4.jpg',
-      './fotos/Urgell/Dormitori5.jpg','./fotos/Urgell/Lavabo.jpg',
-      './fotos/Urgell/Lavabo2.jpg','./fotos/Urgell/Balco.jpg',
-      './fotos/Urgell/Balco2.jpg','./fotos/Urgell/Balco3.jpg',
-      './fotos/Urgell/Pasadis.jpg','./fotos/Urgell/Edifici.jpg',
+      './fotos/Urgell/Entrada.jpg','./fotos/Urgell/Lavabo.jpg',
+      './fotos/Urgell/Pati.jpg','./fotos/Urgell/Pati2.jpg',
+      './fotos/Urgell/Carrer2.jpg','./fotos/Urgell/Carrer.jpg',
       './fotos/Urgell/Edifici2.jpg'
     ]
   }
@@ -1557,12 +1664,11 @@ function setHeroBg() {
   }
 }
 
-
 /* ─── RENDER GRID ─── */
 function renderGrid() {
   const t = i18n[currentLang] || i18n.es;
   const grid = document.getElementById('properties-grid');
-  grid.innerHTML = properties.map((p, i) => `
+  grid.innerHTML = properties.map(p => `
     <div class="card" onclick="showDetail(${p.id})">
       <div class="card-img-wrap">
         ${p.cardImage
@@ -1581,7 +1687,7 @@ function renderGrid() {
         <div class="card-city">${p.city}</div>
         <div class="card-street">${p.street}</div>
         <div class="card-footer">
-          <div class="card-price">${p.price ? p.price + '€<span>' + p.priceUnit + '</span>' : '<span style="font-size:0.78rem;font-family:var(--font-body);color:var(--warm-mid)">Consultar precio</span>'}</div>
+          <div class="card-price">${p.price ? p.price + '€<span>' + p.priceUnit + '</span>' : '<span style="font-size:0.78rem;font-family:var(--font-body);color:var(--warm-mid)">' + t.consult_price + '</span>'}</div>
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem">
             ${!p.available ? `<span style="
               display:inline-block;
@@ -1609,37 +1715,28 @@ function renderGrid() {
   `).join('');
 }
 
-
 /* ─── SHOW DETAIL ─── */
 function showDetail(id) {
   const p = properties.find(x => x.id === id);
   if (!p) return;
   currentPropertyId = id;
 
-  // hero image
   const wrap = document.getElementById('detail-hero-img-wrap');
   wrap.innerHTML = p.mainImage
     ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img">`
-    : `<div class="detail-hero-placeholder">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5">
-          <rect x="10" y="30" width="60" height="40" rx="2"/>
-          <path d="M10 30L40 8l30 22"/>
-          <rect x="30" y="50" width="20" height="20"/>
-        </svg>
-       </div>`;
+    : `<div class="detail-hero-placeholder"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5"><rect x="10" y="30" width="60" height="40" rx="2"/><path d="M10 30L40 8l30 22"/><rect x="30" y="50" width="20" height="20"/></svg></div>`;
 
   document.getElementById('d-tag').textContent = p.tag;
   document.getElementById('d-title').textContent = p.city;
   document.getElementById('d-address').textContent = p.street;
   document.getElementById('d-price').innerHTML = p.price
     ? `${p.price}€<sub>${p.priceUnit}</sub>`
-    : `<span style="font-size:1.2rem;font-family:var(--font-body);font-weight:300;color:var(--warm-mid)">Consultar precio</span>`;
+    : `<span style="font-size:1.2rem;font-family:var(--font-body);font-weight:300;color:var(--warm-mid)">${(i18n[currentLang]||i18n.es).consult_price}</span>`;
 
   const badge = document.getElementById('d-availability');
   badge.textContent = p.availableText;
   badge.className = 'availability-badge ' + (p.available ? 'available' : 'unavailable');
 
-  // specs
   document.getElementById('d-specs').innerHTML = p.specs.map(s => `
     <div class="spec-item">
       <span class="spec-label">${s.label}</span>
@@ -1647,30 +1744,26 @@ function showDetail(id) {
     </div>
   `).join('');
 
-  // description & features
   document.getElementById('d-description').textContent = p.description;
   document.getElementById('d-features').innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
 
-  // extra photos
   const photos = p.extraPhotos.filter(Boolean);
+  const allPhotos = [p.mainImage, ...photos].filter(Boolean);
   const photoGrid = document.getElementById('d-photos');
   if (photos.length) {
     photoGrid.innerHTML = photos.map((src, i) => `
-      <div class="detail-photo">
+      <div class="detail-photo" onclick="openLightbox(${JSON.stringify(allPhotos)}, ${i + 1})" style="cursor:zoom-in">
         <img src="${src}" alt="Foto ${i+1}" loading="lazy">
       </div>
     `).join('');
   } else {
     photoGrid.innerHTML = [0,1,2].map(() => `
-      <div class="detail-photo">
-        <div class="detail-photo-placeholder">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C4B8A4" stroke-width="1.2">
-            <rect x="5" y="8" width="30" height="24" rx="2"/>
-            <circle cx="15" cy="16" r="3"/>
-            <path d="M5 26l8-6 6 5 5-4 11 7"/>
-          </svg>
-        </div>
-      </div>
+      <div class="detail-photo"><div class="detail-photo-placeholder">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C4B8A4" stroke-width="1.2">
+          <rect x="5" y="8" width="30" height="24" rx="2"/><circle cx="15" cy="16" r="3"/>
+          <path d="M5 26l8-6 6 5 5-4 11 7"/>
+        </svg>
+      </div></div>
     `).join('');
   }
 
@@ -1679,19 +1772,16 @@ function showDetail(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
 /* ─── SHOW HOME ─── */
 function showHome() {
   document.getElementById('detail-view').classList.remove('active');
   document.getElementById('home-view').style.display = '';
-  hideEmptyState();
-  // Reset active nav to alquiler
+  switchTab('hogar');
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
   document.querySelectorAll('.nav-link')[0].classList.add('active-nav');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   return false;
 }
-
 
 /* ─── MODAL ─── */
 function openModal() {
@@ -1712,205 +1802,313 @@ function handleOverlayClick(e) {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-/* ─── TRANSLATIONS ─────────────────────────────────────────────── */
+/* ─── i18n TRANSLATIONS ─── */
 const i18n = {
   es: {
-    nav_sale:       'Venta',
-    nav_rent:       'Alquiler',
-    nav_business:   'Empresas',
-    nav_about:      'Quiénes somos',
-    hero_eyebrow:   'Propiedades en alquiler',
-    hero_h1:        'Tu próximo hogar te <em>está esperando</em>',
-    hero_sub:       'Selección de inmuebles exclusivos en las mejores ubicaciones. Ven a conocerlos.',
-    section_title:  'Propiedades disponibles',
-    section_count:  '4 inmuebles',
-    btn_more:       'Saber más',
-    btn_visit:      'Quiero verlo',
-    back:           'Volver',
-    about_prop:     'Sobre la propiedad',
-    features:       'Características',
-    modal_eyebrow:  'Solicitar visita',
-    modal_title:    'Quiero verlo',
-    modal_desc:     'Déjanos tus datos y nos ponemos en contacto contigo para concertar una visita.',
-    f_name:         'Nombre',
-    f_surname:      'Apellidos',
-    f_phone:        'Teléfono',
-    f_email:        'Email',
-    f_when:         '¿Cuándo prefieres la visita?',
-    f_opt0:         'Selecciona una franja horaria',
-    f_opt1:         'Mañana (9h – 13h)',
-    f_opt2:         'Tarde (15h – 19h)',
-    f_opt3:         'Cualquier día y horario',
-    f_msg:          'Mensaje (opcional)',
-    f_msg_ph:       '¿Alguna pregunta o comentario?',
-    btn_send:       'Enviar solicitud',
-    success_title:  '¡Solicitud enviada!',
-    success_desc:   'Nos pondremos en contacto contigo en menos de 24 horas para confirmar la visita.',
-    available:      'Disponible',
-    unavailable:    'Alquilado',
-    flag:           '🇪🇸',
-    label:          'ES',
-    footer_copy:    '© 2025 Burguar Dreams · Todos los derechos reservados',
-    contact_eyebrow:       'Contacto',
-    contact_title:         '¿Te interesa algún <em>apartamento?</em>',
-    contact_sub:           'Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.',
-    contact_whatsapp:      'Escríbenos por WhatsApp',
-    contact_location_label:'Ubicación',
-    contact_email_label:   'Email',
-    contact_phone_label:   'Teléfono / WhatsApp',
-    contact_hours_label:   'Horario',
-    contact_hours:         'Lun – Vie, 9h – 19h',
+    flag: '🇪🇸', label: 'ES',
+    nav_rent: 'Alquiler',
+    hero_eyebrow: 'Alojamiento en Barcelona',
+    hero_h1: 'Descubre nuestros servicios de <em>corporate housing</em> en Barcelona',
+    hero_sub: 'Apartamentos amueblados y listos para entrar a vivir. Para particulares y empresas que buscan flexibilidad, diseño y una experiencia sin complicaciones.',
+    tab_hogar: 'Encuentra tu hogar', tab_empresas: 'Alojamiento para Empresas', tab_faq: 'FAQs', tab_contact: 'Contacto',
+    section_title: 'Propiedades disponibles', section_count: '4 inmuebles',
+    btn_more: 'Saber más', consult_price: 'Consultar precio',
+    back: 'Volver',
+    btn_interest: 'Me interesa',
+    detail_about: 'Sobre la propiedad', detail_features: 'Características',
+    corp_eyebrow: 'Corporate Housing',
+    corp_title: 'Alojamiento para los <em>trabajadores de tu empresa</em>',
+    corp_sub: 'Facilitamos pisos y alojamiento totalmente equipados para profesionales en movilidad, expatriados y equipos de empresa en Barcelona. Sin complicaciones, sin contratos largos.',
+    corp_cta: 'Habla con nosotros',
+    corp_f1t: 'Flexibilidad total', corp_f1: 'Contratos mensuales sin permanencia. Adaptados a las necesidades reales de cada empresa y trabajador.',
+    corp_f2t: 'Apartamentos listos', corp_f2: 'Totalmente amueblados y equipados. El trabajador llega y empieza a vivir desde el primer día.',
+    corp_f3t: 'Gestión sencilla', corp_f3: 'Un solo interlocutor para todas las necesidades. Atención personalizada y respuesta rápida garantizada.',
+    corp_f4t: 'Ubicaciones prime', corp_f4: 'Apartamentos en el corazón del Eixample de Barcelona. Bien comunicados con transporte público y servicios.',
+    faq_title: 'Preguntas frecuentes',
+    modal_eyebrow: 'Solicitud de información', modal_title: 'Me interesa',
+    modal_intro: 'Rellena el formulario y nos pondremos en contacto contigo lo antes posible.',
+    label_nombre: 'Nombre', label_apellidos: 'Apellidos',
+    label_email: 'Email', label_telefono: 'Teléfono *',
+    label_nacimiento: 'Fecha de nacimiento',
+    label_laboral: 'Situación laboral',
+    laboral_0: 'Selecciona una opción', laboral_1: 'Empleado por cuenta ajena', laboral_2: 'Autónomo / Freelance',
+    laboral_3: 'Funcionario', laboral_4: 'Estudiante', laboral_5: 'Jubilado',
+    laboral_6: 'En búsqueda de empleo', laboral_7: 'Otro',
+    label_ingresos: 'Ingresos mensuales netos',
+    ingresos_0: 'Selecciona una opción', ingresos_1: 'Menos de 1.000 €', ingresos_2: 'Entre 1.000 € y 1.500 €',
+    ingresos_3: 'Entre 1.500 € y 2.500 €', ingresos_4: 'Entre 2.500 € y 4.000 €', ingresos_5: 'Más de 4.000 €',
+    label_personas: 'Número de personas que vivirán allí',
+    personas_0: 'Selecciona una opción', personas_1: '1 persona', personas_2: '2 personas',
+    personas_3: '3 personas', personas_4: '4 personas', personas_5: '5 o más personas',
+    label_mascotas: 'Mascotas', mascotas_no: 'No', mascotas_si: 'Sí',
+    btn_send: 'Enviar solicitud',
+    success_title: '¡Solicitud enviada!', success_desc: 'Nos pondremos en contacto contigo en menos de 24 horas.',
+    contact_eyebrow: 'Contacto',
+    contact_title: '¿Te interesa algún <em>apartamento?</em>',
+    contact_sub: 'Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.',
+    contact_whatsapp: 'Escríbenos por WhatsApp',
+    contact_location_label: 'Ubicación', contact_email_label: 'Email',
+    contact_phone_label: 'Teléfono / WhatsApp', contact_hours_label: 'Horario',
+    contact_hours: 'Lun – Vie, 9h – 19h',
+    footer_copy: '© 2025 Burguar Dreams · Todos los derechos reservados',
+    nombre_ph: 'Tu nombre', apellidos_ph: 'Tus apellidos',
   },
   ca: {
-    nav_sale:       'Venda',
-    nav_rent:       'Lloguer',
-    nav_business:   'Empreses',
-    nav_about:      'Qui som',
-    hero_eyebrow:   'Propietats en lloguer',
-    hero_h1:        'La teva nova llar t\'<em>està esperant</em>',
-    hero_sub:       'Selecció d\'immobles exclusius a les millors ubicacions. Vine a conèixer-los.',
-    section_title:  'Propietats disponibles',
-    section_count:  '4 immobles',
-    btn_more:       'Saber-ne més',
-    btn_visit:      'Vull veure-la',
-    back:           'Tornar',
-    about_prop:     'Sobre la propietat',
-    features:       'Característiques',
-    modal_eyebrow:  'Sol·licitar visita',
-    modal_title:    'Vull veure-la',
-    modal_desc:     'Deixa\'ns les teves dades i ens posem en contacte per concertar una visita.',
-    f_name:         'Nom',
-    f_surname:      'Cognoms',
-    f_phone:        'Telèfon',
-    f_email:        'Correu electrònic',
-    f_when:         'Quan prefereixes la visita?',
-    f_opt0:         'Selecciona una franja horària',
-    f_opt1:         'Matí (9h – 13h)',
-    f_opt2:         'Tarda (15h – 19h)',
-    f_opt3:         'Qualsevol dia i horari',
-    f_msg:          'Missatge (opcional)',
-    f_msg_ph:       'Tens alguna pregunta o comentari?',
-    btn_send:       'Enviar sol·licitud',
-    success_title:  'Sol·licitud enviada!',
-    success_desc:   'Ens posarem en contacte amb tu en menys de 24 hores per confirmar la visita.',
-    available:      'Disponible',
-    unavailable:    'Llogat',
-    flag:           '<svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd;vertical-align:middle"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg>',
-    label:          'CA',
-    footer_copy:    '© 2025 Burguar Dreams · Tots els drets reservats',
-    contact_eyebrow:       'Contacte',
-    contact_title:         'T\'interessa algun <em>apartament?</em>',
-    contact_sub:           'Escriu-nos o truca\'ns i t\'atenem personalment. Estarem encantats d\'organitzar una visita.',
-    contact_whatsapp:      'Escriu-nos per WhatsApp',
-    contact_location_label:'Ubicació',
-    contact_email_label:   'Correu electrònic',
-    contact_phone_label:   'Telèfon / WhatsApp',
-    contact_hours_label:   'Horari',
-    contact_hours:         'Dl – Dv, 9h – 19h',
+    flag: '<svg width="18" height="12" viewBox="0 0 18 12" style="flex-shrink:0;border:1px solid #ddd;vertical-align:middle"><rect width="18" height="12" fill="#FCDD09"/><rect y="0" width="18" height="1.7" fill="#C60B1E"/><rect y="3.4" width="18" height="1.7" fill="#C60B1E"/><rect y="6.8" width="18" height="1.7" fill="#C60B1E"/><rect y="10.2" width="18" height="1.7" fill="#C60B1E"/></svg>',
+    label: 'CA',
+    nav_rent: 'Lloguer',
+    hero_eyebrow: 'Allotjament a Barcelona',
+    hero_h1: 'Descobreix els nostres serveis de <em>corporate housing</em> a Barcelona',
+    hero_sub: 'Apartaments moblats i llestos per entrar a viure. Per a particulars i empreses que busquen flexibilitat, disseny i una experiència sense complicacions.',
+    tab_hogar: 'Troba la teva llar', tab_empresas: 'Allotjament per a Empreses', tab_faq: 'FAQs', tab_contact: 'Contacte',
+    section_title: 'Propietats disponibles', section_count: '4 immobles',
+    btn_more: 'Saber-ne més', consult_price: 'Consultar preu',
+    back: 'Tornar',
+    btn_interest: 'M\'interessa',
+    detail_about: 'Sobre la propietat', detail_features: 'Característiques',
+    corp_eyebrow: 'Corporate Housing',
+    corp_title: 'Allotjament per als <em>treballadors de la teva empresa</em>',
+    corp_sub: 'Facilitem pisos i allotjament totalment equipats per a professionals en mobilitat, expatriats i equips d\'empresa a Barcelona. Sense complicacions, sense contractes llargs.',
+    corp_cta: 'Parla amb nosaltres',
+    corp_f1t: 'Flexibilitat total', corp_f1: 'Contractes mensuals sense permanència. Adaptats a les necessitats reals de cada empresa i treballador.',
+    corp_f2t: 'Apartaments llestos', corp_f2: 'Totalment moblats i equipats. El treballador arriba i comença a viure des del primer dia.',
+    corp_f3t: 'Gestió senzilla', corp_f3: 'Un sol interlocutor per a totes les necessitats. Atenció personalitzada i resposta ràpida garantida.',
+    corp_f4t: 'Ubicacions prime', corp_f4: 'Apartaments al cor de l\'Eixample de Barcelona. Ben comunicats amb transport públic i serveis.',
+    faq_title: 'Preguntes freqüents',
+    modal_eyebrow: 'Sol·licitud d\'informació', modal_title: 'M\'interessa',
+    modal_intro: 'Omple el formulari i ens posarem en contacte amb tu al més aviat possible.',
+    label_nombre: 'Nom', label_apellidos: 'Cognoms',
+    label_email: 'Correu electrònic', label_telefono: 'Telèfon *',
+    label_nacimiento: 'Data de naixement',
+    label_laboral: 'Situació laboral',
+    laboral_0: 'Selecciona una opció', laboral_1: 'Empleat per compte aliè', laboral_2: 'Autònom / Freelance',
+    laboral_3: 'Funcionari', laboral_4: 'Estudiant', laboral_5: 'Jubilat',
+    laboral_6: 'En cerca de feina', laboral_7: 'Altre',
+    label_ingresos: 'Ingressos mensuals nets',
+    ingresos_0: 'Selecciona una opció', ingresos_1: 'Menys de 1.000 €', ingresos_2: 'Entre 1.000 € i 1.500 €',
+    ingresos_3: 'Entre 1.500 € i 2.500 €', ingresos_4: 'Entre 2.500 € i 4.000 €', ingresos_5: 'Més de 4.000 €',
+    label_personas: 'Nombre de persones que hi viuran',
+    personas_0: 'Selecciona una opció', personas_1: '1 persona', personas_2: '2 persones',
+    personas_3: '3 persones', personas_4: '4 persones', personas_5: '5 o més persones',
+    label_mascotas: 'Mascotes', mascotas_no: 'No', mascotas_si: 'Sí',
+    btn_send: 'Enviar sol·licitud',
+    success_title: 'Sol·licitud enviada!', success_desc: 'Ens posarem en contacte amb tu en menys de 24 hores.',
+    contact_eyebrow: 'Contacte',
+    contact_title: 'T\'interessa algun <em>apartament?</em>',
+    contact_sub: 'Escriu-nos o truca\'ns i t\'atenem personalment. Estarem encantats d\'organitzar una visita.',
+    contact_whatsapp: 'Escriu-nos per WhatsApp',
+    contact_location_label: 'Ubicació', contact_email_label: 'Correu electrònic',
+    contact_phone_label: 'Telèfon / WhatsApp', contact_hours_label: 'Horari',
+    contact_hours: 'Dl – Dv, 9h – 19h',
+    footer_copy: '© 2025 Burguar Dreams · Tots els drets reservats',
+    nombre_ph: 'El teu nom', apellidos_ph: 'Els teus cognoms',
   },
   en: {
-    nav_sale:       'Sale',
-    nav_rent:       'Rental',
-    nav_business:   'Business',
-    nav_about:      'About us',
-    hero_eyebrow:   'Properties for rent',
-    hero_h1:        'Your next home is <em>waiting for you</em>',
-    hero_sub:       'A curated selection of exclusive properties in the best locations. Come and see them.',
-    section_title:  'Available properties',
-    section_count:  '4 properties',
-    btn_more:       'Learn more',
-    btn_visit:      'I want to see it',
-    back:           'Back',
-    about_prop:     'About the property',
-    features:       'Features',
-    modal_eyebrow:  'Schedule a visit',
-    modal_title:    'I want to see it',
-    modal_desc:     'Leave us your details and we\'ll get in touch to arrange a viewing.',
-    f_name:         'First name',
-    f_surname:      'Last name',
-    f_phone:        'Phone',
-    f_email:        'Email',
-    f_when:         'When do you prefer the visit?',
-    f_opt0:         'Select a time slot',
-    f_opt1:         'Morning (9am – 1pm)',
-    f_opt2:         'Afternoon (3pm – 7pm)',
-    f_opt3:         'Any day and time',
-    f_msg:          'Message (optional)',
-    f_msg_ph:       'Any questions or comments?',
-    btn_send:       'Send request',
-    success_title:  'Request sent!',
-    success_desc:   'We will contact you within 24 hours to confirm the visit.',
-    available:      'Available',
-    unavailable:    'Rented',
-    flag:           '🇬🇧',
-    label:          'EN',
-    footer_copy:    '© 2025 Burguar Dreams · All rights reserved',
-    contact_eyebrow:       'Contact',
-    contact_title:         'Interested in an <em>apartment?</em>',
-    contact_sub:           'Write or call us and we\'ll help you personally. We\'d love to arrange a viewing.',
-    contact_whatsapp:      'Message us on WhatsApp',
-    contact_location_label:'Location',
-    contact_email_label:   'Email',
-    contact_phone_label:   'Phone / WhatsApp',
-    contact_hours_label:   'Hours',
-    contact_hours:         'Mon – Fri, 9am – 7pm',
+    flag: '🇬🇧', label: 'EN',
+    nav_rent: 'Rental',
+    hero_eyebrow: 'Housing in Barcelona',
+    hero_h1: 'Discover our <em>corporate housing</em> services in Barcelona',
+    hero_sub: 'Furnished apartments, move-in ready. For individuals and companies seeking flexibility, design and a hassle-free experience.',
+    tab_hogar: 'Find your home', tab_empresas: 'Corporate Housing', tab_faq: 'FAQs', tab_contact: 'Contact',
+    section_title: 'Available properties', section_count: '4 properties',
+    btn_more: 'Learn more', consult_price: 'Price on request',
+    back: 'Back',
+    btn_interest: 'I\'m interested',
+    detail_about: 'About the property', detail_features: 'Features',
+    corp_eyebrow: 'Corporate Housing',
+    corp_title: 'Housing for your <em>company\'s employees</em>',
+    corp_sub: 'We provide fully equipped apartments for mobile professionals, expats and corporate teams in Barcelona. No hassle, no long-term contracts.',
+    corp_cta: 'Talk to us',
+    corp_f1t: 'Full flexibility', corp_f1: 'Monthly contracts with no long-term commitment. Tailored to the real needs of each company and employee.',
+    corp_f2t: 'Move-in ready', corp_f2: 'Fully furnished and equipped. Your employee arrives and starts living from day one.',
+    corp_f3t: 'Simple management', corp_f3: 'One point of contact for all needs. Personalised attention and fast response guaranteed.',
+    corp_f4t: 'Prime locations', corp_f4: 'Apartments in the heart of Barcelona\'s Eixample. Well connected by public transport and services.',
+    faq_title: 'Frequently asked questions',
+    modal_eyebrow: 'Information request', modal_title: 'I\'m interested',
+    modal_intro: 'Fill in the form and we will get back to you as soon as possible.',
+    label_nombre: 'First name', label_apellidos: 'Last name',
+    label_email: 'Email', label_telefono: 'Phone *',
+    label_nacimiento: 'Date of birth',
+    label_laboral: 'Employment status',
+    laboral_0: 'Select an option', laboral_1: 'Employee', laboral_2: 'Self-employed / Freelance',
+    laboral_3: 'Civil servant', laboral_4: 'Student', laboral_5: 'Retired',
+    laboral_6: 'Job seeking', laboral_7: 'Other',
+    label_ingresos: 'Net monthly income',
+    ingresos_0: 'Select an option', ingresos_1: 'Less than €1,000', ingresos_2: 'Between €1,000 and €1,500',
+    ingresos_3: 'Between €1,500 and €2,500', ingresos_4: 'Between €2,500 and €4,000', ingresos_5: 'More than €4,000',
+    label_personas: 'Number of people who will live there',
+    personas_0: 'Select an option', personas_1: '1 person', personas_2: '2 people',
+    personas_3: '3 people', personas_4: '4 people', personas_5: '5 or more people',
+    label_mascotas: 'Pets', mascotas_no: 'No', mascotas_si: 'Yes',
+    btn_send: 'Send request',
+    success_title: 'Request sent!', success_desc: 'We will contact you within 24 hours.',
+    contact_eyebrow: 'Contact',
+    contact_title: 'Interested in an <em>apartment?</em>',
+    contact_sub: 'Write or call us and we\'ll help you personally. We\'d love to arrange a viewing.',
+    contact_whatsapp: 'Message us on WhatsApp',
+    contact_location_label: 'Location', contact_email_label: 'Email',
+    contact_phone_label: 'Phone / WhatsApp', contact_hours_label: 'Hours',
+    contact_hours: 'Mon – Fri, 9am – 7pm',
+    footer_copy: '© 2025 Burguar Dreams · All rights reserved',
+    nombre_ph: 'Your first name', apellidos_ph: 'Your last name',
   },
   fr: {
-    nav_sale:       'Vente',
-    nav_rent:       'Location',
-    nav_business:   'Entreprises',
-    nav_about:      'Qui sommes-nous',
-    hero_eyebrow:   'Propriétés à louer',
-    hero_h1:        'Votre prochaine maison vous <em>attend</em>',
-    hero_sub:       'Une sélection de biens exclusifs dans les meilleures adresses. Venez les découvrir.',
-    section_title:  'Propriétés disponibles',
-    section_count:  '4 biens',
-    btn_more:       'En savoir plus',
-    btn_visit:      'Je veux la visiter',
-    back:           'Retour',
-    about_prop:     'À propos du bien',
-    features:       'Caractéristiques',
-    modal_eyebrow:  'Demander une visite',
-    modal_title:    'Je veux la visiter',
-    modal_desc:     'Laissez-nous vos coordonnées et nous vous contacterons pour organiser une visite.',
-    f_name:         'Prénom',
-    f_surname:      'Nom',
-    f_phone:        'Téléphone',
-    f_email:        'Email',
-    f_when:         'Quand préférez-vous la visite ?',
-    f_opt0:         'Sélectionnez un créneau',
-    f_opt1:         'Matin (9h – 13h)',
-    f_opt2:         'Après-midi (15h – 19h)',
-    f_opt3:         'N\'importe quel jour',
-    f_msg:          'Message (optionnel)',
-    f_msg_ph:       'Une question ou un commentaire ?',
-    btn_send:       'Envoyer la demande',
-    success_title:  'Demande envoyée !',
-    success_desc:   'Nous vous contacterons dans les 24 heures pour confirmer la visite.',
-    available:      'Disponible',
-    unavailable:    'Loué',
-    flag:           '🇫🇷',
-    label:          'FR',
-    footer_copy:    '© 2025 Burguar Dreams · Tous droits réservés',
-    contact_eyebrow:       'Contact',
-    contact_title:         'Un <em>appartement</em> vous intéresse ?',
-    contact_sub:           'Écrivez-nous ou appelez-nous et nous vous répondrons personnellement. Nous serons ravis d\'organiser une visite.',
-    contact_whatsapp:      'Écrivez-nous sur WhatsApp',
-    contact_location_label:'Localisation',
-    contact_email_label:   'Email',
-    contact_phone_label:   'Téléphone / WhatsApp',
-    contact_hours_label:   'Horaires',
-    contact_hours:         'Lun – Ven, 9h – 19h',
+    flag: '🇫🇷', label: 'FR',
+    nav_rent: 'Location',
+    hero_eyebrow: 'Logement à Barcelone',
+    hero_h1: 'Découvrez nos services de <em>corporate housing</em> à Barcelone',
+    hero_sub: 'Appartements meublés et prêts à vivre. Pour particuliers et entreprises en quête de flexibilité, de design et d\'une expérience sans tracas.',
+    tab_hogar: 'Trouvez votre logement', tab_empresas: 'Logement entreprises', tab_faq: 'FAQ', tab_contact: 'Contact',
+    section_title: 'Propriétés disponibles', section_count: '4 biens',
+    btn_more: 'En savoir plus', consult_price: 'Prix sur demande',
+    back: 'Retour',
+    btn_interest: 'Ça m\'intéresse',
+    detail_about: 'À propos du bien', detail_features: 'Caractéristiques',
+    corp_eyebrow: 'Corporate Housing',
+    corp_title: 'Logement pour les <em>employés de votre entreprise</em>',
+    corp_sub: 'Nous mettons à disposition des appartements entièrement équipés pour les professionnels en mobilité, les expatriés et les équipes d\'entreprise à Barcelone.',
+    corp_cta: 'Parlez-nous',
+    corp_f1t: 'Flexibilité totale', corp_f1: 'Contrats mensuels sans engagement. Adaptés aux besoins réels de chaque entreprise et employé.',
+    corp_f2t: 'Appartements prêts', corp_f2: 'Entièrement meublés et équipés. L\'employé arrive et commence à vivre dès le premier jour.',
+    corp_f3t: 'Gestion simple', corp_f3: 'Un seul interlocuteur pour tous les besoins. Accompagnement personnalisé et réactivité garantis.',
+    corp_f4t: 'Emplacements prime', corp_f4: 'Appartements au cœur de l\'Eixample de Barcelone. Bien desservis par les transports en commun.',
+    faq_title: 'Questions fréquentes',
+    modal_eyebrow: 'Demande d\'informations', modal_title: 'Ça m\'intéresse',
+    modal_intro: 'Remplissez le formulaire et nous vous contacterons dans les plus brefs délais.',
+    label_nombre: 'Prénom', label_apellidos: 'Nom',
+    label_email: 'Email', label_telefono: 'Téléphone *',
+    label_nacimiento: 'Date de naissance',
+    label_laboral: 'Situation professionnelle',
+    laboral_0: 'Sélectionnez une option', laboral_1: 'Salarié', laboral_2: 'Indépendant / Freelance',
+    laboral_3: 'Fonctionnaire', laboral_4: 'Étudiant', laboral_5: 'Retraité',
+    laboral_6: 'En recherche d\'emploi', laboral_7: 'Autre',
+    label_ingresos: 'Revenus mensuels nets',
+    ingresos_0: 'Sélectionnez une option', ingresos_1: 'Moins de 1 000 €', ingresos_2: 'Entre 1 000 € et 1 500 €',
+    ingresos_3: 'Entre 1 500 € et 2 500 €', ingresos_4: 'Entre 2 500 € et 4 000 €', ingresos_5: 'Plus de 4 000 €',
+    label_personas: 'Nombre de personnes qui habiteront là',
+    personas_0: 'Sélectionnez une option', personas_1: '1 personne', personas_2: '2 personnes',
+    personas_3: '3 personnes', personas_4: '4 personnes', personas_5: '5 personnes ou plus',
+    label_mascotas: 'Animaux de compagnie', mascotas_no: 'Non', mascotas_si: 'Oui',
+    btn_send: 'Envoyer la demande',
+    success_title: 'Demande envoyée !', success_desc: 'Nous vous contacterons dans les 24 heures.',
+    contact_eyebrow: 'Contact',
+    contact_title: 'Un <em>appartement</em> vous intéresse ?',
+    contact_sub: 'Écrivez-nous ou appelez-nous et nous vous répondrons personnellement. Nous serons ravis d\'organiser une visite.',
+    contact_whatsapp: 'Écrivez-nous sur WhatsApp',
+    contact_location_label: 'Localisation', contact_email_label: 'Email',
+    contact_phone_label: 'Téléphone / WhatsApp', contact_hours_label: 'Horaires',
+    contact_hours: 'Lun – Ven, 9h – 19h',
+    footer_copy: '© 2025 Burguar Dreams · Tous droits réservés',
+    nombre_ph: 'Votre prénom', apellidos_ph: 'Votre nom',
+  },
+  de: {
+    flag: '🇩🇪', label: 'DE',
+    nav_rent: 'Miete',
+    hero_eyebrow: 'Wohnen in Barcelona',
+    hero_h1: 'Entdecken Sie unsere <em>Corporate-Housing</em>-Dienste in Barcelona',
+    hero_sub: 'Möblierte Wohnungen, sofort einzugsbereit. Für Privatpersonen und Unternehmen, die Flexibilität und Design suchen.',
+    tab_hogar: 'Finde dein Zuhause', tab_empresas: 'Firmenwohnungen', tab_faq: 'FAQ', tab_contact: 'Kontakt',
+    section_title: 'Verfügbare Wohnungen', section_count: '4 Wohnungen',
+    btn_more: 'Mehr erfahren', consult_price: 'Preis auf Anfrage',
+    back: 'Zurück',
+    btn_interest: 'Interessiert mich',
+    detail_about: 'Über die Immobilie', detail_features: 'Ausstattung',
+    corp_eyebrow: 'Corporate Housing',
+    corp_title: 'Wohnungen für <em>Ihre Mitarbeiter</em>',
+    corp_sub: 'Wir bieten vollständig ausgestattete Wohnungen für mobile Fachkräfte, Expats und Unternehmensteams in Barcelona. Ohne Aufwand, ohne Langzeitverträge.',
+    corp_cta: 'Kontakt aufnehmen',
+    corp_f1t: 'Volle Flexibilität', corp_f1: 'Monatliche Verträge ohne Bindung. Auf die tatsächlichen Bedürfnisse jedes Unternehmens zugeschnitten.',
+    corp_f2t: 'Einzugsbereit', corp_f2: 'Vollständig möbliert und ausgestattet. Ihr Mitarbeiter kommt an und fängt sofort an zu leben.',
+    corp_f3t: 'Einfache Verwaltung', corp_f3: 'Ein Ansprechpartner für alle Bedürfnisse. Persönliche Betreuung und schnelle Reaktionszeit garantiert.',
+    corp_f4t: 'Beste Lagen', corp_f4: 'Wohnungen im Herzen des Eixample in Barcelona. Gut durch öffentliche Verkehrsmittel erreichbar.',
+    faq_title: 'Häufige Fragen',
+    modal_eyebrow: 'Informationsanfrage', modal_title: 'Interessiert mich',
+    modal_intro: 'Füllen Sie das Formular aus und wir melden uns so schnell wie möglich.',
+    label_nombre: 'Vorname', label_apellidos: 'Nachname',
+    label_email: 'E-Mail', label_telefono: 'Telefon *',
+    label_nacimiento: 'Geburtsdatum',
+    label_laboral: 'Beschäftigungsstatus',
+    laboral_0: 'Option auswählen', laboral_1: 'Angestellt', laboral_2: 'Selbstständig / Freelance',
+    laboral_3: 'Beamter', laboral_4: 'Student', laboral_5: 'Rentner',
+    laboral_6: 'Arbeitssuchend', laboral_7: 'Sonstiges',
+    label_ingresos: 'Monatliches Nettoeinkommen',
+    ingresos_0: 'Option auswählen', ingresos_1: 'Weniger als 1.000 €', ingresos_2: 'Zwischen 1.000 € und 1.500 €',
+    ingresos_3: 'Zwischen 1.500 € und 2.500 €', ingresos_4: 'Zwischen 2.500 € und 4.000 €', ingresos_5: 'Mehr als 4.000 €',
+    label_personas: 'Anzahl der Personen, die dort wohnen werden',
+    personas_0: 'Option auswählen', personas_1: '1 Person', personas_2: '2 Personen',
+    personas_3: '3 Personen', personas_4: '4 Personen', personas_5: '5 oder mehr Personen',
+    label_mascotas: 'Haustiere', mascotas_no: 'Nein', mascotas_si: 'Ja',
+    btn_send: 'Anfrage senden',
+    success_title: 'Anfrage gesendet!', success_desc: 'Wir melden uns innerhalb von 24 Stunden.',
+    contact_eyebrow: 'Kontakt',
+    contact_title: 'Interessiert an einer <em>Wohnung?</em>',
+    contact_sub: 'Schreiben oder rufen Sie uns an. Wir helfen Ihnen persönlich und organisieren gerne eine Besichtigung.',
+    contact_whatsapp: 'WhatsApp schreiben',
+    contact_location_label: 'Standort', contact_email_label: 'E-Mail',
+    contact_phone_label: 'Telefon / WhatsApp', contact_hours_label: 'Öffnungszeiten',
+    contact_hours: 'Mo – Fr, 9–19 Uhr',
+    footer_copy: '© 2025 Burguar Dreams · Alle Rechte vorbehalten',
+    nombre_ph: 'Ihr Vorname', apellidos_ph: 'Ihr Nachname',
+  },
+  it: {
+    flag: '🇮🇹', label: 'IT',
+    nav_rent: 'Affitto',
+    hero_eyebrow: 'Alloggi a Barcellona',
+    hero_h1: 'Scopri i nostri servizi di <em>corporate housing</em> a Barcellona',
+    hero_sub: 'Appartamenti arredati e pronti ad abitare. Per privati e aziende che cercano flessibilità, design e un\'esperienza senza complicazioni.',
+    tab_hogar: 'Trova casa tua', tab_empresas: 'Alloggi aziendali', tab_faq: 'FAQ', tab_contact: 'Contatto',
+    section_title: 'Proprietà disponibili', section_count: '4 appartamenti',
+    btn_more: 'Scopri di più', consult_price: 'Prezzo su richiesta',
+    back: 'Indietro',
+    btn_interest: 'Mi interessa',
+    detail_about: 'La proprietà', detail_features: 'Caratteristiche',
+    corp_eyebrow: 'Corporate Housing',
+    corp_title: 'Alloggi per i <em>dipendenti della tua azienda</em>',
+    corp_sub: 'Mettiamo a disposizione appartamenti completamente attrezzati per professionisti in mobilità, expatriati e team aziendali a Barcellona. Senza complicazioni, senza contratti lunghi.',
+    corp_cta: 'Contattaci',
+    corp_f1t: 'Massima flessibilità', corp_f1: 'Contratti mensili senza vincoli. Adattati alle reali esigenze di ogni azienda e lavoratore.',
+    corp_f2t: 'Pronti ad abitare', corp_f2: 'Completamente arredati e attrezzati. Il dipendente arriva e inizia a vivere dal primo giorno.',
+    corp_f3t: 'Gestione semplice', corp_f3: 'Un solo referente per tutte le esigenze. Assistenza personalizzata e risposta rapida garantita.',
+    corp_f4t: 'Posizioni prime', corp_f4: 'Appartamenti nel cuore dell\'Eixample di Barcellona. Ben collegati con i trasporti pubblici e i servizi.',
+    faq_title: 'Domande frequenti',
+    modal_eyebrow: 'Richiesta di informazioni', modal_title: 'Mi interessa',
+    modal_intro: 'Compila il modulo e ti contatteremo il prima possibile.',
+    label_nombre: 'Nome', label_apellidos: 'Cognome',
+    label_email: 'Email', label_telefono: 'Telefono *',
+    label_nacimiento: 'Data di nascita',
+    label_laboral: 'Situazione lavorativa',
+    laboral_0: 'Seleziona un\'opzione', laboral_1: 'Dipendente', laboral_2: 'Autonomo / Freelance',
+    laboral_3: 'Funzionario pubblico', laboral_4: 'Studente', laboral_5: 'Pensionato',
+    laboral_6: 'In cerca di lavoro', laboral_7: 'Altro',
+    label_ingresos: 'Reddito mensile netto',
+    ingresos_0: 'Seleziona un\'opzione', ingresos_1: 'Meno di 1.000 €', ingresos_2: 'Tra 1.000 € e 1.500 €',
+    ingresos_3: 'Tra 1.500 € e 2.500 €', ingresos_4: 'Tra 2.500 € e 4.000 €', ingresos_5: 'Più di 4.000 €',
+    label_personas: 'Numero di persone che abiteranno lì',
+    personas_0: 'Seleziona un\'opzione', personas_1: '1 persona', personas_2: '2 persone',
+    personas_3: '3 persone', personas_4: '4 persone', personas_5: '5 o più persone',
+    label_mascotas: 'Animali domestici', mascotas_no: 'No', mascotas_si: 'Sì',
+    btn_send: 'Invia richiesta',
+    success_title: 'Richiesta inviata!', success_desc: 'Ti contatteremo entro 24 ore.',
+    contact_eyebrow: 'Contatto',
+    contact_title: 'Ti interessa un <em>appartamento?</em>',
+    contact_sub: 'Scrivici o chiamaci e ti risponderemo personalmente. Saremo felici di organizzare una visita.',
+    contact_whatsapp: 'Scrivici su WhatsApp',
+    contact_location_label: 'Posizione', contact_email_label: 'Email',
+    contact_phone_label: 'Telefono / WhatsApp', contact_hours_label: 'Orari',
+    contact_hours: 'Lun – Ven, 9–19',
+    footer_copy: '© 2025 Burguar Dreams · Tutti i diritti riservati',
+    nombre_ph: 'Il tuo nome', apellidos_ph: 'Il tuo cognome',
   }
 };
 
 let currentLang = 'es';
 
+/* ─── SET LANG ─── */
 function setLang(lang) {
   currentLang = lang;
-  const t = i18n[lang];
+  const t = i18n[lang] || i18n.es;
 
-  // Update flag & label in button
+  // Flag & label
   document.getElementById('lang-flag').innerHTML = t.flag;
   document.getElementById('lang-label').textContent = t.label;
 
@@ -1919,95 +2117,103 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${lang}'`));
   });
 
-  // Nav links
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key]) el.textContent = t[key];
-  });
+  // Nav
+  document.getElementById('nav-rent-btn').textContent = t.nav_rent;
 
   // Hero
-  const heroEye = document.querySelector('.hero-eyebrow');
-  if (heroEye) heroEye.textContent = t.hero_eyebrow;
-  const heroH1 = document.querySelector('.hero h1');
-  if (heroH1) heroH1.innerHTML = t.hero_h1;
-  const heroSub = document.querySelector('.hero-sub');
-  if (heroSub) heroSub.textContent = t.hero_sub;
+  document.getElementById('hero-eyebrow-text').textContent = t.hero_eyebrow;
+  document.getElementById('hero-h1-text').innerHTML = t.hero_h1;
+  document.getElementById('hero-sub-text').textContent = t.hero_sub;
+
+  // Tabs
+  document.getElementById('tab-btn-hogar').textContent = t.tab_hogar;
+  document.getElementById('tab-btn-empresas').textContent = t.tab_empresas;
+  document.getElementById('tab-btn-faq').textContent = t.tab_faq;
+  document.getElementById('tab-btn-contact').textContent = t.tab_contact;
 
   // Section
-  const secTitle = document.querySelector('.section-label h2');
-  if (secTitle) secTitle.textContent = t.section_title;
-  const secCount = document.querySelector('.count-badge');
-  if (secCount) secCount.textContent = t.section_count;
+  document.getElementById('section-title-text').textContent = t.section_title;
+  document.getElementById('section-count-text').textContent = t.section_count;
 
-  // Footer
-  const footerP = document.querySelector('.footer-bar p');
-  if (footerP) footerP.textContent = t.footer_copy;
+  // Corporate
+  document.getElementById('corp-eyebrow-text').textContent = t.corp_eyebrow;
+  document.getElementById('corp-title-text').innerHTML = t.corp_title;
+  document.getElementById('corp-sub-text').textContent = t.corp_sub;
+  document.getElementById('corp-cta-text').textContent = t.corp_cta;
+  document.getElementById('corp-f1t-text').textContent = t.corp_f1t;
+  document.getElementById('corp-f1-text').textContent = t.corp_f1;
+  document.getElementById('corp-f2t-text').textContent = t.corp_f2t;
+  document.getElementById('corp-f2-text').textContent = t.corp_f2;
+  document.getElementById('corp-f3t-text').textContent = t.corp_f3t;
+  document.getElementById('corp-f3-text').textContent = t.corp_f3;
+  document.getElementById('corp-f4t-text').textContent = t.corp_f4t;
+  document.getElementById('corp-f4-text').textContent = t.corp_f4;
 
-  // Contact section
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (t[key] !== undefined) el.textContent = t[key];
-  });
-  document.querySelectorAll('[data-i18n-html]').forEach(el => {
-    const key = el.getAttribute('data-i18n-html');
-    if (t[key] !== undefined) el.innerHTML = t[key];
-  });
-  // WhatsApp button span
-  const waSpan = document.querySelector('.btn-whatsapp span');
-  if (waSpan && t.contact_whatsapp) waSpan.textContent = t.contact_whatsapp;
+  // FAQ title
+  document.getElementById('faq-title-text').textContent = t.faq_title;
 
-  // Modal static texts
-  document.querySelector('.modal-eyebrow').textContent = t.modal_eyebrow;
-  document.querySelector('.modal h2').textContent = t.modal_title;
-  document.querySelector('.modal > .modal-form > p').textContent = t.modal_desc;
-  document.querySelector('#btn-send').textContent = t.btn_send;
-  document.querySelector('.modal-success h3').textContent = t.success_title;
-  document.querySelector('.modal-success p').textContent = t.success_desc;
+  // Detail view
+  document.getElementById('back-label').textContent = t.back;
+  document.getElementById('btn-interest-label').textContent = t.btn_interest;
+  document.getElementById('detail-about-h3').textContent = t.detail_about;
+  document.getElementById('detail-features-h3').textContent = t.detail_features;
 
-  // Form labels
-  document.querySelector('label[for="f-nombre"]').textContent = t.f_name;
-  document.querySelector('label[for="f-apellidos"]').textContent = t.f_surname;
-  document.querySelector('label[for="f-telefono"]').textContent = t.f_phone;
-  document.querySelector('label[for="f-email"]').textContent = t.f_email;
-  document.querySelector('label[for="f-cuando"]').textContent = t.f_when;
-  document.querySelector('label[for="f-mensaje"]').textContent = t.f_msg;
-  document.getElementById('f-nombre').placeholder = t.f_name;
-  document.getElementById('f-apellidos').placeholder = t.f_surname;
-  document.getElementById('f-mensaje').placeholder = t.f_msg_ph;
+  // Modal
+  document.getElementById('modal-eyebrow-text').textContent = t.modal_eyebrow;
+  document.getElementById('modal-title-text').textContent = t.modal_title;
+  document.getElementById('modal-intro-text').textContent = t.modal_intro;
+  document.getElementById('label-nombre').textContent = t.label_nombre;
+  document.getElementById('label-apellidos').textContent = t.label_apellidos;
+  document.getElementById('label-email').textContent = t.label_email;
+  document.getElementById('label-telefono').textContent = t.label_telefono;
+  document.getElementById('label-nacimiento').textContent = t.label_nacimiento;
+  document.getElementById('label-laboral').textContent = t.label_laboral;
+  document.getElementById('label-ingresos').textContent = t.label_ingresos;
+  document.getElementById('label-personas').textContent = t.label_personas;
+  document.getElementById('label-mascotas').textContent = t.label_mascotas;
+  document.getElementById('f-nombre').placeholder = t.nombre_ph;
+  document.getElementById('f-apellidos').placeholder = t.apellidos_ph;
+  document.getElementById('mascotas-no-label').textContent = t.mascotas_no;
+  document.getElementById('mascotas-si-label').textContent = t.mascotas_si;
 
-  // Select options
-  const sel = document.getElementById('f-cuando');
-  sel.options[0].text = t.f_opt0;
-  sel.options[1].text = t.f_opt1;
-  sel.options[2].text = t.f_opt2;
-  sel.options[3].text = t.f_opt3;
-
-  // Back button
-  const backLabel = document.getElementById('back-label');
-  if (backLabel) backLabel.textContent = t.back;
-
-  // "Quiero verlo" button
-  const btnVisit = document.querySelector('.btn-quiero span');
-  if (btnVisit) btnVisit.textContent = t.btn_visit;
-
-  // Detail headings (when visible)
-  const h3s = document.querySelectorAll('.detail-description h3');
-  if (h3s[0]) h3s[0].textContent = t.about_prop;
-  if (h3s[1]) h3s[1].textContent = t.features;
-
-  // Re-render empty state if visible
-  const emptyEl = document.getElementById('empty-state');
-  if (emptyEl && emptyEl.style.display !== 'none') {
-    const activeNav = document.querySelector('.nav-link.active-nav');
-    const sec = activeNav ? activeNav.getAttribute('onclick').match(/handleNav\('(\w+)'\)/)?.[1] : null;
-    if (sec && sec !== 'alquiler' && sec !== 'quienes') showEmptyState(sec);
+  // Select: laboral
+  for (let i = 0; i <= 7; i++) {
+    const el = document.getElementById(`f-laboral-${i}`);
+    if (el) el.textContent = t[`laboral_${i}`];
+  }
+  // Select: ingresos
+  for (let i = 0; i <= 5; i++) {
+    const el = document.getElementById(`f-ingresos-${i}`);
+    if (el) el.textContent = t[`ingresos_${i}`];
+  }
+  // Select: personas
+  for (let i = 0; i <= 5; i++) {
+    const el = document.getElementById(`f-personas-${i}`);
+    if (el) el.textContent = t[`personas_${i}`];
   }
 
-  // Re-render about state if visible
-  const aboutEl = document.getElementById('about-state');
-  if (aboutEl && aboutEl.style.display !== 'none') showAboutUs();
+  document.getElementById('btn-send').textContent = t.btn_send;
+  document.getElementById('success-title-text').textContent = t.success_title;
+  document.getElementById('success-desc-text').textContent = t.success_desc;
 
-  // Re-render grid for button labels
+  // Contact
+  document.getElementById('contact-eyebrow-text').textContent = t.contact_eyebrow;
+  document.getElementById('contact-title-text').innerHTML = t.contact_title;
+  document.getElementById('contact-sub-text').textContent = t.contact_sub;
+  document.getElementById('contact-whatsapp-text').textContent = t.contact_whatsapp;
+  document.getElementById('contact-location-label').textContent = t.contact_location_label;
+  document.getElementById('contact-email-label').textContent = t.contact_email_label;
+  document.getElementById('contact-phone-label').textContent = t.contact_phone_label;
+  document.getElementById('contact-hours-label').textContent = t.contact_hours_label;
+  document.getElementById('contact-hours-value').textContent = t.contact_hours;
+
+  // Footer
+  document.getElementById('footer-copy-text').textContent = t.footer_copy;
+
+  // Re-render FAQ if open
+  if (document.getElementById('tab-faq').classList.contains('active')) renderFAQ();
+
+  // Re-render grid (for "Saber más" / "Consultar precio" button labels)
   renderGrid();
 
   // Close dropdown
@@ -2023,231 +2229,13 @@ document.addEventListener('click', () => {
   document.getElementById('lang-switcher').classList.remove('open');
 });
 
-/* ─── NAV HANDLER ─── */
+/* ─── NAV ─── */
 function handleNav(section) {
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
   event.target.classList.add('active-nav');
-
   if (section === 'alquiler') {
-    hideEmptyState();
     showHome();
-  } else if (section === 'venta') {
-    document.getElementById('detail-view').classList.remove('active');
-    document.getElementById('home-view').style.display = '';
-    const aboutEl = document.getElementById('about-state');
-    if (aboutEl) aboutEl.style.display = 'none';
-    showEmptyState('venta');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else if (section === 'empresas') {
-    document.getElementById('detail-view').classList.remove('active');
-    document.getElementById('home-view').style.display = '';
-    const aboutEl = document.getElementById('about-state');
-    if (aboutEl) aboutEl.style.display = 'none';
-    showEmptyState('empresas');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  } else if (section === 'quienes') {
-    document.getElementById('detail-view').classList.remove('active');
-    document.getElementById('home-view').style.display = '';
-    // Ocultar empty-state explícitamente antes de mostrar about
-    const emptyEl = document.getElementById('empty-state');
-    if (emptyEl) emptyEl.style.display = 'none';
-    document.querySelector('.hero').style.display = 'none';
-    document.querySelector('.properties-section').style.display = 'none';
-    showAboutUs();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-}
-
-function showEmptyState(section) {
-  const t = i18n[currentLang] || i18n.es;
-  let el = document.getElementById('empty-state');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'empty-state';
-    el.style.cssText = `
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      padding: 8rem 2rem 10rem; text-align:center;
-    `;
-    document.getElementById('home-view').appendChild(el);
-  }
-
-  const msgs = {
-    venta: {
-      es: { icon: 'house', tag: 'Venta', title: 'Próximamente', sub: 'Aún no hay inmuebles disponibles para vender.\nEstamos preparando nuevas propiedades. Vuelve pronto.' },
-      ca: { icon: 'house', tag: 'Venda', title: 'Properament',  sub: 'Encara no hi ha immobles disponibles per vendre.\nEstem preparant noves propietats. Torna aviat.' },
-      en: { icon: 'house', tag: 'Sale',  title: 'Coming soon',  sub: 'There are no properties available for sale yet.\nWe are preparing new listings. Check back soon.' },
-      fr: { icon: 'house', tag: 'Vente', title: 'Bientôt',      sub: 'Aucun bien n\'est encore disponible à la vente.\nNous préparons de nouvelles propriétés. Revenez bientôt.' },
-    },
-    empresas: {
-      es: { icon: 'building', tag: 'Empresas', title: 'Soluciones para empresas', sub: 'Ofrecemos servicios especializados para empresas que buscan\noficinas, locales o espacios corporativos en alquiler.\nContacta con nosotros y te asesoramos sin compromiso.', cta: true },
-      ca: { icon: 'building', tag: 'Empreses', title: 'Solucions per a empreses', sub: 'Oferim serveis especialitzats per a empreses que busquen\noficines, locals o espais corporatius en lloguer.\nContacta\'ns i t\'assessorem sense compromís.', cta: true },
-      en: { icon: 'building', tag: 'Business', title: 'Business solutions',       sub: 'We offer specialized services for companies looking for\noffices, commercial spaces or corporate properties.\nContact us and we\'ll advise you with no obligation.', cta: true },
-      fr: { icon: 'building', tag: 'Entreprises', title: 'Solutions entreprises',  sub: 'Nous proposons des services spécialisés pour les entreprises\nà la recherche de bureaux, locaux ou espaces corporatifs.\nContactez-nous pour un conseil sans engagement.', cta: true },
-    }
-  };
-
-  const ctaLabel = { es: 'Contactar', ca: 'Contactar', en: 'Contact us', fr: 'Nous contacter' };
-  const m = msgs[section][currentLang] || msgs[section].es;
-
-  const iconHouse = `
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#C4B8A4" stroke-width="1.2" style="margin-bottom:2rem">
-      <rect x="10" y="24" width="44" height="30" rx="2"/>
-      <path d="M10 24L32 8l22 16"/>
-      <rect x="24" y="38" width="16" height="16"/>
-      <circle cx="48" cy="20" r="10" fill="#ffffff" stroke="#C4B8A4"/>
-      <path d="M48 16v4.5l3 2" stroke="#C4B8A4" stroke-linecap="round"/>
-    </svg>`;
-
-  const iconBuilding = `
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#C4B8A4" stroke-width="1.2" style="margin-bottom:2rem">
-      <rect x="12" y="10" width="40" height="46" rx="2"/>
-      <rect x="20" y="18" width="8" height="8"/><rect x="36" y="18" width="8" height="8"/>
-      <rect x="20" y="32" width="8" height="8"/><rect x="36" y="32" width="8" height="8"/>
-      <rect x="26" y="44" width="12" height="12"/>
-      <path d="M8 56h48"/>
-    </svg>`;
-
-  const icon = m.icon === 'building' ? iconBuilding : iconHouse;
-  const ctaBtn = m.cta ? `
-    <a href="mailto:burguardreams@gmail.com" style="
-      display:inline-flex; align-items:center; gap:0.6rem; margin-top:2rem;
-      padding:0.9rem 2.5rem; background:#2C2416; color:#FDFAF5;
-      font-family:'DM Sans',sans-serif; font-size:0.78rem; letter-spacing:0.14em;
-      text-transform:uppercase; text-decoration:none; transition:background 0.2s;
-    " onmouseover="this.style.background='#8B6B3D'" onmouseout="this.style.background='#2C2416'">
-      ${ctaLabel[currentLang] || ctaLabel.es}
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 4l3 3-3 3"/></svg>
-    </a>` : '';
-
-  el.innerHTML = `
-    ${icon}
-    <p style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#B8935A;margin-bottom:1rem">${m.tag}</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;color:#2C2416;margin-bottom:1.2rem">${m.title}</h2>
-    <p style="font-size:0.95rem;color:#5C4F3A;font-weight:300;line-height:1.8;max-width:420px;white-space:pre-line">${m.sub}</p>
-    ${ctaBtn}
-  `;
-
-  document.querySelector('.hero').style.display = 'none';
-  document.querySelector('.properties-section').style.display = 'none';
-  el.style.display = 'flex';
-}
-
-function showAboutUs() {
-  let el = document.getElementById('about-state');
-  if (!el) {
-    el = document.createElement('div');
-    el.id = 'about-state';
-    document.getElementById('home-view').appendChild(el);
-  }
-
-  const about = {
-    es: {
-      tag: 'Quiénes somos',
-      title: 'Expertos en el\nmercado <em>inmobiliario</em>',
-      p1: 'Somos una agencia inmobiliaria con más de 15 años de experiencia ayudando a familias y empresas a encontrar el hogar o espacio perfecto. Nos especializamos en alquiler y venta de inmuebles residenciales y comerciales en las principales ciudades de España.',
-      p2: 'Nuestro equipo de profesionales trabaja con dedicación, transparencia y un trato cercano para que cada proceso sea claro, seguro y sin sorpresas. Conocemos el mercado en profundidad y ponemos ese conocimiento a tu servicio.',
-      val1t: 'Confianza', val1: 'Más de 500 familias han encontrado su hogar con nosotros.',
-      val2t: 'Experiencia', val2: '+15 años en el sector inmobiliario español.',
-      val3t: 'Cercanía', val3: 'Un asesor personal para cada cliente, sin burocracia.',
-      cta: 'Contactar con nosotros',
-    },
-    ca: {
-      tag: 'Qui som',
-      title: 'Experts en el\nmercat <em>immobiliari</em>',
-      p1: 'Som una agència immobiliària amb més de 15 anys d\'experiència ajudant famílies i empreses a trobar la llar o l\'espai perfecte. Ens especialitzem en lloguer i venda d\'immobles residencials i comercials a les principals ciutats d\'Espanya.',
-      p2: 'El nostre equip de professionals treballa amb dedicació, transparència i tracte proper perquè cada procés sigui clar, segur i sense sorpreses. Coneixem el mercat en profunditat i posem aquest coneixement al teu servei.',
-      val1t: 'Confiança', val1: 'Més de 500 famílies han trobat la seva llar amb nosaltres.',
-      val2t: 'Experiència', val2: '+15 anys en el sector immobiliari espanyol.',
-      val3t: 'Proximitat', val3: 'Un assessor personal per a cada client, sense burocràcia.',
-      cta: 'Contacta\'ns',
-    },
-    en: {
-      tag: 'About us',
-      title: 'Experts in the\n<em>real estate</em> market',
-      p1: 'We are a real estate agency with over 15 years of experience helping families and businesses find the perfect home or space. We specialise in rental and sale of residential and commercial properties in Spain\'s major cities.',
-      p2: 'Our team of professionals works with dedication, transparency and a personal touch so that every process is clear, safe and free of surprises. We know the market inside out and put that knowledge at your service.',
-      val1t: 'Trust', val1: 'Over 500 families have found their home with us.',
-      val2t: 'Experience', val2: '+15 years in the Spanish real estate sector.',
-      val3t: 'Personal touch', val3: 'A dedicated advisor for every client, no red tape.',
-      cta: 'Get in touch',
-    },
-    fr: {
-      tag: 'Qui sommes-nous',
-      title: 'Experts du marché\n<em>immobilier</em>',
-      p1: 'Nous sommes une agence immobilière avec plus de 15 ans d\'expérience aidant des familles et des entreprises à trouver le logement ou l\'espace idéal. Nous sommes spécialisés dans la location et la vente de biens résidentiels et commerciaux dans les grandes villes d\'Espagne.',
-      p2: 'Notre équipe de professionnels travaille avec dévouement, transparence et proximité pour que chaque processus soit clair, sûr et sans mauvaises surprises. Nous connaissons le marché en profondeur et mettons ce savoir-faire à votre service.',
-      val1t: 'Confiance', val1: 'Plus de 500 familles ont trouvé leur logement avec nous.',
-      val2t: 'Expérience', val2: '+15 ans dans le secteur immobilier espagnol.',
-      val3t: 'Proximité', val3: 'Un conseiller personnel pour chaque client, sans bureaucratie.',
-      cta: 'Nous contacter',
-    }
-  };
-
-  const a = about[currentLang] || about.es;
-
-  el.innerHTML = `
-    <div style="max-width:960px; margin:0 auto; padding:10rem 4rem 8rem;">
-
-      <p style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#B8935A;margin-bottom:1.2rem;display:flex;align-items:center;gap:1rem">
-        <span style="display:inline-block;width:40px;height:1px;background:#B8935A"></span>${a.tag}
-      </p>
-
-      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:300;color:#2C2416;line-height:1.15;margin-bottom:3rem;white-space:pre-line">${a.title}</h2>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-bottom:4rem">
-        <p style="font-size:0.95rem;color:#5C4F3A;font-weight:300;line-height:1.9">${a.p1}</p>
-        <p style="font-size:0.95rem;color:#5C4F3A;font-weight:300;line-height:1.9">${a.p2}</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#E8DFD0;border:1px solid #E8DFD0;margin-bottom:4rem">
-        ${[
-          [a.val1t, a.val1, '❶'],
-          [a.val2t, a.val2, '❷'],
-          [a.val3t, a.val3, '❸']
-        ].map(([title, desc]) => `
-          <div style="background:#fff;padding:2rem 1.8rem">
-            <div style="width:32px;height:2px;background:#B8935A;margin-bottom:1.2rem"></div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:#2C2416;margin-bottom:0.6rem">${title}</p>
-            <p style="font-size:0.84rem;color:#5C4F3A;font-weight:300;line-height:1.7">${desc}</p>
-          </div>
-        `).join('')}
-      </div>
-
-      <div style="display:flex;justify-content:center;padding-top:1rem;border-top:1px solid #E8DFD0">
-        <a href="mailto:burguardreams@gmail.com" style="
-          display:inline-flex;align-items:center;gap:0.8rem;
-          padding:1rem 3rem;background:#2C2416;color:#FDFAF5;
-          font-family:'DM Sans',sans-serif;font-size:0.78rem;letter-spacing:0.16em;
-          text-transform:uppercase;text-decoration:none;transition:background 0.2s;
-        " onmouseover="this.style.background='#8B6B3D'" onmouseout="this.style.background='#2C2416'">
-          ${a.cta}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 7h10M8 4l3 3-3 3"/></svg>
-        </a>
-      </div>
-
-    </div>
-  `;
-
-  document.querySelector('.hero').style.display = 'none';
-  document.querySelector('.properties-section').style.display = 'none';
-  el.style.display = 'block';
-  el.style.visibility = 'visible';
-  el.style.opacity = '1';
-}
-
-function hideAboutUs() {
-  const el = document.getElementById('about-state');
-  if (el) el.style.display = 'none';
-}
-
-function hideEmptyState() {
-  const el = document.getElementById('empty-state');
-  if (el) el.style.display = 'none';
-  hideAboutUs();
-  const hero = document.querySelector('.hero');
-  const section = document.querySelector('.properties-section');
-  if (hero) hero.style.display = '';
-  if (section) section.style.display = '';
 }
 
 /* ─── SUBMIT FORM → SUPABASE ─── */
@@ -2268,17 +2256,17 @@ async function submitForm() {
 
   try {
     const { error } = await db.from('solicitudes').insert({
-      property_id:   currentPropertyId || null,
-      property_name: p ? `${p.city} — ${p.street}` : null,
-      nombre:        nombre,
-      apellidos:     document.getElementById('f-apellidos').value.trim(),
-      telefono:      telefono,
-      email:         document.getElementById('f-email').value.trim(),
-      fecha_nacimiento: document.getElementById('f-nacimiento').value || null,
-      situacion_laboral: document.getElementById('f-laboral').value,
+      property_id:        currentPropertyId || null,
+      property_name:      p ? `${p.city} — ${p.street}` : null,
+      nombre:             nombre,
+      apellidos:          document.getElementById('f-apellidos').value.trim(),
+      telefono:           telefono,
+      email:              document.getElementById('f-email').value.trim(),
+      fecha_nacimiento:   document.getElementById('f-nacimiento').value || null,
+      situacion_laboral:  document.getElementById('f-laboral').value,
       ingresos_mensuales: document.getElementById('f-ingresos').value,
-      num_personas:  document.getElementById('f-personas').value,
-      mascotas:      mascotas,
+      num_personas:       document.getElementById('f-personas').value,
+      mascotas:           mascotas,
     });
 
     if (error) throw error;
@@ -2292,9 +2280,145 @@ async function submitForm() {
     alert('Ha ocurrido un error. Por favor inténtalo de nuevo.');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Enviar solicitud';
+    btn.textContent = (i18n[currentLang] || i18n.es).btn_send;
   }
 }
+
+/* ─── TABS ─── */
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const tabMap = { hogar: 'tab-btn-hogar', empresas: 'tab-btn-empresas', faq: 'tab-btn-faq' };
+  if (tabMap[tab]) document.getElementById(tabMap[tab]).classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById(`tab-${tab}`);
+  if (el) el.classList.add('active');
+  if (tab === 'faq') renderFAQ();
+  const tabsBar = document.querySelector('.tabs-bar');
+  if (tabsBar) window.scrollTo({ top: tabsBar.offsetTop - 120, behavior: 'smooth' });
+}
+
+/* ─── FAQ ─── */
+const faqs = {
+  es: [
+    { q: '¿Cuánto tiempo mínimo puedo alquilar?', a: 'Nuestros apartamentos están disponibles para alquileres de media y larga duración, generalmente a partir de 1 mes. Contáctanos para conocer la disponibilidad concreta de cada piso.' },
+    { q: '¿Los apartamentos están amueblados?', a: 'Sí, todos nuestros apartamentos están completamente amueblados y equipados. Puedes instalarte desde el primer día sin necesidad de comprar nada.' },
+    { q: '¿Qué documentos necesito para alquilar?', a: 'Habitualmente solicitamos DNI o pasaporte, justificante de ingresos (nóminas o declaración de autónomo) y en algunos casos referencia de arrendatario anterior.' },
+    { q: '¿Se admiten mascotas?', a: 'Depende del apartamento. Indícalo en el formulario de solicitud y te informaremos en función de la disponibilidad.' },
+    { q: '¿Están incluidos los suministros?', a: 'Consulta las condiciones de cada apartamento. En general, el agua, gas y luz pueden estar incluidos o facturarse aparte según el piso.' },
+    { q: '¿Puedo ver el apartamento antes de decidirme?', a: 'Por supuesto. Puedes usar el botón "Me interesa" en cada apartamento o contactarnos directamente por WhatsApp para organizar una visita.' },
+    { q: '¿Ofrecéis alojamiento para empresas?', a: 'Sí. Disponemos de soluciones específicas de corporate housing para empresas que necesitan alojar a sus trabajadores en Barcelona.' },
+    { q: '¿Cuánto es la fianza?', a: 'La fianza es habitualmente de 1 a 2 mensualidades según la normativa vigente y las condiciones de cada apartamento.' },
+  ],
+  ca: [
+    { q: 'Quin temps mínim puc llogar?', a: 'Els nostres apartaments estan disponibles per a lloguers de mitjana i llarga durada, generalment a partir d\'1 mes. Contacta\'ns per conèixer la disponibilitat concreta de cada pis.' },
+    { q: 'Els apartaments estan moblats?', a: 'Sí, tots els nostres apartaments estan completament moblats i equipats. T\'hi pots instal·lar des del primer dia sense necessitat de comprar res.' },
+    { q: 'Quins documents necessito per llogar?', a: 'Habitualment sol·licitem DNI o passaport, justificant d\'ingressos i en alguns casos referència d\'arrendatari anterior.' },
+    { q: 'S\'admeten mascotes?', a: 'Depèn de l\'apartament. Indica-ho al formulari de sol·licitud i t\'informarem segons la disponibilitat.' },
+    { q: 'Estan inclosos els subministraments?', a: 'Consulta les condicions de cada apartament. En general, l\'aigua, gas i llum poden estar inclosos o facturar-se a part.' },
+    { q: 'Puc veure l\'apartament abans de decidir-me?', a: 'Per descomptat. Pots fer servir el botó "M\'interessa" o contactar-nos directament per WhatsApp per organitzar una visita.' },
+    { q: 'Oferiu allotjament per a empreses?', a: 'Sí. Disposem de solucions específiques de corporate housing per a empreses que necessiten allotjar els seus treballadors a Barcelona.' },
+    { q: 'Quant és la fiança?', a: 'La fiança és habitualment d\'1 a 2 mensualitats segons la normativa vigent i les condicions de cada apartament.' },
+  ],
+  en: [
+    { q: 'What is the minimum rental period?', a: 'Our apartments are available for medium and long-term rentals, generally starting from 1 month. Contact us to check the specific availability of each flat.' },
+    { q: 'Are the apartments furnished?', a: 'Yes, all our apartments are fully furnished and equipped. You can move in from day one without needing to buy anything.' },
+    { q: 'What documents do I need to rent?', a: 'We typically require ID or passport, proof of income (payslips or freelance declaration), and in some cases a previous landlord reference.' },
+    { q: 'Are pets allowed?', a: 'It depends on the apartment. Please mention it in the request form and we\'ll advise you based on availability.' },
+    { q: 'Are utilities included?', a: 'Please check the conditions for each apartment. In general, water, gas and electricity may be included or billed separately.' },
+    { q: 'Can I visit the apartment before deciding?', a: 'Absolutely. You can use the "I\'m interested" button on each apartment or contact us directly via WhatsApp to arrange a viewing.' },
+    { q: 'Do you offer corporate housing?', a: 'Yes. We offer specific corporate housing solutions for companies that need to accommodate their employees in Barcelona.' },
+    { q: 'How much is the deposit?', a: 'The deposit is typically 1 to 2 months\' rent in accordance with current regulations and each apartment\'s conditions.' },
+  ],
+  fr: [
+    { q: 'Quelle est la durée minimale de location ?', a: 'Nos appartements sont disponibles pour des locations de moyenne et longue durée, généralement à partir d\'1 mois. Contactez-nous pour connaître la disponibilité de chaque bien.' },
+    { q: 'Les appartements sont-ils meublés ?', a: 'Oui, tous nos appartements sont entièrement meublés et équipés. Vous pouvez vous installer dès le premier jour sans rien acheter.' },
+    { q: 'Quels documents sont nécessaires pour louer ?', a: 'Nous demandons généralement une pièce d\'identité, une preuve de revenus et parfois une référence de l\'ancien propriétaire.' },
+    { q: 'Les animaux de compagnie sont-ils acceptés ?', a: 'Cela dépend de l\'appartement. Mentionnez-le dans le formulaire de demande et nous vous informerons selon la disponibilité.' },
+    { q: 'Les charges sont-elles incluses ?', a: 'Consultez les conditions de chaque appartement. En général, l\'eau, le gaz et l\'électricité peuvent être inclus ou facturés séparément.' },
+    { q: 'Puis-je visiter l\'appartement avant de décider ?', a: 'Bien sûr. Utilisez le bouton "Ça m\'intéresse" ou contactez-nous directement via WhatsApp pour organiser une visite.' },
+    { q: 'Proposez-vous du logement pour entreprises ?', a: 'Oui. Nous proposons des solutions de corporate housing pour les entreprises qui souhaitent loger leurs collaborateurs à Barcelone.' },
+    { q: 'Quel est le montant de la caution ?', a: 'La caution est généralement de 1 à 2 mois de loyer conformément à la réglementation en vigueur.' },
+  ],
+  de: [
+    { q: 'Was ist die Mindestmietdauer?', a: 'Unsere Wohnungen sind für mittel- und langfristige Vermietungen verfügbar, in der Regel ab 1 Monat. Kontaktieren Sie uns für die Verfügbarkeit jeder Immobilie.' },
+    { q: 'Sind die Wohnungen möbliert?', a: 'Ja, alle unsere Wohnungen sind vollständig möbliert und ausgestattet. Sie können vom ersten Tag an einziehen.' },
+    { q: 'Welche Dokumente benötige ich?', a: 'Wir benötigen in der Regel Ausweis oder Reisepass, Einkommensnachweis und manchmal eine Referenz des vorherigen Vermieters.' },
+    { q: 'Sind Haustiere erlaubt?', a: 'Das hängt von der Wohnung ab. Bitte erwähnen Sie es im Antragsformular und wir informieren Sie entsprechend.' },
+    { q: 'Sind Nebenkosten inklusive?', a: 'Bitte prüfen Sie die Bedingungen jeder Wohnung. Wasser, Gas und Strom können je nach Immobilie inklusive oder separat sein.' },
+    { q: 'Kann ich die Wohnung vorher besichtigen?', a: 'Natürlich. Nutzen Sie die Schaltfläche "Interessiert mich" oder kontaktieren Sie uns direkt per WhatsApp.' },
+    { q: 'Bieten Sie Corporate Housing an?', a: 'Ja. Wir bieten spezifische Corporate-Housing-Lösungen für Unternehmen, die ihre Mitarbeiter in Barcelona unterbringen möchten.' },
+    { q: 'Wie hoch ist die Kaution?', a: 'Die Kaution beträgt in der Regel 1 bis 2 Monatsmieten gemäß den geltenden Vorschriften.' },
+  ],
+  it: [
+    { q: 'Qual è la durata minima di affitto?', a: 'I nostri appartamenti sono disponibili per affitti di media e lunga durata, generalmente a partire da 1 mese. Contattateci per verificare la disponibilità.' },
+    { q: 'Gli appartamenti sono arredati?', a: 'Sì, tutti i nostri appartamenti sono completamente arredati e attrezzati. Puoi trasferirti dal primo giorno senza dover comprare nulla.' },
+    { q: 'Quali documenti servono per affittare?', a: 'Di solito richiediamo carta d\'identità o passaporto, prova di reddito e talvolta una referenza del precedente proprietario.' },
+    { q: 'Sono ammessi animali domestici?', a: 'Dipende dall\'appartamento. Indicatelo nel modulo di richiesta e vi informeremo in base alla disponibilità.' },
+    { q: 'Le utenze sono incluse?', a: 'Verificate le condizioni di ogni appartamento. In generale, acqua, gas e luce possono essere inclusi o fatturati separatamente.' },
+    { q: 'Posso visitare l\'appartamento prima di decidere?', a: 'Certamente. Usa il pulsante "Mi interessa" o contattaci direttamente via WhatsApp per organizzare una visita.' },
+    { q: 'Offrite alloggi per aziende?', a: 'Sì. Offriamo soluzioni di corporate housing per aziende che necessitano di alloggiare i propri dipendenti a Barcellona.' },
+    { q: 'A quanto ammonta il deposito?', a: 'Il deposito è generalmente di 1–2 mensilità in conformità con la normativa vigente.' },
+  ],
+};
+
+function renderFAQ() {
+  const list = document.getElementById('faq-list');
+  const items = faqs[currentLang] || faqs.es;
+  list.innerHTML = items.map((f, i) => `
+    <div class="faq-item" id="faq-${i}">
+      <button class="faq-question" onclick="toggleFAQ(${i})">
+        <span>${f.q}</span>
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 6l5 5 5-5"/>
+        </svg>
+      </button>
+      <div class="faq-answer">${f.a}</div>
+    </div>
+  `).join('');
+}
+
+function toggleFAQ(i) {
+  document.getElementById(`faq-${i}`).classList.toggle('open');
+}
+
+/* ─── LIGHTBOX ─── */
+let lightboxPhotos = [];
+let lightboxIndex = 0;
+
+function openLightbox(photos, index) {
+  lightboxPhotos = photos;
+  lightboxIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+  document.getElementById('lightbox-img').src = lightboxPhotos[lightboxIndex];
+  document.getElementById('lightbox-counter').textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+}
+
+function lightboxNav(dir) {
+  lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOnBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('lightbox').classList.contains('active')) {
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'Escape') closeLightbox();
+  }
+});
 
 /* ─── INIT ─── */
 renderGrid();
