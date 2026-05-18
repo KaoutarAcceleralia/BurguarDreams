@@ -279,6 +279,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center center;
     display: block;
     transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
@@ -389,7 +390,13 @@
   .detail-back:hover { color: var(--accent); }
 
   .detail-hero { position: relative; height: 65vh; overflow: hidden; }
-  .detail-hero-img { width: 100%; height: 100%; object-fit: cover; }
+  .detail-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
 
   .detail-hero-placeholder {
     width: 100%;
@@ -509,6 +516,102 @@
 
   .spec-unit { font-size: 0.8rem; color: var(--warm-mid); font-family: var(--font-body); font-weight: 300; }
 
+  /* ── DESCRIPTION BLOCK ── */
+  .detail-description-block {
+    margin-bottom: 4rem;
+  }
+
+  .detail-description-block h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 1.2rem;
+  }
+
+  .detail-description-block p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--warm-mid);
+    font-weight: 300;
+  }
+
+  /* ── AMENITIES GRID ── */
+  .amenities-section {
+    margin-bottom: 4rem;
+  }
+
+  .amenities-section h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 2rem;
+  }
+
+  .amenities-groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+  }
+
+  .amenity-group {}
+
+  .amenity-group-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .amenity-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(232,223,208,0.4);
+  }
+
+  .amenity-item:last-child { border-bottom: none; }
+
+  .amenity-item.has { color: var(--warm-dark); font-weight: 400; }
+  .amenity-item.has-not { color: var(--stone); text-decoration: line-through; font-weight: 300; }
+
+  .amenity-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .amenity-item.has .amenity-icon {
+    background: rgba(80,140,80,0.12);
+    color: #3a7a3a;
+  }
+
+  .amenity-item.has-not .amenity-icon {
+    background: rgba(196,184,164,0.2);
+    color: var(--stone);
+  }
+
+  /* ── OLD DETAIL DESCRIPTION (2-col) kept for compat ── */
   .detail-description {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1094,6 +1197,7 @@
     .detail-price-block { text-align: left; }
     .detail-specs { grid-template-columns: repeat(2, 1fr); }
     .detail-description { grid-template-columns: 1fr; gap: 3rem; }
+    .amenities-groups { grid-template-columns: 1fr; gap: 2rem; }
     .detail-photos { grid-template-columns: repeat(2, 1fr); }
     .modal { padding: 2.5rem 1.8rem; }
     .form-row { grid-template-columns: 1fr; }
@@ -1293,15 +1397,16 @@
 
     <div class="detail-specs" id="d-specs"></div>
 
-    <div class="detail-description">
-      <div>
-        <h3 id="detail-about-h3">Sobre la propiedad</h3>
-        <p id="d-description"></p>
-      </div>
-      <div>
-        <h3 id="detail-features-h3">Características</h3>
-        <ul class="detail-features" id="d-features"></ul>
-      </div>
+    <!-- Description block -->
+    <div class="detail-description-block">
+      <h3 id="detail-about-h3">Sobre la propiedad</h3>
+      <p id="d-description"></p>
+    </div>
+
+    <!-- Amenities checklist -->
+    <div class="amenities-section">
+      <h3 id="detail-amenities-h3">Equipamiento</h3>
+      <div class="amenities-groups" id="d-amenities"></div>
     </div>
 
     <div class="detail-photos" id="d-photos"></div>
@@ -1540,6 +1645,85 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let currentPropertyId = null;
 
+const AMENITY_GROUPS = [
+  {
+    group: 'Características generales',
+    items: [
+      { key: 'amueblado', label: 'Amueblado' },
+      { key: 'equipado', label: 'Equipado' },
+      { key: 'fumadores', label: 'Se acepta fumadores' },
+      { key: 'mascotas', label: 'Acepta animales' },
+    ]
+  },
+  {
+    group: 'Equipamiento general',
+    items: [
+      { key: 'wifi_1g', label: 'Wifi 600 Mb' },
+      { key: 'wifi', label: 'Wifi' },
+      { key: 'ac', label: 'Aire acondicionado' },
+      { key: 'calefaccion', label: 'Calefacción' },
+      { key: 'tv', label: 'Smart TV' },
+      { key: 'ventilador', label: 'Ventilador' },
+      { key: 'lavadora', label: 'Lavadora' },
+      { key: 'secadora', label: 'Secadora' },
+      { key: 'tendedero', label: 'Tendedero' },
+      { key: 'aspiradora', label: 'Aspiradora' },
+      { key: 'plancha', label: 'Plancha y tabla de planchar' },
+      { key: 'kit_limpieza', label: 'Kit de limpieza' },
+      { key: 'sofa_cama', label: 'Sofá cama' },
+    ]
+  },
+  {
+    group: 'Cocina',
+    items: [
+      { key: 'cafetera', label: 'Cafetera Nespresso' },
+      { key: 'lavavajillas', label: 'Lavavajillas' },
+      { key: 'microondas', label: 'Microondas' },
+      { key: 'nevera', label: 'Nevera' },
+      { key: 'horno', label: 'Horno' },
+      { key: 'vitroceramica', label: 'Vitrocerámica' },
+      { key: 'fogones', label: 'Fogones / Gas' },
+      { key: 'tostadora', label: 'Tostadora' },
+    ]
+  },
+  {
+    group: 'Habitación',
+    items: [
+      { key: 'sabanas', label: 'Juego de sábanas y nórdico' },
+      { key: 'toallas', label: 'Juego de toallas' },
+    ]
+  },
+  {
+    group: 'Baño',
+    items: [
+      { key: 'secador_pelo', label: 'Secador de pelo' },
+      { key: 'papel_wc', label: 'Papel higiénico de cortesía' },
+    ]
+  },
+  {
+    group: 'Otras áreas',
+    items: [
+      { key: 'patio_japones', label: 'Patio japonés exterior' },
+      { key: 'terraza', label: 'Terraza exterior' },
+      { key: 'patio', label: 'Patio' },
+      { key: 'balcon', label: 'Balcón' },
+      { key: 'despacho', label: 'Despacho / Oficina' },
+      { key: 'aparcamiento', label: 'Aparcamiento' },
+      { key: 'trastero', label: 'Trastero' },
+    ]
+  },
+  {
+    group: 'Espacios comunitarios',
+    items: [
+      { key: 'ascensor', label: 'Ascensor' },
+      { key: 'portero_auto', label: 'Portero automático' },
+      { key: 'portero', label: 'Servicio de portero' },
+      { key: 'piscina', label: 'Piscina comunitaria' },
+      { key: 'conserje', label: 'Conserje' },
+    ]
+  },
+];
+
 /* ─── PROPERTIES DATA ─── */
 const properties = [
   {
@@ -1548,13 +1732,13 @@ const properties = [
     street: 'Gran Via de les Corts Catalanes',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: true, availableText: 'Disponible ahora',
-    description: 'Luminoso piso en pleno Eixample, reformado con materiales de primera calidad. Techos altos, ventanas de piso a techo y vistas despejadas. A 5 minutos del Passeig de Gràcia.',
-    features: ['Calefacción central','Aire acondicionado','Cocina equipada','Ascensor','Portero automático'],
+    description: 'Apartamento muy luminoso en pleno Eixample. Muy bien comunicado, con vistas a La Monumental y a 10 minutos de la Barceloneta.',
+    amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi_1g','tv','lavadora','secadora','tendedero','plancha','aspiradora','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','ascensor','portero_auto']),
     specs: [
       { label: 'Superficie', value: '56', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
       { label: 'Baños', value: '1', unit: 'baño' },
-      { label: 'Planta', value: 'Entresuelo', unit: '2ª' }
+      { label: 'Planta', value: '1ª', unit: '' }
     ],
     cardImage: './fotos/Granvia/Cuina.jpg',
     mainImage: './fotos/Granvia/Cuina.jpg',
@@ -1576,13 +1760,13 @@ const properties = [
     street: 'Eixample c/ València',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: true, availableText: 'Disponible ahora',
-    description: 'Elegante apartamento en el Eixample. Acabados de lujo, suelos de parquet y cocina con isla de diseño. Zona premium con todos los servicios a pie de calle.',
-    features: ['Dobles ventanas','Cocina equipada','Aire acondicionado','Ascensor','Portero automático'],
+    description: 'Apartamento muy luminoso en el Eixample. Cocina completamente equipada, baño con secador y wc de cortesía. Zona premium con todos los servicios a pie de calle.',
+    amenities: new Set(['amueblado','equipado','ac','wifi_1g','tv','lavadora','secadora','tendedero','plancha','aspiradora','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','sofa_cama','ascensor','portero_auto']),
     specs: [
-      { label: 'Superficie', value: '50', unit: 'm²' },
+      { label: 'Superficie', value: '55', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
       { label: 'Baños', value: '1', unit: 'baño' },
-      { label: 'Planta', value: 'Entresuelo', unit: '3ª' }
+      { label: 'Planta', value: '1ª', unit: '' }
     ],
     cardImage: './fotos/Valencia/Sofa4.jpg',
     mainImage: './fotos/Valencia/Sofa4.jpg',
@@ -1607,7 +1791,7 @@ const properties = [
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: false, availableText: 'Disponible el 10/07/2026',
     description: 'Precioso piso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
-    features: ['Patio privado','Cocina independiente','Aire acondicionado','Doble acristalamiento','Ascensor','Portero automático'],
+    amenities: new Set(['amueblado','equipado','ac','wifi','tv','lavadora','secadora','tendedero','cafetera','microondas','nevera','lavavajillas','secador_pelo','papel_wc','patio','ascensor','portero_auto']),
     specs: [
       { label: 'Superficie', value: '70', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1631,19 +1815,29 @@ const properties = [
   {
     id: 4,
     city: 'Barcelona',
-    street: 'Apartamento Francesc Macià',
+    street: 'Apartamento Francesc Macià — Comte Urgell 259',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: false, availableText: 'Disponible el 30/05/2026',
-    description: 'Reformado y luminoso, con habitaciones exteriores y cocina renovada. Muy bien comunicado.',
-    features: ['Balcón exterior','Cocina renovada','Habitaciones exteriores','Ascensor','Portero automático','Aire acondicionado'],
+    description: 'Recién reformado y luminoso con 2 habitaciones con patio japonés exterior y cocina completamente equipada. Zona muy céntrica muy bien comunicada con metro, TRAM, Bus y en zona neurálgica del Distrito Financiero Francesc Macià de Barcelona.',
+    amenities: new Set([
+      'amueblado','equipado',
+      'wifi_1g','ac','calefaccion','tv',
+      'lavadora','secadora','tendedero','aspiradora','plancha',
+      'cafetera','lavavajillas','microondas','nevera','horno','vitroceramica','tostadora',
+      'sabanas','toallas',
+      'secador_pelo','papel_wc',
+      'patio_japones','terraza',
+      'ascensor','portero_auto','portero'
+    ]),
     specs: [
       { label: 'Superficie', value: '80', unit: 'm²' },
       { label: 'Habitaciones', value: '2', unit: 'dorm.' },
       { label: 'Baños', value: '1', unit: 'baño' },
-      { label: 'Planta', value: 'Subsótano', unit: '1°' }
+      { label: 'Planta', value: '-1', unit: 'Subsótano' }
     ],
     cardImage: './fotos/Urgell/Sofa.jpg',
     mainImage: './fotos/Urgell/Sofa.jpg',
+    heroImagePosition: 'center center',
     extraPhotos: [
       './fotos/Urgell/Sofa.jpg','./fotos/Urgell/Sofa2.jpg',
       './fotos/Urgell/Menjador.jpg','./fotos/Urgell/Menjador2.jpg',
@@ -1665,6 +1859,25 @@ function setHeroBg() {
   if (heroBg && properties[0] && properties[0].mainImage) {
     heroBg.style.backgroundImage = `url("${properties[0].mainImage}")`;
   }
+}
+
+/* ─── RENDER AMENITIES ─── */
+function renderAmenities(amenitySet) {
+  return AMENITY_GROUPS.map(group => {
+    const items = group.items.map(item => {
+      const has = amenitySet.has(item.key);
+      return `
+        <li class="amenity-item ${has ? 'has' : 'has-not'}">
+          <span class="amenity-icon">${has ? '✓' : '✕'}</span>
+          <span>${item.label}</span>
+        </li>`;
+    }).join('');
+    return `
+      <div class="amenity-group">
+        <div class="amenity-group-title">${group.group}</div>
+        <ul class="amenity-list">${items}</ul>
+      </div>`;
+  }).join('');
 }
 
 /* ─── RENDER GRID ─── */
@@ -1724,15 +1937,14 @@ function showDetail(id) {
   if (!p) return;
   currentPropertyId = id;
 
-  // Build full photos array (main + extras, deduplicated)
   const allPhotosArr = [p.mainImage, ...(p.extraPhotos || [])].filter(Boolean);
 
   const wrap = document.getElementById('detail-hero-img-wrap');
+  const imgPos = p.heroImagePosition || 'center center';
   wrap.innerHTML = p.mainImage
-    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in" onclick="openLightbox(currentAllPhotos, 0)">`
+    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in;object-position:${imgPos}" onclick="openLightbox(currentAllPhotos, 0)">`
     : `<div class="detail-hero-placeholder"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5"><rect x="10" y="30" width="60" height="40" rx="2"/><path d="M10 30L40 8l30 22"/><rect x="30" y="50" width="20" height="20"/></svg></div>`;
 
-  // Store in a global so the inline onclick can reference it
   window.currentAllPhotos = allPhotosArr;
 
   document.getElementById('d-tag').textContent = p.tag;
@@ -1754,7 +1966,8 @@ function showDetail(id) {
   `).join('');
 
   document.getElementById('d-description').textContent = p.description;
-  document.getElementById('d-features').innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+
+  document.getElementById('d-amenities').innerHTML = renderAmenities(p.amenities);
 
   const photos = p.extraPhotos.filter(Boolean);
   const photoGrid = document.getElementById('d-photos');
@@ -1823,7 +2036,7 @@ const i18n = {
     btn_more: 'Saber más', consult_price: 'Consultar precio',
     back: 'Volver',
     btn_interest: 'Me interesa',
-    detail_about: 'Sobre la propiedad', detail_features: 'Características',
+    detail_about: 'Sobre la propiedad', detail_amenities: 'Equipamiento',
     corp_eyebrow: 'Corporate Housing',
     corp_title: 'Alojamiento para los <em>trabajadores de tu empresa</em>',
     corp_sub: 'Facilitamos pisos y alojamiento totalmente equipados para profesionales en movilidad, expatriados y equipos de empresa en Barcelona. Sin complicaciones, sin contratos largos.',
@@ -1873,7 +2086,7 @@ const i18n = {
     btn_more: 'Saber-ne més', consult_price: 'Consultar preu',
     back: 'Tornar',
     btn_interest: 'M\'interessa',
-    detail_about: 'Sobre la propietat', detail_features: 'Característiques',
+    detail_about: 'Sobre la propietat', detail_amenities: 'Equipament',
     corp_eyebrow: 'Corporate Housing',
     corp_title: 'Allotjament per als <em>treballadors de la teva empresa</em>',
     corp_sub: 'Facilitem pisos i allotjament totalment equipats per a professionals en mobilitat, expatriats i equips d\'empresa a Barcelona. Sense complicacions, sense contractes llargs.',
@@ -1922,7 +2135,7 @@ const i18n = {
     btn_more: 'Learn more', consult_price: 'Price on request',
     back: 'Back',
     btn_interest: 'I\'m interested',
-    detail_about: 'About the property', detail_features: 'Features',
+    detail_about: 'About the property', detail_amenities: 'Amenities',
     corp_eyebrow: 'Corporate Housing',
     corp_title: 'Housing for your <em>company\'s employees</em>',
     corp_sub: 'We provide fully equipped apartments for mobile professionals, expats and corporate teams in Barcelona. No hassle, no long-term contracts.',
@@ -1971,15 +2184,15 @@ const i18n = {
     btn_more: 'En savoir plus', consult_price: 'Prix sur demande',
     back: 'Retour',
     btn_interest: 'Ça m\'intéresse',
-    detail_about: 'À propos du bien', detail_features: 'Caractéristiques',
+    detail_about: 'À propos du bien', detail_amenities: 'Équipements',
     corp_eyebrow: 'Corporate Housing',
     corp_title: 'Logement pour les <em>employés de votre entreprise</em>',
     corp_sub: 'Nous mettons à disposition des appartements entièrement équipés pour les professionnels en mobilité, les expatriés et les équipes d\'entreprise à Barcelone.',
     corp_cta: 'Parlez-nous',
-    corp_f1t: 'Flexibilité totale', corp_f1: 'Contrats mensuels sans engagement. Adaptés aux besoins réels de chaque entreprise et employé.',
-    corp_f2t: 'Appartements prêts', corp_f2: 'Entièrement meublés et équipés. L\'employé arrive et commence à vivre dès le premier jour.',
-    corp_f3t: 'Gestion simple', corp_f3: 'Un seul interlocuteur pour tous les besoins. Accompagnement personnalisé et réactivité garantis.',
-    corp_f4t: 'Emplacements prime', corp_f4: 'Appartements au cœur de l\'Eixample de Barcelone. Bien desservis par les transports en commun.',
+    corp_f1t: 'Flexibilité totale', corp_f1: 'Contrats mensuels sans engagement.',
+    corp_f2t: 'Appartements prêts', corp_f2: 'Entièrement meublés et équipés.',
+    corp_f3t: 'Gestion simple', corp_f3: 'Un seul interlocuteur pour tous les besoins.',
+    corp_f4t: 'Emplacements prime', corp_f4: 'Appartements au cœur de l\'Eixample de Barcelone.',
     faq_title: 'Questions fréquentes',
     modal_eyebrow: 'Demande d\'informations', modal_title: 'Ça m\'intéresse',
     modal_intro: 'Remplissez le formulaire et nous vous contacterons dans les plus brefs délais.',
@@ -2001,7 +2214,7 @@ const i18n = {
     success_title: 'Demande envoyée !', success_desc: 'Nous vous contacterons dans les 24 heures.',
     contact_eyebrow: 'Contact',
     contact_title: 'Un <em>appartement</em> vous intéresse ?',
-    contact_sub: 'Écrivez-nous ou appelez-nous et nous vous répondrons personnellement. Nous serons ravis d\'organiser une visite.',
+    contact_sub: 'Écrivez-nous ou appelez-nous et nous vous répondrons personnellement.',
     contact_whatsapp: 'Écrivez-nous sur WhatsApp',
     contact_location_label: 'Localisation', contact_email_label: 'Email',
     contact_phone_label: 'Téléphone / WhatsApp', contact_hours_label: 'Horaires',
@@ -2014,21 +2227,21 @@ const i18n = {
     nav_rent: 'Miete',
     hero_eyebrow: 'Wohnen in Barcelona',
     hero_h1: 'Entdecken Sie unsere <em>Corporate-Housing</em>-Dienste in Barcelona',
-    hero_sub: 'Möblierte Wohnungen, sofort einzugsbereit. Für Privatpersonen und Unternehmen, die Flexibilität und Design suchen.',
+    hero_sub: 'Möblierte Wohnungen, sofort einzugsbereit.',
     tab_hogar: 'Finde dein Zuhause', tab_empresas: 'Firmenwohnungen', tab_faq: 'FAQ', tab_contact: 'Kontakt',
     section_title: 'Verfügbare Wohnungen', section_count: '4 Wohnungen',
     btn_more: 'Mehr erfahren', consult_price: 'Preis auf Anfrage',
     back: 'Zurück',
     btn_interest: 'Interessiert mich',
-    detail_about: 'Über die Immobilie', detail_features: 'Ausstattung',
+    detail_about: 'Über die Immobilie', detail_amenities: 'Ausstattung',
     corp_eyebrow: 'Corporate Housing',
     corp_title: 'Wohnungen für <em>Ihre Mitarbeiter</em>',
-    corp_sub: 'Wir bieten vollständig ausgestattete Wohnungen für mobile Fachkräfte, Expats und Unternehmensteams in Barcelona. Ohne Aufwand, ohne Langzeitverträge.',
+    corp_sub: 'Vollständig ausgestattete Wohnungen für mobile Fachkräfte in Barcelona.',
     corp_cta: 'Kontakt aufnehmen',
-    corp_f1t: 'Volle Flexibilität', corp_f1: 'Monatliche Verträge ohne Bindung. Auf die tatsächlichen Bedürfnisse jedes Unternehmens zugeschnitten.',
-    corp_f2t: 'Einzugsbereit', corp_f2: 'Vollständig möbliert und ausgestattet. Ihr Mitarbeiter kommt an und fängt sofort an zu leben.',
-    corp_f3t: 'Einfache Verwaltung', corp_f3: 'Ein Ansprechpartner für alle Bedürfnisse. Persönliche Betreuung und schnelle Reaktionszeit garantiert.',
-    corp_f4t: 'Beste Lagen', corp_f4: 'Wohnungen im Herzen des Eixample in Barcelona. Gut durch öffentliche Verkehrsmittel erreichbar.',
+    corp_f1t: 'Volle Flexibilität', corp_f1: 'Monatliche Verträge ohne Bindung.',
+    corp_f2t: 'Einzugsbereit', corp_f2: 'Vollständig möbliert und ausgestattet.',
+    corp_f3t: 'Einfache Verwaltung', corp_f3: 'Ein Ansprechpartner für alle Bedürfnisse.',
+    corp_f4t: 'Beste Lagen', corp_f4: 'Wohnungen im Herzen des Eixample in Barcelona.',
     faq_title: 'Häufige Fragen',
     modal_eyebrow: 'Informationsanfrage', modal_title: 'Interessiert mich',
     modal_intro: 'Füllen Sie das Formular aus und wir melden uns so schnell wie möglich.',
@@ -2042,7 +2255,7 @@ const i18n = {
     label_ingresos: 'Monatliches Nettoeinkommen',
     ingresos_0: 'Option auswählen', ingresos_1: 'Weniger als 1.000 €', ingresos_2: 'Zwischen 1.000 € und 1.500 €',
     ingresos_3: 'Zwischen 1.500 € und 2.500 €', ingresos_4: 'Zwischen 2.500 € und 4.000 €', ingresos_5: 'Mehr als 4.000 €',
-    label_personas: 'Anzahl der Personen, die dort wohnen werden',
+    label_personas: 'Anzahl der Personen',
     personas_0: 'Option auswählen', personas_1: '1 Person', personas_2: '2 Personen',
     personas_3: '3 Personen', personas_4: '4 Personen', personas_5: '5 oder mehr Personen',
     label_mascotas: 'Haustiere', mascotas_no: 'Nein', mascotas_si: 'Ja',
@@ -2050,7 +2263,7 @@ const i18n = {
     success_title: 'Anfrage gesendet!', success_desc: 'Wir melden uns innerhalb von 24 Stunden.',
     contact_eyebrow: 'Kontakt',
     contact_title: 'Interessiert an einer <em>Wohnung?</em>',
-    contact_sub: 'Schreiben oder rufen Sie uns an. Wir helfen Ihnen persönlich und organisieren gerne eine Besichtigung.',
+    contact_sub: 'Schreiben oder rufen Sie uns an.',
     contact_whatsapp: 'WhatsApp schreiben',
     contact_location_label: 'Standort', contact_email_label: 'E-Mail',
     contact_phone_label: 'Telefon / WhatsApp', contact_hours_label: 'Öffnungszeiten',
@@ -2063,21 +2276,21 @@ const i18n = {
     nav_rent: 'Affitto',
     hero_eyebrow: 'Alloggi a Barcellona',
     hero_h1: 'Scopri i nostri servizi di <em>corporate housing</em> a Barcellona',
-    hero_sub: 'Appartamenti arredati e pronti ad abitare. Per privati e aziende che cercano flessibilità, design e un\'esperienza senza complicazioni.',
+    hero_sub: 'Appartamenti arredati e pronti ad abitare.',
     tab_hogar: 'Trova casa tua', tab_empresas: 'Alloggi aziendali', tab_faq: 'FAQ', tab_contact: 'Contatto',
     section_title: 'Proprietà disponibili', section_count: '4 appartamenti',
     btn_more: 'Scopri di più', consult_price: 'Prezzo su richiesta',
     back: 'Indietro',
     btn_interest: 'Mi interessa',
-    detail_about: 'La proprietà', detail_features: 'Caratteristiche',
+    detail_about: 'La proprietà', detail_amenities: 'Dotazioni',
     corp_eyebrow: 'Corporate Housing',
     corp_title: 'Alloggi per i <em>dipendenti della tua azienda</em>',
-    corp_sub: 'Mettiamo a disposizione appartamenti completamente attrezzati per professionisti in mobilità, expatriati e team aziendali a Barcellona. Senza complicazioni, senza contratti lunghi.',
+    corp_sub: 'Appartamenti completamente attrezzati per professionisti in mobilità a Barcellona.',
     corp_cta: 'Contattaci',
-    corp_f1t: 'Massima flessibilità', corp_f1: 'Contratti mensili senza vincoli. Adattati alle reali esigenze di ogni azienda e lavoratore.',
-    corp_f2t: 'Pronti ad abitare', corp_f2: 'Completamente arredati e attrezzati. Il dipendente arriva e inizia a vivere dal primo giorno.',
-    corp_f3t: 'Gestione semplice', corp_f3: 'Un solo referente per tutte le esigenze. Assistenza personalizzata e risposta rapida garantita.',
-    corp_f4t: 'Posizioni prime', corp_f4: 'Appartamenti nel cuore dell\'Eixample di Barcellona. Ben collegati con i trasporti pubblici e i servizi.',
+    corp_f1t: 'Massima flessibilità', corp_f1: 'Contratti mensili senza vincoli.',
+    corp_f2t: 'Pronti ad abitare', corp_f2: 'Completamente arredati e attrezzati.',
+    corp_f3t: 'Gestione semplice', corp_f3: 'Un solo referente per tutte le esigenze.',
+    corp_f4t: 'Posizioni prime', corp_f4: 'Appartamenti nel cuore dell\'Eixample di Barcellona.',
     faq_title: 'Domande frequenti',
     modal_eyebrow: 'Richiesta di informazioni', modal_title: 'Mi interessa',
     modal_intro: 'Compila il modulo e ti contatteremo il prima possibile.',
@@ -2091,7 +2304,7 @@ const i18n = {
     label_ingresos: 'Reddito mensile netto',
     ingresos_0: 'Seleziona un\'opzione', ingresos_1: 'Meno di 1.000 €', ingresos_2: 'Tra 1.000 € e 1.500 €',
     ingresos_3: 'Tra 1.500 € e 2.500 €', ingresos_4: 'Tra 2.500 € e 4.000 €', ingresos_5: 'Più di 4.000 €',
-    label_personas: 'Numero di persone che abiteranno lì',
+    label_personas: 'Numero di persone',
     personas_0: 'Seleziona un\'opzione', personas_1: '1 persona', personas_2: '2 persone',
     personas_3: '3 persone', personas_4: '4 persone', personas_5: '5 o più persone',
     label_mascotas: 'Animali domestici', mascotas_no: 'No', mascotas_si: 'Sì',
@@ -2099,7 +2312,7 @@ const i18n = {
     success_title: 'Richiesta inviata!', success_desc: 'Ti contatteremo entro 24 ore.',
     contact_eyebrow: 'Contatto',
     contact_title: 'Ti interessa un <em>appartamento?</em>',
-    contact_sub: 'Scrivici o chiamaci e ti risponderemo personalmente. Saremo felici di organizzare una visita.',
+    contact_sub: 'Scrivici o chiamaci e ti risponderemo personalmente.',
     contact_whatsapp: 'Scrivici su WhatsApp',
     contact_location_label: 'Posizione', contact_email_label: 'Email',
     contact_phone_label: 'Telefono / WhatsApp', contact_hours_label: 'Orari',
@@ -2116,34 +2329,23 @@ function setLang(lang) {
   currentLang = lang;
   const t = i18n[lang] || i18n.es;
 
-  // Flag & label
   document.getElementById('lang-flag').innerHTML = t.flag;
   document.getElementById('lang-label').textContent = t.label;
 
-  // Mark active option
   document.querySelectorAll('.lang-option').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${lang}'`));
   });
 
-  // Nav
   document.getElementById('nav-rent-btn').textContent = t.nav_rent;
-
-  // Hero
   document.getElementById('hero-eyebrow-text').textContent = t.hero_eyebrow;
   document.getElementById('hero-h1-text').innerHTML = t.hero_h1;
   document.getElementById('hero-sub-text').textContent = t.hero_sub;
-
-  // Tabs
   document.getElementById('tab-btn-hogar').textContent = t.tab_hogar;
   document.getElementById('tab-btn-empresas').textContent = t.tab_empresas;
   document.getElementById('tab-btn-faq').textContent = t.tab_faq;
   document.getElementById('tab-btn-contact').textContent = t.tab_contact;
-
-  // Section
   document.getElementById('section-title-text').textContent = t.section_title;
   document.getElementById('section-count-text').textContent = t.section_count;
-
-  // Corporate
   document.getElementById('corp-eyebrow-text').textContent = t.corp_eyebrow;
   document.getElementById('corp-title-text').innerHTML = t.corp_title;
   document.getElementById('corp-sub-text').textContent = t.corp_sub;
@@ -2156,17 +2358,11 @@ function setLang(lang) {
   document.getElementById('corp-f3-text').textContent = t.corp_f3;
   document.getElementById('corp-f4t-text').textContent = t.corp_f4t;
   document.getElementById('corp-f4-text').textContent = t.corp_f4;
-
-  // FAQ title
   document.getElementById('faq-title-text').textContent = t.faq_title;
-
-  // Detail view
   document.getElementById('back-label').textContent = t.back;
   document.getElementById('btn-interest-label').textContent = t.btn_interest;
   document.getElementById('detail-about-h3').textContent = t.detail_about;
-  document.getElementById('detail-features-h3').textContent = t.detail_features;
-
-  // Modal
+  document.getElementById('detail-amenities-h3').textContent = t.detail_amenities;
   document.getElementById('modal-eyebrow-text').textContent = t.modal_eyebrow;
   document.getElementById('modal-title-text').textContent = t.modal_title;
   document.getElementById('modal-intro-text').textContent = t.modal_intro;
@@ -2184,27 +2380,13 @@ function setLang(lang) {
   document.getElementById('mascotas-no-label').textContent = t.mascotas_no;
   document.getElementById('mascotas-si-label').textContent = t.mascotas_si;
 
-  // Select: laboral
-  for (let i = 0; i <= 7; i++) {
-    const el = document.getElementById(`f-laboral-${i}`);
-    if (el) el.textContent = t[`laboral_${i}`];
-  }
-  // Select: ingresos
-  for (let i = 0; i <= 5; i++) {
-    const el = document.getElementById(`f-ingresos-${i}`);
-    if (el) el.textContent = t[`ingresos_${i}`];
-  }
-  // Select: personas
-  for (let i = 0; i <= 5; i++) {
-    const el = document.getElementById(`f-personas-${i}`);
-    if (el) el.textContent = t[`personas_${i}`];
-  }
+  for (let i = 0; i <= 7; i++) { const el = document.getElementById(`f-laboral-${i}`); if (el) el.textContent = t[`laboral_${i}`]; }
+  for (let i = 0; i <= 5; i++) { const el = document.getElementById(`f-ingresos-${i}`); if (el) el.textContent = t[`ingresos_${i}`]; }
+  for (let i = 0; i <= 5; i++) { const el = document.getElementById(`f-personas-${i}`); if (el) el.textContent = t[`personas_${i}`]; }
 
   document.getElementById('btn-send').textContent = t.btn_send;
   document.getElementById('success-title-text').textContent = t.success_title;
   document.getElementById('success-desc-text').textContent = t.success_desc;
-
-  // Contact
   document.getElementById('contact-eyebrow-text').textContent = t.contact_eyebrow;
   document.getElementById('contact-title-text').innerHTML = t.contact_title;
   document.getElementById('contact-sub-text').textContent = t.contact_sub;
@@ -2214,17 +2396,10 @@ function setLang(lang) {
   document.getElementById('contact-phone-label').textContent = t.contact_phone_label;
   document.getElementById('contact-hours-label').textContent = t.contact_hours_label;
   document.getElementById('contact-hours-value').textContent = t.contact_hours;
-
-  // Footer
   document.getElementById('footer-copy-text').textContent = t.footer_copy;
 
-  // Re-render FAQ if open
   if (document.getElementById('tab-faq').classList.contains('active')) renderFAQ();
-
-  // Re-render grid (for "Saber más" / "Consultar precio" button labels)
   renderGrid();
-
-  // Close dropdown
   document.getElementById('lang-switcher').classList.remove('open');
 }
 
@@ -2241,9 +2416,7 @@ document.addEventListener('click', () => {
 function handleNav(section) {
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
   event.target.classList.add('active-nav');
-  if (section === 'alquiler') {
-    showHome();
-  }
+  if (section === 'alquiler') showHome();
 }
 
 /* ─── SUBMIT FORM → SUPABASE ─── */
@@ -2318,54 +2491,54 @@ const faqs = {
     { q: '¿Cuánto es la fianza?', a: 'La fianza es habitualmente de 1 a 2 mensualidades según la normativa vigente y las condiciones de cada apartamento.' },
   ],
   ca: [
-    { q: 'Quin temps mínim puc llogar?', a: 'Els nostres apartaments estan disponibles per a lloguers de mitjana i llarga durada, generalment a partir d\'1 mes. Contacta\'ns per conèixer la disponibilitat concreta de cada pis.' },
-    { q: 'Els apartaments estan moblats?', a: 'Sí, tots els nostres apartaments estan completament moblats i equipats. T\'hi pots instal·lar des del primer dia sense necessitat de comprar res.' },
+    { q: 'Quin temps mínim puc llogar?', a: 'Els nostres apartaments estan disponibles per a lloguers de mitjana i llarga durada, generalment a partir d\'1 mes.' },
+    { q: 'Els apartaments estan moblats?', a: 'Sí, tots els nostres apartaments estan completament moblats i equipats.' },
     { q: 'Quins documents necessito per llogar?', a: 'Habitualment sol·licitem DNI o passaport, justificant d\'ingressos i en alguns casos referència d\'arrendatari anterior.' },
-    { q: 'S\'admeten mascotes?', a: 'Depèn de l\'apartament. Indica-ho al formulari de sol·licitud i t\'informarem segons la disponibilitat.' },
-    { q: 'Estan inclosos els subministraments?', a: 'Consulta les condicions de cada apartament. En general, l\'aigua, gas i llum poden estar inclosos o facturar-se a part.' },
-    { q: 'Puc veure l\'apartament abans de decidir-me?', a: 'Per descomptat. Pots fer servir el botó "M\'interessa" o contactar-nos directament per WhatsApp per organitzar una visita.' },
-    { q: 'Oferiu allotjament per a empreses?', a: 'Sí. Disposem de solucions específiques de corporate housing per a empreses que necessiten allotjar els seus treballadors a Barcelona.' },
-    { q: 'Quant és la fiança?', a: 'La fiança és habitualment d\'1 a 2 mensualitats segons la normativa vigent i les condicions de cada apartament.' },
+    { q: 'S\'admeten mascotes?', a: 'Depèn de l\'apartament. Indica-ho al formulari de sol·licitud.' },
+    { q: 'Estan inclosos els subministraments?', a: 'Consulta les condicions de cada apartament.' },
+    { q: 'Puc veure l\'apartament abans de decidir-me?', a: 'Per descomptat. Pots fer servir el botó "M\'interessa" o contactar-nos per WhatsApp.' },
+    { q: 'Oferiu allotjament per a empreses?', a: 'Sí. Disposem de solucions específiques de corporate housing.' },
+    { q: 'Quant és la fiança?', a: 'La fiança és habitualment d\'1 a 2 mensualitats.' },
   ],
   en: [
-    { q: 'What is the minimum rental period?', a: 'Our apartments are available for medium and long-term rentals, generally starting from 1 month. Contact us to check the specific availability of each flat.' },
-    { q: 'Are the apartments furnished?', a: 'Yes, all our apartments are fully furnished and equipped. You can move in from day one without needing to buy anything.' },
-    { q: 'What documents do I need to rent?', a: 'We typically require ID or passport, proof of income (payslips or freelance declaration), and in some cases a previous landlord reference.' },
-    { q: 'Are pets allowed?', a: 'It depends on the apartment. Please mention it in the request form and we\'ll advise you based on availability.' },
-    { q: 'Are utilities included?', a: 'Please check the conditions for each apartment. In general, water, gas and electricity may be included or billed separately.' },
-    { q: 'Can I visit the apartment before deciding?', a: 'Absolutely. You can use the "I\'m interested" button on each apartment or contact us directly via WhatsApp to arrange a viewing.' },
-    { q: 'Do you offer corporate housing?', a: 'Yes. We offer specific corporate housing solutions for companies that need to accommodate their employees in Barcelona.' },
-    { q: 'How much is the deposit?', a: 'The deposit is typically 1 to 2 months\' rent in accordance with current regulations and each apartment\'s conditions.' },
+    { q: 'What is the minimum rental period?', a: 'Our apartments are available for medium and long-term rentals, generally starting from 1 month.' },
+    { q: 'Are the apartments furnished?', a: 'Yes, all our apartments are fully furnished and equipped.' },
+    { q: 'What documents do I need to rent?', a: 'We typically require ID or passport, proof of income, and in some cases a previous landlord reference.' },
+    { q: 'Are pets allowed?', a: 'It depends on the apartment. Please mention it in the request form.' },
+    { q: 'Are utilities included?', a: 'Please check the conditions for each apartment.' },
+    { q: 'Can I visit the apartment before deciding?', a: 'Absolutely. Use the "I\'m interested" button or contact us via WhatsApp.' },
+    { q: 'Do you offer corporate housing?', a: 'Yes. We offer specific corporate housing solutions for companies in Barcelona.' },
+    { q: 'How much is the deposit?', a: 'The deposit is typically 1 to 2 months\' rent.' },
   ],
   fr: [
-    { q: 'Quelle est la durée minimale de location ?', a: 'Nos appartements sont disponibles pour des locations de moyenne et longue durée, généralement à partir d\'1 mois. Contactez-nous pour connaître la disponibilité de chaque bien.' },
-    { q: 'Les appartements sont-ils meublés ?', a: 'Oui, tous nos appartements sont entièrement meublés et équipés. Vous pouvez vous installer dès le premier jour sans rien acheter.' },
-    { q: 'Quels documents sont nécessaires pour louer ?', a: 'Nous demandons généralement une pièce d\'identité, une preuve de revenus et parfois une référence de l\'ancien propriétaire.' },
-    { q: 'Les animaux de compagnie sont-ils acceptés ?', a: 'Cela dépend de l\'appartement. Mentionnez-le dans le formulaire de demande et nous vous informerons selon la disponibilité.' },
-    { q: 'Les charges sont-elles incluses ?', a: 'Consultez les conditions de chaque appartement. En général, l\'eau, le gaz et l\'électricité peuvent être inclus ou facturés séparément.' },
-    { q: 'Puis-je visiter l\'appartement avant de décider ?', a: 'Bien sûr. Utilisez le bouton "Ça m\'intéresse" ou contactez-nous directement via WhatsApp pour organiser une visite.' },
-    { q: 'Proposez-vous du logement pour entreprises ?', a: 'Oui. Nous proposons des solutions de corporate housing pour les entreprises qui souhaitent loger leurs collaborateurs à Barcelone.' },
-    { q: 'Quel est le montant de la caution ?', a: 'La caution est généralement de 1 à 2 mois de loyer conformément à la réglementation en vigueur.' },
+    { q: 'Quelle est la durée minimale de location ?', a: 'Nos appartements sont disponibles à partir d\'1 mois.' },
+    { q: 'Les appartements sont-ils meublés ?', a: 'Oui, entièrement meublés et équipés.' },
+    { q: 'Quels documents sont nécessaires ?', a: 'Pièce d\'identité, preuve de revenus et parfois une référence.' },
+    { q: 'Les animaux sont-ils acceptés ?', a: 'Cela dépend de l\'appartement. Mentionnez-le dans le formulaire.' },
+    { q: 'Les charges sont-elles incluses ?', a: 'Consultez les conditions de chaque appartement.' },
+    { q: 'Puis-je visiter avant de décider ?', a: 'Bien sûr. Utilisez le bouton ou contactez-nous via WhatsApp.' },
+    { q: 'Proposez-vous du logement pour entreprises ?', a: 'Oui, des solutions de corporate housing à Barcelone.' },
+    { q: 'Quel est le montant de la caution ?', a: 'Généralement 1 à 2 mois de loyer.' },
   ],
   de: [
-    { q: 'Was ist die Mindestmietdauer?', a: 'Unsere Wohnungen sind für mittel- und langfristige Vermietungen verfügbar, in der Regel ab 1 Monat. Kontaktieren Sie uns für die Verfügbarkeit jeder Immobilie.' },
-    { q: 'Sind die Wohnungen möbliert?', a: 'Ja, alle unsere Wohnungen sind vollständig möbliert und ausgestattet. Sie können vom ersten Tag an einziehen.' },
-    { q: 'Welche Dokumente benötige ich?', a: 'Wir benötigen in der Regel Ausweis oder Reisepass, Einkommensnachweis und manchmal eine Referenz des vorherigen Vermieters.' },
-    { q: 'Sind Haustiere erlaubt?', a: 'Das hängt von der Wohnung ab. Bitte erwähnen Sie es im Antragsformular und wir informieren Sie entsprechend.' },
-    { q: 'Sind Nebenkosten inklusive?', a: 'Bitte prüfen Sie die Bedingungen jeder Wohnung. Wasser, Gas und Strom können je nach Immobilie inklusive oder separat sein.' },
-    { q: 'Kann ich die Wohnung vorher besichtigen?', a: 'Natürlich. Nutzen Sie die Schaltfläche "Interessiert mich" oder kontaktieren Sie uns direkt per WhatsApp.' },
-    { q: 'Bieten Sie Corporate Housing an?', a: 'Ja. Wir bieten spezifische Corporate-Housing-Lösungen für Unternehmen, die ihre Mitarbeiter in Barcelona unterbringen möchten.' },
-    { q: 'Wie hoch ist die Kaution?', a: 'Die Kaution beträgt in der Regel 1 bis 2 Monatsmieten gemäß den geltenden Vorschriften.' },
+    { q: 'Was ist die Mindestmietdauer?', a: 'In der Regel ab 1 Monat.' },
+    { q: 'Sind die Wohnungen möbliert?', a: 'Ja, vollständig möbliert und ausgestattet.' },
+    { q: 'Welche Dokumente benötige ich?', a: 'Ausweis, Einkommensnachweis und manchmal eine Referenz.' },
+    { q: 'Sind Haustiere erlaubt?', a: 'Hängt von der Wohnung ab. Im Formular angeben.' },
+    { q: 'Sind Nebenkosten inklusive?', a: 'Bitte die Bedingungen jeder Wohnung prüfen.' },
+    { q: 'Kann ich vorher besichtigen?', a: 'Natürlich. Per Schaltfläche oder WhatsApp kontaktieren.' },
+    { q: 'Bieten Sie Corporate Housing an?', a: 'Ja, für Unternehmen in Barcelona.' },
+    { q: 'Wie hoch ist die Kaution?', a: 'In der Regel 1–2 Monatsmieten.' },
   ],
   it: [
-    { q: 'Qual è la durata minima di affitto?', a: 'I nostri appartamenti sono disponibili per affitti di media e lunga durata, generalmente a partire da 1 mese. Contattateci per verificare la disponibilità.' },
-    { q: 'Gli appartamenti sono arredati?', a: 'Sì, tutti i nostri appartamenti sono completamente arredati e attrezzati. Puoi trasferirti dal primo giorno senza dover comprare nulla.' },
-    { q: 'Quali documenti servono per affittare?', a: 'Di solito richiediamo carta d\'identità o passaporto, prova di reddito e talvolta una referenza del precedente proprietario.' },
-    { q: 'Sono ammessi animali domestici?', a: 'Dipende dall\'appartamento. Indicatelo nel modulo di richiesta e vi informeremo in base alla disponibilità.' },
-    { q: 'Le utenze sono incluse?', a: 'Verificate le condizioni di ogni appartamento. In generale, acqua, gas e luce possono essere inclusi o fatturati separatamente.' },
-    { q: 'Posso visitare l\'appartamento prima di decidere?', a: 'Certamente. Usa il pulsante "Mi interessa" o contattaci direttamente via WhatsApp per organizzare una visita.' },
-    { q: 'Offrite alloggi per aziende?', a: 'Sì. Offriamo soluzioni di corporate housing per aziende che necessitano di alloggiare i propri dipendenti a Barcellona.' },
-    { q: 'A quanto ammonta il deposito?', a: 'Il deposito è generalmente di 1–2 mensilità in conformità con la normativa vigente.' },
+    { q: 'Qual è la durata minima?', a: 'Generalmente a partire da 1 mese.' },
+    { q: 'Gli appartamenti sono arredati?', a: 'Sì, completamente arredati e attrezzati.' },
+    { q: 'Quali documenti servono?', a: 'Carta d\'identità, prova di reddito e talvolta una referenza.' },
+    { q: 'Sono ammessi animali?', a: 'Dipende dall\'appartamento. Indicarlo nel modulo.' },
+    { q: 'Le utenze sono incluse?', a: 'Verificate le condizioni di ogni appartamento.' },
+    { q: 'Posso visitare prima di decidere?', a: 'Certamente. Usa il pulsante o contattaci via WhatsApp.' },
+    { q: 'Offrite alloggi per aziende?', a: 'Sì, soluzioni di corporate housing a Barcellona.' },
+    { q: 'A quanto ammonta il deposito?', a: 'Generalmente 1–2 mensilità.' },
   ],
 };
 
