@@ -404,6 +404,7 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, rgba(44,36,22,0.2) 0%, transparent 40%);
+    pointer-events: none;
   }
 
   .detail-body {
@@ -1544,7 +1545,7 @@ const properties = [
   {
     id: 1,
     city: 'Barcelona',
-    street: 'Gran Via de les Corts Catalanes, 794 Entresuelo 2ª',
+    street: 'Gran Via de les Corts Catalanes',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: true, availableText: 'Disponible ahora',
     description: 'Luminoso piso en pleno Eixample, reformado con materiales de primera calidad. Techos altos, ventanas de piso a techo y vistas despejadas. A 5 minutos del Passeig de Gràcia.',
@@ -1572,7 +1573,7 @@ const properties = [
   {
     id: 2,
     city: 'Barcelona',
-    street: 'C/ de València, 178 Entresuelo 3ª',
+    street: 'Eixample c/ València',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: true, availableText: 'Disponible ahora',
     description: 'Elegante apartamento en el Eixample. Acabados de lujo, suelos de parquet y cocina con isla de diseño. Zona premium con todos los servicios a pie de calle.',
@@ -1602,8 +1603,8 @@ const properties = [
   {
     id: 3,
     city: 'Barcelona',
-    street: 'Carrer de Can Bruixa, 16 Entresuelo 1ª',
-    tag: 'Apartamento', price: '1.200', priceUnit: '/mes',
+    street: 'Les Corts Can Bruixa',
+    tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: false, availableText: 'Disponible el 10/07/2026',
     description: 'Precioso piso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
     features: ['Patio privado','Cocina independiente','Aire acondicionado','Doble acristalamiento','Ascensor','Portero automático'],
@@ -1630,7 +1631,7 @@ const properties = [
   {
     id: 4,
     city: 'Barcelona',
-    street: 'Carrer del Comte d\'Urgell, 259 Subsotano 1°',
+    street: 'Apartamento Francesc Macià',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: false, availableText: 'Disponible el 30/05/2026',
     description: 'Reformado y luminoso, con habitaciones exteriores y cocina renovada. Muy bien comunicado.',
@@ -1723,10 +1724,16 @@ function showDetail(id) {
   if (!p) return;
   currentPropertyId = id;
 
+  // Build full photos array (main + extras, deduplicated)
+  const allPhotosArr = [p.mainImage, ...(p.extraPhotos || [])].filter(Boolean);
+
   const wrap = document.getElementById('detail-hero-img-wrap');
   wrap.innerHTML = p.mainImage
-    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img">`
+    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in" onclick="openLightbox(currentAllPhotos, 0)">`
     : `<div class="detail-hero-placeholder"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5"><rect x="10" y="30" width="60" height="40" rx="2"/><path d="M10 30L40 8l30 22"/><rect x="30" y="50" width="20" height="20"/></svg></div>`;
+
+  // Store in a global so the inline onclick can reference it
+  window.currentAllPhotos = allPhotosArr;
 
   document.getElementById('d-tag').textContent = p.tag;
   document.getElementById('d-title').textContent = p.city;
@@ -1750,11 +1757,10 @@ function showDetail(id) {
   document.getElementById('d-features').innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
 
   const photos = p.extraPhotos.filter(Boolean);
-  const allPhotos = [p.mainImage, ...photos].filter(Boolean);
   const photoGrid = document.getElementById('d-photos');
   if (photos.length) {
     photoGrid.innerHTML = photos.map((src, i) => `
-      <div class="detail-photo" onclick="openLightbox(${JSON.stringify(allPhotos)}, ${i + 1})" style="cursor:zoom-in">
+      <div class="detail-photo" onclick="openLightbox(currentAllPhotos, ${i + 1})" style="cursor:zoom-in">
         <img src="${src}" alt="Foto ${i+1}" loading="lazy">
       </div>
     `).join('');
