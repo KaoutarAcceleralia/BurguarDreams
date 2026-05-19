@@ -1658,8 +1658,8 @@ const AMENITY_GROUPS = [
   {
     group: 'Equipamiento general',
     items: [
-      { key: 'wifi_1g', label: 'Wifi 600 Mb' },
       { key: 'wifi', label: 'Wifi' },
+      { key: 'wifi_600', label: 'Wifi 600 Mb' },
       { key: 'ac', label: 'Aire acondicionado' },
       { key: 'calefaccion', label: 'Calefacción' },
       { key: 'tv', label: 'Smart TV' },
@@ -1704,12 +1704,8 @@ const AMENITY_GROUPS = [
     group: 'Otras áreas',
     items: [
       { key: 'patio_japones', label: 'Patio japonés exterior' },
-      { key: 'terraza', label: 'Terraza exterior' },
       { key: 'patio', label: 'Patio' },
-      { key: 'balcon', label: 'Balcón' },
       { key: 'despacho', label: 'Despacho / Oficina' },
-      { key: 'aparcamiento', label: 'Aparcamiento' },
-      { key: 'trastero', label: 'Trastero' },
     ]
   },
   {
@@ -1718,8 +1714,6 @@ const AMENITY_GROUPS = [
       { key: 'ascensor', label: 'Ascensor' },
       { key: 'portero_auto', label: 'Portero automático' },
       { key: 'portero', label: 'Servicio de portero' },
-      { key: 'piscina', label: 'Piscina comunitaria' },
-      { key: 'conserje', label: 'Conserje' },
     ]
   },
 ];
@@ -1731,9 +1725,9 @@ const properties = [
     city: 'Barcelona',
     street: 'Gran Via de les Corts Catalanes',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: true, availableText: 'Disponible ahora',
+    available: false, availableText: 'Disponible el 16/10/2025',
     description: 'Apartamento muy luminoso en pleno Eixample. Muy bien comunicado, con vistas a La Monumental y a 10 minutos de la Barceloneta.',
-    amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi_1g','tv','lavadora','secadora','tendedero','plancha','aspiradora','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','ascensor','portero_auto']),
+    amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi','tv','lavadora','secadora','tendedero','plancha','aspiradora','kit_limpieza','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','ascensor','portero_auto']),
     specs: [
       { label: 'Superficie', value: '56', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1759,9 +1753,9 @@ const properties = [
     city: 'Barcelona',
     street: 'Eixample c/ València',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: true, availableText: 'Disponible ahora',
-    description: 'Apartamento muy luminoso en el Eixample. Cocina completamente equipada, baño con secador y wc de cortesía. Zona premium con todos los servicios a pie de calle.',
-    amenities: new Set(['amueblado','equipado','ac','wifi_1g','tv','lavadora','secadora','tendedero','plancha','aspiradora','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','sofa_cama','ascensor','portero_auto']),
+    available: false, availableText: 'Disponible el 01/07/2025',
+    description: 'Apartamento en pleno corazón del Eixample Izquierdo. Diseño muy moderno con acabados de alta calidad. Zona Premium con todos los servicios a pie de calle.',
+    amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi','tv','lavadora','secadora','tendedero','plancha','aspiradora','kit_limpieza','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','sofa_cama','despacho','ascensor','portero_auto']),
     specs: [
       { label: 'Superficie', value: '55', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1790,8 +1784,8 @@ const properties = [
     street: 'Les Corts Can Bruixa',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
     available: false, availableText: 'Disponible el 10/07/2026',
-    description: 'Precioso piso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
-    amenities: new Set(['amueblado','equipado','ac','wifi','tv','lavadora','secadora','tendedero','cafetera','microondas','nevera','lavavajillas','secador_pelo','papel_wc','patio','ascensor','portero_auto']),
+    description: 'Precioso piso muy luminoso con patio privado en Barcelona. Distribución ideal, con amplio salón, cocina independiente y habitaciones bien separadas. Comunidad tranquila.',
+    amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi_600','tv','lavadora','secadora','tendedero','plancha','aspiradora','kit_limpieza','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','patio_japones','despacho','ascensor','portero_auto']),
     specs: [
       { label: 'Superficie', value: '70', unit: 'm²' },
       { label: 'Habitaciones', value: '1', unit: 'dorm.' },
@@ -1815,25 +1809,25 @@ const properties = [
   {
     id: 4,
     city: 'Barcelona',
-    street: 'Apartamento Francesc Macià — Comte Urgell 259',
+    street: 'Apartamento Francesc Macià — Comte Urgell',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: false, availableText: 'Disponible el 30/05/2026',
+    available: false, availableText: 'Disponible el 02/06/2025',
     description: 'Recién reformado y luminoso con 2 habitaciones con patio japonés exterior y cocina completamente equipada. Zona muy céntrica muy bien comunicada con metro, TRAM, Bus y en zona neurálgica del Distrito Financiero Francesc Macià de Barcelona.',
     amenities: new Set([
       'amueblado','equipado',
-      'wifi_1g','ac','calefaccion','tv',
-      'lavadora','secadora','tendedero','aspiradora','plancha',
+      'wifi','ac','calefaccion','tv',
+      'lavadora','secadora','tendedero','aspiradora','plancha','kit_limpieza',
       'cafetera','lavavajillas','microondas','nevera','horno','vitroceramica','tostadora',
       'sabanas','toallas',
       'secador_pelo','papel_wc',
-      'patio_japones','terraza',
+      'patio_japones',
       'ascensor','portero_auto','portero'
     ]),
     specs: [
       { label: 'Superficie', value: '80', unit: 'm²' },
       { label: 'Habitaciones', value: '2', unit: 'dorm.' },
       { label: 'Baños', value: '1', unit: 'baño' },
-      { label: 'Planta', value: '-1', unit: 'Subsótano' }
+      { label: 'Planta', value: '-1', unit: '' }
     ],
     cardImage: './fotos/Urgell/Sofa.jpg',
     mainImage: './fotos/Urgell/Sofa.jpg',
@@ -1862,16 +1856,25 @@ function setHeroBg() {
 }
 
 /* ─── RENDER AMENITIES ─── */
+// Keys that are mutually exclusive variants — only show the one the property has, hide the rest entirely
+const HIDE_IF_ABSENT = new Set(['wifi', 'wifi_600']);
+
 function renderAmenities(amenitySet) {
   return AMENITY_GROUPS.map(group => {
-    const items = group.items.map(item => {
-      const has = amenitySet.has(item.key);
-      return `
+    const items = group.items
+      .filter(item => {
+        // For wifi variants: only render if the property actually has it
+        if (HIDE_IF_ABSENT.has(item.key)) return amenitySet.has(item.key);
+        return true;
+      })
+      .map(item => {
+        const has = amenitySet.has(item.key);
+        return `
         <li class="amenity-item ${has ? 'has' : 'has-not'}">
           <span class="amenity-icon">${has ? '✓' : '✕'}</span>
           <span>${item.label}</span>
         </li>`;
-    }).join('');
+      }).join('');
     return `
       <div class="amenity-group">
         <div class="amenity-group-title">${group.group}</div>
