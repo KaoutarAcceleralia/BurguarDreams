@@ -1,8 +1,23 @@
+function getDb() {
+  if (window.db) return window.db;
+  if (typeof supabase !== 'undefined' && window.SUPABASE_URL && window.SUPABASE_KEY) {
+    window.db = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);
+    return window.db;
+  }
+  return null;
+}
+
 async function submitForm() {
   const nombre   = document.getElementById('f-nombre').value.trim();
   const telefono = document.getElementById('f-telefono').value.trim();
   if (!nombre || !telefono) {
     alert('Por favor rellena al menos tu nombre y teléfono.');
+    return;
+  }
+
+  const db = getDb();
+  if (!db) {
+    alert('No se pudo conectar con el servidor. Comprueba tu conexión o desactiva el bloqueador de anuncios e inténtalo de nuevo.');
     return;
   }
 

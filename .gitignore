@@ -1,5 +1,4 @@
 .env
-js/config.js
 .DS_Store
 __pycache__/
 scripts/__pycache__/

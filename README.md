@@ -13,8 +13,8 @@ BurguarDreams/
 │   ├── components.css      # Header, cards, modals, footer, lightbox
 │   └── pages.css           # Hero, detail, corporate, FAQ, contacto
 ├── js/
-│   ├── config.js           # Supabase (generado, no versionado)
-│   ├── config.example.js   # Plantilla de config
+│   ├── config.js           # Supabase (claves anon; versionado para el deploy)
+│   ├── config.example.js   # Copia de referencia de config.js
 │   ├── data/
 │   │   ├── properties.js   # 4 propiedades + traducciones de campos
 │   │   ├── i18n.js         # Traducciones UI
@@ -51,13 +51,15 @@ BurguarDreams/
 
 2. Edita `.env` con tu `SUPABASE_URL` y `SUPABASE_KEY`.
 
-3. Genera la configuración de Supabase:
+3. Genera la configuración de Supabase (opcional si editas `js/config.js` a mano):
 
    ```bash
    python3 scripts/generate_config.py
    ```
 
-4. Sirve el sitio con un servidor HTTP estático (no uses `file://`):
+4. **Deploy (GitHub Pages):** `js/config.js` debe estar en el repo con tu `SUPABASE_URL` y la clave **anon/publicable** (no la service role). Haz commit y push de ese archivo tras configurarlo.
+
+5. Sirve el sitio con un servidor HTTP estático (no uses `file://`):
 
    ```bash
    python3 -m http.server 8080

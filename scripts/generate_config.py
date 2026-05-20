@@ -30,9 +30,13 @@ def main() -> None:
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(
-        f'const SUPABASE_URL = "{url}";\n'
-        f'const SUPABASE_KEY = "{key}";\n'
-        "const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);\n"
+        f'window.SUPABASE_URL = "{url}";\n'
+        f'window.SUPABASE_KEY = "{key}";\n'
+        'if (typeof supabase === "undefined") {\n'
+        '  console.error("[Burguar Dreams] No se cargó el SDK de Supabase (CDN bloqueado o sin conexión).");\n'
+        "} else {\n"
+        "  window.db = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_KEY);\n"
+        "}\n"
         "let currentPropertyId = null;\n",
         encoding="utf-8",
     )
