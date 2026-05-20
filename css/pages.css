@@ -57,6 +57,25 @@
   line-height: 1.7;
 }
 
+/* ── PROPERTIES GRID ── */
+.properties-section {
+  padding: 4rem 4rem 8rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.section-label h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--warm-dark);
+}
+
 /* ── DETAIL VIEW ── */
 #detail-view { display: none; min-height: 100vh; background: #ffffff; }
 #detail-view.active { display: block; }
