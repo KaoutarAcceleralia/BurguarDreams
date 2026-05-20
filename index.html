@@ -23,9 +23,12 @@
     --white: #FDFAF5;
     --font-display: 'Cormorant Garamond', serif;
     --font-body: 'DM Sans', sans-serif;
+    --header-offset: 120px;
   }
 
   html { scroll-behavior: smooth; }
+
+  .page-section { scroll-margin-top: var(--header-offset); }
 
   body {
     font-family: var(--font-body);
@@ -978,47 +981,128 @@
   .footer-bar .logo span { color: var(--accent-light); }
   .footer-bar p { font-size: 0.75rem; color: var(--stone); font-weight: 300; }
 
-  /* ── TABS ── */
-  .tabs-bar {
+  .footer-meta {
     display: flex;
-    border-bottom: 1px solid var(--sand);
-    background: #fff;
-    padding: 0 4rem;
-    position: sticky;
-    top: 112px;
-    z-index: 90;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
-  .tab-btn {
+  .footer-legal-link {
     font-family: var(--font-body);
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--warm-mid);
+    font-size: 0.75rem;
+    color: var(--stone);
     background: none;
     border: none;
     cursor: pointer;
-    padding: 1rem 1.5rem;
-    position: relative;
+    text-decoration: underline;
+    text-underline-offset: 3px;
     transition: color 0.2s;
+    padding: 0;
+    white-space: nowrap;
   }
 
-  .tab-btn::after {
-    content: '';
-    position: absolute;
-    bottom: -1px; left: 0; right: 0;
-    height: 2px;
-    background: var(--warm-dark);
-    transform: scaleX(0);
-    transition: transform 0.25s ease;
+  .footer-legal-link:hover { color: var(--accent-light); }
+
+  .footer-meta p { margin: 0; }
+
+  .footer-separator {
+    font-size: 0.75rem;
+    color: var(--stone);
+    line-height: 1;
   }
 
-  .tab-btn:hover { color: var(--warm-dark); }
-  .tab-btn.active { color: var(--warm-dark); font-weight: 500; }
-  .tab-btn.active::after { transform: scaleX(1); }
+  .legal-modal {
+    max-width: 720px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 3rem 3.5rem;
+  }
 
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
+  .legal-modal h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--warm-dark);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .legal-modal h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--warm-dark);
+    margin: 1.5rem 0 0.6rem;
+  }
+
+  .legal-modal p,
+  .legal-modal li {
+    font-size: 0.85rem;
+    color: var(--warm-mid);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-modal ul {
+    margin: 0.5rem 0 0.75rem 1.2rem;
+  }
+
+  .legal-modal ul li { margin-bottom: 0.35rem; }
+
+  .legal-modal a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-modal a:hover { color: var(--accent-light); }
+
+  .legal-modal h4 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--warm-dark);
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .cookie-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0 1.25rem;
+    font-size: 0.78rem;
+  }
+
+  .cookie-table th,
+  .cookie-table td {
+    border: 1px solid var(--sand);
+    padding: 0.55rem 0.65rem;
+    text-align: left;
+    vertical-align: top;
+    color: var(--warm-mid);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .cookie-table th {
+    background: var(--cream);
+    color: var(--warm-dark);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+
+  .cookie-table code {
+    font-size: 0.76rem;
+    color: var(--warm-dark);
+    word-break: break-all;
+  }
+
+  @media (max-width: 600px) {
+    .cookie-table { display: block; overflow-x: auto; }
+  }
 
   /* ── CORPORATE ── */
   .corporate-section { max-width: 1400px; margin: 0 auto; padding: 5rem 4rem 6rem; }
@@ -1183,10 +1267,8 @@
   @media (max-width: 900px) {
     .header-top { padding: 1rem 1.5rem; }
     .wa-header-text { display: none; }
-    .header-nav { padding: 0 1.5rem; overflow-x: auto; }
-    .nav-link { padding: 0.8rem 0.8rem; font-size: 0.7rem; }
-    .tabs-bar { padding: 0 1rem; top: 100px; overflow-x: auto; }
-    .tab-btn { padding: 0.8rem 0.8rem; font-size: 0.68rem; white-space: nowrap; }
+    .header-nav { padding: 0 1rem; overflow-x: auto; }
+    .nav-link { padding: 0.8rem 0.8rem; font-size: 0.7rem; white-space: nowrap; }
     .hero { padding: 11rem 2rem 4rem; }
     .properties-section { padding: 2rem 2rem 4rem; }
     .grid { grid-template-columns: 1fr; gap: 12px; }
@@ -1205,6 +1287,7 @@
     .contact-section { padding: 4rem 2rem 3rem; }
     .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
     .footer-bar { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-meta { justify-content: center; }
     .corporate-section { padding: 3rem 2rem 4rem; }
     .corporate-hero { grid-template-columns: 1fr; gap: 2.5rem; }
     .corporate-features { grid-template-columns: repeat(2, 1fr); }
@@ -1253,14 +1336,17 @@
   </div>
 
   <nav class="header-nav">
-    <button class="nav-link active-nav" onclick="handleNav('alquiler')" id="nav-rent-btn">Alquiler</button>
+    <button class="nav-link active-nav" onclick="scrollToSection('hogar')" id="nav-hogar-btn">Encuentra tu hogar</button>
+    <button class="nav-link" onclick="scrollToSection('empresas')" id="nav-empresas-btn">Alojamiento para Empresas</button>
+    <button class="nav-link" onclick="scrollToSection('faq')" id="nav-faq-btn">FAQs</button>
+    <button class="nav-link" onclick="scrollToSection('contacto')" id="nav-contact-btn">Contacto</button>
   </nav>
 </header>
 
 <!-- ─────────────── HOME VIEW ─────────────── -->
 <div id="home-view">
 
-  <section class="hero">
+  <section class="hero page-section" id="inicio">
     <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-content">
       <p class="hero-eyebrow" id="hero-eyebrow-text">Alojamiento en Barcelona</p>
@@ -1269,27 +1355,15 @@
     </div>
   </section>
 
-  <div class="tabs-bar">
-    <button class="tab-btn active" onclick="switchTab('hogar')" id="tab-btn-hogar">Encuentra tu hogar</button>
-    <button class="tab-btn" onclick="switchTab('empresas')" id="tab-btn-empresas">Alojamiento para Empresas</button>
-    <button class="tab-btn" onclick="switchTab('faq')" id="tab-btn-faq">FAQs</button>
-    <button class="tab-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" id="tab-btn-contact">Contacto</button>
-  </div>
-
-  <!-- TAB: ENCUENTRA TU HOGAR -->
-  <div id="tab-hogar" class="tab-content active">
-    <section class="properties-section">
+  <section id="hogar" class="page-section properties-section">
       <div class="section-label">
         <h2 id="section-title-text">Propiedades disponibles</h2>
         <span class="count-badge" id="section-count-text">4 inmuebles</span>
       </div>
       <div class="grid" id="properties-grid"></div>
-    </section>
-  </div>
+  </section>
 
-  <!-- TAB: EMPRESAS -->
-  <div id="tab-empresas" class="tab-content">
-    <section class="corporate-section">
+  <section id="empresas" class="page-section corporate-section">
       <div class="corporate-hero">
         <div class="corporate-hero-text">
           <p class="hero-eyebrow" style="color:var(--accent)" id="corp-eyebrow-text">Corporate Housing</p>
@@ -1336,19 +1410,15 @@
           <p id="corp-f4-text">Apartamentos en el corazón del Eixample de Barcelona. Bien comunicados con transporte público y servicios.</p>
         </div>
       </div>
-    </section>
-  </div>
+  </section>
 
-  <!-- TAB: FAQ -->
-  <div id="tab-faq" class="tab-content">
-    <section class="faq-section">
+  <section id="faq" class="page-section faq-section">
       <div class="faq-inner">
         <p class="hero-eyebrow" style="color:var(--accent);margin-bottom:1rem">FAQ</p>
         <h2 id="faq-title-text" style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--warm-dark);margin-bottom:3rem">Preguntas frecuentes</h2>
         <div class="faq-list" id="faq-list"></div>
       </div>
-    </section>
-  </div>
+  </section>
 
 </div>
 
@@ -1537,7 +1607,7 @@
 </div>
 
 <!-- ─────────────── CONTACTO + FOOTER ─────────────── -->
-<section class="contact-section" id="contacto">
+<section class="contact-section page-section" id="contacto">
   <div class="contact-inner">
     <div class="contact-left">
       <p class="contact-eyebrow" id="contact-eyebrow-text">Contacto</p>
@@ -1632,9 +1702,258 @@
 
   <div class="footer-bar">
     <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
-    <p id="footer-copy-text">© 2025 Burguar Dreams · Todos los derechos reservados</p>
+    <div class="footer-meta">
+      <p id="footer-copy-text">© 2025 Burguar Dreams · Todos los derechos reservados</p>
+      <span class="footer-separator" aria-hidden="true">·</span>
+      <button type="button" class="footer-legal-link" id="footer-legal-link" onclick="openLegalModal()">Aviso Legal</button>
+      <span class="footer-separator" aria-hidden="true">·</span>
+      <button type="button" class="footer-legal-link" id="footer-privacy-link" onclick="openPrivacyModal()">Privacidad</button>
+      <span class="footer-separator" aria-hidden="true">·</span>
+      <button type="button" class="footer-legal-link" id="footer-cookies-link" onclick="openCookiesModal()">Cookies</button>
+    </div>
   </div>
 </section>
+
+<!-- ─────────────── AVISO LEGAL ─────────────── -->
+<div class="modal-overlay" id="legal-modal-overlay" onclick="handleLegalOverlayClick(event)">
+  <div class="modal legal-modal" role="dialog" aria-labelledby="legal-modal-title" aria-modal="true">
+    <button type="button" class="modal-close" onclick="closeLegalModal()" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 5l10 10M15 5L5 15"/>
+      </svg>
+    </button>
+
+    <h2 id="legal-modal-title">AVISO LEGAL</h2>
+
+    <h3>Datos de identificación</h3>
+    <p>Usted está visitando el sitio web de Burguar Dreams, propiedad de Burguar Dreams S.L., con domicilio social en C/ Can Bruixa, 16, ent. 1º, 08028 Barcelona, España, con NIF n.º B67209502, inscrita en el Registro Mercantil de Barcelona [DATOS REGISTRO MERCANTIL] (que en dicho documento se denomina «Burguar Dreams»).</p>
+    <p>Esta actividad no está sujeta a ningún régimen de autorización administrativa previa.</p>
+    <p>Puede ponerse en contacto con Burguar Dreams por cualquiera de los siguientes medios:</p>
+    <ul>
+      <li>Teléfono / WhatsApp: 660 68 85 01</li>
+      <li>Correo electrónico: burguardreams@gmail.com</li>
+    </ul>
+
+    <h3>Alojamiento web</h3>
+    <p>Los datos de alojamiento web serán facilitados en cuanto estén disponibles.</p>
+
+    <h3>Usuarios</h3>
+    <p>Estas condiciones (en adelante, Aviso Legal) tienen por objeto regular el uso del sitio web de Burguar Dreams que pone a disposición del público.</p>
+    <p>El acceso y/o uso de este sitio web le atribuye la condición de USUARIO, quien acepta, desde dicho acceso y/o uso, las condiciones generales de uso aquí reflejadas. Estas condiciones serán aplicables independientemente de las condiciones generales de contratación que pudieran ser obligatorias.</p>
+
+    <h3>Uso del portal</h3>
+    <p>Burguar Dreams proporciona acceso a información, servicios y datos (en adelante, "los contenidos") en Internet pertenecientes a Burguar Dreams S.L. o a sus licenciantes, a los que el USUARIO puede tener acceso.</p>
+    <p>El USUARIO asume la responsabilidad del uso del sitio web. Esta responsabilidad se extiende al registro necesario para acceder a determinados servicios o contenidos. En dicho registro, el USUARIO deberá proporcionar información veraz y lícita. Como resultado de este registro, se le podrá asignar una contraseña, de la cual será responsable, comprometiéndose a hacer un uso diligente y confidencial de la misma.</p>
+    <p>El USUARIO se compromete a hacer un uso adecuado de los contenidos y servicios que Burguar Dreams ofrece a través de su sitio web y, en particular, a no utilizarlos para:</p>
+    <ul>
+      <li>Participar en actividades ilícitas, ilegales o contrarias a la buena fe y al orden público.</li>
+      <li>Difundir contenido o propaganda de carácter racista, xenófobo, pornográfico ilegal, que promueva el terrorismo o viole los derechos humanos.</li>
+      <li>Causar daños a los sistemas físicos y lógicos de Burguar Dreams, sus proveedores o terceros, o introducir virus informáticos o cualquier otro elemento dañino.</li>
+      <li>Intentar acceder a cuentas de otros usuarios o manipular sus mensajes.</li>
+      <li>Utilizar el sitio web con fines comerciales, políticos o publicitarios no autorizados, incluido el envío de correos electrónicos no solicitados.</li>
+    </ul>
+    <p>Burguar Dreams se reserva el derecho de retirar todos los comentarios y contribuciones que atenten contra la dignidad de la persona, que sean discriminatorios, xenófobos, racistas, pornográficos, que amenacen el orden o la seguridad pública, o que no sean adecuados para su publicación. En ningún caso, Burguar Dreams se responsabilizará de las opiniones expresadas por los usuarios a través de foros, chats u otras herramientas de participación.</p>
+
+    <h3>Protección de datos</h3>
+    <p>Todo lo relacionado con la política de protección de datos está contenido en el documento de Política de Privacidad, disponible en el sitio web.</p>
+
+    <h3>Propiedad intelectual e industrial</h3>
+    <p>Burguar Dreams S.L. es titular de todos los derechos de propiedad intelectual e industrial de su sitio web, así como de los elementos contenidos en el mismo (a título enunciativo: imágenes, fotografías, textos, marcas, logotipos, combinaciones de colores, estructura y diseño, software, etc.), propiedad de Burguar Dreams S.L. o de sus licenciantes.</p>
+    <p>Todos los derechos reservados. De conformidad con lo dispuesto en la Ley de Propiedad Intelectual, queda expresamente prohibida la reproducción, distribución y comunicación pública de la totalidad o parte de los contenidos de este sitio web con fines comerciales, en cualquier soporte y por cualquier medio técnico, sin la autorización expresa de Burguar Dreams S.L.</p>
+    <p>El USUARIO se compromete a respetar los derechos de propiedad intelectual e industrial de Burguar Dreams. Podrá visualizar los elementos del sitio web e imprimirlos, copiarlos o almacenarlos única y exclusivamente para uso personal y privado.</p>
+
+    <h3>Exclusión de garantías y responsabilidad</h3>
+    <p>El USUARIO reconoce que el uso del sitio web, sus contenidos y servicios se realiza bajo su exclusiva responsabilidad. En particular, Burguar Dreams no asume responsabilidad en los siguientes ámbitos:</p>
+    <ul>
+      <li>La disponibilidad, calidad o interoperabilidad del sitio web, sus servicios y contenidos.</li>
+      <li>La infracción de la legislación vigente por parte del USUARIO o de terceros, especialmente en materia de propiedad intelectual o industrial.</li>
+      <li>La existencia de códigos maliciosos o elementos dañinos que pudieran afectar al sistema informático del USUARIO.</li>
+      <li>El acceso fraudulento a contenidos o servicios por parte de terceros no autorizados.</li>
+      <li>La exactitud, veracidad o utilidad de los contenidos ofrecidos. Burguar Dreams empleará todos los medios razonables para proporcionar información actualizada y fiable.</li>
+      <li>Daños causados a los equipos informáticos del USUARIO o derivados de fallos en las redes de telecomunicaciones.</li>
+      <li>Daños derivados de caso fortuito o fuerza mayor.</li>
+    </ul>
+
+    <h3>Modificación de este aviso legal</h3>
+    <p>Burguar Dreams se reserva el derecho de realizar, sin previo aviso, las modificaciones que considere oportunas en el sitio web, pudiendo cambiar, eliminar o añadir tanto los contenidos y servicios como la forma en que se presentan.</p>
+    <p>La validez de las condiciones aquí reflejadas dependerá de su publicación y estarán vigentes hasta que sean modificadas por otras debidamente publicadas.</p>
+
+    <h3>Política de enlaces</h3>
+    <p>En caso de que el sitio web incluya enlaces o hipervínculos a otros sitios web, Burguar Dreams no ejercerá ningún tipo de control sobre dichos sitios ni sus contenidos. En ningún caso Burguar Dreams asumirá responsabilidad alguna por el contenido de los enlaces a sitios web de terceros, ni garantizará su disponibilidad, calidad, fiabilidad o exactitud. La inclusión de estas conexiones externas no implicará ningún tipo de asociación, fusión ni participación con las entidades enlazadas.</p>
+
+    <h3>Derecho de exclusión</h3>
+    <p>Burguar Dreams se reserva el derecho de denegar o retirar el acceso al sitio web y/o a los servicios ofrecidos sin previo aviso, a petición propia o de un tercero, a aquellos usuarios que no cumplan con el contenido de este Aviso Legal.</p>
+
+    <h3>Generalidades</h3>
+    <p>Burguar Dreams perseguirá el incumplimiento de estas condiciones, así como cualquier uso indebido del sitio web, ejerciendo todas las acciones civiles y penales que le correspondan por ley.</p>
+
+    <h3>Ley aplicable y jurisdicción</h3>
+    <p>La relación entre Burguar Dreams y el USUARIO se regirá por la normativa española vigente. Todas las controversias y reclamaciones derivadas de este Aviso Legal serán resueltas por los juzgados y tribunales de la ciudad de Barcelona.</p>
+  </div>
+</div>
+
+<!-- ─────────────── POLÍTICA DE PRIVACIDAD ─────────────── -->
+<div class="modal-overlay" id="privacy-modal-overlay" onclick="handlePrivacyOverlayClick(event)">
+  <div class="modal legal-modal" role="dialog" aria-labelledby="privacy-modal-title" aria-modal="true">
+    <button type="button" class="modal-close" onclick="closePrivacyModal()" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 5l10 10M15 5L5 15"/>
+      </svg>
+    </button>
+
+    <h2 id="privacy-modal-title">POLÍTICA DE PRIVACIDAD</h2>
+
+    <p>Burguar Dreams S.L., con el fin de proteger los derechos individuales y ser transparente con el Usuario, ha establecido una política que incluye todos los tratamientos de datos, las finalidades perseguidas, la legitimidad de los mismos y los instrumentos disponibles para que el Usuario pueda ejercer sus derechos.</p>
+    <p>La navegación por este sitio web implica la aceptación total de las siguientes disposiciones. Se acepta el uso de cookies. Si no está de acuerdo, envíe un correo electrónico a <a href="mailto:burguardreams@gmail.com">burguardreams@gmail.com</a>.</p>
+    <p>La versión actualizada de esta política de privacidad es la única aplicable durante el tiempo que se utilice el sitio web, hasta que no exista otra versión que la reemplace.</p>
+    <p>Para obtener información adicional sobre la protección de datos personales, le invitamos a consultar la página web de la <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">AEPD (Agencia Española de Protección de Datos)</a>.</p>
+
+    <h3>Recopilación de datos</h3>
+    <p>Sus datos son recopilados por Burguar Dreams S.L.</p>
+    <p>Los datos personales son toda información relativa a una persona física identificada o identificable. Se entiende por persona identificable aquella que puede ser identificada, directa o indirectamente, especialmente mediante un nombre, un número de identificación (DNI, NIF, NIE, pasaporte) o uno o varios elementos específicos de su identidad física, fisiológica, genética, psíquica, económica, cultural o social.</p>
+    <p>Los datos que generalmente se recopilarán son: nombre y apellidos, dirección, correo electrónico, número de teléfono, fecha de nacimiento y situación laboral e ingresos, en el contexto de solicitudes de información sobre alquiler de apartamentos. Se podrán recopilar otros tipos de datos, informando al usuario en cada caso.</p>
+
+    <h3>¿Con qué finalidad se tratan sus datos personales?</h3>
+    <p>La finalidad del tratamiento de los datos personales que se puedan recabar es su uso principal por parte de Burguar Dreams S.L. para la gestión de su relación con usted, para poder ofrecerle apartamentos y servicios acordes a sus necesidades, para mejorar su experiencia como usuario y para tramitar sus solicitudes de información o reserva. No se tomarán decisiones automatizadas basadas en su perfil.</p>
+    <p>Los datos facilitados se conservarán mientras se mantenga la relación comercial, siempre que el interesado no solicite su supresión, o durante los años necesarios para cumplir con las obligaciones legales.</p>
+
+    <h3>¿Cuál es la legitimidad del tratamiento de sus datos?</h3>
+    <p>La base legal para el tratamiento de sus datos personales es:</p>
+    <ul>
+      <li>El interés legítimo de Burguar Dreams S.L.</li>
+      <li>El consentimiento del usuario o cliente para el tratamiento de sus datos.</li>
+    </ul>
+
+    <h3>¿A qué destinatarios se comunicarán los datos?</h3>
+    <p>Los datos personales del Usuario podrán ser comunicados eventualmente a terceros relacionados con Burguar Dreams S.L. por contrato para la realización de tareas necesarias para la gestión de su solicitud, sin necesidad de autorización expresa.</p>
+    <p>También cuando fuera necesario comunicarse con las autoridades en caso de que el Usuario hubiera realizado acciones contrarias a la Ley o infringido el contenido del Aviso Legal.</p>
+    <p>Los datos personales del Usuario no serán transferidos a terceros países ni a organizaciones internacionales, salvo que el Usuario sea debidamente informado de dicha transferencia, sus condiciones y destinatario.</p>
+    <p>Cuando determinados datos sean obligatorios para acceder a funcionalidades específicas del sitio web, Burguar Dreams S.L. indicará este carácter obligatorio en el momento de la recogida.</p>
+
+    <h3>Cookies</h3>
+    <p>Al navegar por este sitio web, las cookies de Burguar Dreams S.L. y/o de terceros pueden instalarse en su dispositivo. Durante la primera navegación, aparecerá un banner informativo sobre el uso de cookies.</p>
+    <p>Al continuar la navegación, el Usuario se considerará informado y habrá aceptado el uso de dichas cookies. El consentimiento otorgado tendrá una validez de trece meses.</p>
+    <p>Para obtener más información, consulte nuestra Política de Cookies.</p>
+
+    <h3>Derechos del usuario</h3>
+    <p>Se informa al usuario de la posibilidad de ejercer sus derechos de acceso, rectificación, cancelación y oposición. Asimismo, toda persona tiene derecho a la limitación del tratamiento de sus datos personales, a la supresión de los datos transmitidos al responsable del tratamiento y a la portabilidad de sus datos.</p>
+    <p>El usuario tiene la posibilidad de presentar una reclamación ante la <a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer">AEPD (Agencia Española de Protección de Datos)</a> cuando no haya obtenido una solución satisfactoria en el ejercicio de sus derechos.</p>
+    <p>Salvo que el Usuario se oponga, mediante el envío de un correo electrónico a <a href="mailto:burguardreams@gmail.com">burguardreams@gmail.com</a>, sus datos podrán ser utilizados para enviarle información sobre apartamentos y servicios de Burguar Dreams S.L.</p>
+    <p>Los datos facilitados se conservarán mientras se mantenga la relación comercial o durante los años necesarios para cumplir con las obligaciones legales.</p>
+    <p>El Usuario es responsable de que la información proporcionada a través de este sitio web sea veraz, respondiendo de la exactitud de todos los datos comunicados y manteniéndolos actualizados para reflejar su situación real.</p>
+    <p>Esta información será almacenada y gestionada con la debida confidencialidad, aplicando las medidas de seguridad informática necesarias para evitar el acceso o uso indebido de sus datos, su manipulación, deterioro o pérdida.</p>
+    <p>Sin embargo, el Usuario debe tener en cuenta que la seguridad de los sistemas informáticos nunca es absoluta. Al proporcionar datos personales en línea, dicha información puede ser recopilada sin su consentimiento y procesada por terceros no autorizados. Burguar Dreams S.L. declina cualquier responsabilidad por las consecuencias de dichos actos si el Usuario publicó la información voluntariamente.</p>
+    <p>Podrá ejercer estos derechos mediante solicitud escrita dirigida a:</p>
+    <p><strong>Burguar Dreams S.L.</strong><br>C/ Can Bruixa, 16, ent. 1º<br>08028 Barcelona</p>
+    <p>O por correo electrónico a: <a href="mailto:burguardreams@gmail.com">burguardreams@gmail.com</a>, adjuntando copia del DNI o documento equivalente.</p>
+    <p>Estas solicitudes serán atendidas en el plazo de un mes, prorrogable a dos meses si la complejidad o el número de solicitudes así lo requiere, sin perjuicio de la obligación de conservar determinados datos en los plazos legales.</p>
+    <p>Asimismo, los usuarios que lo soliciten tienen la posibilidad de organizar el destino de sus datos tras su fallecimiento.</p>
+  </div>
+</div>
+
+<!-- ─────────────── POLÍTICA DE COOKIES ─────────────── -->
+<div class="modal-overlay" id="cookies-modal-overlay" onclick="handleCookiesOverlayClick(event)">
+  <div class="modal legal-modal" role="dialog" aria-labelledby="cookies-modal-title" aria-modal="true">
+    <button type="button" class="modal-close" onclick="closeCookiesModal()" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M5 5l10 10M15 5L5 15"/>
+      </svg>
+    </button>
+
+    <h2 id="cookies-modal-title">POLÍTICA DE COOKIES</h2>
+
+    <h3>1. Uso de cookies</h3>
+    <p>El sitio web de Burguar Dreams (el Sitio Web), propiedad de Burguar Dreams S.L., utiliza cookies. Una cookie es un archivo que se descarga en tu ordenador al acceder a determinadas páginas web. Las cookies permiten a un sitio web, entre otras cosas, almacenar y recuperar información sobre los hábitos de navegación del usuario o de su ordenador y, según la información que contengan y la forma en que utilice su ordenador, pueden utilizarse para reconocer al usuario. Además, mejoran la experiencia de navegación, ya que permiten al sitio web ofrecer al usuario información que pueda ser de su interés en función del uso que haga del contenido del sitio web.</p>
+
+    <h3>2. Consentimiento</h3>
+    <p>Las cookies que utilizamos no almacenan ningún dato personal ni ningún tipo de información que pueda identificarle, a menos que desee registrarse voluntariamente para utilizar los servicios que ponemos a su disposición o para recibir información sobre apartamentos y servicios de su interés. Al navegar por primera vez, aparecerá un banner que explica el uso de cookies.</p>
+
+    <h3>3. Tipos y finalidad de las cookies</h3>
+    <p>Las cookies, según su permanencia, se pueden clasificar de la siguiente manera:</p>
+    <ul>
+      <li><strong>Cookies de sesión:</strong> caducan cuando el usuario cierra el navegador.</li>
+      <li><strong>Cookies persistentes:</strong> caducan cuando se cumple la finalidad para la que se utilizan o cuando se eliminan manualmente.</li>
+    </ul>
+    <p>En nuestro sitio web utilizamos diferentes tipos de cookies para mejorar la experiencia de nuestros usuarios.</p>
+    <p>Las <strong>cookies necesarias</strong> son imprescindibles para habilitar las funciones básicas del sitio, como la gestión de sus preferencias de consentimiento. Estas cookies no almacenan ningún dato que permita identificarle personalmente.</p>
+    <p>Las <strong>cookies funcionales</strong> ayudan a realizar ciertas funciones, como compartir contenido en redes sociales u otras funciones de terceros.</p>
+    <p>Las <strong>cookies analíticas</strong> se utilizan para comprender cómo interactúan los visitantes con el sitio web, proporcionando información sobre métricas como el número de visitantes, la tasa de rebote, la fuente de tráfico, etc.</p>
+    <p>Las <strong>cookies publicitarias</strong> se utilizan para ofrecer a los visitantes anuncios personalizados basados en las páginas que han visitado anteriormente y para analizar la eficacia de las campañas publicitarias.</p>
+
+    <h3>4. Cómo bloquear o eliminar las cookies instaladas</h3>
+    <p>Puedes permitir, bloquear o eliminar las cookies instaladas en tu ordenador configurando las opciones de tu navegador. Encontrarás información sobre cómo hacerlo en los siguientes enlaces:</p>
+    <ul>
+      <li><a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener noreferrer">Chrome</a></li>
+      <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
+      <li><a href="https://support.microsoft.com/es-es/microsoft-edge/eliminar-las-cookies-en-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Explorer / Edge</a></li>
+      <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank" rel="noopener noreferrer">Firefox</a></li>
+    </ul>
+    <p>Todo lo relacionado con las cookies de Google, tanto analíticas como publicitarias, puede consultarse en:</p>
+    <ul>
+      <li><a href="https://www.google.es/intl/es/policies/technologies/types/" target="_blank" rel="noopener noreferrer">Tipos de cookies de Google</a></li>
+      <li><a href="https://www.google.es/policies/technologies/ads/" target="_blank" rel="noopener noreferrer">Cookies publicitarias de Google</a></li>
+    </ul>
+    <p>Sin embargo, le informamos de la posibilidad de que la desactivación de una cookie pueda impedir o dificultar la navegación o la prestación de los servicios ofrecidos en el sitio web.</p>
+
+    <h3>5. Modificaciones</h3>
+    <p>Las cookies de este sitio web o esta política pueden actualizarse, por lo que le recomendamos que las revise periódicamente.</p>
+
+    <h3>6. Lista de cookies</h3>
+
+    <h4>Necesarias</h4>
+    <p>Las cookies necesarias son cruciales para las funciones básicas del sitio web y este no funcionará de la forma prevista sin ellas. No almacenan ningún dato de identificación personal.</p>
+    <table class="cookie-table">
+      <thead>
+        <tr><th>Cookie</th><th>Duración</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>cookieyes-consent</code></td><td>1 año</td><td>Recuerda las preferencias de consentimiento de cookies del usuario para que se respeten en visitas posteriores. No recoge ni almacena información personal.</td></tr>
+        <tr><td><code>__cf_bm</code></td><td>1 hora</td><td>Establecida por Cloudflare para respaldar la gestión de bots.</td></tr>
+        <tr><td><code>__cfruid</code></td><td>Sesión</td><td>Utilizada por Cloudflare para identificar tráfico web de confianza.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Funcionales</h4>
+    <p>Las cookies funcionales ayudan a realizar ciertas funcionalidades, como compartir contenido en redes sociales u otras características de terceros.</p>
+    <table class="cookie-table">
+      <thead>
+        <tr><th>Cookie</th><th>Duración</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>lidc</code></td><td>1 día</td><td>LinkedIn la establece para facilitar la selección del centro de datos.</td></tr>
+        <tr><td><code>li_gc</code></td><td>6 meses</td><td>LinkedIn la establece para almacenar el consentimiento del visitante respecto al uso de cookies no esenciales.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Analíticas</h4>
+    <p>Las cookies analíticas se utilizan para comprender cómo interactúan los visitantes con el sitio web, proporcionando información sobre número de visitantes, porcentaje de rebote, fuente de tráfico, etc.</p>
+    <table class="cookie-table">
+      <thead>
+        <tr><th>Cookie</th><th>Duración</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>_ga</code></td><td>1 año 1 mes</td><td>Google Analytics la establece para calcular datos de visitantes, sesiones y campañas. Almacena la información de forma anónima.</td></tr>
+        <tr><td><code>ga*</code></td><td>1 año 1 mes</td><td>Google Analytics la utiliza para almacenar y contabilizar las visitas a la página.</td></tr>
+        <tr><td><code>_gid</code></td><td>1 día</td><td>Google Analytics la establece para almacenar información sobre el uso del sitio web y generar informes de rendimiento.</td></tr>
+        <tr><td><code>_gat_UA-*</code></td><td>1 minuto</td><td>Google Analytics la establece para realizar un seguimiento del comportamiento del usuario.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Publicitarias</h4>
+    <p>Las cookies publicitarias se utilizan para ofrecer anuncios personalizados basados en las páginas visitadas anteriormente y para analizar la efectividad de las campañas publicitarias.</p>
+    <table class="cookie-table">
+      <thead>
+        <tr><th>Cookie</th><th>Duración</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>bcookie</code></td><td>1 año</td><td>LinkedIn la establece para reconocer los identificadores del navegador.</td></tr>
+        <tr><td><code>YSC</code></td><td>Sesión</td><td>YouTube la establece para hacer seguimiento de las visualizaciones de vídeos incrustados.</td></tr>
+        <tr><td><code>VISITOR_INFO1_LIVE</code></td><td>6 meses</td><td>YouTube la establece para medir el ancho de banda y determinar la interfaz del reproductor.</td></tr>
+        <tr><td><code>VISITOR_PRIVACY_METADATA</code></td><td>6 meses</td><td>YouTube la establece para almacenar el estado del consentimiento de cookies del usuario.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 
 <script>
@@ -2370,10 +2689,8 @@ function showDetail(id) {
 function showHome() {
   document.getElementById('detail-view').classList.remove('active');
   document.getElementById('home-view').style.display = '';
-  switchTab('hogar');
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
-  document.querySelectorAll('.nav-link')[0].classList.add('active-nav');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  setActiveNav('hogar');
   return false;
 }
 
@@ -2382,19 +2699,77 @@ function openModal() {
   document.getElementById('modal-overlay').classList.add('active');
   document.getElementById('modal-form').classList.remove('hidden');
   document.getElementById('modal-success').classList.remove('active');
-  document.body.style.overflow = 'hidden';
+  updateBodyScrollLock();
 }
 
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('active');
-  document.body.style.overflow = '';
+  updateBodyScrollLock();
 }
 
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modal-overlay')) closeModal();
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+function openLegalModal() {
+  document.getElementById('legal-modal-overlay').classList.add('active');
+  updateBodyScrollLock();
+}
+
+function closeLegalModal() {
+  document.getElementById('legal-modal-overlay').classList.remove('active');
+  updateBodyScrollLock();
+}
+
+function handleLegalOverlayClick(e) {
+  if (e.target === document.getElementById('legal-modal-overlay')) closeLegalModal();
+}
+
+function openPrivacyModal() {
+  document.getElementById('privacy-modal-overlay').classList.add('active');
+  updateBodyScrollLock();
+}
+
+function closePrivacyModal() {
+  document.getElementById('privacy-modal-overlay').classList.remove('active');
+  updateBodyScrollLock();
+}
+
+function handlePrivacyOverlayClick(e) {
+  if (e.target === document.getElementById('privacy-modal-overlay')) closePrivacyModal();
+}
+
+function openCookiesModal() {
+  document.getElementById('cookies-modal-overlay').classList.add('active');
+  updateBodyScrollLock();
+}
+
+function closeCookiesModal() {
+  document.getElementById('cookies-modal-overlay').classList.remove('active');
+  updateBodyScrollLock();
+}
+
+function handleCookiesOverlayClick(e) {
+  if (e.target === document.getElementById('cookies-modal-overlay')) closeCookiesModal();
+}
+
+function updateBodyScrollLock() {
+  const locked =
+    document.getElementById('modal-overlay').classList.contains('active') ||
+    document.getElementById('legal-modal-overlay').classList.contains('active') ||
+    document.getElementById('privacy-modal-overlay').classList.contains('active') ||
+    document.getElementById('cookies-modal-overlay').classList.contains('active') ||
+    document.getElementById('lightbox').classList.contains('active');
+  document.body.style.overflow = locked ? 'hidden' : '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (document.getElementById('cookies-modal-overlay').classList.contains('active')) closeCookiesModal();
+  else if (document.getElementById('privacy-modal-overlay').classList.contains('active')) closePrivacyModal();
+  else if (document.getElementById('legal-modal-overlay').classList.contains('active')) closeLegalModal();
+  else if (document.getElementById('modal-overlay').classList.contains('active')) closeModal();
+});
 
 /* ─── i18n TRANSLATIONS ─── */
 const i18n = {
@@ -2444,6 +2819,9 @@ const i18n = {
     contact_location_label: 'Ubicación', contact_email_label: 'Email',
     contact_phone_label: 'Teléfono / WhatsApp', contact_hours_label: 'Horario',
     contact_hours: 'Lun – Vie, 9h – 19h',
+    footer_legal: 'Aviso Legal',
+    footer_privacy: 'Privacidad',
+    footer_cookies: 'Cookies',
     footer_copy: '© 2025 Burguar Dreams · Todos los derechos reservados',
     nombre_ph: 'Tu nombre', apellidos_ph: 'Tus apellidos',
   },
@@ -2494,6 +2872,9 @@ const i18n = {
     contact_location_label: 'Ubicació', contact_email_label: 'Correu electrònic',
     contact_phone_label: 'Telèfon / WhatsApp', contact_hours_label: 'Horari',
     contact_hours: 'Dl – Dv, 9h – 19h',
+    footer_legal: 'Avís Legal',
+    footer_privacy: 'Privacitat',
+    footer_cookies: 'Cookies',
     footer_copy: '© 2025 Burguar Dreams · Tots els drets reservats',
     nombre_ph: 'El teu nom', apellidos_ph: 'Els teus cognoms',
   },
@@ -2543,6 +2924,9 @@ const i18n = {
     contact_location_label: 'Location', contact_email_label: 'Email',
     contact_phone_label: 'Phone / WhatsApp', contact_hours_label: 'Hours',
     contact_hours: 'Mon – Fri, 9am – 7pm',
+    footer_legal: 'Legal Notice',
+    footer_privacy: 'Privacy',
+    footer_cookies: 'Cookies',
     footer_copy: '© 2025 Burguar Dreams · All rights reserved',
     nombre_ph: 'Your first name', apellidos_ph: 'Your last name',
   },
@@ -2592,6 +2976,9 @@ const i18n = {
     contact_location_label: 'Localisation', contact_email_label: 'Email',
     contact_phone_label: 'Téléphone / WhatsApp', contact_hours_label: 'Horaires',
     contact_hours: 'Lun – Ven, 9h – 19h',
+    footer_legal: 'Mentions légales',
+    footer_privacy: 'Confidentialité',
+    footer_cookies: 'Cookies',
     footer_copy: '© 2025 Burguar Dreams · Tous droits réservés',
     nombre_ph: 'Votre prénom', apellidos_ph: 'Votre nom',
   },
@@ -2641,6 +3028,9 @@ const i18n = {
     contact_location_label: 'Standort', contact_email_label: 'E-Mail',
     contact_phone_label: 'Telefon / WhatsApp', contact_hours_label: 'Öffnungszeiten',
     contact_hours: 'Mo – Fr, 9–19 Uhr',
+    footer_legal: 'Impressum',
+    footer_privacy: 'Datenschutz',
+    footer_cookies: 'Cookies',
     footer_copy: '© 2025 Burguar Dreams · Alle Rechte vorbehalten',
     nombre_ph: 'Ihr Vorname', apellidos_ph: 'Ihr Nachname',
   },
@@ -2690,6 +3080,9 @@ const i18n = {
     contact_location_label: 'Posizione', contact_email_label: 'Email',
     contact_phone_label: 'Telefono / WhatsApp', contact_hours_label: 'Orari',
     contact_hours: 'Lun – Ven, 9–19',
+    footer_legal: 'Note legali',
+    footer_privacy: 'Privacy',
+    footer_cookies: 'Cookies',
     footer_copy: '© 2025 Burguar Dreams · Tutti i diritti riservati',
     nombre_ph: 'Il tuo nome', apellidos_ph: 'Il tuo cognome',
   }
@@ -2709,14 +3102,13 @@ function setLang(lang) {
     btn.classList.toggle('active', btn.getAttribute('onclick').includes(`'${lang}'`));
   });
 
-  document.getElementById('nav-rent-btn').textContent = t.nav_rent;
+  document.getElementById('nav-hogar-btn').textContent = t.tab_hogar;
+  document.getElementById('nav-empresas-btn').textContent = t.tab_empresas;
+  document.getElementById('nav-faq-btn').textContent = t.tab_faq;
+  document.getElementById('nav-contact-btn').textContent = t.tab_contact;
   document.getElementById('hero-eyebrow-text').textContent = t.hero_eyebrow;
   document.getElementById('hero-h1-text').innerHTML = t.hero_h1;
   document.getElementById('hero-sub-text').textContent = t.hero_sub;
-  document.getElementById('tab-btn-hogar').textContent = t.tab_hogar;
-  document.getElementById('tab-btn-empresas').textContent = t.tab_empresas;
-  document.getElementById('tab-btn-faq').textContent = t.tab_faq;
-  document.getElementById('tab-btn-contact').textContent = t.tab_contact;
   document.getElementById('section-title-text').textContent = t.section_title;
   document.getElementById('section-count-text').textContent = t.section_count;
   document.getElementById('corp-eyebrow-text').textContent = t.corp_eyebrow;
@@ -2769,9 +3161,12 @@ function setLang(lang) {
   document.getElementById('contact-phone-label').textContent = t.contact_phone_label;
   document.getElementById('contact-hours-label').textContent = t.contact_hours_label;
   document.getElementById('contact-hours-value').textContent = t.contact_hours;
+  document.getElementById('footer-legal-link').textContent = t.footer_legal;
+  document.getElementById('footer-privacy-link').textContent = t.footer_privacy;
+  document.getElementById('footer-cookies-link').textContent = t.footer_cookies;
   document.getElementById('footer-copy-text').textContent = t.footer_copy;
 
-  if (document.getElementById('tab-faq').classList.contains('active')) renderFAQ();
+  renderFAQ();
   renderGrid();
   // If user is viewing a property detail, re-render it in the new language
   if (currentPropertyId && document.getElementById('detail-view').classList.contains('active')) {
@@ -2789,11 +3184,57 @@ document.addEventListener('click', () => {
   document.getElementById('lang-switcher').classList.remove('open');
 });
 
-/* ─── NAV ─── */
-function handleNav(section) {
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active-nav'));
-  event.target.classList.add('active-nav');
-  if (section === 'alquiler') showHome();
+/* ─── NAV / SCROLL ─── */
+const navSectionMap = {
+  'nav-hogar-btn': 'hogar',
+  'nav-empresas-btn': 'empresas',
+  'nav-faq-btn': 'faq',
+  'nav-contact-btn': 'contacto',
+};
+
+function getHeaderOffset() {
+  const header = document.querySelector('header');
+  return header ? header.offsetHeight + 8 : 120;
+}
+
+function setActiveNav(sectionId) {
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const id = link.id;
+    link.classList.toggle('active-nav', navSectionMap[id] === sectionId);
+  });
+}
+
+function scrollToSection(sectionId) {
+  if (document.getElementById('detail-view').classList.contains('active')) {
+    document.getElementById('detail-view').classList.remove('active');
+    document.getElementById('home-view').style.display = '';
+  }
+
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+
+  const top = section.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+  window.scrollTo({ top, behavior: 'smooth' });
+  setActiveNav(sectionId);
+}
+
+function initScrollSpy() {
+  const sections = ['hogar', 'empresas', 'faq', 'contacto']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver(entries => {
+    if (document.getElementById('detail-view').classList.contains('active')) return;
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    if (visible.length) setActiveNav(visible[0].target.id);
+  }, {
+    rootMargin: `-${getHeaderOffset()}px 0px -55% 0px`,
+    threshold: [0, 0.15, 0.35, 0.55],
+  });
+
+  sections.forEach(section => observer.observe(section));
 }
 
 /* ─── SUBMIT FORM → SUPABASE ─── */
@@ -2840,19 +3281,6 @@ async function submitForm() {
     btn.disabled = false;
     btn.textContent = (i18n[currentLang] || i18n.es).btn_send;
   }
-}
-
-/* ─── TABS ─── */
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  const tabMap = { hogar: 'tab-btn-hogar', empresas: 'tab-btn-empresas', faq: 'tab-btn-faq' };
-  if (tabMap[tab]) document.getElementById(tabMap[tab]).classList.add('active');
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  const el = document.getElementById(`tab-${tab}`);
-  if (el) el.classList.add('active');
-  if (tab === 'faq') renderFAQ();
-  const tabsBar = document.querySelector('.tabs-bar');
-  if (tabsBar) window.scrollTo({ top: tabsBar.offsetTop - 120, behavior: 'smooth' });
 }
 
 /* ─── FAQ ─── */
@@ -2948,7 +3376,7 @@ function openLightbox(photos, index) {
   lightboxIndex = index;
   updateLightbox();
   document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow = 'hidden';
+  updateBodyScrollLock();
 }
 
 function updateLightbox() {
@@ -2963,7 +3391,7 @@ function lightboxNav(dir) {
 
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
-  document.body.style.overflow = '';
+  updateBodyScrollLock();
 }
 
 function closeLightboxOnBg(e) {
@@ -2980,7 +3408,13 @@ document.addEventListener('keydown', e => {
 
 /* ─── INIT ─── */
 renderGrid();
+renderFAQ();
 setHeroBg();
+initScrollSpy();
+window.addEventListener('resize', () => {
+  document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');
+});
+document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');
 </script>
 </body>
 </html>
