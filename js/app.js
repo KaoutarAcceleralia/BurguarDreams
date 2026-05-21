@@ -28,12 +28,15 @@ function scrollToSection(sectionId) {
   if (typeof closeMobileNav === 'function') closeMobileNav();
 
   if (document.getElementById('detail-view').classList.contains('active')) {
-    document.getElementById('detail-view').classList.remove('active');
+    const detailView = document.getElementById('detail-view');
+    detailView.classList.remove('active');
     document.getElementById('home-view').style.display = '';
     currentPropertyId = null;
     const url = new URL(window.location.href);
     url.searchParams.delete('inmueble');
     history.replaceState(null, '', url.pathname + url.search);
+    if (typeof resetRevealIn === 'function') resetRevealIn(detailView);
+    if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
   }
 
   const section = document.getElementById(sectionId);
@@ -68,7 +71,7 @@ function renderFAQ() {
   const list = document.getElementById('faq-list');
   const items = faqs[currentLang] || faqs.es;
   list.innerHTML = items.map((f, i) => `
-    <div class="faq-item" id="faq-${i}">
+    <div class="faq-item" id="faq-${i}" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
       <button type="button" class="faq-question" id="faq-btn-${i}" onclick="toggleFAQ(${i})"
               aria-expanded="false" aria-controls="faq-answer-${i}">
         <span>${f.q}</span>
@@ -79,6 +82,7 @@ function renderFAQ() {
       <div class="faq-answer" id="faq-answer-${i}" role="region" aria-labelledby="faq-btn-${i}" hidden>${f.a}</div>
     </div>
   `).join('');
+  if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
 }
 
 function toggleFAQ(i) {
@@ -98,6 +102,7 @@ setHeroBg();
 updateWhatsAppLinks(null);
 initPropertyFromUrl();
 initScrollSpy();
+if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
 window.addEventListener('resize', () => {
   document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');
 });

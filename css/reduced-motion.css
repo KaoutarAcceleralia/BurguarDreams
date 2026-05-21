@@ -28,4 +28,10 @@
   }
 
   .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

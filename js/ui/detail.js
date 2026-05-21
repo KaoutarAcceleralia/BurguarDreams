@@ -3,7 +3,7 @@ const HIDE_IF_ABSENT = new Set(['wifi', 'wifi_600']);
 const DETAIL_GALLERY_EAGER = 4;
 
 function renderAmenities(amenitySet) {
-  return getAmenityGroups(currentLang).map(group => {
+  return getAmenityGroups(currentLang).map((group, i) => {
     const items = group.items
       .filter(item => {
         if (HIDE_IF_ABSENT.has(item.key)) return amenitySet.has(item.key);
@@ -17,8 +17,9 @@ function renderAmenities(amenitySet) {
           <span>${item.label}</span>
         </li>`;
       }).join('');
+    const side = i % 2 === 0 ? 'left' : 'right';
     return `
-      <div class="amenity-group">
+      <div class="amenity-group" data-reveal="${side}">
         <div class="amenity-group-title">${group.group}</div>
         <ul class="amenity-list">${items}</ul>
       </div>`;
@@ -59,6 +60,9 @@ function showDetail(id, options = {}) {
   if (!p) return;
   currentPropertyId = id;
 
+  const detailView = document.getElementById('detail-view');
+  if (typeof resetRevealIn === 'function') resetRevealIn(detailView);
+
   if (!options.skipUrlUpdate) {
     const url = new URL(window.location.href);
     url.searchParams.set('inmueble', String(id));
@@ -94,8 +98,8 @@ function showDetail(id, options = {}) {
     { label: sl.banos,        value: p.specs[2].value, unit: sl.bano },
     { label: sl.planta,       value: p.specs[3].value, unit: p.specs[3].unit },
   ];
-  document.getElementById('d-specs').innerHTML = specsData.map(s => `
-    <div class="spec-item">
+  document.getElementById('d-specs').innerHTML = specsData.map((s, i) => `
+    <div class="spec-item" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
       <span class="spec-label">${s.label}</span>
       <span class="spec-value">${s.value} <span class="spec-unit">${s.unit}</span></span>
     </div>
@@ -115,14 +119,14 @@ function showDetail(id, options = {}) {
         ? `<img src="${src}" alt="Foto ${i + 1}" loading="lazy" decoding="async" width="800" height="600">`
         : `<img data-src="${src}" src="" alt="Foto ${i + 1}" class="detail-photo-img lazy-photo" decoding="async" width="800" height="600">`;
       return `
-      <div class="detail-photo" onclick="openLightbox(currentAllPhotos, ${i + 1})" style="cursor:zoom-in">
+      <div class="detail-photo" data-reveal="${i % 2 === 0 ? 'left' : 'right'}" onclick="openLightbox(currentAllPhotos, ${i + 1})" style="cursor:zoom-in">
         ${imgTag}
       </div>`;
     }).join('');
     initLazyImages(photoGrid);
   } else {
-    photoGrid.innerHTML = [0,1,2].map(() => `
-      <div class="detail-photo"><div class="detail-photo-placeholder">
+    photoGrid.innerHTML = [0,1,2].map((_, i) => `
+      <div class="detail-photo" data-reveal="${i % 2 === 0 ? 'left' : 'right'}"><div class="detail-photo-placeholder">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="#C4B8A4" stroke-width="1.2">
           <rect x="5" y="8" width="30" height="24" rx="2"/><circle cx="15" cy="16" r="3"/>
           <path d="M5 26l8-6 6 5 5-4 11 7"/>
@@ -134,9 +138,10 @@ function showDetail(id, options = {}) {
   updateWhatsAppLinks(p);
 
   document.getElementById('home-view').style.display = 'none';
-  document.getElementById('detail-view').classList.add('active');
+  detailView.classList.add('active');
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+  if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
 }
 
 /* ─── SHOW HOME ─── */
@@ -152,5 +157,6 @@ function showHome() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   setActiveNav('hogar');
+  if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
   return false;
 }

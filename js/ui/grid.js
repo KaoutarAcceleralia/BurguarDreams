@@ -1,8 +1,8 @@
 function renderGrid() {
   const t = i18n[currentLang] || i18n.es;
   const grid = document.getElementById('properties-grid');
-  grid.innerHTML = properties.map(p => `
-    <a class="card" href="${propertyUrl(p.id)}" target="_blank" rel="noopener noreferrer">
+  grid.innerHTML = properties.map((p, i) => `
+    <a class="card" href="${propertyUrl(p.id)}" target="_blank" rel="noopener noreferrer" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
       <div class="card-img-wrap">
         ${p.cardImage
           ? `<img src="${p.cardImage}" alt="${p.city}" class="card-img" loading="lazy" decoding="async" width="800" height="600">`
@@ -34,4 +34,5 @@ function renderGrid() {
       </div>
     </a>
   `).join('');
+  if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
 }
