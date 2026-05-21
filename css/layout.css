@@ -42,6 +42,7 @@ body.nav-menu-open { overflow: hidden; }
   .grid { grid-template-columns: 1fr; gap: 12px; }
   .card { min-height: unset; }
   .btn-saber { font-size: 0.68rem; padding: 0.5rem 0.9rem; }
+  .card-availability { font-size: 0.58rem; padding: 0.3rem 0.65rem; }
   .detail-body { padding: 4rem 2rem 6rem; }
   .detail-header { grid-template-columns: 1fr; }
   .detail-price-block { text-align: left; }

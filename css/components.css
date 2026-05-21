@@ -241,12 +241,79 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
   font-weight: 300;
   color: var(--warm-mid);
 }
+/* ── Botones con hover marrón radiante que sigue el cursor ── */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--btn-radius);
+  --btn-x: 50%;
+  --btn-y: 50%;
+  --btn-base: var(--warm-dark);
+  background: var(--btn-base);
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-glow::before {
+  content: '';
+  position: absolute;
+  left: var(--btn-x);
+  top: var(--btn-y);
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle closest-side,
+    var(--glow-brown-soft) 0%,
+    var(--glow-brown) 32%,
+    var(--glow-brown-deep) 55%,
+    transparent 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  will-change: left, top;
+}
+.btn-glow:hover::before,
+.btn-glow.is-glow-active::before {
+  opacity: 1;
+  transition: opacity 0.12s ease;
+}
+.btn-glow:hover,
+.btn-glow.is-glow-active {
+  color: var(--warm-dark);
+}
+.btn-glow:hover svg,
+.btn-glow.is-glow-active svg {
+  stroke: currentColor;
+}
+.btn-glow.btn-glow--accent { --btn-base: var(--accent); }
+.btn-glow.btn-glow--whatsapp { --btn-base: #25D366; }
+.btn-glow.btn-glow--outline {
+  --btn-base: transparent;
+  background: transparent;
+}
+.btn-glow.btn-glow--outline::before {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle closest-side,
+    rgba(245, 232, 212, 0.55) 0%,
+    rgba(212, 168, 106, 0.38) 42%,
+    rgba(166, 124, 66, 0.18) 60%,
+    transparent 100%
+  );
+}
+.btn-glow.btn-glow--outline:hover,
+.btn-glow.btn-glow--outline.is-glow-active {
+  border-color: var(--accent-light);
+}
+
 .btn-saber {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.2rem;
-  background: var(--warm-dark);
   color: #FDFAF5;
   font-family: var(--font-body);
   font-size: 0.72rem;
@@ -254,10 +321,29 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
   text-transform: uppercase;
   cursor: pointer;
   border: none;
-  transition: background 0.2s ease;
 }
-.btn-saber:hover { background: var(--accent); }
+.btn-saber.btn-glow > * {
+  position: relative;
+  z-index: 1;
+}
 .btn-saber svg { flex-shrink: 0; }
+
+.card-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 1.25rem;
+  background: var(--glow-brown-soft);
+  color: var(--warm-mid);
+  border: 1px solid var(--sand);
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
 /* ── AMENITIES GRID ── */
 .amenities-section {
@@ -420,7 +506,6 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
 .btn-submit {
   width: 100%;
   padding: 1rem;
-  background: var(--warm-dark);
   color: var(--white);
   border: none;
   font-family: var(--font-body);
@@ -429,9 +514,7 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
   text-transform: uppercase;
   cursor: pointer;
   margin-top: 1.5rem;
-  transition: background 0.25s;
 }
-.btn-submit:hover { background: var(--accent); }
 
 .form-field-error,
 .form-global-error {
@@ -498,7 +581,7 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 0.55rem 1rem;
-  border-radius: 2px;
+  border-radius: var(--btn-radius);
   cursor: pointer;
   border: 1px solid transparent;
 }
@@ -752,7 +835,7 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
   font-weight: 500;
   letter-spacing: 0.06em;
   text-decoration: none;
-  border-radius: 2px;
+  border-radius: var(--btn-radius);
   transition: background 0.2s;
 }
 

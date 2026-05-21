@@ -17,8 +17,14 @@
   .btn-whatsapp:hover,
   .btn-saber:hover,
   .detail-photo:hover img,
-  .detail-sticky-btn:hover {
+  .detail-sticky-btn:hover,
+  .detail-sticky-form:hover {
     transform: none;
+  }
+
+  .btn-glow:hover::before,
+  .btn-glow.is-glow-active::before {
+    transition: none;
   }
 
   .faq-item.open .faq-chevron { transform: rotate(180deg); }
