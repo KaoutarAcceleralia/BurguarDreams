@@ -6,16 +6,41 @@
 <script>
 /* GitHub Pages sirve en /NombreRepo/; sin esto, ./assets/... apunta a la raíz del dominio y da 404 */
 (function () {
-  if (!location.hostname.endsWith('github.io')) return;
+  var origin = location.origin;
   var parts = location.pathname.split('/').filter(Boolean);
-  if (!parts.length || parts[0] === 'index.html') return;
-  var base = document.createElement('base');
-  base.href = location.origin + '/' + parts[0] + '/';
-  document.head.appendChild(base);
+  var sitePath = '';
+  if (location.hostname.endsWith('github.io') && parts.length && parts[0] !== 'index.html') {
+    sitePath = '/' + parts[0] + '/';
+    var base = document.createElement('base');
+    base.href = origin + sitePath;
+    document.head.appendChild(base);
+  } else {
+    sitePath = location.pathname.replace(/[^/]*$/, '');
+    if (!sitePath.endsWith('/')) sitePath += '/';
+  }
+  window.SITE_BASE_URL = origin + sitePath;
+  var ogImage = window.SITE_BASE_URL + 'assets/images/properties/granvia/Cuina.jpg';
+  [['og:url', location.href.split('#')[0]], ['og:image', ogImage], ['twitter:image', ogImage]].forEach(function (pair) {
+    var el = document.querySelector('meta[property="' + pair[0] + '"], meta[name="' + pair[0] + '"]');
+    if (el) el.setAttribute('content', pair[1]);
+  });
 })();
 </script>
 <title>Corporate housing Barcelona | Burguar Dreams</title>
 <meta name="description" content="Apartamentos amueblados y corporate housing en Barcelona. Flexibilidad, sin permanencia y visitas personalizadas. Burguar Dreams.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Burguar Dreams">
+<meta property="og:title" content="Corporate housing Barcelona | Burguar Dreams">
+<meta property="og:description" content="Apartamentos amueblados y corporate housing en Barcelona. Flexibilidad, sin permanencia y visitas personalizadas.">
+<meta property="og:url" content="">
+<meta property="og:image" content="">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Corporate housing Barcelona | Burguar Dreams">
+<meta name="twitter:description" content="Apartamentos amueblados y corporate housing en Barcelona.">
+<meta name="twitter:image" content="">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,9 +48,11 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/reduced-motion.css">
 </head>
 <body>
 
+<a href="#hogar" class="skip-link" id="skip-link">Saltar al contenido</a>
 
 <!-- ─────────────── HEADER ─────────────── -->
 <header id="main-header">
@@ -58,10 +85,16 @@
           <button class="lang-option" onclick="setLang('it')">🇮🇹 &nbsp;Italiano</button>
         </div>
       </div>
+
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="header-nav" aria-label="Abrir menú de navegación">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
     </div>
   </div>
 
-  <nav class="header-nav">
+  <nav class="header-nav" id="header-nav">
     <button class="nav-link active-nav" onclick="scrollToSection('hogar')" id="nav-hogar-btn">Encuentra tu hogar</button>
     <button class="nav-link" onclick="scrollToSection('empresas')" id="nav-empresas-btn">Alojamiento para Empresas</button>
     <button class="nav-link" onclick="scrollToSection('faq')" id="nav-faq-btn">FAQs</button>
@@ -79,13 +112,11 @@
       <h1 id="hero-h1-text">Descubre nuestros servicios de <em>corporate housing</em> en Barcelona</h1>
       <p class="hero-sub" id="hero-sub-text">Apartamentos amueblados y listos para entrar a vivir. Para particulares y empresas que buscan flexibilidad, diseño y una experiencia sin complicaciones.</p>
       <div class="hero-ctas">
-        <button type="button" class="hero-cta hero-cta-primary" id="hero-cta-apartments" onclick="scrollToSection('hogar')">Ver los 4 apartamentos</button>
         <a href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
            target="_blank" rel="noopener" class="hero-cta hero-cta-whatsapp" id="hero-cta-whatsapp">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
           <span id="hero-cta-whatsapp-text">Hablar por WhatsApp</span>
         </a>
-        <button type="button" class="hero-cta hero-cta-secondary" id="hero-cta-corporate" onclick="scrollToSection('empresas')">Empresas</button>
       </div>
     </div>
   </section>
@@ -530,6 +561,8 @@
 <script src="js/ui/detail.js"></script>
 <script src="js/ui/modal.js"></script>
 <script src="js/ui/cookies.js"></script>
+<script src="js/ui/lazy-images.js"></script>
+<script src="js/ui/mobile-nav.js"></script>
 <script src="js/ui/lightbox.js"></script>
 <script src="js/ui/i18n.js"></script>
 <script src="js/api/submit-form.js"></script>

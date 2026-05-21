@@ -16,9 +16,13 @@ function setLang(lang) {
   document.getElementById('hero-eyebrow-text').textContent = t.hero_eyebrow;
   document.getElementById('hero-h1-text').innerHTML = t.hero_h1;
   document.getElementById('hero-sub-text').textContent = t.hero_sub;
-  document.getElementById('hero-cta-apartments').textContent = t.hero_cta_apartments;
   document.getElementById('hero-cta-whatsapp-text').textContent = t.hero_cta_whatsapp;
-  document.getElementById('hero-cta-corporate').textContent = t.hero_cta_corporate;
+  const skipLink = document.getElementById('skip-link');
+  if (skipLink) skipLink.textContent = t.skip_link;
+  const navToggle = document.getElementById('nav-toggle');
+  if (navToggle && !document.getElementById('main-header')?.classList.contains('nav-open')) {
+    navToggle.setAttribute('aria-label', t.nav_open);
+  }
   document.getElementById('section-title-text').textContent = t.section_title;
   document.getElementById('section-count-text').textContent = t.section_count;
   document.getElementById('corp-eyebrow-text').textContent = t.corp_eyebrow;

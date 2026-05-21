@@ -1,0 +1,25 @@
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero-bg { transform: none; filter: blur(12px) brightness(0.45) saturate(0.8); }
+  .card:hover,
+  .card:hover .card-img,
+  .hero-cta-whatsapp:hover,
+  .btn-quiero:hover,
+  .btn-whatsapp:hover,
+  .btn-saber:hover,
+  .detail-photo:hover img,
+  .detail-sticky-btn:hover {
+    transform: none;
+  }
+
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+}

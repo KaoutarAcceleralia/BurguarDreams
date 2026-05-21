@@ -5,7 +5,7 @@ function renderGrid() {
     <a class="card" href="${propertyUrl(p.id)}" target="_blank" rel="noopener noreferrer">
       <div class="card-img-wrap">
         ${p.cardImage
-          ? `<img src="${p.cardImage}" alt="${p.city}" class="card-img">`
+          ? `<img src="${p.cardImage}" alt="${p.city}" class="card-img" loading="lazy" decoding="async" width="800" height="600">`
           : `<div class="card-placeholder">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="#C4B8A4" stroke-width="1.5">
                 <rect x="8" y="24" width="48" height="32" rx="2"/>

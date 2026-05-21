@@ -1,5 +1,6 @@
 // Keys that are mutually exclusive variants — only show the one the property has, hide the rest entirely
 const HIDE_IF_ABSENT = new Set(['wifi', 'wifi_600']);
+const DETAIL_GALLERY_EAGER = 4;
 
 function renderAmenities(amenitySet) {
   return getAmenityGroups(currentLang).map(group => {
@@ -67,9 +68,8 @@ function showDetail(id, options = {}) {
   const allPhotosArr = [p.mainImage, ...(p.extraPhotos || [])].filter(Boolean);
 
   const wrap = document.getElementById('detail-hero-img-wrap');
-  const imgPos = p.heroImagePosition || 'center center';
   wrap.innerHTML = p.mainImage
-    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in;object-position:${imgPos}" onclick="openLightbox(currentAllPhotos, 0)">`
+    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in" fetchpriority="high" decoding="async" onclick="openLightbox(currentAllPhotos, 0)">`
     : `<div class="detail-hero-placeholder"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5"><rect x="10" y="30" width="60" height="40" rx="2"/><path d="M10 30L40 8l30 22"/><rect x="30" y="50" width="20" height="20"/></svg></div>`;
 
   window.currentAllPhotos = allPhotosArr;
@@ -107,12 +107,19 @@ function showDetail(id, options = {}) {
 
   const photos = p.extraPhotos.filter(Boolean);
   const photoGrid = document.getElementById('d-photos');
+  disconnectLazyImages(photoGrid);
   if (photos.length) {
-    photoGrid.innerHTML = photos.map((src, i) => `
+    photoGrid.innerHTML = photos.map((src, i) => {
+      const eager = i < DETAIL_GALLERY_EAGER;
+      const imgTag = eager
+        ? `<img src="${src}" alt="Foto ${i + 1}" loading="lazy" decoding="async" width="800" height="600">`
+        : `<img data-src="${src}" src="" alt="Foto ${i + 1}" class="detail-photo-img lazy-photo" decoding="async" width="800" height="600">`;
+      return `
       <div class="detail-photo" onclick="openLightbox(currentAllPhotos, ${i + 1})" style="cursor:zoom-in">
-        <img src="${src}" alt="Foto ${i+1}" loading="lazy">
-      </div>
-    `).join('');
+        ${imgTag}
+      </div>`;
+    }).join('');
+    initLazyImages(photoGrid);
   } else {
     photoGrid.innerHTML = [0,1,2].map(() => `
       <div class="detail-photo"><div class="detail-photo-placeholder">
@@ -128,11 +135,13 @@ function showDetail(id, options = {}) {
 
   document.getElementById('home-view').style.display = 'none';
   document.getElementById('detail-view').classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
 }
 
 /* ─── SHOW HOME ─── */
 function showHome() {
+  if (typeof closeMobileNav === 'function') closeMobileNav();
   document.getElementById('detail-view').classList.remove('active');
   document.getElementById('home-view').style.display = '';
   currentPropertyId = null;
@@ -140,7 +149,8 @@ function showHome() {
   const url = new URL(window.location.href);
   url.searchParams.delete('inmueble');
   history.replaceState(null, '', url.pathname + url.search);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   setActiveNav('hogar');
   return false;
 }

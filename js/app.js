@@ -25,6 +25,8 @@ function setActiveNav(sectionId) {
 }
 
 function scrollToSection(sectionId) {
+  if (typeof closeMobileNav === 'function') closeMobileNav();
+
   if (document.getElementById('detail-view').classList.contains('active')) {
     document.getElementById('detail-view').classList.remove('active');
     document.getElementById('home-view').style.display = '';
@@ -38,7 +40,8 @@ function scrollToSection(sectionId) {
   if (!section) return;
 
   const top = section.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
-  window.scrollTo({ top, behavior: 'smooth' });
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.scrollTo({ top, behavior: prefersReduced ? 'auto' : 'smooth' });
   setActiveNav(sectionId);
 }
 
