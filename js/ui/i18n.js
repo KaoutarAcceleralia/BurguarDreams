@@ -16,6 +16,9 @@ function setLang(lang) {
   document.getElementById('hero-eyebrow-text').textContent = t.hero_eyebrow;
   document.getElementById('hero-h1-text').innerHTML = t.hero_h1;
   document.getElementById('hero-sub-text').textContent = t.hero_sub;
+  document.getElementById('hero-cta-apartments').textContent = t.hero_cta_apartments;
+  document.getElementById('hero-cta-whatsapp-text').textContent = t.hero_cta_whatsapp;
+  document.getElementById('hero-cta-corporate').textContent = t.hero_cta_corporate;
   document.getElementById('section-title-text').textContent = t.section_title;
   document.getElementById('section-count-text').textContent = t.section_count;
   document.getElementById('corp-eyebrow-text').textContent = t.corp_eyebrow;
@@ -33,11 +36,20 @@ function setLang(lang) {
   document.getElementById('faq-title-text').textContent = t.faq_title;
   document.getElementById('back-label').textContent = t.back;
   document.getElementById('btn-interest-label').textContent = t.btn_interest;
+  const stickyWa = document.getElementById('detail-sticky-wa-label');
+  const stickyForm = document.getElementById('detail-sticky-form-label');
+  if (stickyWa) stickyWa.textContent = t.detail_sticky_wa;
+  if (stickyForm) stickyForm.textContent = t.btn_interest;
   document.getElementById('detail-about-h3').textContent = t.detail_about;
   document.getElementById('detail-amenities-h3').textContent = t.detail_amenities;
   document.getElementById('modal-eyebrow-text').textContent = t.modal_eyebrow;
   document.getElementById('modal-title-text').textContent = t.modal_title;
   document.getElementById('modal-intro-text').textContent = t.modal_intro;
+  const cookieText = document.getElementById('cookie-banner-text');
+  if (cookieText) cookieText.textContent = t.cookie_banner_text;
+  document.getElementById('cookie-accept-btn').textContent = t.cookie_accept;
+  document.getElementById('cookie-reject-btn').textContent = t.cookie_reject;
+  document.getElementById('cookie-config-btn').textContent = t.cookie_configure;
   document.getElementById('label-nombre').textContent = t.label_nombre;
   document.getElementById('label-apellidos').textContent = t.label_apellidos;
   document.getElementById('label-email').textContent = t.label_email;
@@ -62,7 +74,15 @@ function setLang(lang) {
   document.getElementById('contact-eyebrow-text').textContent = t.contact_eyebrow;
   document.getElementById('contact-title-text').innerHTML = t.contact_title;
   document.getElementById('contact-sub-text').textContent = t.contact_sub;
+  document.getElementById('contact-wa-hint').textContent = t.contact_wa_hint;
   document.getElementById('contact-whatsapp-text').textContent = t.contact_whatsapp;
+  document.getElementById('contact-form-btn-text').textContent = t.contact_form_btn;
+  document.getElementById('contact-form-note').textContent = t.contact_form_note;
+  const contactWa = document.getElementById('contact-wa-link');
+  if (contactWa) {
+    const p = currentPropertyId ? properties.find(x => x.id === currentPropertyId) : null;
+    contactWa.href = buildWhatsAppUrl(p);
+  }
   document.getElementById('contact-location-label').textContent = t.contact_location_label;
   document.getElementById('contact-email-label').textContent = t.contact_email_label;
   document.getElementById('contact-phone-label').textContent = t.contact_phone_label;
@@ -71,6 +91,7 @@ function setLang(lang) {
   document.getElementById('footer-legal-link').textContent = t.footer_legal;
   document.getElementById('footer-privacy-link').textContent = t.footer_privacy;
   document.getElementById('footer-cookies-link').textContent = t.footer_cookies;
+  document.getElementById('footer-legal-id').textContent = t.footer_legal_id;
   document.getElementById('footer-copy-text').textContent = t.footer_copy;
 
   renderFAQ();
@@ -79,6 +100,8 @@ function setLang(lang) {
   // If user is viewing a property detail, re-render it in the new language
   if (currentPropertyId && document.getElementById('detail-view').classList.contains('active')) {
     showDetail(currentPropertyId);
+  } else {
+    updateWhatsAppLinks(null);
   }
   document.getElementById('lang-switcher').classList.remove('open');
 }

@@ -105,7 +105,7 @@ header {
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--stone);
+  color: var(--warm-mid);
 }
 .grid {
   display: grid;
@@ -120,6 +120,8 @@ header {
   flex-direction: column;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 .card:hover {
   box-shadow: 0 12px 40px rgba(44,36,22,0.12);
@@ -383,6 +385,93 @@ header {
   transition: background 0.25s;
 }
 .btn-submit:hover { background: var(--accent); }
+
+.form-field-error,
+.form-global-error {
+  display: block;
+  font-size: 0.78rem;
+  color: #8B3A2A;
+  margin-top: 0.35rem;
+  min-height: 0;
+}
+.form-field-error:not(:empty),
+.form-global-error:not(:empty) { min-height: 1.1em; }
+.form-global-error { margin-bottom: 0.75rem; }
+.form-extra {
+  margin: 1.25rem 0 1rem;
+  border: 1px solid var(--sand);
+  border-radius: 2px;
+  padding: 0;
+}
+.form-extra summary {
+  padding: 0.9rem 1rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--warm-mid);
+  cursor: pointer;
+  list-style: none;
+}
+.form-extra summary::-webkit-details-marker { display: none; }
+.form-extra[open] summary { border-bottom: 1px solid var(--sand); }
+.form-extra-body { padding: 1rem; }
+
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--warm-dark);
+  color: rgba(255,255,255,0.9);
+  box-shadow: 0 -4px 24px rgba(44,36,22,0.15);
+}
+.cookie-banner[hidden] { display: none !important; }
+.cookie-banner-text {
+  flex: 1 1 280px;
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+}
+.cookie-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cookie-btn {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.55rem 1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+.cookie-btn-accept {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.cookie-btn-reject {
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.35);
+}
+.cookie-btn-link {
+  background: transparent;
+  color: var(--accent-light);
+  border: none;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .modal-success { display: none; text-align: center; padding: 2rem 0; }
 .modal-success.active { display: block; }
 .modal-form.hidden { display: none; }
@@ -417,13 +506,25 @@ header {
 .footer-bar .logo { color: var(--sand); }
 .footer-bar .logo span { color: var(--accent-light); }
 .footer-logo { justify-self: start; }
-.footer-copy {
+.footer-center {
   justify-self: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.footer-legal-id {
+  margin: 0;
+  font-size: 0.72rem;
+  color: rgba(232,223,208,0.85);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.footer-copy {
   margin: 0;
   font-size: 0.75rem;
-  color: var(--stone);
+  color: rgba(232,223,208,0.7);
   font-weight: 300;
-  text-align: center;
 }
 .footer-links {
   justify-self: end;
@@ -436,7 +537,7 @@ header {
 .footer-legal-link {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  color: var(--stone);
+  color: rgba(232,223,208,0.75);
   background: none;
   border: none;
   cursor: pointer;

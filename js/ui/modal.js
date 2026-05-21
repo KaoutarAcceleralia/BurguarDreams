@@ -2,6 +2,7 @@ function openModal() {
   document.getElementById('modal-overlay').classList.add('active');
   document.getElementById('modal-form').classList.remove('hidden');
   document.getElementById('modal-success').classList.remove('active');
+  if (typeof clearFormErrors === 'function') clearFormErrors();
   updateBodyScrollLock();
 }
 

@@ -28,6 +28,10 @@ function scrollToSection(sectionId) {
   if (document.getElementById('detail-view').classList.contains('active')) {
     document.getElementById('detail-view').classList.remove('active');
     document.getElementById('home-view').style.display = '';
+    currentPropertyId = null;
+    const url = new URL(window.location.href);
+    url.searchParams.delete('inmueble');
+    history.replaceState(null, '', url.pathname + url.search);
   }
 
   const section = document.getElementById(sectionId);
@@ -62,25 +66,34 @@ function renderFAQ() {
   const items = faqs[currentLang] || faqs.es;
   list.innerHTML = items.map((f, i) => `
     <div class="faq-item" id="faq-${i}">
-      <button class="faq-question" onclick="toggleFAQ(${i})">
+      <button type="button" class="faq-question" id="faq-btn-${i}" onclick="toggleFAQ(${i})"
+              aria-expanded="false" aria-controls="faq-answer-${i}">
         <span>${f.q}</span>
-        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path d="M3 6l5 5 5-5"/>
         </svg>
       </button>
-      <div class="faq-answer">${f.a}</div>
+      <div class="faq-answer" id="faq-answer-${i}" role="region" aria-labelledby="faq-btn-${i}" hidden>${f.a}</div>
     </div>
   `).join('');
 }
 
 function toggleFAQ(i) {
-  document.getElementById(`faq-${i}`).classList.toggle('open');
+  const item = document.getElementById(`faq-${i}`);
+  const btn = document.getElementById(`faq-btn-${i}`);
+  const answer = document.getElementById(`faq-answer-${i}`);
+  const open = !item.classList.contains('open');
+  item.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', String(open));
+  answer.hidden = !open;
 }
 
 renderGrid();
 renderFAQ();
 renderLegalModals('es');
 setHeroBg();
+updateWhatsAppLinks(null);
+initPropertyFromUrl();
 initScrollSpy();
 window.addEventListener('resize', () => {
   document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');

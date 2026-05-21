@@ -24,10 +24,45 @@ function renderAmenities(amenitySet) {
   }).join('');
 }
 
-function showDetail(id) {
+function propertyUrl(id) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('inmueble', String(id));
+  return url.pathname + url.search;
+}
+
+function buildWhatsAppUrl(property) {
+  const t = i18n[currentLang] || i18n.es;
+  const text = property
+    ? (t.wa_msg_property || t.wa_msg_general)
+        .replace('{street}', property.street)
+        .replace('{city}', property.city)
+    : t.wa_msg_general;
+  return `https://wa.me/34660688501?text=${encodeURIComponent(text)}`;
+}
+
+function updateWhatsAppLinks(property) {
+  const url = buildWhatsAppUrl(property);
+  const sticky = document.getElementById('detail-sticky-wa');
+  if (sticky) sticky.href = url;
+  const contact = document.getElementById('contact-wa-link');
+  if (contact) contact.href = url;
+}
+
+function initPropertyFromUrl() {
+  const id = Number(new URLSearchParams(window.location.search).get('inmueble'));
+  if (id && properties.some(x => x.id === id)) showDetail(id, { skipUrlUpdate: true });
+}
+
+function showDetail(id, options = {}) {
   const p = properties.find(x => x.id === id);
   if (!p) return;
   currentPropertyId = id;
+
+  if (!options.skipUrlUpdate) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('inmueble', String(id));
+    history.replaceState(null, '', url.pathname + url.search);
+  }
 
   const allPhotosArr = [p.mainImage, ...(p.extraPhotos || [])].filter(Boolean);
 
@@ -89,6 +124,8 @@ function showDetail(id) {
     `).join('');
   }
 
+  updateWhatsAppLinks(p);
+
   document.getElementById('home-view').style.display = 'none';
   document.getElementById('detail-view').classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -98,6 +135,11 @@ function showDetail(id) {
 function showHome() {
   document.getElementById('detail-view').classList.remove('active');
   document.getElementById('home-view').style.display = '';
+  currentPropertyId = null;
+  updateWhatsAppLinks(null);
+  const url = new URL(window.location.href);
+  url.searchParams.delete('inmueble');
+  history.replaceState(null, '', url.pathname + url.search);
   window.scrollTo({ top: 0, behavior: 'smooth' });
   setActiveNav('hogar');
   return false;

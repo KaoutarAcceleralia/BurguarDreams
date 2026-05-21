@@ -2,7 +2,7 @@ function renderGrid() {
   const t = i18n[currentLang] || i18n.es;
   const grid = document.getElementById('properties-grid');
   grid.innerHTML = properties.map(p => `
-    <div class="card" onclick="showDetail(${p.id})">
+    <a class="card" href="${propertyUrl(p.id)}" target="_blank" rel="noopener noreferrer">
       <div class="card-img-wrap">
         ${p.cardImage
           ? `<img src="${p.cardImage}" alt="${p.city}" class="card-img">`
@@ -35,15 +35,15 @@ function renderGrid() {
               border-radius:3px;
               white-space:nowrap;
             ">📅 ${getPropText(p,'availableText')}</span>` : ''}
-            <button class="btn-saber" onclick="event.stopPropagation(); showDetail(${p.id})">
+            <span class="btn-saber">
               <span>${t.btn_more}</span>
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M2.5 6.5h8M7 3.5l3 3-3 3"/>
               </svg>
-            </button>
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </a>
   `).join('');
 }

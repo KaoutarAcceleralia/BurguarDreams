@@ -7,17 +7,35 @@ function getDb() {
   return null;
 }
 
+function clearFormErrors() {
+  ['error-nombre', 'error-telefono', 'form-global-error'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '';
+  });
+}
+
+function showFormError(fieldId, message) {
+  const el = document.getElementById(fieldId);
+  if (el) el.textContent = message;
+}
+
 async function submitForm() {
+  clearFormErrors();
+  const t = i18n[currentLang] || i18n.es;
+
   const nombre   = document.getElementById('f-nombre').value.trim();
   const telefono = document.getElementById('f-telefono').value.trim();
   if (!nombre || !telefono) {
-    alert('Por favor rellena al menos tu nombre y teléfono.');
+    if (!nombre) showFormError('error-nombre', t.form_error_required);
+    if (!telefono) showFormError('error-telefono', t.form_error_required);
+    if (!nombre && !telefono) showFormError('form-global-error', t.form_error_required);
+    document.getElementById('f-nombre').focus();
     return;
   }
 
   const db = getDb();
   if (!db) {
-    alert('No se pudo conectar con el servidor. Comprueba tu conexión o desactiva el bloqueador de anuncios e inténtalo de nuevo.');
+    showFormError('form-global-error', t.form_error_server);
     return;
   }
 
@@ -51,9 +69,9 @@ async function submitForm() {
 
   } catch (e) {
     console.error('Error guardando solicitud:', e);
-    alert('Ha ocurrido un error. Por favor inténtalo de nuevo.');
+    showFormError('form-global-error', t.form_error_generic);
   } finally {
     btn.disabled = false;
-    btn.textContent = (i18n[currentLang] || i18n.es).btn_send;
+    btn.textContent = t.btn_send;
   }
 }
