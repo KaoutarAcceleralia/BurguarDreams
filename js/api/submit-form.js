@@ -46,18 +46,24 @@ async function submitForm() {
   const p = properties.find(x => x.id === currentPropertyId);
   const mascotas = document.querySelector('input[name="f-mascotas"]:checked')?.value || 'No';
 
+  const opt = (id) => {
+    const el = document.getElementById(id);
+    const v = el?.value?.trim();
+    return v || null;
+  };
+
   try {
     const { error } = await db.from('solicitudes').insert({
       property_id:        currentPropertyId || null,
       property_name:      p ? `${p.city} — ${p.street}` : null,
       nombre:             nombre,
-      apellidos:          document.getElementById('f-apellidos').value.trim(),
+      apellidos:          opt('f-apellidos'),
       telefono:           telefono,
-      email:              document.getElementById('f-email').value.trim(),
-      fecha_nacimiento:   document.getElementById('f-nacimiento').value || null,
-      situacion_laboral:  document.getElementById('f-laboral').value,
-      ingresos_mensuales: document.getElementById('f-ingresos').value,
-      num_personas:       document.getElementById('f-personas').value,
+      email:              opt('f-email'),
+      fecha_nacimiento:   opt('f-nacimiento'),
+      situacion_laboral:  opt('f-laboral'),
+      ingresos_mensuales: opt('f-ingresos'),
+      num_personas:       opt('f-personas'),
       mascotas:           mascotas,
     });
 
@@ -68,8 +74,29 @@ async function submitForm() {
     setTimeout(closeModal, 3000);
 
   } catch (e) {
-    console.error('Error guardando solicitud:', e);
-    showFormError('form-global-error', t.form_error_generic);
+    const msg = e?.message || e?.error_description || String(e);
+    const code = e?.code || '';
+    console.error('[Burguar Dreams] Error guardando solicitud:', {
+      code,
+      message: msg,
+      hint: e?.hint,
+      details: e?.details,
+    });
+    const needsDbSetup =
+      code === '42501' ||
+      code === '3F000' ||
+      /row-level security/i.test(msg) ||
+      /schema "net"/i.test(msg);
+    if (needsDbSetup) {
+      console.error(
+        '[Burguar Dreams] Ejecuta supabase/fix-urgente.sql en SQL Editor:',
+        'https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new'
+      );
+    }
+    showFormError(
+      'form-global-error',
+      needsDbSetup ? (t.form_error_db_setup || t.form_error_generic) : t.form_error_generic
+    );
   } finally {
     btn.disabled = false;
     btn.textContent = t.btn_send;

@@ -1,0 +1,48 @@
+-- Burguar Dreams — arreglar envío del formulario desde la web
+-- Error HTTP 400 / code 3F000: schema "net" does not exist
+--
+-- Ejecutar en: Supabase Dashboard → SQL Editor → New query → pegar todo → Run
+-- Proyecto: https://supabase.com/dashboard/project/yscbwngotgbkytmzogol
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- 1) Quitar triggers/webhooks en solicitudes (arregla el 400 de inmediato)
+-- Elimina TODOS los triggers de usuario en solicitudes.
+-- Si tenías email automático al recibir solicitudes, vuelve a crearlo tras el paso 3.
+-- ─────────────────────────────────────────────────────────────────────────────
+do $$
+declare
+  r record;
+begin
+  for r in
+    select t.tgname
+    from pg_trigger t
+    join pg_class c on c.oid = t.tgrelid
+    join pg_namespace n on n.oid = c.relnamespace
+    where n.nspname = 'public'
+      and c.relname = 'solicitudes'
+      and not t.tgisinternal
+  loop
+    execute format('drop trigger if exists %I on public.solicitudes', r.tgname);
+    raise notice 'Trigger eliminado: %', r.tgname;
+  end loop;
+end $$;
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- 2) Política RLS: permitir INSERT anónimo desde la web
+-- Sin esto: code 42501 — row-level security policy
+-- ─────────────────────────────────────────────────────────────────────────────
+alter table public.solicitudes enable row level security;
+
+drop policy if exists "anon_insert_solicitudes" on public.solicitudes;
+
+create policy "anon_insert_solicitudes"
+  on public.solicitudes
+  for insert
+  to anon, authenticated
+  with check (true);
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- 3) Extensión pg_net (opcional; para volver a usar webhooks de email)
+-- Si falla: Database → Extensions → pg_net → Enable
+-- ─────────────────────────────────────────────────────────────────────────────
+create extension if not exists pg_net with schema extensions;
