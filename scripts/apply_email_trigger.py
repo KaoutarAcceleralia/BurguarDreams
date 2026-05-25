@@ -11,8 +11,26 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = ROOT / ".env"
+CONFIG_JS = ROOT / "js" / "config.js"
 SQL_TEMPLATE = ROOT / "supabase" / "trigger-resend-email.sql"
+READY_SQL = ROOT / "supabase" / ".trigger-ready.sql"
 PROJECT_REF = "yscbwngotgbkytmzogol"
+
+
+def load_keys_from_config_js() -> dict[str, str]:
+    import re
+
+    if not CONFIG_JS.exists():
+        return {}
+    text = CONFIG_JS.read_text(encoding="utf-8")
+    out: dict[str, str] = {}
+    m = re.search(r'window\.SUPABASE_KEY\s*=\s*"([^"]+)"', text)
+    if m:
+        out["SUPABASE_KEY"] = m.group(1)
+    m = re.search(r'window\.SUPABASE_ANON_KEY\s*=\s*"([^"]+)"', text)
+    if m:
+        out["SUPABASE_ANON_KEY"] = m.group(1)
+    return out
 
 
 def load_env() -> dict[str, str]:
@@ -51,12 +69,13 @@ def run_sql(token: str, sql: str) -> None:
 
 def main() -> int:
     env = load_env()
+    env.update({k: v for k, v in load_keys_from_config_js().items() if v})
     token = env.get("SUPABASE_ACCESS_TOKEN", "").strip()
     pub = env.get("SUPABASE_KEY", "").strip()
     anon = env.get("SUPABASE_ANON_KEY", "").strip()
 
     if not pub or not anon:
-        print("Faltan SUPABASE_KEY y SUPABASE_ANON_KEY en .env", file=sys.stderr)
+        print("Faltan SUPABASE_KEY y SUPABASE_ANON_KEY en .env o js/config.js", file=sys.stderr)
         print("Ejecuta: python3 scripts/generate_config.py", file=sys.stderr)
         return 1
 
@@ -70,8 +89,11 @@ def main() -> int:
         .replace("{{SUPABASE_ANON_KEY}}", anon.replace("'", "''"))
     )
 
+    READY_SQL.write_text(sql, encoding="utf-8")
+    print(f"SQL listo: {READY_SQL}", file=sys.stderr)
+
     if not token:
-        print("Sin SUPABASE_ACCESS_TOKEN: pega este SQL en el Dashboard → SQL Editor:\n")
+        print("Sin SUPABASE_ACCESS_TOKEN: pega el SQL en Dashboard → SQL Editor:\n")
         print(sql)
         print(
             "\nToken: https://supabase.com/dashboard/account/tokens",
