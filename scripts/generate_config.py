@@ -25,13 +25,19 @@ def main() -> None:
     env = load_env(ENV_FILE)
     url = env.get("SUPABASE_URL")
     key = env.get("SUPABASE_KEY")
+    anon = env.get("SUPABASE_ANON_KEY", "").strip()
     if not url or not key:
         raise SystemExit(".env must define SUPABASE_URL and SUPABASE_KEY")
+
+    anon_line = ""
+    if anon:
+        anon_line = f'window.SUPABASE_ANON_KEY = "{anon}";\n'
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(
         f'window.SUPABASE_URL = "{url}";\n'
         f'window.SUPABASE_KEY = "{key}";\n'
+        f"{anon_line}"
         'if (typeof supabase === "undefined") {\n'
         '  console.error("[Burguar Dreams] No se cargó el SDK de Supabase (CDN bloqueado o sin conexión).");\n'
         "} else {\n"

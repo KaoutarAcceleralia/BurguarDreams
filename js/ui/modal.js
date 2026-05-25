@@ -2,6 +2,8 @@ function openModal() {
   document.getElementById('modal-overlay').classList.add('active');
   document.getElementById('modal-form').classList.remove('hidden');
   document.getElementById('modal-success').classList.remove('active');
+  const privacy = document.getElementById('f-privacidad');
+  if (privacy) privacy.checked = false;
   if (typeof clearFormErrors === 'function') clearFormErrors();
   updateBodyScrollLock();
 }

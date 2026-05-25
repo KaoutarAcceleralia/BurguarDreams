@@ -1,7 +1,10 @@
+const HTML_LANG_CODES = { es: 'es', ca: 'ca', en: 'en', fr: 'fr', de: 'de', it: 'it' };
+
 function setLang(lang) {
   currentLang = lang;
   const t = i18n[lang] || i18n.es;
 
+  document.documentElement.lang = HTML_LANG_CODES[lang] || 'es';
   document.getElementById('lang-flag').innerHTML = t.flag;
   document.getElementById('lang-label').textContent = t.label;
 
@@ -72,6 +75,8 @@ function setLang(lang) {
   for (let i = 0; i <= 5; i++) { const el = document.getElementById(`f-ingresos-${i}`); if (el) el.textContent = t[`ingresos_${i}`]; }
   for (let i = 0; i <= 5; i++) { const el = document.getElementById(`f-personas-${i}`); if (el) el.textContent = t[`personas_${i}`]; }
 
+  const privacyLabel = document.getElementById('label-privacidad');
+  if (privacyLabel) privacyLabel.innerHTML = t.form_privacy_html;
   document.getElementById('btn-send').textContent = t.btn_send;
   document.getElementById('success-title-text').textContent = t.success_title;
   document.getElementById('success-desc-text').textContent = t.success_desc;

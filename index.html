@@ -370,6 +370,14 @@
         </div>
       </div>
 
+      <div class="form-group form-group-consent">
+        <label class="form-consent-label">
+          <input type="checkbox" id="f-privacidad" name="f-privacidad" value="1">
+          <span id="label-privacidad">He leído la <button type="button" class="form-privacy-link" onclick="event.preventDefault();event.stopPropagation();openPrivacyModal()">política de privacidad</button> y acepto el tratamiento de mis datos *</span>
+        </label>
+        <span class="form-field-error" id="error-privacidad" role="alert"></span>
+      </div>
+
       <p class="form-global-error" id="form-global-error" role="alert"></p>
       <button class="btn-submit btn-glow" id="btn-send" onclick="submitForm()">Enviar solicitud</button>
     </div>
@@ -551,24 +559,24 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/data/amenities.js"></script>
-<script src="js/data/properties.js"></script>
-<script src="js/data/i18n.js"></script>
-<script src="js/data/faqs.js"></script>
-<script src="js/legal/legal-i18n.js"></script>
-<script src="js/ui/grid.js"></script>
-<script src="js/ui/detail.js"></script>
-<script src="js/ui/modal.js"></script>
-<script src="js/ui/cookies.js"></script>
-<script src="js/ui/lazy-images.js"></script>
-<script src="js/ui/mobile-nav.js"></script>
-<script src="js/ui/button-hover.js"></script>
-<script src="js/ui/scroll-reveal.js"></script>
-<script src="js/ui/lightbox.js"></script>
-<script src="js/ui/i18n.js"></script>
-<script src="js/api/submit-form.js"></script>
-<script src="js/app.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script defer src="js/config.js"></script>
+<script defer src="js/data/amenities.js"></script>
+<script defer src="js/data/properties.js"></script>
+<script defer src="js/data/i18n.js"></script>
+<script defer src="js/data/faqs.js"></script>
+<script defer src="js/legal/legal-i18n.js"></script>
+<script defer src="js/ui/grid.js"></script>
+<script defer src="js/ui/detail.js"></script>
+<script defer src="js/ui/modal.js"></script>
+<script defer src="js/ui/cookies.js"></script>
+<script defer src="js/ui/lazy-images.js"></script>
+<script defer src="js/ui/mobile-nav.js"></script>
+<script defer src="js/ui/button-hover.js"></script>
+<script defer src="js/ui/scroll-reveal.js"></script>
+<script defer src="js/ui/lightbox.js"></script>
+<script defer src="js/ui/i18n.js"></script>
+<script defer src="js/api/submit-form.js"></script>
+<script defer src="js/app.js"></script>
 </body>
 </html>

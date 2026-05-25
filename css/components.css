@@ -527,6 +527,36 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
 .form-field-error:not(:empty),
 .form-global-error:not(:empty) { min-height: 1.1em; }
 .form-global-error { margin-bottom: 0.75rem; }
+
+.form-consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--warm-dark);
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.45;
+  cursor: pointer;
+}
+.form-consent-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+}
+.form-privacy-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.form-privacy-link:hover { color: var(--warm-dark); }
 .form-extra {
   margin: 1.25rem 0 1rem;
   border: 1px solid var(--sand);

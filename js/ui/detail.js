@@ -75,6 +75,10 @@ function showDetail(id, options = {}) {
   wrap.innerHTML = p.mainImage
     ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in" fetchpriority="high" decoding="async" onclick="openLightbox(currentAllPhotos, 0)">`
     : `<div class="detail-hero-placeholder"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5"><rect x="10" y="30" width="60" height="40" rx="2"/><path d="M10 30L40 8l30 22"/><rect x="30" y="50" width="20" height="20"/></svg></div>`;
+  const heroImg = wrap.querySelector('.detail-hero-img');
+  if (heroImg && p.heroImagePosition) {
+    heroImg.style.objectPosition = p.heroImagePosition;
+  }
 
   window.currentAllPhotos = allPhotosArr;
 

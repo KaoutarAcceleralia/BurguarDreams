@@ -7,8 +7,20 @@ function getDb() {
   return null;
 }
 
+const FIELD_LIMITS = {
+  nombre: 120,
+  apellidos: 120,
+  telefono: 30,
+  email: 254,
+  situacion_laboral: 80,
+  ingresos_mensuales: 80,
+  num_personas: 40,
+  mascotas: 10,
+  property_name: 200,
+};
+
 function clearFormErrors() {
-  ['error-nombre', 'error-telefono', 'form-global-error'].forEach(id => {
+  ['error-nombre', 'error-telefono', 'error-privacidad', 'form-global-error'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = '';
   });
@@ -19,17 +31,92 @@ function showFormError(fieldId, message) {
   if (el) el.textContent = message;
 }
 
+function trimField(id, maxLen) {
+  const v = document.getElementById(id)?.value?.trim() || '';
+  if (!maxLen) return v;
+  return v.slice(0, maxLen);
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidPhone(value) {
+  const digits = value.replace(/\D/g, '');
+  return digits.length >= 6 && digits.length <= 15 && /^[\d\s+\-().]+$/.test(value);
+}
+
+function edgeFunctionJwt() {
+  const anon = window.SUPABASE_ANON_KEY;
+  if (typeof anon === 'string' && anon.startsWith('eyJ')) return anon;
+  const key = window.SUPABASE_KEY;
+  if (typeof key === 'string' && key.startsWith('eyJ')) return key;
+  return null;
+}
+
+async function invokeResendEmail(payload) {
+  const url = `${window.SUPABASE_URL}/functions/v1/resend-email`;
+  const apiKey = window.SUPABASE_KEY;
+  const jwt = edgeFunctionJwt();
+  const headers = {
+    'Content-Type': 'application/json',
+    apikey: apiKey,
+  };
+  if (jwt) {
+    headers.Authorization = `Bearer ${jwt}`;
+  } else {
+    headers.Authorization = `Bearer ${apiKey}`;
+  }
+  const res = await fetch(url, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    let hint = '';
+    if (res.status === 401) {
+      hint =
+        ' Arreglo: (1) Dashboard → Edge Functions → resend-email → desactiva Verify JWT, ' +
+        'o ejecuta: python3 scripts/disable_resend_jwt.py (con SUPABASE_ACCESS_TOKEN en .env). ' +
+        '(2) O añade SUPABASE_ANON_KEY (eyJ...) en .env y ejecuta: python3 scripts/generate_config.py';
+    }
+    console.warn('[Burguar Dreams] resend-email', res.status, text || res.statusText, hint);
+    return false;
+  }
+  return true;
+}
+
 async function submitForm() {
   clearFormErrors();
   const t = i18n[currentLang] || i18n.es;
 
-  const nombre   = document.getElementById('f-nombre').value.trim();
-  const telefono = document.getElementById('f-telefono').value.trim();
-  if (!nombre || !telefono) {
-    if (!nombre) showFormError('error-nombre', t.form_error_required);
-    if (!telefono) showFormError('error-telefono', t.form_error_required);
-    if (!nombre && !telefono) showFormError('form-global-error', t.form_error_required);
-    document.getElementById('f-nombre').focus();
+  const nombre = trimField('f-nombre', FIELD_LIMITS.nombre);
+  const telefono = trimField('f-telefono', FIELD_LIMITS.telefono);
+  const email = trimField('f-email', FIELD_LIMITS.email);
+  const privacyOk = document.getElementById('f-privacidad')?.checked;
+
+  let hasError = false;
+  if (!nombre || nombre.length < 2) {
+    showFormError('error-nombre', t.form_error_required);
+    hasError = true;
+  }
+  if (!telefono || !isValidPhone(telefono)) {
+    showFormError('error-telefono', telefono ? t.form_error_phone : t.form_error_required);
+    hasError = true;
+  }
+  if (email && !isValidEmail(email)) {
+    showFormError('form-global-error', t.form_error_email);
+    hasError = true;
+  }
+  if (!privacyOk) {
+    showFormError('error-privacidad', t.form_error_privacy);
+    hasError = true;
+  }
+  if (hasError) {
+    if (!nombre || nombre.length < 2) document.getElementById('f-nombre').focus();
+    else if (!telefono || !isValidPhone(telefono)) document.getElementById('f-telefono').focus();
+    else if (!privacyOk) document.getElementById('f-privacidad').focus();
     return;
   }
 
@@ -46,29 +133,48 @@ async function submitForm() {
   const p = properties.find(x => x.id === currentPropertyId);
   const mascotas = document.querySelector('input[name="f-mascotas"]:checked')?.value || 'No';
 
-  const opt = (id) => {
-    const el = document.getElementById(id);
-    const v = el?.value?.trim();
+  const opt = (id, maxLen) => {
+    const v = trimField(id, maxLen);
     return v || null;
   };
 
+  const propertyName = p ? `${p.city} — ${p.street}`.slice(0, FIELD_LIMITS.property_name) : null;
+
   try {
     const { error } = await db.from('solicitudes').insert({
-      property_id:        currentPropertyId || null,
-      property_name:      p ? `${p.city} — ${p.street}` : null,
-      nombre:             nombre,
-      apellidos:          opt('f-apellidos'),
-      telefono:           telefono,
-      email:              opt('f-email'),
-      fecha_nacimiento:   opt('f-nacimiento'),
-      situacion_laboral:  opt('f-laboral'),
-      ingresos_mensuales: opt('f-ingresos'),
-      num_personas:       opt('f-personas'),
-      mascotas:           mascotas,
+      property_id: currentPropertyId || null,
+      property_name: propertyName,
+      nombre,
+      apellidos: opt('f-apellidos', FIELD_LIMITS.apellidos),
+      telefono,
+      email: email || null,
+      fecha_nacimiento: opt('f-nacimiento'),
+      situacion_laboral: opt('f-laboral', FIELD_LIMITS.situacion_laboral),
+      ingresos_mensuales: opt('f-ingresos', FIELD_LIMITS.ingresos_mensuales),
+      num_personas: opt('f-personas', FIELD_LIMITS.num_personas),
+      mascotas: mascotas.slice(0, FIELD_LIMITS.mascotas),
     });
 
     if (error) throw error;
 
+    try {
+      await invokeResendEmail({
+        nombre,
+        apellidos: opt('f-apellidos', FIELD_LIMITS.apellidos),
+        telefono,
+        email: email || null,
+        fecha_nacimiento: opt('f-nacimiento'),
+        situacion_laboral: opt('f-laboral', FIELD_LIMITS.situacion_laboral),
+        ingresos_mensuales: opt('f-ingresos', FIELD_LIMITS.ingresos_mensuales),
+        num_personas: opt('f-personas', FIELD_LIMITS.num_personas),
+        mascotas,
+        property_name: propertyName,
+      });
+    } catch (emailErr) {
+      console.warn('[Burguar Dreams] Email no enviado (datos guardados):', emailErr);
+    }
+
+    document.getElementById('f-privacidad').checked = false;
     document.getElementById('modal-form').classList.add('hidden');
     document.getElementById('modal-success').classList.add('active');
     setTimeout(closeModal, 3000);
@@ -82,21 +188,25 @@ async function submitForm() {
       hint: e?.hint,
       details: e?.details,
     });
+    const validationFailed = /invalid nombre|invalid telefono|invalid email/i.test(msg);
     const needsDbSetup =
-      code === '42501' ||
-      code === '3F000' ||
-      /row-level security/i.test(msg) ||
-      /schema "net"/i.test(msg);
+      !validationFailed &&
+      (code === '42501' ||
+        code === '3F000' ||
+        /row-level security/i.test(msg) ||
+        /schema "net"/i.test(msg));
     if (needsDbSetup) {
       console.error(
-        '[Burguar Dreams] Ejecuta supabase/fix-urgente.sql en SQL Editor:',
+        '[Burguar Dreams] Ejecuta supabase/fix-urgente.sql y supabase/validate-solicitudes.sql en SQL Editor:',
         'https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new'
       );
+      showFormError(
+        'form-global-error',
+        t.form_error_db_setup || t.form_error_generic
+      );
+    } else {
+      showFormError('form-global-error', t.form_error_generic);
     }
-    showFormError(
-      'form-global-error',
-      needsDbSetup ? (t.form_error_db_setup || t.form_error_generic) : t.form_error_generic
-    );
   } finally {
     btn.disabled = false;
     btn.textContent = t.btn_send;
