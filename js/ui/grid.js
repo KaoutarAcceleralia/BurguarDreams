@@ -1,14 +1,8 @@
-function onCardClick(e, propertyId) {
-  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-  e.preventDefault();
-  showDetail(propertyId);
-}
-
 function renderGrid() {
   const t = i18n[currentLang] || i18n.es;
   const grid = document.getElementById('properties-grid');
   grid.innerHTML = properties.map((p, i) => `
-    <a class="card" href="${propertyUrl(p.id)}" onclick="onCardClick(event, ${p.id})" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
+    <a class="card" href="${propertyUrl(p.id)}" target="_blank" rel="noopener noreferrer" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
       <div class="card-img-wrap">
         ${p.cardImage
           ? `<img src="${p.cardImage}" alt="${p.city}" class="card-img" loading="lazy" decoding="async" width="800" height="600">`
