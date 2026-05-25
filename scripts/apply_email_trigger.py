@@ -79,6 +79,10 @@ def main() -> int:
         print("Ejecuta: python3 scripts/generate_config.py", file=sys.stderr)
         return 1
 
+    if not anon.startswith("eyJ") or "TU_" in anon or "{{" in anon:
+        print("SUPABASE_ANON_KEY inválida (debe ser JWT eyJ..., no un placeholder).", file=sys.stderr)
+        return 1
+
     if not SQL_TEMPLATE.exists():
         print(f"No existe {SQL_TEMPLATE}", file=sys.stderr)
         return 1

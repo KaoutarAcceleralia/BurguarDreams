@@ -6,6 +6,15 @@ El formulario guarda bien en `solicitudes`, pero la Edge Function devuelve **401
 
 La función tiene **Verify JWT** activado y en `js/config.js` usas una clave **publishable** (`sb_publishable_...`). Esa clave **no es un JWT**; el gateway rechaza la petición antes de ejecutar tu código.
 
+## Arreglo automático (recomendado)
+
+```bash
+# .env: SUPABASE_ACCESS_TOKEN=sbp_... (+ claves en .env o js/config.js)
+python3 scripts/setup_resend_email.py
+```
+
+Sin token, el script imprime el SQL de [`supabase/.trigger-ready.sql`](.trigger-ready.sql) para el SQL Editor (sustituye placeholders tipo `TU_eyJ_ano` por el JWT anon real).
+
 ## Solución A — Desactivar Verify JWT (recomendado con publishable)
 
 **Dashboard**

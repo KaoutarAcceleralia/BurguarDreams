@@ -63,13 +63,13 @@ BurguarDreams/
 
    Comprobar: `python3 scripts/apply_supabase_fix.py` (debe terminar con HTTP 201).
 
-6. **Email al enviar el formulario:** el correo se dispara desde un **trigger en la base de datos** (no desde el navegador; evita errores CORS en local y GitHub Pages). Con `SUPABASE_ANON_KEY` en `.env`:
+6. **Email al enviar el formulario:** trigger SQL `pg_net` → Edge Function `resend-email`. Con `SUPABASE_ANON_KEY` en `.env`:
 
    ```bash
-   python3 scripts/apply_email_trigger.py
+   python3 scripts/setup_resend_email.py
    ```
 
-   Sin token, el script imprime el SQL para pegarlo en SQL Editor. Opcional: `supabase functions deploy resend-email --no-verify-jwt` para CORS en la Edge Function ([`supabase/CORS-405.md`](supabase/CORS-405.md)).
+   Con `SUPABASE_ACCESS_TOKEN` en `.env` aplica trigger, desactiva Verify JWT y redespliega la función. Sin token, pega [`supabase/.trigger-ready.sql`](supabase/.trigger-ready.sql) en [SQL Editor](https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new). Error 401: [`supabase/RESEND-401.md`](supabase/RESEND-401.md).
 
 7. Sirve el sitio con un servidor HTTP estático (no uses `file://`):
 
