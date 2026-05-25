@@ -1,5 +1,11 @@
+-- =============================================================================
+-- PEGAR TODO EN SQL EDITOR Y RUN
+-- https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new
+-- Arregla 401 TU_eyJ_ano → JWT anon real
+-- =============================================================================
+
 -- Email automático al insertar en solicitudes (sin CORS; funciona en local y GitHub Pages).
--- NO ejecutes este archivo tal cual: tiene placeholders {{SUPABASE_KEY}}.
+-- NO ejecutes este archivo tal cual: tiene placeholders sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN.
 -- Usa: python3 scripts/setup_resend_email.py
 -- O pega en SQL Editor: supabase/PEGAR-AHORA.sql (claves ya sustituidas)
 
@@ -31,8 +37,8 @@ begin
 
   _headers := jsonb_build_object(
     'Content-Type', 'application/json',
-    'apikey', '{{SUPABASE_KEY}}',
-    'Authorization', 'Bearer {{SUPABASE_ANON_KEY}}'
+    'apikey', 'sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN',
+    'Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzY2J3bmdvdGdia3l0bXpvZ29sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4NDU4NDcsImV4cCI6MjA5MjQyMTg0N30.LlcMGyk67971m0h6neH7crxAp5k0a0-IbOA7rCbW2H4'
   );
 
   select net.http_post(

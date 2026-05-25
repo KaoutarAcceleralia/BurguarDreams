@@ -13,7 +13,9 @@ La función tiene **Verify JWT** activado y en `js/config.js` usas una clave **p
 python3 scripts/setup_resend_email.py
 ```
 
-Sin token, el script imprime el SQL de [`supabase/.trigger-ready.sql`](.trigger-ready.sql) para el SQL Editor (sustituye placeholders tipo `TU_eyJ_ano` por el JWT anon real).
+Sin token, pega y ejecuta **[`supabase/PEGAR-AHORA.sql`](PEGAR-AHORA.sql)** en el SQL Editor (sustituye el placeholder `TU_eyJ_ano` por el JWT anon real).
+
+**No ejecutes** [`trigger-resend-email.sql`](trigger-resend-email.sql) sin `python3 scripts/setup_resend_email.py` — deja `{{SUPABASE_ANON_KEY}}` o texto tipo `TU_eyJ_ano` y provoca el 401.
 
 ## Solución A — Desactivar Verify JWT (recomendado con publishable)
 

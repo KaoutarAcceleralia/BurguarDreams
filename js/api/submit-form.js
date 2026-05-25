@@ -116,9 +116,7 @@ async function submitForm() {
 
     if (error) throw error;
 
-    /* El correo lo envía el trigger SQL on_solicitud_resend_email (pg_net → resend-email).
-       Si ves 401 en logs: ejecuta supabase/.trigger-ready.sql en SQL Editor.
-       Ver scripts/setup_resend_email.py y supabase/RESEND-401.md */
+    /* Correo: trigger on_solicitud_resend_email (pg_net). Si 401 TU_eyJ_ano → supabase/PEGAR-AHORA.sql */
 
     document.getElementById('f-privacidad').checked = false;
     document.getElementById('modal-form').classList.add('hidden');

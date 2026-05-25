@@ -31,6 +31,7 @@ from _supabase_mgmt import (
 
 SQL_TEMPLATE = ROOT / "supabase" / "trigger-resend-email.sql"
 READY_SQL = ROOT / "supabase" / ".trigger-ready.sql"
+PEGAR_SQL = ROOT / "supabase" / "PEGAR-AHORA.sql"
 FUNCTION_TS = ROOT / "supabase" / "functions" / "resend-email" / "index.ts"
 
 
@@ -117,15 +118,23 @@ def main() -> int:
 
     sql = build_trigger_sql(pub, anon)
     READY_SQL.write_text(sql, encoding="utf-8")
-    print(f"SQL generado: {READY_SQL.relative_to(ROOT)}")
+    banner = (
+        "-- =============================================================================\n"
+        "-- PEGAR TODO EN SQL EDITOR Y RUN\n"
+        f"-- https://supabase.com/dashboard/project/{project_ref}/sql/new\n"
+        "-- Arregla 401 TU_eyJ_ano → JWT anon real\n"
+        "-- =============================================================================\n\n"
+    )
+    PEGAR_SQL.write_text(banner + sql, encoding="utf-8")
+    print(f"SQL generado: {PEGAR_SQL.relative_to(ROOT)}")
 
     if not token:
         print("\nSin SUPABASE_ACCESS_TOKEN no se puede aplicar en remoto.", file=sys.stderr)
         print("Añade a .env: SUPABASE_ACCESS_TOKEN=sbp_...", file=sys.stderr)
         print("https://supabase.com/dashboard/account/tokens\n", file=sys.stderr)
-        print("O ejecuta manualmente en SQL Editor:")
-        print(f"  https://supabase.com/dashboard/project/{project_ref}/sql/new\n")
-        print(sql)
+        print("Pega y ejecuta en SQL Editor:")
+        print(f"  https://supabase.com/dashboard/project/{project_ref}/sql/new")
+        print(f"  Archivo: {PEGAR_SQL.relative_to(ROOT)}\n")
         print("\nComprobación local de la Edge Function (anon JWT)…")
         code = test_edge_function(url, pub, anon)
         return 0 if code == 200 else 1
