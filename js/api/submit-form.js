@@ -46,47 +46,6 @@ function isValidPhone(value) {
   return digits.length >= 6 && digits.length <= 15 && /^[\d\s+\-().]+$/.test(value);
 }
 
-function edgeFunctionJwt() {
-  const anon = window.SUPABASE_ANON_KEY;
-  if (typeof anon === 'string' && anon.startsWith('eyJ')) return anon;
-  const key = window.SUPABASE_KEY;
-  if (typeof key === 'string' && key.startsWith('eyJ')) return key;
-  return null;
-}
-
-async function invokeResendEmail(payload) {
-  const url = `${window.SUPABASE_URL}/functions/v1/resend-email`;
-  const apiKey = window.SUPABASE_KEY;
-  const jwt = edgeFunctionJwt();
-  const headers = {
-    'Content-Type': 'application/json',
-    apikey: apiKey,
-  };
-  if (jwt) {
-    headers.Authorization = `Bearer ${jwt}`;
-  } else {
-    headers.Authorization = `Bearer ${apiKey}`;
-  }
-  const res = await fetch(url, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    let hint = '';
-    if (res.status === 401) {
-      hint =
-        ' Arreglo: (1) Dashboard → Edge Functions → resend-email → desactiva Verify JWT, ' +
-        'o ejecuta: python3 scripts/disable_resend_jwt.py (con SUPABASE_ACCESS_TOKEN en .env). ' +
-        '(2) O añade SUPABASE_ANON_KEY (eyJ...) en .env y ejecuta: python3 scripts/generate_config.py';
-    }
-    console.warn('[Burguar Dreams] resend-email', res.status, text || res.statusText, hint);
-    return false;
-  }
-  return true;
-}
-
 async function submitForm() {
   clearFormErrors();
   const t = i18n[currentLang] || i18n.es;
@@ -157,22 +116,8 @@ async function submitForm() {
 
     if (error) throw error;
 
-    try {
-      await invokeResendEmail({
-        nombre,
-        apellidos: opt('f-apellidos', FIELD_LIMITS.apellidos),
-        telefono,
-        email: email || null,
-        fecha_nacimiento: opt('f-nacimiento'),
-        situacion_laboral: opt('f-laboral', FIELD_LIMITS.situacion_laboral),
-        ingresos_mensuales: opt('f-ingresos', FIELD_LIMITS.ingresos_mensuales),
-        num_personas: opt('f-personas', FIELD_LIMITS.num_personas),
-        mascotas,
-        property_name: propertyName,
-      });
-    } catch (emailErr) {
-      console.warn('[Burguar Dreams] Email no enviado (datos guardados):', emailErr);
-    }
+    /* El correo lo envía el trigger SQL on_solicitud_resend_email (pg_net → resend-email).
+       Evita CORS en el navegador (OPTIONS 405). Ver supabase/trigger-resend-email.sql */
 
     document.getElementById('f-privacidad').checked = false;
     document.getElementById('modal-form').classList.add('hidden');

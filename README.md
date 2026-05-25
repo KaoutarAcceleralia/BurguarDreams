@@ -63,7 +63,15 @@ BurguarDreams/
 
    Comprobar: `python3 scripts/apply_supabase_fix.py` (debe terminar con HTTP 201).
 
-6. Sirve el sitio con un servidor HTTP estático (no uses `file://`):
+6. **Email al enviar el formulario:** el correo se dispara desde un **trigger en la base de datos** (no desde el navegador; evita errores CORS en local y GitHub Pages). Con `SUPABASE_ANON_KEY` en `.env`:
+
+   ```bash
+   python3 scripts/apply_email_trigger.py
+   ```
+
+   Sin token, el script imprime el SQL para pegarlo en SQL Editor. Opcional: `supabase functions deploy resend-email --no-verify-jwt` para CORS en la Edge Function ([`supabase/CORS-405.md`](supabase/CORS-405.md)).
+
+7. Sirve el sitio con un servidor HTTP estático (no uses `file://`):
 
    ```bash
    python3 -m http.server 8080

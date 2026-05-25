@@ -51,3 +51,7 @@ El repo incluye `supabase/config.toml` con `verify_jwt = false` para futuros des
 ## Comprobar
 
 Tras el cambio, envía el formulario. En Network, `resend-email` debe ser **200** (o 5xx si falta `RESEND_API_KEY` en la función), no 401.
+
+## Error CORS / 405 en GitHub Pages
+
+Si ves `Preflight response is not successful. Status code: 405`, la función no responde al OPTIONS del navegador. Redespliega con el código de [`supabase/functions/resend-email/`](functions/resend-email/) — guía: [`supabase/CORS-405.md`](CORS-405.md).
