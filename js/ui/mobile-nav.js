@@ -3,6 +3,13 @@ function navToggleLabel(open) {
   return open ? t.nav_close : t.nav_open;
 }
 
+function updateHeaderOffset() {
+  const header = document.querySelector('header');
+  if (header) {
+    document.documentElement.style.setProperty('--header-offset', header.offsetHeight + 8 + 'px');
+  }
+}
+
 function closeMobileNav() {
   const header = document.getElementById('main-header');
   const toggle = document.getElementById('nav-toggle');
@@ -11,6 +18,7 @@ function closeMobileNav() {
   toggle.setAttribute('aria-expanded', 'false');
   toggle.setAttribute('aria-label', navToggleLabel(false));
   document.body.classList.remove('nav-menu-open');
+  updateHeaderOffset();
 }
 
 function toggleMobileNav() {
@@ -22,6 +30,7 @@ function toggleMobileNav() {
   toggle.setAttribute('aria-expanded', String(open));
   toggle.setAttribute('aria-label', navToggleLabel(open));
   document.body.classList.toggle('nav-menu-open', open);
+  requestAnimationFrame(updateHeaderOffset);
 }
 
 function initMobileNav() {

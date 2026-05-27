@@ -71,13 +71,22 @@ BurguarDreams/
 
    Con `SUPABASE_ACCESS_TOKEN` en `.env` aplica trigger, desactiva Verify JWT y redespliega la función. Sin token, pega [`supabase/.trigger-ready.sql`](supabase/.trigger-ready.sql) en [SQL Editor](https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new). Error 401: [`supabase/RESEND-401.md`](supabase/RESEND-401.md).
 
-7. Sirve el sitio con un servidor HTTP estático (no uses `file://`):
+7. Sirve el sitio con un servidor HTTP estático (no abras carpetas `apartamento/…` en el Finder; Safari falla con `file://`):
 
    ```bash
    python3 -m http.server 8080
    ```
 
-   Abre http://localhost:8080
+   Abre http://localhost:8080 (o `index.html` por doble clic: los enlaces de apartamentos usan `?inmueble=slug` en local).
+
+## SEO, GEO y analítica
+
+- `robots.txt` y `sitemap.xml` en la raíz (actualizar URLs si cambias de dominio).
+- `llms.txt` para motores de IA generativos.
+- URLs de inmuebles: `/apartamento/{slug}/` (con `404.html` en GitHub Pages).
+- Google Analytics 4: define `window.GA_MEASUREMENT_ID = "G-XXXXXXXX"` en `js/config.js`; solo se carga si el usuario acepta cookies.
+- [Google Search Console](https://search.google.com/search-console): verifica el dominio y envía el sitemap.
+- **Dominio propio (recomendado):** configura CNAME en GitHub Pages y sustituye `https://kaoutaracceleralia.github.io/BurguarDreams/` en `sitemap.xml`, `robots.txt`, `llms.txt` y el JSON-LD de `index.html`.
 
 ## Scripts opcionales
 

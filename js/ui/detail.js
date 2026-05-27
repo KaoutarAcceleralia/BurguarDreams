@@ -26,12 +26,6 @@ function renderAmenities(amenitySet) {
   }).join('');
 }
 
-function propertyUrl(id) {
-  const url = new URL(window.location.href);
-  url.searchParams.set('inmueble', String(id));
-  return url.pathname + url.search;
-}
-
 function buildWhatsAppUrl(property) {
   const t = i18n[currentLang] || i18n.es;
   const text = property
@@ -42,17 +36,45 @@ function buildWhatsAppUrl(property) {
   return `https://wa.me/34660688501?text=${encodeURIComponent(text)}`;
 }
 
+function buildCorporateWhatsAppUrl() {
+  const t = i18n[currentLang] || i18n.es;
+  const text = t.wa_msg_corporate || t.wa_msg_general;
+  return `https://wa.me/34660688501?text=${encodeURIComponent(text)}`;
+}
+
 function updateWhatsAppLinks(property) {
   const url = buildWhatsAppUrl(property);
+  const corpUrl = buildCorporateWhatsAppUrl();
   const sticky = document.getElementById('detail-sticky-wa');
   if (sticky) sticky.href = url;
   const contact = document.getElementById('contact-wa-link');
   if (contact) contact.href = url;
+  const hero = document.getElementById('hero-cta-whatsapp');
+  if (hero) hero.href = url;
+  const headerWa = document.getElementById('wa-header-link');
+  if (headerWa) headerWa.href = url;
+  const corpWa = document.getElementById('corp-wa-link');
+  if (corpWa) corpWa.href = corpUrl;
+}
+
+function pushPropertyUrl(p) {
+  const url = new URL(propertyUrl(p));
+  url.searchParams.set('lang', getSeoLang());
+  if (usesPathPropertyRoutes()) {
+    url.searchParams.delete('inmueble');
+    url.searchParams.delete('p');
+  } else {
+    url.searchParams.set('inmueble', p.slug);
+  }
+  history.replaceState(null, '', url.pathname + url.search);
 }
 
 function initPropertyFromUrl() {
-  const id = Number(new URLSearchParams(window.location.search).get('inmueble'));
-  if (id && properties.some(x => x.id === id)) showDetail(id, { skipUrlUpdate: true });
+  const id = resolvePropertyIdFromUrl();
+  if (!id) return;
+  showDetail(id, { skipUrlUpdate: true });
+  const p = properties.find(x => x.id === id);
+  if (p) pushPropertyUrl(p);
 }
 
 function showDetail(id, options = {}) {
@@ -63,17 +85,14 @@ function showDetail(id, options = {}) {
   const detailView = document.getElementById('detail-view');
   if (typeof resetRevealIn === 'function') resetRevealIn(detailView);
 
-  if (!options.skipUrlUpdate) {
-    const url = new URL(window.location.href);
-    url.searchParams.set('inmueble', String(id));
-    history.replaceState(null, '', url.pathname + url.search);
-  }
+  if (!options.skipUrlUpdate) pushPropertyUrl(p);
 
   const allPhotosArr = [p.mainImage, ...(p.extraPhotos || [])].filter(Boolean);
+  const heroAlt = propertyImageAlt(p, p.mainImage, 0);
 
   const wrap = document.getElementById('detail-hero-img-wrap');
   wrap.innerHTML = p.mainImage
-    ? `<img src="${p.mainImage}" alt="${p.city}" class="detail-hero-img" style="cursor:zoom-in" fetchpriority="high" decoding="async" onclick="openLightbox(currentAllPhotos, 0)">`
+    ? `<img src="${p.mainImage}" alt="${heroAlt}" class="detail-hero-img" style="cursor:zoom-in" fetchpriority="high" decoding="async" onclick="openLightbox(currentAllPhotos, 0)">`
     : `<div class="detail-hero-placeholder"><svg width="80" height="80" viewBox="0 0 80 80" fill="none" stroke="#C4B8A4" stroke-width="1.5"><rect x="10" y="30" width="60" height="40" rx="2"/><path d="M10 30L40 8l30 22"/><rect x="30" y="50" width="20" height="20"/></svg></div>`;
   const heroImg = wrap.querySelector('.detail-hero-img');
   if (heroImg && p.heroImagePosition) {
@@ -85,7 +104,7 @@ function showDetail(id, options = {}) {
   const sl = getSpecLabels();
 
   document.getElementById('d-tag').textContent = getPropText(p, 'tag');
-  document.getElementById('d-title').textContent = p.city;
+  document.getElementById('d-title').textContent = getPropertyH1(p);
   document.getElementById('d-address').textContent = p.street;
   document.getElementById('d-price').innerHTML = p.price
     ? `${p.price}€<sub>${getPropText(p,'priceUnit')}</sub>`
@@ -95,7 +114,6 @@ function showDetail(id, options = {}) {
   badge.textContent = getPropText(p, 'availableText');
   badge.className = 'availability-badge ' + (p.available ? 'available' : 'unavailable');
 
-  // Build translated specs
   const specsData = [
     { label: sl.superficie,   value: p.specs[0].value, unit: p.specs[0].unit },
     { label: sl.habitaciones, value: p.specs[1].value, unit: sl.dorm },
@@ -118,10 +136,11 @@ function showDetail(id, options = {}) {
   disconnectLazyImages(photoGrid);
   if (photos.length) {
     photoGrid.innerHTML = photos.map((src, i) => {
+      const alt = propertyImageAlt(p, src, i + 1);
       const eager = i < DETAIL_GALLERY_EAGER;
       const imgTag = eager
-        ? `<img src="${src}" alt="Foto ${i + 1}" loading="lazy" decoding="async" width="800" height="600">`
-        : `<img data-src="${src}" src="" alt="Foto ${i + 1}" class="detail-photo-img lazy-photo" decoding="async" width="800" height="600">`;
+        ? `<img src="${src}" alt="${alt}" loading="lazy" decoding="async" width="800" height="600">`
+        : `<img data-src="${src}" src="" alt="${alt}" class="detail-photo-img lazy-photo" decoding="async" width="800" height="600">`;
       return `
       <div class="detail-photo" data-reveal="${i % 2 === 0 ? 'left' : 'right'}" onclick="openLightbox(currentAllPhotos, ${i + 1})" style="cursor:zoom-in">
         ${imgTag}
@@ -140,6 +159,8 @@ function showDetail(id, options = {}) {
   }
 
   updateWhatsAppLinks(p);
+  if (typeof updateModalTitle === 'function') updateModalTitle();
+  applyPropertySeo(p, getSeoLang());
 
   document.getElementById('home-view').style.display = 'none';
   detailView.classList.add('active');
@@ -148,16 +169,25 @@ function showDetail(id, options = {}) {
   if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
 }
 
-/* ─── SHOW HOME ─── */
 function showHome() {
   if (typeof closeMobileNav === 'function') closeMobileNav();
   document.getElementById('detail-view').classList.remove('active');
   document.getElementById('home-view').style.display = '';
   currentPropertyId = null;
   updateWhatsAppLinks(null);
-  const url = new URL(window.location.href);
+  if (typeof updateModalTitle === 'function') updateModalTitle();
+  const url = new URL(location.href);
   url.searchParams.delete('inmueble');
-  history.replaceState(null, '', url.pathname + url.search);
+  url.searchParams.delete('p');
+  if (/\/apartamento\/[^/]+\/?$/.test(url.pathname)) {
+    const base = getCanonicalBase();
+    const home = new URL('./', base.endsWith('/') ? base : base + '/');
+    home.search = url.search;
+    history.replaceState(null, '', home.pathname + home.search);
+  } else {
+    history.replaceState(null, '', url.pathname + url.search);
+  }
+  applyHomeSeo(getSeoLang());
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
   setActiveNav('hogar');

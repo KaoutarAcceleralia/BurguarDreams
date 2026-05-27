@@ -10,7 +10,7 @@ Al trabajar con las tarjetas de inmuebles en el listado, el clic debe abrir el d
 
 ## Comportamiento esperado
 
-- Cada tarjeta del grid es un enlace (`<a>`) con `href` generado por `propertyUrl(id)` (query `?inmueble=<id>`).
+- Cada tarjeta del grid es un enlace (`<a>`) con `href` generado por `propertyUrl(id)`: en producción (GitHub Pages) → `/apartamento/{slug}/`; en `file://` o `localhost` → `index.html?inmueble={slug}` (no existe carpeta física `apartamento/`).
 - El enlace lleva `target="_blank"` y `rel="noopener noreferrer"`.
 - **No** usar `preventDefault` ni `showDetail()` en el clic de la tarjeta; el detalle se carga en la nueva pestaña vía `initPropertyFromUrl()` en `detail.js`.
 
@@ -29,7 +29,7 @@ onclick="onCardClick(event, id)"  // con preventDefault + showDetail
 
 ## Detalle en la nueva pestaña
 
-`initPropertyFromUrl()` lee `?inmueble` al cargar la página y llama a `showDetail(id, { skipUrlUpdate: true })`. No hace falta duplicar lógica en el grid.
+`initPropertyFromUrl()` resuelve el inmueble por path (`/apartamento/{slug}/`) o por query (`?inmueble={slug|id}`) y llama a `showDetail(id, { skipUrlUpdate: true })`. `pushPropertyUrl` solo deja `?lang=` en la barra de direcciones, sin duplicar `inmueble` si el path ya es canónico.
 
 ## Excepciones
 

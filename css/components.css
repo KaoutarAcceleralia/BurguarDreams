@@ -156,7 +156,7 @@ header.nav-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotat
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 .card {

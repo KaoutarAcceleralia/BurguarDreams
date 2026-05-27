@@ -1,0 +1,7 @@
+# Burguar Dreams — GitHub Pages
+# Si usas dominio propio, actualiza la URL del Sitemap en sitemap.xml y aquí.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://kaoutaracceleralia.github.io/BurguarDreams/sitemap.xml

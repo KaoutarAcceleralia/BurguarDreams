@@ -1,6 +1,8 @@
 /* Copy to js/config.js or run: python3 scripts/generate_config.py */
 window.SUPABASE_URL = "https://your-project.supabase.co";
 window.SUPABASE_KEY = "your_publishable_key_here";
+/* Google Analytics 4 (opcional): ID tipo G-XXXXXXXXXX; solo se carga si el usuario acepta cookies */
+window.GA_MEASUREMENT_ID = "";
 /* Opcional si resend-email exige JWT: window.SUPABASE_ANON_KEY = "eyJ..."; */
 if (typeof supabase === "undefined") {
   console.error("[Burguar Dreams] No se cargó el SDK de Supabase (CDN bloqueado o sin conexión).");

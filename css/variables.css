@@ -15,6 +15,21 @@
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'DM Sans', sans-serif;
   --header-offset: 120px;
+  --page-gutter: 4rem;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-offset: 96px;
+    --page-gutter: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-offset: 84px;
+    --page-gutter: 1rem;
+  }
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

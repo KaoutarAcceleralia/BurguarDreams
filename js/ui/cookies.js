@@ -10,6 +10,7 @@ function initCookieBanner() {
   document.getElementById('cookie-accept-btn')?.addEventListener('click', () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
     banner.hidden = true;
+    if (typeof loadGoogleAnalytics === 'function') loadGoogleAnalytics();
   });
 
   document.getElementById('cookie-reject-btn')?.addEventListener('click', () => {

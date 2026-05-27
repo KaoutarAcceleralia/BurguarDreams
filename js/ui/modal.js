@@ -1,3 +1,17 @@
+function updateModalTitle() {
+  const t = i18n[currentLang] || i18n.es;
+  const el = document.getElementById('modal-title-text');
+  if (!el) return;
+  if (currentPropertyId) {
+    const p = properties.find(x => x.id === currentPropertyId);
+    if (p && t.modal_title_property) {
+      el.textContent = t.modal_title_property.replace('{street}', p.street);
+      return;
+    }
+  }
+  el.textContent = t.modal_title;
+}
+
 function openModal() {
   document.getElementById('modal-overlay').classList.add('active');
   document.getElementById('modal-form').classList.remove('hidden');
@@ -5,6 +19,7 @@ function openModal() {
   const privacy = document.getElementById('f-privacidad');
   if (privacy) privacy.checked = false;
   if (typeof clearFormErrors === 'function') clearFormErrors();
+  updateModalTitle();
   updateBodyScrollLock();
 }
 

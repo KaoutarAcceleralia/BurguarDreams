@@ -34,7 +34,9 @@ function scrollToSection(sectionId) {
     currentPropertyId = null;
     const url = new URL(window.location.href);
     url.searchParams.delete('inmueble');
+    url.searchParams.delete('p');
     history.replaceState(null, '', url.pathname + url.search);
+    applyHomeSeo(getSeoLang());
     if (typeof resetRevealIn === 'function') resetRevealIn(detailView);
     if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
   }
@@ -71,39 +73,63 @@ function renderFAQ() {
   const list = document.getElementById('faq-list');
   const items = faqs[currentLang] || faqs.es;
   list.innerHTML = items.map((f, i) => `
-    <div class="faq-item" id="faq-${i}" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
-      <button type="button" class="faq-question" id="faq-btn-${i}" onclick="toggleFAQ(${i})"
-              aria-expanded="false" aria-controls="faq-answer-${i}">
+    <details class="faq-item" id="faq-${i}" data-reveal="${i % 2 === 0 ? 'left' : 'right'}">
+      <summary class="faq-question" id="faq-btn-${i}">
         <span>${f.q}</span>
         <svg class="faq-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path d="M3 6l5 5 5-5"/>
         </svg>
-      </button>
-      <div class="faq-answer" id="faq-answer-${i}" role="region" aria-labelledby="faq-btn-${i}" hidden>${f.a}</div>
-    </div>
+      </summary>
+      <div class="faq-answer" id="faq-answer-${i}">${f.a}</div>
+    </details>
   `).join('');
   if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
 }
 
-function toggleFAQ(i) {
-  const item = document.getElementById(`faq-${i}`);
-  const btn = document.getElementById(`faq-btn-${i}`);
-  const answer = document.getElementById(`faq-answer-${i}`);
-  const open = !item.classList.contains('open');
-  item.classList.toggle('open', open);
-  btn.setAttribute('aria-expanded', String(open));
-  answer.hidden = !open;
+function renderAboutSection() {
+  const t = i18n[currentLang] || i18n.es;
+  const title = document.getElementById('about-title');
+  const p1 = document.getElementById('about-p1');
+  const p2 = document.getElementById('about-p2');
+  const p3 = document.getElementById('about-p3');
+  if (title) title.textContent = t.about_title;
+  if (p1) p1.textContent = t.about_p1;
+  if (p2) p2.textContent = t.about_p2;
+  if (p3) p3.textContent = t.about_p3;
 }
+
+function renderGuideSection() {
+  const t = i18n[currentLang] || i18n.es;
+  const title = document.getElementById('guide-title');
+  const body = document.getElementById('guide-body');
+  if (title) title.textContent = t.guide_title;
+  if (body) body.innerHTML = t.guide_body_html;
+}
+
+const initialLang = initLangFromUrl();
+if (initialLang) currentLang = initialLang;
 
 renderGrid();
 renderFAQ();
-renderLegalModals('es');
+renderAboutSection();
+renderGuideSection();
 setHeroBg();
-updateWhatsAppLinks(null);
 initPropertyFromUrl();
+
+if (initialLang) {
+  setLang(initialLang);
+} else {
+  renderLegalModals('es');
+  updateWhatsAppLinks(null);
+  if (!currentPropertyId) applyHomeSeo('es');
+}
+
+tryLoadAnalyticsFromConsent();
 initScrollSpy();
 if (typeof scheduleScrollReveal === 'function') scheduleScrollReveal();
-window.addEventListener('resize', () => {
-  document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');
-});
-document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');
+function syncHeaderOffset() {
+  if (typeof updateHeaderOffset === 'function') updateHeaderOffset();
+  else document.documentElement.style.setProperty('--header-offset', getHeaderOffset() + 'px');
+}
+window.addEventListener('resize', syncHeaderOffset);
+syncHeaderOffset();

@@ -58,11 +58,23 @@ const PROP_DESCRIPTIONS = {
 
 // Availability date (the date part stays the same, only the prefix is translated)
 const AVAIL_DATES = {
-  1: '16/10/2025',
-  2: '01/07/2025',
+  1: '16/10/2026',
+  2: '01/07/2026',
   3: '10/07/2026',
-  4: '02/06/2025',
+  4: '02/06/2026',
 };
+
+function parseAvailDate(dateStr) {
+  if (!dateStr) return Infinity;
+  const m = dateStr.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  if (!m) return Infinity;
+  return new Date(+m[3], +m[2] - 1, +m[1]).getTime();
+}
+
+function availabilitySortKey(p) {
+  if (p.available) return -Infinity;
+  return parseAvailDate(AVAIL_DATES[p.id]);
+}
 
 function getPropText(p, field) {
   const lang = currentLang;
@@ -93,10 +105,11 @@ function getSpecLabels() {
 const properties = [
   {
     id: 1,
+    slug: 'gran-via',
     city: 'Barcelona',
     street: 'Gran Via de les Corts Catalanes',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: false, availableText: 'Disponible el 16/10/2025',
+    available: false, availableText: 'Disponible el 16/10/2026',
     description: 'Apartamento muy luminoso en pleno Eixample. Muy bien comunicado, con vistas a La Monumental y a 10 minutos de la Barceloneta.',
     amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi','tv','lavadora','secadora','tendedero','plancha','aspiradora','kit_limpieza','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','ascensor','portero_auto']),
     specs: [
@@ -121,10 +134,11 @@ const properties = [
   },
   {
     id: 2,
+    slug: 'valencia-eixample',
     city: 'Barcelona',
     street: 'Eixample c/ València',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: false, availableText: 'Disponible el 01/07/2025',
+    available: false, availableText: 'Disponible el 01/07/2026',
     description: 'Apartamento en pleno corazón del Eixample Izquierdo. Diseño muy moderno con acabados de alta calidad. Zona Premium con todos los servicios a pie de calle.',
     amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi','tv','lavadora','secadora','tendedero','plancha','aspiradora','kit_limpieza','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','sofa_cama','despacho','ascensor','portero_auto']),
     specs: [
@@ -151,6 +165,7 @@ const properties = [
   },
   {
     id: 3,
+    slug: 'can-bruixa',
     city: 'Barcelona',
     street: 'Les Corts Can Bruixa',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
@@ -179,10 +194,11 @@ const properties = [
   },
   {
     id: 4,
+    slug: 'urgell-francesc-macia',
     city: 'Barcelona',
     street: 'Apartamento Francesc Macià — Comte Urgell',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: false, availableText: 'Disponible el 02/06/2025',
+    available: false, availableText: 'Disponible el 02/06/2026',
     description: 'Recién reformado y luminoso con 2 habitaciones con patio japonés exterior y cocina completamente equipada. Zona muy céntrica muy bien comunicada con metro, TRAM, Bus y en zona neurálgica del Distrito Financiero Francesc Macià de Barcelona.',
     amenities: new Set([
       'amueblado','equipado',
@@ -218,3 +234,5 @@ const properties = [
     ]
   }
 ];
+
+properties.sort((a, b) => availabilitySortKey(a) - availabilitySortKey(b));

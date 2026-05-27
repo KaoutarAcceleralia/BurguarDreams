@@ -20,6 +20,10 @@ function setLang(lang) {
   document.getElementById('hero-h1-text').innerHTML = t.hero_h1;
   document.getElementById('hero-sub-text').textContent = t.hero_sub;
   document.getElementById('hero-cta-whatsapp-text').textContent = t.hero_cta_whatsapp;
+  const heroFormText = document.getElementById('hero-cta-form-text');
+  if (heroFormText) heroFormText.textContent = t.hero_cta_form;
+  const sectionSub = document.getElementById('section-sub-text');
+  if (sectionSub) sectionSub.textContent = t.section_sub;
   const skipLink = document.getElementById('skip-link');
   if (skipLink) skipLink.textContent = t.skip_link;
   const navToggle = document.getElementById('nav-toggle');
@@ -32,6 +36,8 @@ function setLang(lang) {
   document.getElementById('corp-title-text').innerHTML = t.corp_title;
   document.getElementById('corp-sub-text').textContent = t.corp_sub;
   document.getElementById('corp-cta-text').textContent = t.corp_cta;
+  const corpFormText = document.getElementById('corp-cta-form-text');
+  if (corpFormText) corpFormText.textContent = t.corp_cta_form;
   document.getElementById('corp-f1t-text').textContent = t.corp_f1t;
   document.getElementById('corp-f1-text').textContent = t.corp_f1;
   document.getElementById('corp-f2t-text').textContent = t.corp_f2t;
@@ -50,8 +56,15 @@ function setLang(lang) {
   document.getElementById('detail-about-h3').textContent = t.detail_about;
   document.getElementById('detail-amenities-h3').textContent = t.detail_amenities;
   document.getElementById('modal-eyebrow-text').textContent = t.modal_eyebrow;
-  document.getElementById('modal-title-text').textContent = t.modal_title;
+  if (typeof updateModalTitle === 'function') updateModalTitle();
+  else document.getElementById('modal-title-text').textContent = t.modal_title;
   document.getElementById('modal-intro-text').textContent = t.modal_intro;
+  const hintLaboral = document.getElementById('hint-laboral');
+  if (hintLaboral) hintLaboral.textContent = t.form_hint_laboral || '';
+  const hintIngresos = document.getElementById('hint-ingresos');
+  if (hintIngresos) hintIngresos.textContent = t.form_hint_ingresos || '';
+  const telefonoInput = document.getElementById('f-telefono');
+  if (telefonoInput && t.telefono_ph) telefonoInput.placeholder = t.telefono_ph;
   const cookieText = document.getElementById('cookie-banner-text');
   if (cookieText) cookieText.textContent = t.cookie_banner_text;
   document.getElementById('cookie-accept-btn').textContent = t.cookie_accept;
@@ -102,15 +115,27 @@ function setLang(lang) {
   document.getElementById('footer-cookies-link').textContent = t.footer_cookies;
   document.getElementById('footer-legal-id').textContent = t.footer_legal_id;
   document.getElementById('footer-copy-text').textContent = t.footer_copy;
+  const footerTrust = document.getElementById('footer-trust-text');
+  if (footerTrust) footerTrust.textContent = t.footer_trust || '';
+  const waHeaderText = document.getElementById('wa-header-text');
+  if (waHeaderText) waHeaderText.textContent = t.wa_header_text || 'WhatsApp';
+  const faqCtaText = document.getElementById('faq-cta-text');
+  if (faqCtaText) faqCtaText.textContent = t.faq_cta_text || '';
+  const faqCtaBtnText = document.getElementById('faq-cta-btn-text');
+  if (faqCtaBtnText) faqCtaBtnText.textContent = t.faq_cta_btn || '';
 
+  if (typeof renderAboutSection === 'function') renderAboutSection();
+  if (typeof renderGuideSection === 'function') renderGuideSection();
   renderFAQ();
   renderLegalModals(lang);
   renderGrid();
-  // If user is viewing a property detail, re-render it in the new language
+  updateLangInUrl(lang);
   if (currentPropertyId && document.getElementById('detail-view').classList.contains('active')) {
-    showDetail(currentPropertyId);
+    showDetail(currentPropertyId, { skipUrlUpdate: true });
   } else {
     updateWhatsAppLinks(null);
+    if (typeof updateModalTitle === 'function') updateModalTitle();
+    applyHomeSeo(lang);
   }
   document.getElementById('lang-switcher').classList.remove('open');
 }

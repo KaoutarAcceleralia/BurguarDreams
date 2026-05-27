@@ -85,6 +85,118 @@
   color: #fff;
 }
 .hero-cta-whatsapp:hover { background: #1ebe5d; transform: translateY(-2px); }
+.hero-cta-form {
+  background: transparent;
+  color: var(--warm-dark);
+  border: 1px solid var(--warm-dark);
+}
+.hero-cta-form:hover {
+  background: var(--warm-dark);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.section-sub {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--warm-mid);
+  line-height: 1.5;
+}
+.card-price-hint {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--warm-mid);
+  letter-spacing: 0.02em;
+}
+.corp-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.corp-cta-form-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.corp-cta-form-link:hover { color: var(--warm-dark); }
+.faq-cta {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--sand);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+.faq-cta-text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 300;
+  color: var(--warm-dark);
+}
+.form-field-hint {
+  margin: 0.35rem 0 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--warm-mid);
+  line-height: 1.45;
+}
+.footer-trust {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--warm-mid);
+  letter-spacing: 0.03em;
+}
+
+/* ── ABOUT / GUIDE (SEO & GEO) ── */
+.about-section,
+.guide-section {
+  padding: 4rem 4rem 5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.about-inner,
+.guide-inner {
+  border-top: 1px solid var(--sand);
+  padding-top: 3rem;
+}
+.about-section h2,
+.guide-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 300;
+  color: var(--warm-dark);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+.about-section p,
+.guide-body p {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--warm-mid);
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+.about-section a,
+.guide-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.guide-body strong { color: var(--warm-dark); font-weight: 500; }
 
 /* ── PROPERTIES GRID ── */
 .properties-section {
@@ -94,9 +206,16 @@
 }
 .section-label {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 3rem;
+}
+.section-label-head {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 3rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 .section-label h2 {
   font-family: var(--font-display);
@@ -219,15 +338,6 @@
   gap: 0.6rem;
 }
 #detail-view.active .detail-sticky-cta { display: none; }
-@media (max-width: 900px) {
-  #detail-view.active .detail-sticky-cta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  #detail-view.active .detail-body {
-    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
-  }
-}
 .detail-sticky-btn {
   display: inline-flex;
   align-items: center;
@@ -658,6 +768,10 @@
 .faq-section { background: #fff; }
 .faq-inner { max-width: 800px; margin: 0 auto; padding: 5rem 4rem 6rem; }
 .faq-item { border-bottom: 1px solid var(--sand); }
+.faq-item summary { list-style: none; cursor: pointer; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item[open] .faq-chevron { transform: rotate(180deg); }
+.faq-item[open] .faq-question { color: var(--accent); }
 .faq-question {
   width: 100%;
   background: none;
@@ -677,8 +791,6 @@
 }
 .faq-question:hover { color: var(--accent); }
 .faq-chevron { flex-shrink: 0; transition: transform 0.25s ease; color: var(--warm-mid); }
-.faq-item.open .faq-chevron { transform: rotate(180deg); }
-.faq-item.open .faq-question { color: var(--accent); }
 .faq-answer {
   padding: 0 0 1.5rem;
   font-size: 0.9rem;
@@ -686,4 +798,3 @@
   line-height: 1.8;
   font-weight: 300;
 }
-.faq-answer[hidden] { display: none; }

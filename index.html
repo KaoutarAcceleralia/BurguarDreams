@@ -26,19 +26,78 @@
   });
 })();
 </script>
-<title>Corporate housing Barcelona | Burguar Dreams</title>
-<meta name="description" content="Apartamentos amueblados y corporate housing en Barcelona. Flexibilidad, sin permanencia y visitas personalizadas. Burguar Dreams.">
+<title>Corporate housing Barcelona para empresas | Burguar Dreams</title>
+<meta name="description" content="Apartamentos amueblados en Eixample para trabajadores y equipos. Sin permanencia, gestión centralizada. Consulta disponibilidad.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Burguar Dreams">
-<meta property="og:title" content="Corporate housing Barcelona | Burguar Dreams">
-<meta property="og:description" content="Apartamentos amueblados y corporate housing en Barcelona. Flexibilidad, sin permanencia y visitas personalizadas.">
+<meta property="og:title" content="Corporate housing Barcelona para empresas | Burguar Dreams">
+<meta property="og:description" content="Apartamentos amueblados en Eixample para trabajadores y equipos. Sin permanencia, gestión centralizada. Consulta disponibilidad.">
 <meta property="og:url" content="">
 <meta property="og:image" content="">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Corporate housing Barcelona | Burguar Dreams">
-<meta name="twitter:description" content="Apartamentos amueblados y corporate housing en Barcelona.">
+<meta name="twitter:title" content="Corporate housing Barcelona para empresas | Burguar Dreams">
+<meta name="twitter:description" content="Apartamentos amueblados en Eixample para trabajadores y equipos. Consulta disponibilidad.">
 <meta name="twitter:image" content="">
+<link rel="canonical" id="canonical-link" href="">
+<script type="application/ld+json" id="schema-org-static">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "#organization",
+      "name": "Burguar Dreams S.L.",
+      "legalName": "Burguar Dreams S.L.",
+      "taxID": "B67209502",
+      "url": "https://kaoutaracceleralia.github.io/BurguarDreams/",
+      "email": "burguardreams@gmail.com",
+      "telephone": "+34660688501",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "C/ Can Bruixa, 16, ent. 1º",
+        "addressLocality": "Barcelona",
+        "postalCode": "08028",
+        "addressCountry": "ES"
+      },
+      "areaServed": { "@type": "City", "name": "Barcelona" },
+      "description": "Corporate housing y apartamentos amueblados en Barcelona para particulares y empresas."
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "Burguar Dreams",
+      "image": "https://kaoutaracceleralia.github.io/BurguarDreams/assets/images/properties/granvia/Cuina.jpg",
+      "telephone": "+34660688501",
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "C/ Can Bruixa, 16, ent. 1º",
+        "addressLocality": "Barcelona",
+        "postalCode": "08028",
+        "addressCountry": "ES"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"¿Cuánto tiempo mínimo puedo alquilar?","acceptedAnswer":{"@type":"Answer","text":"Nuestros apartamentos están disponibles para alquileres de media y larga duración, generalmente a partir de 1 mes."}},
+        {"@type":"Question","name":"¿Los apartamentos están amueblados?","acceptedAnswer":{"@type":"Answer","text":"Sí, todos nuestros apartamentos están completamente amueblados y equipados."}},
+        {"@type":"Question","name":"¿Ofrecéis alojamiento para empresas?","acceptedAnswer":{"@type":"Answer","text":"Sí. Disponemos de soluciones específicas de corporate housing para empresas en Barcelona."}}
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Apartamentos corporate housing Barcelona",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"url":"https://kaoutaracceleralia.github.io/BurguarDreams/apartamento/gran-via/","name":"Gran Via de les Corts Catalanes"},
+        {"@type":"ListItem","position":2,"url":"https://kaoutaracceleralia.github.io/BurguarDreams/apartamento/valencia-eixample/","name":"Eixample c/ València"},
+        {"@type":"ListItem","position":3,"url":"https://kaoutaracceleralia.github.io/BurguarDreams/apartamento/can-bruixa/","name":"Les Corts Can Bruixa"},
+        {"@type":"ListItem","position":4,"url":"https://kaoutaracceleralia.github.io/BurguarDreams/apartamento/urgell-francesc-macia/","name":"Comte Urgell — Francesc Macià"}
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,6 +107,7 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/responsive.css">
 <link rel="stylesheet" href="css/scroll-reveal.css">
 <link rel="stylesheet" href="css/reduced-motion.css">
 </head>
@@ -61,12 +121,12 @@
     <a href="#" class="logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
 
     <div class="header-top-actions">
-      <a href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
-         target="_blank" rel="noopener" class="wa-header-btn">
+      <a href="https://wa.me/34660688501"
+         target="_blank" rel="noopener" class="wa-header-btn" id="wa-header-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
         </svg>
-        <span class="wa-header-text">WhatsApp</span>
+        <span class="wa-header-text" id="wa-header-text">Consultar</span>
       </a>
 
       <div class="lang-switcher" id="lang-switcher">
@@ -96,7 +156,7 @@
   </div>
 
   <nav class="header-nav" id="header-nav">
-    <button class="nav-link active-nav" onclick="scrollToSection('hogar')" id="nav-hogar-btn">Encuentra tu hogar</button>
+    <button class="nav-link active-nav" onclick="scrollToSection('hogar')" id="nav-hogar-btn">Ver apartamentos</button>
     <button class="nav-link" onclick="scrollToSection('empresas')" id="nav-empresas-btn">Alojamiento para Empresas</button>
     <button class="nav-link" onclick="scrollToSection('faq')" id="nav-faq-btn">FAQs</button>
     <button class="nav-link" onclick="scrollToSection('contacto')" id="nav-contact-btn">Contacto</button>
@@ -109,23 +169,38 @@
   <section class="hero page-section" id="inicio">
     <div class="hero-bg" id="hero-bg"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow" id="hero-eyebrow-text" data-reveal="left">Alojamiento en Barcelona</p>
-      <h1 id="hero-h1-text" data-reveal="right">Descubre nuestros servicios de <em>corporate housing</em> en Barcelona</h1>
-      <p class="hero-sub" id="hero-sub-text" data-reveal="left">Apartamentos amueblados y listos para entrar a vivir. Para particulares y empresas que buscan flexibilidad, diseño y una experiencia sin complicaciones.</p>
+      <p class="hero-eyebrow" id="hero-eyebrow-text" data-reveal="left">Corporate housing en Barcelona · Para empresas y equipos</p>
+      <h1 id="hero-h1-text" data-reveal="right">Aloja a tu equipo en Barcelona <em>sin contratos largos ni gestión compleja</em></h1>
+      <p class="hero-sub" id="hero-sub-text" data-reveal="left">Apartamentos amueblados en el Eixample, listos para entrar a vivir. Contratos mensuales, un solo interlocutor y respuesta en menos de 24 h.</p>
       <div class="hero-ctas" data-reveal="right">
-        <a href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
+        <a href="https://wa.me/34660688501"
            target="_blank" rel="noopener" class="hero-cta hero-cta-whatsapp" id="hero-cta-whatsapp">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-          <span id="hero-cta-whatsapp-text">Hablar por WhatsApp</span>
+          <span id="hero-cta-whatsapp-text">Consultar disponibilidad para mi empresa</span>
         </a>
+        <button type="button" class="hero-cta hero-cta-form btn-glow btn-glow--outline" id="hero-cta-form" onclick="openModal()">
+          <span id="hero-cta-form-text">Solicitar propuesta</span>
+        </button>
       </div>
+    </div>
+  </section>
+
+  <section id="sobre-nosotros" class="page-section about-section" aria-labelledby="about-title">
+    <div class="about-inner">
+      <h2 id="about-title">Burguar Dreams: corporate housing en Barcelona</h2>
+      <p id="about-p1">Burguar Dreams S.L. (NIF B67209502) gestiona apartamentos amueblados en Barcelona para particulares y empresas.</p>
+      <p id="about-p2">Nuestros inmuebles están en el Eixample, Les Corts y zona Francesc Macià, bien comunicados en metro, bus y TRAM.</p>
+      <p id="about-p3">Contacto: <a href="mailto:burguardreams@gmail.com">burguardreams@gmail.com</a> · <a href="tel:+34660688501">660 68 85 01</a> · C/ Can Bruixa, 16, ent. 1º, 08028 Barcelona.</p>
     </div>
   </section>
 
   <section id="hogar" class="page-section properties-section">
       <div class="section-label" data-reveal="left">
-        <h2 id="section-title-text">Propiedades disponibles</h2>
-        <span class="count-badge" id="section-count-text">4 inmuebles</span>
+        <div class="section-label-head">
+          <h2 id="section-title-text">Apartamentos listos para tu equipo</h2>
+          <span class="count-badge" id="section-count-text">4 inmuebles</span>
+        </div>
+        <p class="section-sub" id="section-sub-text">4 ubicaciones en Eixample · Entrada inmediata o fecha concertada</p>
       </div>
       <div class="grid" id="properties-grid"></div>
   </section>
@@ -135,15 +210,20 @@
         <div class="corporate-hero-text" data-reveal="left">
           <p class="hero-eyebrow" style="color:var(--accent)" id="corp-eyebrow-text">Corporate Housing</p>
           <h2 id="corp-title-text">Alojamiento para los <em>trabajadores de tu empresa</em></h2>
-          <p id="corp-sub-text">Facilitamos pisos y alojamiento totalmente equipados para profesionales en movilidad, expatriados y equipos de empresa en Barcelona. Sin complicaciones, sin contratos largos.</p>
-          <a href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20el%20alojamiento%20para%20empresas.%20¿Podéis%20informarme%3F"
-             target="_blank" rel="noopener" class="btn-quiero btn-glow btn-glow--whatsapp" style="display:inline-flex;text-decoration:none;margin-top:2rem">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-            <span id="corp-cta-text">Habla con nosotros</span>
-          </a>
+          <p id="corp-sub-text">Centralizamos el alquiler para profesionales en movilidad, expatriados y rotaciones. Facturación y contrato adaptados a la empresa — sin permanencia obligatoria.</p>
+          <div class="corp-cta-group">
+            <a href="https://wa.me/34660688501"
+               target="_blank" rel="noopener" class="btn-quiero btn-glow btn-glow--whatsapp" id="corp-wa-link" style="display:inline-flex;text-decoration:none">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+              <span id="corp-cta-text">Pedir propuesta para mi empresa</span>
+            </a>
+            <button type="button" class="corp-cta-form-link" id="corp-form-btn" onclick="openModal()">
+              <span id="corp-cta-form-text">O envíanos una solicitud por formulario</span>
+            </button>
+          </div>
         </div>
         <div class="corporate-hero-img" data-reveal="right">
-          <img src="./assets/images/properties/granvia/Menjador.jpg" alt="Corporate housing Barcelona" onerror="this.parentElement.style.background='var(--sand)'">
+          <img src="./assets/images/properties/granvia/Menjador.jpg" alt="Salón corporate housing Barcelona — Burguar Dreams" onerror="this.parentElement.style.background='var(--sand)'">
         </div>
       </div>
 
@@ -153,7 +233,7 @@
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="20" height="20" rx="2"/><path d="M4 10h20"/><path d="M10 4v6"/><path d="M18 4v6"/></svg>
           </div>
           <h3 id="corp-f1t-text">Flexibilidad total</h3>
-          <p id="corp-f1-text">Contratos mensuales sin permanencia. Adaptados a las necesidades reales de cada empresa y trabajador.</p>
+          <p id="corp-f1-text">Entrada y salida según el proyecto, sin atarte a años. Contratos mensuales sin permanencia.</p>
         </div>
         <div class="corp-feature" data-reveal="right" data-reveal-delay="1">
           <div class="corp-feature-icon">
@@ -167,7 +247,7 @@
             <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="14" cy="14" r="10"/><path d="M14 8v6l4 2"/></svg>
           </div>
           <h3 id="corp-f3t-text">Gestión sencilla</h3>
-          <p id="corp-f3-text">Un solo interlocutor para todas las necesidades. Atención personalizada y respuesta rápida garantizada.</p>
+          <p id="corp-f3-text">Un contacto para varios apartamentos y varios trabajadores. Atención personalizada y respuesta rápida.</p>
         </div>
         <div class="corp-feature" data-reveal="right" data-reveal-delay="2">
           <div class="corp-feature-icon">
@@ -179,11 +259,24 @@
       </div>
   </section>
 
+  <section id="guia" class="page-section guide-section" aria-labelledby="guide-title">
+    <div class="guide-inner">
+      <h2 id="guide-title">Corporate housing vs alquiler temporal en Barcelona</h2>
+      <div id="guide-body" class="guide-body"></div>
+    </div>
+  </section>
+
   <section id="faq" class="page-section faq-section">
       <div class="faq-inner">
         <p class="hero-eyebrow" style="color:var(--accent);margin-bottom:1rem" data-reveal="left">FAQ</p>
         <h2 id="faq-title-text" style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--warm-dark);margin-bottom:3rem" data-reveal="right">Preguntas frecuentes</h2>
         <div class="faq-list" id="faq-list"></div>
+        <div class="faq-cta" id="faq-cta" data-reveal="right">
+          <p class="faq-cta-text" id="faq-cta-text">¿Tu caso es corporativo?</p>
+          <button type="button" class="btn-quiero btn-glow btn-glow--accent" id="faq-cta-btn" onclick="scrollToSection('empresas')">
+            <span id="faq-cta-btn-text">Pedir propuesta</span>
+          </button>
+        </div>
       </div>
   </section>
 
@@ -191,7 +284,7 @@
 
 <!-- ─────────────── DETAIL VIEW ─────────────── -->
 <div id="detail-view">
-  <div style="padding-top: 7rem; background:#fff;">
+  <div class="detail-view-topbar">
     <button class="detail-back" onclick="showHome()" data-reveal="left">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M10 3L5 8l5 5"/>
@@ -255,7 +348,7 @@
       <span id="detail-sticky-wa-label">WhatsApp</span>
     </a>
     <button type="button" class="detail-sticky-btn detail-sticky-form btn-glow btn-glow--accent" onclick="openModal()">
-      <span id="detail-sticky-form-label">Me interesa</span>
+      <span id="detail-sticky-form-label">Solicitar disponibilidad y visita</span>
     </button>
   </div>
 </div>
@@ -285,9 +378,9 @@
     </button>
 
     <div class="modal-form" id="modal-form">
-      <p class="modal-eyebrow" id="modal-eyebrow-text">Solicitud de información</p>
-      <h2 id="modal-title-text">Me interesa</h2>
-      <p class="modal-intro" id="modal-intro-text">Rellena el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+      <p class="modal-eyebrow" id="modal-eyebrow-text">Consulta de disponibilidad</p>
+      <h2 id="modal-title-text">Solicitar disponibilidad</h2>
+      <p class="modal-intro" id="modal-intro-text">Indica fechas y número de personas. Te respondemos en menos de 24 h con disponibilidad y condiciones — sin compromiso.</p>
 
       <div class="form-row">
         <div class="form-group">
@@ -308,7 +401,7 @@
         </div>
         <div class="form-group">
           <label for="f-telefono" id="label-telefono">Teléfono *</label>
-          <input type="tel" id="f-telefono" placeholder="+34 600 000 000">
+          <input type="tel" id="f-telefono" placeholder="Teléfono de contacto (empresa o particular)">
           <span class="form-field-error" id="error-telefono" role="alert"></span>
         </div>
       </div>
@@ -320,6 +413,7 @@
 
       <div class="form-group">
         <label for="f-laboral" id="label-laboral">Situación laboral</label>
+        <p class="form-field-hint" id="hint-laboral"></p>
         <select id="f-laboral">
           <option value="" id="f-laboral-0">Selecciona una opción</option>
           <option id="f-laboral-1">Empleado por cuenta ajena</option>
@@ -334,6 +428,7 @@
 
       <div class="form-group">
         <label for="f-ingresos" id="label-ingresos">Ingresos mensuales netos</label>
+        <p class="form-field-hint" id="hint-ingresos"></p>
         <select id="f-ingresos">
           <option value="" id="f-ingresos-0">Selecciona una opción</option>
           <option id="f-ingresos-1">Menos de 1.000 €</option>
@@ -379,7 +474,7 @@
       </div>
 
       <p class="form-global-error" id="form-global-error" role="alert"></p>
-      <button class="btn-submit btn-glow" id="btn-send" onclick="submitForm()">Enviar solicitud</button>
+      <button class="btn-submit btn-glow" id="btn-send" onclick="submitForm()">Recibir disponibilidad y condiciones</button>
     </div>
 
     <div class="modal-success" id="modal-success">
@@ -389,7 +484,7 @@
         </svg>
       </div>
       <h3 id="success-title-text">¡Solicitud enviada!</h3>
-      <p id="success-desc-text">Nos pondremos en contacto contigo en menos de 24 horas.</p>
+      <p id="success-desc-text">Hemos recibido tu solicitud. Te contactaremos en menos de 24 h con opciones acordes a tus fechas y número de personas.</p>
     </div>
   </div>
 </div>
@@ -399,13 +494,13 @@
   <div class="contact-inner">
     <div class="contact-left" data-reveal="left">
       <p class="contact-eyebrow" id="contact-eyebrow-text">Contacto</p>
-      <h2 id="contact-title-text">¿Te interesa algún <em>apartamento?</em></h2>
-      <p id="contact-sub-text">Escríbenos o llámanos y te atendemos personalmente. Estaremos encantados de organizar una visita.</p>
+      <h2 id="contact-title-text">¿Necesitas alojamiento <em>para tu empresa en Barcelona?</em></h2>
+      <p id="contact-sub-text">Cuéntanos cuántas personas, fechas y zona preferida. Te proponemos opciones y coordinamos visitas o entrada directa.</p>
 
       <div class="contact-actions">
-        <p class="contact-wa-hint" id="contact-wa-hint">Respuesta rápida: WhatsApp</p>
+        <p class="contact-wa-hint" id="contact-wa-hint">Respuesta habitual en el mismo día laborable</p>
         <a class="btn-whatsapp btn-whatsapp-primary" id="contact-wa-link"
-           href="https://wa.me/34660688501?text=Hola%2C%20me%20interesa%20uno%20de%20vuestros%20apartamentos.%20¿Podéis%20informarme%3F"
+           href="https://wa.me/34660688501"
            target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
@@ -414,9 +509,9 @@
         </a>
         <div class="contact-form-secondary">
           <button type="button" class="btn-contact-form btn-glow btn-glow--outline" id="contact-form-btn" onclick="openModal()">
-            <span id="contact-form-btn-text">Solicitar información</span>
+            <span id="contact-form-btn-text">Enviar solicitud (empresa o particular)</span>
           </button>
-          <p class="contact-form-note" id="contact-form-note">Respuesta en menos de 24 horas</p>
+          <p class="contact-form-note" id="contact-form-note">Sin compromiso · Respuesta en menos de 24 h · Atención en ES / EN / FR</p>
         </div>
       </div>
 
@@ -501,6 +596,7 @@
     <a href="#" class="logo footer-logo" onclick="return showHome()">Burguar <span>Dreams</span></a>
     <div class="footer-center">
       <p class="footer-legal-id" id="footer-legal-id">Burguar Dreams S.L. · NIF B67209502 · Barcelona</p>
+      <p class="footer-trust" id="footer-trust-text">Gestión directa · Apartamentos en Eixample · Corporate housing desde 1 mes</p>
       <p class="footer-copy" id="footer-copy-text">© 2026 Burguar Dreams · Todos los derechos reservados</p>
     </div>
     <div class="footer-links">
@@ -565,6 +661,7 @@
 <script defer src="js/data/properties.js"></script>
 <script defer src="js/data/i18n.js"></script>
 <script defer src="js/data/faqs.js"></script>
+<script defer src="js/seo.js"></script>
 <script defer src="js/legal/legal-i18n.js"></script>
 <script defer src="js/ui/grid.js"></script>
 <script defer src="js/ui/detail.js"></script>
