@@ -1,0 +1,3 @@
+# Netlify: rutas SEO de apartamentos → home con query (evita bucle del 404.html)
+/apartamento/:slug   /?inmueble=:slug   302
+/apartamento/:slug/  /?inmueble=:slug   302

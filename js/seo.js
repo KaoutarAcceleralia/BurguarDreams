@@ -51,7 +51,12 @@ function getSeoLang() {
 }
 
 function getCanonicalBase() {
-  return window.SITE_BASE_URL || (location.origin + location.pathname.replace(/[^/]*$/, ''));
+  if (window.SITE_BASE_URL) return window.SITE_BASE_URL;
+  const parts = location.pathname.split('/').filter(Boolean);
+  if (location.hostname.endsWith('github.io') && parts.length && parts[0] !== 'apartamento' && parts[0] !== 'index.html') {
+    return `${location.origin}/${parts[0]}/`;
+  }
+  return `${location.origin}/`;
 }
 
 /** Rutas /apartamento/{slug}/ solo en hosting (GitHub Pages + 404.html). En file:// o localhost usamos ?inmueble= */

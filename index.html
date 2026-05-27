@@ -8,15 +8,12 @@
 (function () {
   var origin = location.origin;
   var parts = location.pathname.split('/').filter(Boolean);
-  var sitePath = '';
-  if (location.hostname.endsWith('github.io') && parts.length && parts[0] !== 'index.html') {
+  var sitePath = '/';
+  if (location.hostname.endsWith('github.io') && parts.length && parts[0] !== 'index.html' && parts[0] !== 'apartamento') {
     sitePath = '/' + parts[0] + '/';
     var base = document.createElement('base');
     base.href = origin + sitePath;
     document.head.appendChild(base);
-  } else {
-    sitePath = location.pathname.replace(/[^/]*$/, '');
-    if (!sitePath.endsWith('/')) sitePath += '/';
   }
   window.SITE_BASE_URL = origin + sitePath;
   var ogImage = window.SITE_BASE_URL + 'assets/images/properties/granvia/Cuina.jpg';

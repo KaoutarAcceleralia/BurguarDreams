@@ -83,7 +83,7 @@ BurguarDreams/
 
 - `robots.txt` y `sitemap.xml` en la raíz (actualizar URLs si cambias de dominio).
 - `llms.txt` para motores de IA generativos.
-- URLs de inmuebles: `/apartamento/{slug}/` (con `404.html` en GitHub Pages).
+- URLs de inmuebles: `/apartamento/{slug}/` → redirigen a `/?inmueble={slug}` (`404.html` en GitHub Pages; `_redirects` en Netlify).
 - Google Analytics 4: define `window.GA_MEASUREMENT_ID = "G-XXXXXXXX"` en `js/config.js`; solo se carga si el usuario acepta cookies.
 - [Google Search Console](https://search.google.com/search-console): verifica el dominio y envía el sitemap.
 - **Dominio propio (recomendado):** configura CNAME en GitHub Pages y sustituye `https://kaoutaracceleralia.github.io/BurguarDreams/` en `sitemap.xml`, `robots.txt`, `llms.txt` y el JSON-LD de `index.html`.
