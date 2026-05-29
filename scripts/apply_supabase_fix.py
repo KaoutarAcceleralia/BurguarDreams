@@ -77,7 +77,7 @@ def main() -> int:
     url = env.get("SUPABASE_URL", "").strip()
     key = env.get("SUPABASE_KEY", "").strip()
     token = env.get("SUPABASE_ACCESS_TOKEN", "").strip()
-    project_ref = env.get("SUPABASE_PROJECT_REF", "yscbwngotgbkytmzogol").strip()
+    project_ref = env.get("SUPABASE_PROJECT_REF", "vtwyqhxfuiwjvzgptecb").strip()
 
     if not url or not key:
         print("Falta SUPABASE_URL o SUPABASE_KEY en .env", file=sys.stderr)

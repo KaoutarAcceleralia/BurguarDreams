@@ -1,7 +1,6 @@
-window.GA_MEASUREMENT_ID = "";
-window.SUPABASE_URL = "https://yscbwngotgbkytmzogol.supabase.co";
-window.SUPABASE_KEY = "sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN";
-window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzY2J3bmdvdGdia3l0bXpvZ29sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4NDU4NDcsImV4cCI6MjA5MjQyMTg0N30.LlcMGyk67971m0h6neH7crxAp5k0a0-IbOA7rCbW2H4";
+window.SUPABASE_URL = "https://vtwyqhxfuiwjvzgptecb.supabase.co";
+window.SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0d3lxaHhmdWl3anZ6Z3B0ZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzIzOTIsImV4cCI6MjA5Mzc0ODM5Mn0.EUW6HO9jS7EESbklym6qQe7kIRRZRbjCT_3O-nrH9q0";
+window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0d3lxaHhmdWl3anZ6Z3B0ZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzIzOTIsImV4cCI6MjA5Mzc0ODM5Mn0.EUW6HO9jS7EESbklym6qQe7kIRRZRbjCT_3O-nrH9q0";
 if (typeof supabase === "undefined") {
   console.error("[Burguar Dreams] No se cargó el SDK de Supabase (CDN bloqueado o sin conexión).");
 } else {

@@ -3,7 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-PROJECT_REF="${SUPABASE_PROJECT_REF:-yscbwngotgbkytmzogol}"
+PROJECT_REF="${SUPABASE_PROJECT_REF:-vtwyqhxfuiwjvzgptecb}"
 
 if ! command -v supabase >/dev/null 2>&1; then
   if command -v npx >/dev/null 2>&1; then

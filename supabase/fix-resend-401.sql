@@ -1,5 +1,5 @@
 -- Arregla 401 UNAUTHORIZED_INVALID_JWT_FORMAT (reemplaza Authorization placeholder TU_eyJ_ano).
--- Ejecutar en SQL Editor: https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new
+-- Ejecutar en SQL Editor: https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new
 -- Regenerar: python3 scripts/setup_resend_email.py
 
 create extension if not exists pg_net with schema extensions;
@@ -35,7 +35,7 @@ begin
   );
 
   select net.http_post(
-    url := 'https://yscbwngotgbkytmzogol.supabase.co/functions/v1/resend-email',
+    url := 'https://vtwyqhxfuiwjvzgptecb.supabase.co/functions/v1/resend-email',
     headers := _headers,
     body := _body
   ) into _request_id;

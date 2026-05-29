@@ -1,6 +1,6 @@
 -- =============================================================================
 -- PEGAR TODO EN SQL EDITOR Y RUN
--- https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new
+-- https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new
 -- Arregla 401 TU_eyJ_ano → JWT anon real
 -- =============================================================================
 
@@ -42,7 +42,7 @@ begin
   );
 
   select net.http_post(
-    url := 'https://yscbwngotgbkytmzogol.supabase.co/functions/v1/resend-email',
+    url := 'https://vtwyqhxfuiwjvzgptecb.supabase.co/functions/v1/resend-email',
     headers := _headers,
     body := _body
   ) into _request_id;

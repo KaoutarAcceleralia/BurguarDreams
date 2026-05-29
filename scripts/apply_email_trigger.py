@@ -14,7 +14,7 @@ ENV_FILE = ROOT / ".env"
 CONFIG_JS = ROOT / "js" / "config.js"
 SQL_TEMPLATE = ROOT / "supabase" / "trigger-resend-email.sql"
 READY_SQL = ROOT / "supabase" / ".trigger-ready.sql"
-PROJECT_REF = "yscbwngotgbkytmzogol"
+PROJECT_REF = "vtwyqhxfuiwjvzgptecb"
 
 
 def load_keys_from_config_js() -> dict[str, str]:

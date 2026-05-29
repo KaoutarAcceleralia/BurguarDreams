@@ -40,7 +40,7 @@ brew install supabase/tap/supabase
 ```bash
 cd /ruta/a/BurguarDreams
 supabase login
-supabase link --project-ref yscbwngotgbkytmzogol
+supabase link --project-ref vtwyqhxfuiwjvzgptecb
 ```
 
 ### 3. Secretos (si aún no están)
@@ -63,7 +63,7 @@ supabase functions deploy resend-email --no-verify-jwt
 ### 5. Comprobar preflight
 
 ```bash
-curl -i -X OPTIONS "https://yscbwngotgbkytmzogol.supabase.co/functions/v1/resend-email" \
+curl -i -X OPTIONS "https://vtwyqhxfuiwjvzgptecb.supabase.co/functions/v1/resend-email" \
   -H "Origin: https://TU_USUARIO.github.io" \
   -H "Access-Control-Request-Method: POST" \
   -H "Access-Control-Request-Headers: authorization,apikey,content-type"

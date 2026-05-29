@@ -4,7 +4,7 @@ El formulario de la web **funciona**. Supabase rechaza el guardado porque falta 
 
 ## Solución 1 — Activar pg_net (recomendado)
 
-1. [Supabase Dashboard](https://supabase.com/dashboard) → proyecto **yscbwngotgbkytmzogol**
+1. [Supabase Dashboard](https://supabase.com/dashboard) → proyecto **vtwyqhxfuiwjvzgptecb**
 2. Menú izquierdo: **Database** → **Extensions**
 3. Busca **pg_net** (o "HTTP / Webhooks")
 4. Pulsa **Enable** / **Activar**

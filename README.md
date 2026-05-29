@@ -59,7 +59,7 @@ BurguarDreams/
 
 4. **Deploy (GitHub Pages):** `js/config.js` debe estar en el repo con tu `SUPABASE_URL` y la clave **anon/publicable** (no la service role). Haz commit y push de ese archivo tras configurarlo.
 
-5. **Formulario → tabla `solicitudes`:** en [SQL Editor](https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new), ejecuta [`supabase/fix-urgente.sql`](supabase/fix-urgente.sql) y luego [`supabase/validate-solicitudes.sql`](supabase/validate-solicitudes.sql) (validación RLS en servidor). Sin el primero el insert falla con `schema "net" does not exist` (400).
+5. **Formulario → tabla `solicitudes`:** en [SQL Editor](https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new), ejecuta [`supabase/fix-urgente.sql`](supabase/fix-urgente.sql) y luego [`supabase/validate-solicitudes.sql`](supabase/validate-solicitudes.sql) (validación RLS en servidor). Sin el primero el insert falla con `schema "net" does not exist` (400).
 
    Comprobar: `python3 scripts/apply_supabase_fix.py` (debe terminar con HTTP 201).
 
@@ -69,7 +69,7 @@ BurguarDreams/
    python3 scripts/setup_resend_email.py
    ```
 
-   Con `SUPABASE_ACCESS_TOKEN` en `.env` aplica trigger, desactiva Verify JWT y redespliega la función. Sin token, pega [`supabase/.trigger-ready.sql`](supabase/.trigger-ready.sql) en [SQL Editor](https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new). Error 401: [`supabase/RESEND-401.md`](supabase/RESEND-401.md).
+   Con `SUPABASE_ACCESS_TOKEN` en `.env` aplica trigger, desactiva Verify JWT y redespliega la función. Sin token, pega [`supabase/.trigger-ready.sql`](supabase/.trigger-ready.sql) en [SQL Editor](https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new). Error 401: [`supabase/RESEND-401.md`](supabase/RESEND-401.md).
 
 7. Sirve el sitio con un servidor HTTP estático (no abras carpetas `apartamento/…` en el Finder; Safari falla con `file://`):
 

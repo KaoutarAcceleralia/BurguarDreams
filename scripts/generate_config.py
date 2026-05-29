@@ -23,11 +23,19 @@ def load_env(path: Path) -> dict[str, str]:
 
 def main() -> None:
     env = load_env(ENV_FILE)
-    url = env.get("SUPABASE_URL")
-    key = env.get("SUPABASE_KEY")
-    anon = env.get("SUPABASE_ANON_KEY", "").strip()
+    url = env.get("SUPABASE_URL") or env.get("NEXT_PUBLIC_SUPABASE_URL")
+    key = env.get("SUPABASE_KEY") or env.get("NEXT_PUBLIC_SUPABASE_ANON_KEY")
+    anon = (
+        env.get("SUPABASE_ANON_KEY", "")
+        or env.get("NEXT_PUBLIC_SUPABASE_ANON_KEY", "")
+    ).strip()
+    if not key and anon:
+        key = anon
     if not url or not key:
-        raise SystemExit(".env must define SUPABASE_URL and SUPABASE_KEY")
+        raise SystemExit(
+            ".env must define SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL) "
+            "and SUPABASE_KEY or SUPABASE_ANON_KEY"
+        )
 
     anon_line = ""
     if anon:

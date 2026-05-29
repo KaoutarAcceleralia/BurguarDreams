@@ -1,6 +1,6 @@
 -- ARREGLO URGENTE (30 segundos) — quita el error 400 "schema net does not exist"
 -- SQL Editor → New query → pegar → Run
--- https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new
+-- https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new
 
 do $$
 declare r record;

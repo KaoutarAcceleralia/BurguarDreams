@@ -142,7 +142,7 @@ async function submitForm() {
     if (needsDbSetup) {
       console.error(
         '[Burguar Dreams] Ejecuta supabase/fix-urgente.sql y supabase/validate-solicitudes.sql en SQL Editor:',
-        'https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/sql/new'
+        'https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new'
       );
       showFormError(
         'form-global-error',

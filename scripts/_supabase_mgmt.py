@@ -11,7 +11,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = ROOT / ".env"
 CONFIG_JS = ROOT / "js" / "config.js"
-DEFAULT_PROJECT_REF = "yscbwngotgbkytmzogol"
+DEFAULT_PROJECT_REF = "vtwyqhxfuiwjvzgptecb"
 
 
 def load_env() -> dict[str, str]:

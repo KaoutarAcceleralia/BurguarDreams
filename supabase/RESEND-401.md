@@ -21,7 +21,7 @@ Sin token, pega y ejecuta **[`supabase/PEGAR-AHORA.sql`](PEGAR-AHORA.sql)** en e
 
 **Dashboard**
 
-1. [Edge Functions → `resend-email`](https://supabase.com/dashboard/project/yscbwngotgbkytmzogol/functions)
+1. [Edge Functions → `resend-email`](https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/functions)
 2. Desactiva **Enforce JWT Verification** / **Verify JWT**
 3. Guarda / redespliega si te lo pide
 

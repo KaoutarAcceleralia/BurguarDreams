@@ -2,7 +2,7 @@
 -- Error HTTP 400 / code 3F000: schema "net" does not exist
 --
 -- Ejecutar en: Supabase Dashboard → SQL Editor → New query → pegar todo → Run
--- Proyecto: https://supabase.com/dashboard/project/yscbwngotgbkytmzogol
+-- Proyecto: https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- 1) Quitar triggers/webhooks en solicitudes (arregla el 400 de inmediato)
