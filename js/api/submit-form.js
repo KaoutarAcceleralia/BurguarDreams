@@ -64,13 +64,25 @@ async function insertSolicitud(db, row) {
   throw lastError || new Error('No se pudo guardar la solicitud');
 }
 
+/** URL del correo: proxy same-origin en Netlify (_redirects) o Supabase directo. */
+function getResendEmailUrl() {
+  if (window.RESEND_EMAIL_URL) return window.RESEND_EMAIL_URL;
+  const host = typeof location !== 'undefined' ? location.hostname : '';
+  const isLocal = host === 'localhost' || host === '127.0.0.1';
+  const isGithubPages = host.endsWith('.github.io');
+  if (!isLocal && !isGithubPages && location?.protocol?.startsWith('http')) {
+    return `${location.origin}/api/resend-email`;
+  }
+  return `${window.SUPABASE_URL}/functions/v1/resend-email`;
+}
+
 /** Llama a resend-email (Edge Function). Si usas trigger PEGAR-AHORA.sql, pon EMAIL_VIA_TRIGGER_ONLY en config. */
 async function notifyResendEmail(row) {
   if (window.EMAIL_VIA_TRIGGER_ONLY) return;
   const key = window.SUPABASE_ANON_KEY || window.SUPABASE_KEY;
   if (!key || !window.SUPABASE_URL) return;
   try {
-    const res = await fetch(`${window.SUPABASE_URL}/functions/v1/resend-email`, {
+    const res = await fetch(getResendEmailUrl(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,6 +1,18 @@
 # Error CORS / preflight 405 en `resend-email`
 
-## Solución recomendada (sin redesplegar)
+## Solución en Netlify (sin redesplegar Supabase)
+
+En `_redirects` hay un proxy same-origin:
+
+```
+/api/resend-email  https://…supabase.co/functions/v1/resend-email  200
+```
+
+El formulario llama a `/api/resend-email` (mismo origen → sin CORS). Haz **deploy** en Netlify tras cambiar `_redirects` o `js/api/submit-form.js`.
+
+---
+
+## Solución alternativa: trigger SQL
 
 El formulario ya **no llama** a `resend-email` desde el navegador. El correo lo envía un **trigger SQL** tras cada insert (`supabase/trigger-resend-email.sql`):
 
