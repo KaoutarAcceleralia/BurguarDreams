@@ -46,6 +46,24 @@ function isValidPhone(value) {
   return digits.length >= 6 && digits.length <= 15 && /^[\d\s+\-().]+$/.test(value);
 }
 
+/** Tablas creadas sin IDENTITY en id (bigint): el insert sin id devuelve 23502. */
+function provisionalSolicitudId() {
+  return Date.now() * 1000 + Math.floor(Math.random() * 1000);
+}
+
+async function insertSolicitud(db, row) {
+  let lastError = null;
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const payload = { ...row, id: provisionalSolicitudId() };
+    const { error } = await db.from('solicitudes').insert(payload);
+    if (!error) return;
+    lastError = error;
+    if (error.code === '23505') continue;
+    throw error;
+  }
+  throw lastError || new Error('No se pudo guardar la solicitud');
+}
+
 async function submitForm() {
   clearFormErrors();
   const t = i18n[currentLang] || i18n.es;
@@ -100,7 +118,7 @@ async function submitForm() {
   const propertyName = p ? `${p.city} — ${p.street}`.slice(0, FIELD_LIMITS.property_name) : null;
 
   try {
-    const { error } = await db.from('solicitudes').insert({
+    await insertSolicitud(db, {
       property_id: currentPropertyId || null,
       property_name: propertyName,
       nombre,
@@ -113,8 +131,6 @@ async function submitForm() {
       num_personas: opt('f-personas', FIELD_LIMITS.num_personas),
       mascotas: mascotas.slice(0, FIELD_LIMITS.mascotas),
     });
-
-    if (error) throw error;
 
     /* Correo: trigger on_solicitud_resend_email (pg_net). Si 401 TU_eyJ_ano → supabase/PEGAR-AHORA.sql */
 
