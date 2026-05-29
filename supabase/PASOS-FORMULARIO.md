@@ -1,4 +1,10 @@
-# Arreglar error `schema "net" does not exist` (400 en solicitudes)
+# Arreglar errores 400 en solicitudes
+
+## `null value in column "id"`
+
+La tabla `solicitudes` tiene `id` bigint **sin** valor por defecto. Ejecuta [`fix-solicitudes-id.sql`](fix-solicitudes-id.sql) en SQL Editor.
+
+## `schema "net" does not exist`
 
 El formulario de la web **funciona**. Supabase rechaza el guardado porque falta la extensión **pg_net** (o hay un webhook/trigger roto en la tabla `solicitudes`).
 

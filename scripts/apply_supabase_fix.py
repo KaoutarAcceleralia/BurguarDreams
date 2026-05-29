@@ -91,6 +91,17 @@ def main() -> int:
         print("El formulario ya funciona. No hace falta aplicar el SQL.")
         return 0
 
+    id_fix = ROOT / "supabase" / "fix-solicitudes-id.sql"
+    if "null value in column" in str(err.get("message", "")) and "id" in str(
+        err.get("message", "")
+    ):
+        print()
+        print("Causa: la columna id no tiene autoincremento.")
+        print("Ejecuta en SQL Editor:")
+        print(f"  https://supabase.com/dashboard/project/{project_ref}/sql/new")
+        print(f"  Archivo: {id_fix.relative_to(ROOT)}")
+        return 1
+
     if not token:
         print()
         print("Para aplicar el SQL automáticamente, añade a .env:")

@@ -133,15 +133,20 @@ async function submitForm() {
       details: e?.details,
     });
     const validationFailed = /invalid nombre|invalid telefono|invalid email/i.test(msg);
+    const missingIdDefault = /null value in column "id"/i.test(msg);
     const needsDbSetup =
       !validationFailed &&
-      (code === '42501' ||
+      (missingIdDefault ||
+        code === '42501' ||
         code === '3F000' ||
         /row-level security/i.test(msg) ||
         /schema "net"/i.test(msg));
     if (needsDbSetup) {
+      const sqlHint = missingIdDefault
+        ? 'supabase/fix-solicitudes-id.sql (y opcionalmente fix-urgente.sql)'
+        : 'supabase/fix-urgente.sql y supabase/validate-solicitudes.sql';
       console.error(
-        '[Burguar Dreams] Ejecuta supabase/fix-urgente.sql y supabase/validate-solicitudes.sql en SQL Editor:',
+        `[Burguar Dreams] Ejecuta ${sqlHint} en SQL Editor:`,
         'https://supabase.com/dashboard/project/vtwyqhxfuiwjvzgptecb/sql/new'
       );
       showFormError(
