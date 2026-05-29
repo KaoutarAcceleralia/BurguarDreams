@@ -5,7 +5,7 @@
 -- =============================================================================
 
 -- Email automático al insertar en solicitudes (sin CORS; funciona en local y GitHub Pages).
--- NO ejecutes este archivo tal cual: tiene placeholders sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN.
+-- NO ejecutes este archivo tal cual: tiene placeholders eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0d3lxaHhmdWl3anZ6Z3B0ZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzIzOTIsImV4cCI6MjA5Mzc0ODM5Mn0.EUW6HO9jS7EESbklym6qQe7kIRRZRbjCT_3O-nrH9q0.
 -- Usa: python3 scripts/setup_resend_email.py
 -- O pega en SQL Editor: supabase/PEGAR-AHORA.sql (claves ya sustituidas)
 
@@ -37,8 +37,8 @@ begin
 
   _headers := jsonb_build_object(
     'Content-Type', 'application/json',
-    'apikey', 'sb_publishable_XLX91DHrgXhALJUu6Vw6Gg_R74RtaEN',
-    'Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzY2J3bmdvdGdia3l0bXpvZ29sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4NDU4NDcsImV4cCI6MjA5MjQyMTg0N30.LlcMGyk67971m0h6neH7crxAp5k0a0-IbOA7rCbW2H4'
+    'apikey', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0d3lxaHhmdWl3anZ6Z3B0ZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzIzOTIsImV4cCI6MjA5Mzc0ODM5Mn0.EUW6HO9jS7EESbklym6qQe7kIRRZRbjCT_3O-nrH9q0',
+    'Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0d3lxaHhmdWl3anZ6Z3B0ZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNzIzOTIsImV4cCI6MjA5Mzc0ODM5Mn0.EUW6HO9jS7EESbklym6qQe7kIRRZRbjCT_3O-nrH9q0'
   );
 
   select net.http_post(

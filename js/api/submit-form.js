@@ -64,6 +64,41 @@ async function insertSolicitud(db, row) {
   throw lastError || new Error('No se pudo guardar la solicitud');
 }
 
+/** Llama a resend-email (Edge Function). Si usas trigger PEGAR-AHORA.sql, pon EMAIL_VIA_TRIGGER_ONLY en config. */
+async function notifyResendEmail(row) {
+  if (window.EMAIL_VIA_TRIGGER_ONLY) return;
+  const key = window.SUPABASE_ANON_KEY || window.SUPABASE_KEY;
+  if (!key || !window.SUPABASE_URL) return;
+  try {
+    const res = await fetch(`${window.SUPABASE_URL}/functions/v1/resend-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+      },
+      body: JSON.stringify({
+        nombre: row.nombre,
+        apellidos: row.apellidos,
+        telefono: row.telefono,
+        email: row.email,
+        fecha_nacimiento: row.fecha_nacimiento,
+        situacion_laboral: row.situacion_laboral,
+        ingresos_mensuales: row.ingresos_mensuales,
+        num_personas: row.num_personas,
+        mascotas: row.mascotas,
+        property_name: row.property_name,
+      }),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.warn('[Burguar Dreams] Email no enviado:', res.status, text.slice(0, 300));
+    }
+  } catch (err) {
+    console.warn('[Burguar Dreams] Email no enviado:', err);
+  }
+}
+
 async function submitForm() {
   clearFormErrors();
   const t = i18n[currentLang] || i18n.es;
@@ -117,22 +152,23 @@ async function submitForm() {
 
   const propertyName = p ? `${p.city} — ${p.street}`.slice(0, FIELD_LIMITS.property_name) : null;
 
-  try {
-    await insertSolicitud(db, {
-      property_id: currentPropertyId || null,
-      property_name: propertyName,
-      nombre,
-      apellidos: opt('f-apellidos', FIELD_LIMITS.apellidos),
-      telefono,
-      email: email || null,
-      fecha_nacimiento: opt('f-nacimiento'),
-      situacion_laboral: opt('f-laboral', FIELD_LIMITS.situacion_laboral),
-      ingresos_mensuales: opt('f-ingresos', FIELD_LIMITS.ingresos_mensuales),
-      num_personas: opt('f-personas', FIELD_LIMITS.num_personas),
-      mascotas: mascotas.slice(0, FIELD_LIMITS.mascotas),
-    });
+  const solicitud = {
+    property_id: currentPropertyId || null,
+    property_name: propertyName,
+    nombre,
+    apellidos: opt('f-apellidos', FIELD_LIMITS.apellidos),
+    telefono,
+    email: email || null,
+    fecha_nacimiento: opt('f-nacimiento'),
+    situacion_laboral: opt('f-laboral', FIELD_LIMITS.situacion_laboral),
+    ingresos_mensuales: opt('f-ingresos', FIELD_LIMITS.ingresos_mensuales),
+    num_personas: opt('f-personas', FIELD_LIMITS.num_personas),
+    mascotas: mascotas.slice(0, FIELD_LIMITS.mascotas),
+  };
 
-    /* Correo: trigger on_solicitud_resend_email (pg_net). Si 401 TU_eyJ_ano → supabase/PEGAR-AHORA.sql */
+  try {
+    await insertSolicitud(db, solicitud);
+    notifyResendEmail(solicitud);
 
     document.getElementById('f-privacidad').checked = false;
     document.getElementById('modal-form').classList.add('hidden');

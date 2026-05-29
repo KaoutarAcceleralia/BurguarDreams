@@ -4,6 +4,7 @@ window.SUPABASE_KEY = "your_publishable_key_here";
 /* Google Analytics 4 (opcional): ID tipo G-XXXXXXXXXX; solo se carga si el usuario acepta cookies */
 window.GA_MEASUREMENT_ID = "";
 /* Opcional si resend-email exige JWT: window.SUPABASE_ANON_KEY = "eyJ..."; */
+/* Solo trigger SQL (PEGAR-AHORA.sql), sin llamada desde el navegador: window.EMAIL_VIA_TRIGGER_ONLY = true; */
 if (typeof supabase === "undefined") {
   console.error("[Burguar Dreams] No se cargó el SDK de Supabase (CDN bloqueado o sin conexión).");
 } else {
