@@ -59,7 +59,7 @@ const PROP_DESCRIPTIONS = {
 // Availability date (the date part stays the same, only the prefix is translated)
 const AVAIL_DATES = {
   1: '16/10/2026',
-  2: '01/07/2026',
+  2: '02/08/2026',
   3: '10/07/2026',
   4: '02/06/2026',
 };
@@ -138,7 +138,7 @@ const properties = [
     city: 'Barcelona',
     street: 'Eixample c/ València',
     tag: 'Apartamento', price: '', priceUnit: '/mes',
-    available: false, availableText: 'Disponible el 01/07/2026',
+    available: false, availableText: 'Disponible el 02/08/2026',
     description: 'Apartamento en pleno corazón del Eixample Izquierdo. Diseño muy moderno con acabados de alta calidad. Zona Premium con todos los servicios a pie de calle.',
     amenities: new Set(['amueblado','equipado','ac','calefaccion','wifi','tv','lavadora','secadora','tendedero','plancha','aspiradora','kit_limpieza','cafetera','microondas','nevera','horno','vitroceramica','tostadora','lavavajillas','secador_pelo','papel_wc','sabanas','toallas','sofa_cama','despacho','ascensor','portero_auto']),
     specs: [
